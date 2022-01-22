@@ -1,8 +1,7 @@
 package common;
 
-import floorsubsystem.FloorLamp;
-
 public class Person {
+	
 	private final String arrivalTime;
 	private int currentFloorNumber;
 	private final int destinationFloorNumber;
