@@ -2,12 +2,10 @@ package elevatorsubsystem;
 
 public class ElevatorLamp {
 	
-	private final int elevatorNumber;
 	private final int floorNumber;
 	private boolean isTurnedOn;
 	
-	public ElevatorLamp(int elevatorNumber, int floorNumber) {
-		this.elevatorNumber = elevatorNumber;
+	public ElevatorLamp(int floorNumber) {
 		this.floorNumber = floorNumber;
 		this.isTurnedOn = false;
 	}
@@ -22,10 +20,6 @@ public class ElevatorLamp {
 	
 	public boolean isTurnedOn() {
 		return this.isTurnedOn;
-	}
-
-	public int getElevatorNumber() {
-		return elevatorNumber;
 	}
 
 
