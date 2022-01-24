@@ -9,6 +9,7 @@ public class Floor extends Thread {
 	//private final Scheduler scheduler;
 	private List<Person> peopleWaiting;
 	
+	
 	public Floor(int floorNumber, List<Person> peopleWaiting) {
 		this.floorNumber = floorNumber;
 		this.peopleWaiting = peopleWaiting;
