@@ -22,7 +22,7 @@ public class Scheduler {
 		elevators.remove(elevator);
 	}
 	
-	public void receiveFloorInputs() {
+	public void handleFloorEvent(FloorEvent floorEvent) {
 		//call corresponding floor methods
 	}
 	
@@ -30,7 +30,7 @@ public class Scheduler {
 		//send message to activate floor lamps
 	}
 	
-	public void receiveElevatorInputs() {
+	public void handleElevatorEvent(ElevatorEvent elevatorEvent) {
 		//call corresponding elevator methods
 	}
 	
