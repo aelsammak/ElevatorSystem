@@ -37,7 +37,7 @@ public class Floor extends Thread {
                 }
                 
                 //TODO Fix handleFloorEvent in scheduler
-                scheduler.handleFloorEvent(floorEventQueue.peek());
+                scheduler.handleFloorEvent(currentFloorEvent);
                 floorEventQueue.poll();
                 
             }
