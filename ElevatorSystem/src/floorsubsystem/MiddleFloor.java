@@ -1,8 +1,9 @@
 package floorsubsystem;
 
-import java.util.List;
+import java.util.PriorityQueue;
 
-import common.Person;
+import scheduler.Event;
+import scheduler.Scheduler;
 
 public class MiddleFloor extends Floor {
 	
@@ -12,8 +13,8 @@ public class MiddleFloor extends Floor {
 	private final FloorLamp upLamp;
 	private final FloorLamp downLamp;
 	
-	public MiddleFloor(int floorNumber, List<Person> peopleWaiting) {
-		super(floorNumber, peopleWaiting);
+	public MiddleFloor(int floorNumber, Scheduler scheduler, PriorityQueue<Event> eventQueue) {
+		super(floorNumber, scheduler, eventQueue);
 		this.upBtn = new FloorButton(floorNumber, true);
 		this.downBtn = new FloorButton(floorNumber, false);
 		this.upLamp = new FloorLamp();

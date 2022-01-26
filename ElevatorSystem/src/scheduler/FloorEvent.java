@@ -13,21 +13,26 @@ import floorsubsystem.Floor;
  */
 public class FloorEvent extends Event {
 	
-	private int buttonPressed;
+	private boolean isUpButton;
 	private Floor floor;
 	
-	public FloorEvent(Floor floor, int buttonPressed, Date time) {
+	
+	public FloorEvent(Floor floor, boolean isUpButton, Date time) {
 		super(time);
 		this.floor = floor;
-		this.buttonPressed = buttonPressed;
-	}
-	
-	public int getButtonPressed() {
-		return buttonPressed;
+		this.setUpButton(isUpButton);
 	}
 	
 	public Floor getFloor() {
 		return floor;
+	}
+
+	public boolean isUpButton() {
+		return isUpButton;
+	}
+
+	public void setUpButton(boolean isUpButton) {
+		this.isUpButton = isUpButton;
 	}
 	
 }
