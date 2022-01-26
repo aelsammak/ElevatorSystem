@@ -5,13 +5,15 @@ import java.util.*;
 import elevatorsubsystem.Elevator;
 import floorsubsystem.Floor;
 
-public class Scheduler {
+public class Scheduler extends Thread {
 	
 	private List<Elevator> elevators;
 	private List<Floor> floors;
+	private final PriorityQueue<Event> eventQueue;
 	
 	public Scheduler() {
 		elevators = new ArrayList<Elevator>();
+		this.eventQueue = new PriorityQueue<>();
 	}
 	
 	public void addElevator(Elevator elevator) {
@@ -71,5 +73,28 @@ public class Scheduler {
 	public synchronized void elevatorArrivesAtFloor(Floor currentFloor) {
 		// turns off floor lamps and unpress the corresponding floor button
 		// tells elevator to close doors
+	}
+	
+	public boolean hasEvents() {
+		// return boolean indicating weather or not the priority queues in all other floors is empty or not
+		return false; //placeholder
+	}
+	
+	public long getElapsedTime() {
+		//return time elapsed so far
+		return (long) 1.0; //placeholder
+	}
+	
+	
+	
+	@Override
+	public void run() {
+		// Get current date
+		// get start time
+		// While(this.hasEvents) : update date and get time passed
+	}
+
+	public PriorityQueue<Event> getEventQueue() {
+		return eventQueue;
 	}
 }
