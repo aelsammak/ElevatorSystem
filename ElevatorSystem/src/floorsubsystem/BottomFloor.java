@@ -2,7 +2,7 @@ package floorsubsystem;
 
 import java.util.PriorityQueue;
 
-import scheduler.Event;
+import scheduler.FloorEvent;
 import scheduler.Scheduler;
 
 public class BottomFloor extends Floor {
@@ -11,7 +11,7 @@ public class BottomFloor extends Floor {
 	
 	private final FloorLamp upLamp;
 	
-	public BottomFloor(int floorNumber, Scheduler scheduler, PriorityQueue<Event> eventQueue) {
+	public BottomFloor(int floorNumber, Scheduler scheduler, PriorityQueue<FloorEvent> eventQueue) {
 		super(floorNumber, scheduler, eventQueue);
 		this.upBtn = new FloorButton(floorNumber, true);
 		this.upLamp = new FloorLamp();
@@ -24,6 +24,4 @@ public class BottomFloor extends Floor {
 	public FloorLamp getUpLamp() {
 		return upLamp;
 	}
-	
-	
 }
