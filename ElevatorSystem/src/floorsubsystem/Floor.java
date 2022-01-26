@@ -9,20 +9,20 @@ public class Floor extends Thread {
 	
 	private final int floorNumber;
 	private final Scheduler scheduler;
-	private final PriorityQueue<FloorEvent> eventQueue;
+	private final PriorityQueue<FloorEvent> floorEventQueue;
 	
-	public Floor(int floorNumber, Scheduler scheduler, PriorityQueue<FloorEvent> eventQueue) {
+	public Floor(int floorNumber, Scheduler scheduler, PriorityQueue<FloorEvent> floorEventQueue) {
 		this.floorNumber = floorNumber;
 		this.scheduler = scheduler;
-		this.eventQueue = eventQueue;
+		this.floorEventQueue = floorEventQueue;
 	}
 		
 	@Override
 	public void run() {
 		while(scheduler.hasEvents()) {
-            if(this.isPriorityFloor())
+            if(this.isPriorityFloorEvent())
             {
-            	FloorEvent currentFloorEvent = eventQueue.peek();
+            	FloorEvent currentFloorEvent = floorEventQueue.peek();
             	
                 if(currentFloorEvent.getFloor() instanceof MiddleFloor) {
                 	if(currentFloorEvent.isUpButton()) {
@@ -37,8 +37,8 @@ public class Floor extends Thread {
                 }
                 
                 //TODO Fix handleFloorEvent in scheduler
-                scheduler.handleFloorEvent(eventQueue.peek());
-                eventQueue.poll();
+                scheduler.handleFloorEvent(floorEventQueue.peek());
+                floorEventQueue.poll();
                 
             }
         }
@@ -48,8 +48,8 @@ public class Floor extends Thread {
 		return floorNumber;
 	}
 	
-	private boolean isPriorityFloor() {
-		return (!eventQueue.isEmpty() && eventQueue.peek().getTimeLeftTillEvent() <= scheduler.getElapsedTime() && scheduler.getEventQueue().peek().equals(eventQueue.peek()));
+	private boolean isPriorityFloorEvent() {
+		return (!floorEventQueue.isEmpty() && floorEventQueue.peek().getTimeLeftTillEvent() <= scheduler.getElapsedTime() && scheduler.getEventQueue().peek().equals(floorEventQueue.peek()));
 	}
 	
 

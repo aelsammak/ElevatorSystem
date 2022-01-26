@@ -11,8 +11,8 @@ public class TopFloor extends Floor {
 	
 	private final FloorLamp downLamp;
 	
-	public TopFloor(int floorNumber, Scheduler scheduler, PriorityQueue<FloorEvent> eventQueue) {
-		super(floorNumber, scheduler, eventQueue);
+	public TopFloor(int floorNumber, Scheduler scheduler, PriorityQueue<FloorEvent> floorEventQueue) {
+		super(floorNumber, scheduler, floorEventQueue);
 		this.downBtn = new FloorButton(floorNumber, false);
 		this.downLamp = new FloorLamp();
 	}
