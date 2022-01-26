@@ -16,7 +16,7 @@ Time to move between floors (from doors shutting to doors opening):
 mean = 5.83 s
 median = 5.71 s
 
-Total height for 15 floors (ground floor to 16th floor:
+Total height for 15 floors (ground floor to 16th floor):
 45.032 m
 45.431 m
 48.449 m
@@ -40,7 +40,7 @@ median = 1.093 m/s^2
 
 Min acceleration
 -1.130 m/s^2
--1.094 m/s
+-1.094 m/s^2
 -1.164 m/s^2
 mean = -1.129 m/s^2
 median = -1.130 m/s^2
