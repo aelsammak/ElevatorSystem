@@ -85,8 +85,6 @@ public class Scheduler extends Thread {
 		return (long) 1.0; //placeholder
 	}
 	
-	
-	
 	@Override
 	public void run() {
 		// Get current date
