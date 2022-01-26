@@ -5,9 +5,8 @@ import static java.lang.Math.abs;
 
 public class ArrivalSensor {
 	
-	// TODO - NEED REAL VALUES
-	private static final long DISTANCE_BETWEEN_FLOORS = (long) 3.0 ;
-	private static final long MAX_SPEED = (long) 1.1 ;
+	private static final long DISTANCE_BETWEEN_FLOORS = (long) 3.02 ;
+	private static final long MAX_SPEED = (long) 1.80 ;
 
     public ArrivalSensor() {
       

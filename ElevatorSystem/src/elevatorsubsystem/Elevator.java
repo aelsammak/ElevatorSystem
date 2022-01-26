@@ -22,9 +22,7 @@ public class Elevator extends Thread {
 	private final ElevatorLamp[] elevatorLamps;
 	private final Motor motor;
 	private final Door door;
-	
-	// TODO - Need real value
-	private static final long WAIT_TIME = (long) 8.5;
+	private static final long LOAD_UNLOAD_TIME = (long) 12.43;
 	
 	public Elevator(int elevatorNumber, Scheduler scheduler) {
 		this.elevatorNumber = elevatorNumber;
@@ -46,7 +44,7 @@ public class Elevator extends Thread {
 	
 	
 	public synchronized void moveToFloor(Floor destinationFloor) {
-		while(motor.getElevatorState() == ElevatorState.MOVING_UP) {
+		while(motor.getElevatorState() != ElevatorState.IDLE) {
 			try {
 				this.wait();
 			} catch (Exception e) {
@@ -84,7 +82,7 @@ public class Elevator extends Thread {
 	public synchronized void closeDoors() {
     	
         try {
-            wait(WAIT_TIME * 1000);
+            wait(LOAD_UNLOAD_TIME * 1000);
         } catch (InterruptedException e) {
         	System.out.println("In method closeDoors()");
             e.printStackTrace();
