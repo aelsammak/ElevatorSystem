@@ -16,7 +16,6 @@ public class FloorEvent extends Event {
 	private boolean isUpButton;
 	private Floor floor;
 	
-	
 	public FloorEvent(Floor floor, boolean isUpButton, Date time) {
 		super(time);
 		this.floor = floor;

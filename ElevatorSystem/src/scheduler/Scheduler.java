@@ -10,10 +10,12 @@ public class Scheduler extends Thread {
 	private List<Elevator> elevators;
 	private List<Floor> floors;
 	private final PriorityQueue<Event> eventQueue;
+	private long elapsedTime;
 	
 	public Scheduler() {
 		elevators = new ArrayList<Elevator>();
 		this.eventQueue = new PriorityQueue<>();
+		this.elapsedTime = 0;
 	}
 	
 	public void addElevator(Elevator elevator) {
@@ -24,44 +26,45 @@ public class Scheduler extends Thread {
 		elevators.remove(elevator);
 	}
 	
-	public void handleFloorEvent(FloorEvent floorEvent) {
-		//call corresponding floor methods
-	}
+	private synchronized void handleEvent() {
+		if (!eventQueue.isEmpty()) {
+			Event currentEvent = eventQueue.peek();
+			if (currentEvent instanceof FloorEvent) {
+				handleFloorEvent((FloorEvent) currentEvent);
+			} else {
+				handleElevatorEvent((ElevatorEvent) currentEvent);
+			}
+		}
+	} 
 	
-	private void updateFloorLamps() {
-		//send message to activate floor lamps
+	public void handleFloorEvent(FloorEvent floorEvent) {
+		moveElevatorToPersonsFloor(floorEvent.getFloor());
+		eventQueue.poll();
 	}
 	
 	public void handleElevatorEvent(ElevatorEvent elevatorEvent) {
-		//call corresponding elevator methods
+		moveElevatorToRequestedDestination(elevatorEvent.getDestinationFloor());
+		eventQueue.poll();
 	}
 	
-	private void updateElevatorLamps() {
-		
-	}
-	
-	private void activateElevatorMotor() {
-		
-	}
-	
-	private void activateElevatorDoor() {
-		
-	}
-	
-	public synchronized void moveElevatorToServePerson(Floor personsFloor, Floor destinationFloor) {
-		// while the Elevator's motor is moving (NOT idle), call this.wait()
-		
-		// Once the Elevator's motor is idle: 
-		// call moveElevatorToPersonsFloor(personsFloor)
-		// call moveElevatorToRequestedDestination(destinationFloor)
+	public synchronized void addEvents(FloorEvent floorEvent) {
+		eventQueue.add(floorEvent);
+		eventQueue.add(elevators.get(0).getElevatorEventQueue().poll());
 	}
 	
 	public void moveElevatorToPersonsFloor(Floor personsFloor) {
+		// while the Elevator's motor is moving (NOT idle), call this.wait()
+		
+		// Once the Elevator's motor is idle:
 		// if the Elevator.getCurrentFloor().getFloorNumber() != personsFloor.getFloorNumber() then, call elevators.get(0).moveToFloor(personsFloor)
 		// else open the Elevator's doors (elevators.get(0).openDoors()) and call elevatorArrivesAtFloor(personsFloor)
+		// call this.notifyAll()
 	}
 	
 	public void moveElevatorToRequestedDestination(Floor destinationFloor) {
+		// while the Elevator's motor is moving (NOT idle), call this.wait()
+		
+		// Once the Elevator's motor is idle:
 		System.out.println("Elevator button " + destinationFloor.getFloorNumber() + " has been pressed");
 		// Turn on the ElevatorButton AND ElevatorLamp corresponding to the destinationFloor's floor number
 		// if the Elevator.getCurrentFloor().getFloorNumber() != destinationFloor.getFloorNumber() then, call elevators.get(0).moveToFloor(destinationFloor)
@@ -75,21 +78,39 @@ public class Scheduler extends Thread {
 		// tells elevator to close doors
 	}
 	
-	public boolean hasEvents() {
-		// return boolean indicating weather or not the priority queues in all other floors is empty or not
-		return false; //placeholder
+	public Floor getFloorByIndex(int floorIndex) {
+		return floors.get(floorIndex);
 	}
 	
 	public long getElapsedTime() {
-		//return time elapsed so far
-		return (long) 1.0; //placeholder
+		return elapsedTime;
 	}
+	
+    public boolean hasEvents() {
+        for(Floor floor : floors) {
+            if (!floor.hasEvents()) {
+                return false;
+            }
+        }
+        
+        for(Elevator elevator : elevators) {
+            if (!elevator.hasEvents()) {
+                return false;
+            }
+        }
+        
+        return true;
+    }
 	
 	@Override
 	public void run() {
-		// Get current date
-		// get start time
-		// While(this.hasEvents) : update date and get time passed
+        Date d = new Date();
+        long startTime = d.getTime();
+        while(hasEvents()) {
+            d = new Date();
+            elapsedTime = (d.getTime() - startTime) / 1000;
+            handleEvent();
+        }
 	}
 
 	public PriorityQueue<Event> getEventQueue() {

@@ -17,11 +17,6 @@ public class Event implements Comparable<Event> {
 	public Event(Date time) {
 		this.time = time;
 	}
-	
-	@Override
-	public int compareTo(Event o) {
-		return 0;
-	}
 
 	public long getTimeLeftTillEvent() {
 		return timeLeftTillEvent;
@@ -34,5 +29,12 @@ public class Event implements Comparable<Event> {
 	public Date getTime() {
 		return time;
 	}
+	
+    @Override
+    public int compareTo(Event e) {
+        long currentEventTime = time.getTime();
+        long otherEventTime = e.getTime().getTime();
+        return (currentEventTime < otherEventTime ? -1  : 1);
+    }
 	
 }

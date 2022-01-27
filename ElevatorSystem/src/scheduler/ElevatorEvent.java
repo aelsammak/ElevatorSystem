@@ -3,25 +3,25 @@ package scheduler;
 import java.util.Date;
 
 import elevatorsubsystem.Elevator;
+import floorsubsystem.Floor;
 
 public class ElevatorEvent extends Event {
 	
 	private Elevator elevator;
-	private int buttonPressed;
-	//private ElevatorState elevatorState;
+	private Floor destinationFloor;
 	
-	public ElevatorEvent(Elevator elevator, int buttonPressed, Date time) {
+	public ElevatorEvent(Elevator elevator, Floor destinationFloor, Date time) {
 		super(time);
 		this.elevator = elevator;
-		this.buttonPressed = buttonPressed;
+		this.destinationFloor = destinationFloor;
 	}
 	
 	public Elevator getElevator() {
 		return elevator;
 	}
 	
-	public int getButtonPressed() {
-		return buttonPressed;
+	public Floor getDestinationFloor() {
+		return destinationFloor;
 	}
 	
 }
