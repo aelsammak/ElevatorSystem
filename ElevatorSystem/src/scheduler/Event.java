@@ -11,11 +11,10 @@ import java.util.Date;
  */
 public class Event implements Comparable<Event> {
 	
-	private Date time;
 	private long timeLeftTillEvent;
 	
-	public Event(Date time) {
-		this.time = time;
+	public Event(long timeLeftTillEvent) {
+		this.timeLeftTillEvent = timeLeftTillEvent;
 	}
 
 	public long getTimeLeftTillEvent() {
@@ -25,16 +24,11 @@ public class Event implements Comparable<Event> {
 	public void setTimeLeftTillEvent(long timeLeftTillEvent) {
 		this.timeLeftTillEvent = timeLeftTillEvent;
 	}
-
-	public Date getTime() {
-		return time;
-	}
 	
     @Override
     public int compareTo(Event e) {
-        long currentEventTime = time.getTime();
-        long otherEventTime = e.getTime().getTime();
-        return (currentEventTime < otherEventTime ? -1  : 1);
+        long otherEventTime = e.getTimeLeftTillEvent();
+        return (timeLeftTillEvent < otherEventTime ? 1  : -1);
     }
 	
 }

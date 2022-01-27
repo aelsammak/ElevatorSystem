@@ -3,6 +3,8 @@ package floorsubsystem;
 import scheduler.FloorEvent;
 import scheduler.Scheduler;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 public class Floor extends Thread {
@@ -11,10 +13,10 @@ public class Floor extends Thread {
 	private final Scheduler scheduler;
 	private final Queue<FloorEvent> floorEventQueue;
 	
-	public Floor(int floorNumber, Scheduler scheduler, Queue<FloorEvent> floorEventQueue) {
+	public Floor(int floorNumber, Scheduler scheduler) {
 		this.floorNumber = floorNumber;
 		this.scheduler = scheduler;
-		this.floorEventQueue = floorEventQueue;
+		this.floorEventQueue = new LinkedList<FloorEvent>();
 	}
 		
 	@Override
@@ -51,6 +53,10 @@ public class Floor extends Thread {
 	
 	private boolean isPriorityFloorEvent() {
 		return (!floorEventQueue.isEmpty() && floorEventQueue.peek().getTimeLeftTillEvent() <= scheduler.getElapsedTime());
+	}
+	
+	public void addFloorEvent(FloorEvent floorEvent) {
+		this.floorEventQueue.add(floorEvent);
 	}
 	
 }

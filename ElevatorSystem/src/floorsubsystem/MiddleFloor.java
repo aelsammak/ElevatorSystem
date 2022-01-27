@@ -1,8 +1,5 @@
 package floorsubsystem;
 
-import java.util.Queue;
-
-import scheduler.FloorEvent;
 import scheduler.Scheduler;
 
 public class MiddleFloor extends Floor {
@@ -12,8 +9,8 @@ public class MiddleFloor extends Floor {
 	private final FloorLamp upLamp;
 	private final FloorLamp downLamp;
 	
-	public MiddleFloor(int floorNumber, Scheduler scheduler, Queue<FloorEvent> floorEventQueue) {
-		super(floorNumber, scheduler, floorEventQueue);
+	public MiddleFloor(int floorNumber, Scheduler scheduler) {
+		super(floorNumber, scheduler);
 		this.upBtn = new FloorButton(floorNumber, true);
 		this.downBtn = new FloorButton(floorNumber, false);
 		this.upLamp = new FloorLamp();

@@ -1,7 +1,5 @@
 package scheduler;
 
-import java.util.Date;
-
 import elevatorsubsystem.Elevator;
 import floorsubsystem.Floor;
 
@@ -10,8 +8,8 @@ public class ElevatorEvent extends Event {
 	private Elevator elevator;
 	private Floor destinationFloor;
 	
-	public ElevatorEvent(Elevator elevator, Floor destinationFloor, Date time) {
-		super(time);
+	public ElevatorEvent(Elevator elevator, Floor destinationFloor, long timeLeftTillEvent) {
+		super(timeLeftTillEvent);
 		this.elevator = elevator;
 		this.destinationFloor = destinationFloor;
 	}
