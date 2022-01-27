@@ -3,8 +3,6 @@
  */
 package scheduler;
 
-import java.util.Date;
-
 /**
  * @author Cam
  *

@@ -101,6 +101,18 @@ public class Scheduler extends Thread {
         
         return true;
     }
+    
+    public List<Elevator> getElevators() {
+    	return elevators;
+    }
+    
+    public List<Floor> getFloors() {
+    	return floors;
+    }
+    
+    public void setFloors(List<Floor> floors) {
+    	this.floors = floors;
+    }
 	
 	@Override
 	public void run() {

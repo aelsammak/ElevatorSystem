@@ -1,5 +1,6 @@
 package elevatorsubsystem;
 
+import java.util.LinkedList;
 import java.util.Queue;
 import common.Common;
 import common.ElevatorState;
@@ -22,13 +23,13 @@ public class Elevator extends Thread {
 	private final Queue<ElevatorEvent> elevatorEventQueue;
 	private static final long LOAD_UNLOAD_TIME = (long) 12.43;
 	
-	public Elevator(int elevatorNumber, Scheduler scheduler, Queue<ElevatorEvent> elevatorEventQueue) {
+	public Elevator(int elevatorNumber, Scheduler scheduler) {
 		this.elevatorNumber = elevatorNumber;
 		this.scheduler = scheduler; 
 		this.motor = new Motor(elevatorNumber);
 		this.door = new Door(elevatorNumber);
 		this.arrivalSensor = new ArrivalSensor(this);
-		this.elevatorEventQueue = elevatorEventQueue;
+		this.elevatorEventQueue = new LinkedList<>();
 		
 		this.elevatorButtons = new ElevatorButton[Common.NUM_FLOORS];
 		this.elevatorLamps = new ElevatorLamp[Common.NUM_FLOORS];
@@ -178,6 +179,10 @@ public class Elevator extends Thread {
 
 	public Queue<ElevatorEvent> getElevatorEventQueue() {
 		return elevatorEventQueue;
+	}
+	
+	public void addElevatorEvent(ElevatorEvent elevatorEvent) {
+		this.elevatorEventQueue.add(elevatorEvent);
 	}
 
 }
