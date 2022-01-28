@@ -13,12 +13,6 @@ public class ArrivalSensor {
     public ArrivalSensor(Elevator elevator) {
     	this.elevator = elevator; 
     }
-
-    // time is in milliseconds
-//    public long getTimeBetweenFloors(Floor currentFloor, Floor destinationFloor) {
-//    	long distanceBetweenFloors = abs((destinationFloor.getFloorNumber() - currentFloor.getFloorNumber()) * DISTANCE_BETWEEN_FLOORS);
-//    	return ((distanceBetweenFloors / MAX_SPEED) * 1000);
-//    }
     
     public synchronized void simulateElevatorMovement(Floor currentFloor, Floor destinationFloor) {
     	try {
