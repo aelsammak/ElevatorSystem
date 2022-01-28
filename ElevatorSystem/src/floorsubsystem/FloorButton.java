@@ -1,10 +1,10 @@
 package floorsubsystem;
 
 public class FloorButton {
+	
 	private boolean isPressed;
 	private final int floorNumber;
 	private final boolean isUp;
-	
 	
 	public FloorButton(int floorNumber, boolean isUp) {
 		this.floorNumber = floorNumber;
@@ -31,8 +31,4 @@ public class FloorButton {
 	public void turnOff() {
 		this.isPressed = false;  
 	}
-	
-	
-	
-	
 }
