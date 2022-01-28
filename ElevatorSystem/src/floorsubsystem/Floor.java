@@ -1,38 +1,61 @@
 package floorsubsystem;
 
-import scheduler.Event;
+import scheduler.FloorEvent;
 import scheduler.Scheduler;
 
-import java.util.List;
-import java.util.PriorityQueue;
-
-import common.Person;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class Floor extends Thread {
 	
 	private final int floorNumber;
 	private final Scheduler scheduler;
-	private final PriorityQueue<Event> eventQueue;
+	private final Queue<FloorEvent> floorEventQueue;
 	
-	public Floor(int floorNumber, Scheduler scheduler, PriorityQueue<Event> eventQueue) {
+	public Floor(int floorNumber, Scheduler scheduler) {
 		this.floorNumber = floorNumber;
 		this.scheduler = scheduler;
-		this.eventQueue = eventQueue;
+		this.floorEventQueue = new LinkedList<FloorEvent>();
 	}
 		
 	@Override
 	public void run() {
 		while(scheduler.hasEvents()) {
-            if(!eventQueue.isEmpty() && eventQueue.peek().getTimeLeftTillEvent() <= scheduler.getElapsedTime() && scheduler.getEventQueue().peek().equals(eventQueue.peek()))
-            {
-                //TODO implement 
+            if(this.isPriorityFloorEvent()) {
+            	FloorEvent currentFloorEvent = floorEventQueue.peek();
+            	
+                if(currentFloorEvent.getFloor() instanceof MiddleFloor) {
+                	if(currentFloorEvent.isUpButton()) {
+                		((MiddleFloor)(currentFloorEvent.getFloor())).pressUpButton();
+                	} else {
+                		((MiddleFloor)(currentFloorEvent.getFloor())).pressDownButton();
+                	}
+                } else if(currentFloorEvent.getFloor() instanceof TopFloor){
+                	((TopFloor)(currentFloorEvent.getFloor())).pressDownButton();
+                } else {
+                	((BottomFloor)(currentFloorEvent.getFloor())).pressUpButton();
+                }
+                
+                scheduler.addEvents(currentFloorEvent);
+                floorEventQueue.poll();
             }
-
         }
+	}
+	
+	public boolean hasEvents() {
+		return !floorEventQueue.isEmpty();
 	}
 
 	public int getFloorNumber() {
 		return floorNumber;
 	}
-
+	
+	private boolean isPriorityFloorEvent() {
+		return (!floorEventQueue.isEmpty() && floorEventQueue.peek().getTimeLeftTillEvent() <= scheduler.getElapsedTime());
+	}
+	
+	public void addFloorEvent(FloorEvent floorEvent) {
+		this.floorEventQueue.add(floorEvent);
+	}
+	
 }

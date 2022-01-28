@@ -3,8 +3,6 @@
  */
 package scheduler;
 
-import java.util.Date;
-
 import floorsubsystem.Floor;
 
 /**
@@ -16,9 +14,8 @@ public class FloorEvent extends Event {
 	private boolean isUpButton;
 	private Floor floor;
 	
-	
-	public FloorEvent(Floor floor, boolean isUpButton, Date time) {
-		super(time);
+	public FloorEvent(Floor floor, boolean isUpButton, long timeLeftTillEvent) {
+		super(timeLeftTillEvent);
 		this.floor = floor;
 		this.setUpButton(isUpButton);
 	}
