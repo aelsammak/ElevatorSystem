@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-package floorsubsystem;
-
-public class FloorSubsystem {
-	
-}
-=======
 package floorsubsystem;
 
 import java.io.File;
@@ -103,4 +96,3 @@ public class FloorSubsystem {
         }
 	}
 }
->>>>>>> refs/heads/AdiImpl

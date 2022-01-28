@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package floorsubsystem;
 
 import java.util.List;
@@ -51,4 +50,3 @@ public class BottomFloor extends Floor {
 		return upLamp;
 	}
 }
->>>>>>> refs/heads/AdiImpl

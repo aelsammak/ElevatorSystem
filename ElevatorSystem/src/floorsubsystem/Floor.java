@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package floorsubsystem;
 
 import java.util.List;
@@ -92,4 +91,3 @@ public class Floor extends Thread {
 	}
 	
 }
->>>>>>> refs/heads/AdiImpl
