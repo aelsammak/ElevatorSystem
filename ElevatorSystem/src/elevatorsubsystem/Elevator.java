@@ -1,7 +1,6 @@
 package elevatorsubsystem;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.PriorityQueue;
 import common.Common;
 import common.ElevatorState;
 import floorsubsystem.BottomFloor;
@@ -10,6 +9,13 @@ import floorsubsystem.TopFloor;
 import scheduler.ElevatorEvent;
 import scheduler.Scheduler;
 
+/**
+ * The Elevator class represents the a single Elevator in the ElevatorSubSystem. 
+ * 
+ * @author Adi El-Sammak
+ * @version 1.0
+ *
+ */
 public class Elevator extends Thread {
 	
 	private Scheduler scheduler;
@@ -20,16 +26,22 @@ public class Elevator extends Thread {
 	private final ElevatorLamp[] elevatorLamps;
 	private final Motor motor;
 	private final Door door;
-	private final Queue<ElevatorEvent> elevatorEventQueue;
+	private final PriorityQueue<ElevatorEvent> elevatorEventQueue;
 	private static final long LOAD_UNLOAD_TIME = (long) 12.43;
 	
+	/**
+	 * Constructor used to create an instance of the Elevator class
+	 * 
+	 * @param elevatorNumber - the elevator number
+	 * @param scheduler - the system's scheduler
+	 */
 	public Elevator(int elevatorNumber, Scheduler scheduler) {
 		this.elevatorNumber = elevatorNumber;
 		this.scheduler = scheduler; 
 		this.motor = new Motor(elevatorNumber);
 		this.door = new Door(elevatorNumber);
 		this.arrivalSensor = new ArrivalSensor(this);
-		this.elevatorEventQueue = new LinkedList<>();
+		this.elevatorEventQueue = new PriorityQueue<>();
 		
 		this.elevatorButtons = new ElevatorButton[Common.NUM_FLOORS];
 		this.elevatorLamps = new ElevatorLamp[Common.NUM_FLOORS];
@@ -40,6 +52,11 @@ public class Elevator extends Thread {
         }
 	}
 	
+	/**
+	 * This method is responsible for moving the Elevator to the passed in destinationFloor and then notify the scheduler of the arrival
+	 * 
+	 * @param destinationFloor - the floor to which the Elevator must move to
+	 */
 	public synchronized void moveToFloor(Floor destinationFloor) {
 		while (this.getMotorState() != ElevatorState.IDLE) {
 			try {
@@ -55,6 +72,11 @@ public class Elevator extends Thread {
 		this.notifyAll();
 	}
 	
+	/**
+	 * This method is responsible for simulating the Elevator's movement and arrival at the destination floor
+	 * 
+	 * @param destinationFloor - the floor to which the Elevator must move to
+	 */
 	private void simulateElevatorArrival(Floor destinationFloor) {
 		String infoStr = "";
 		if (elevatorShouldMove(infoStr, destinationFloor)) {
@@ -68,11 +90,18 @@ public class Elevator extends Thread {
 		}
 	}
 	
+	/**
+	 * This method is responsible for deciding if the Elevator should move based on the destinationFloor and the currentFloor of the Elevator
+	 * 
+	 * @param infoStr - the informational string to print to the terminal
+	 * @param destinationFloor - the floor to which the Elevator must move to
+	 * @return boolean - true if the Elevator should move, else false
+	 */
 	private boolean elevatorShouldMove(String infoStr, Floor destinationFloor) {
 		boolean shouldMove = false;
 		if (destinationFloor instanceof TopFloor) {
-			if (destinationFloor.getFloorNumber() < currentFloor.getFloorNumber()) {
-				this.motor.setElevatorState(ElevatorState.MOVING_DOWN);
+			if (destinationFloor.getFloorNumber() > currentFloor.getFloorNumber()) {
+				this.motor.setElevatorState(ElevatorState.MOVING_UP);
 				infoStr = "Elevator is moving down to floor " + destinationFloor.getFloorNumber();
 				shouldMove = true;
 			} else {
@@ -80,8 +109,8 @@ public class Elevator extends Thread {
 				infoStr = "Elevator is already at Top Floor";
 			}
 		} else if (destinationFloor instanceof BottomFloor) {
-			if (destinationFloor.getFloorNumber() > currentFloor.getFloorNumber()) {
-				this.motor.setElevatorState(ElevatorState.MOVING_UP);
+			if (destinationFloor.getFloorNumber() < currentFloor.getFloorNumber()) {
+				this.motor.setElevatorState(ElevatorState.MOVING_DOWN);
 				infoStr = "Elevator is moving up to floor " + destinationFloor.getFloorNumber();
 				shouldMove = true;
 			} else {
@@ -92,21 +121,32 @@ public class Elevator extends Thread {
 			if (destinationFloor.getFloorNumber() > currentFloor.getFloorNumber()) {
 				this.motor.setElevatorState(ElevatorState.MOVING_UP);
 				infoStr = "Elevator is moving up to floor " + destinationFloor.getFloorNumber();
-			} else {
+				shouldMove = true;
+			} else if (destinationFloor.getFloorNumber() < currentFloor.getFloorNumber()) {
 				this.motor.setElevatorState(ElevatorState.MOVING_DOWN);
 				infoStr = "Elevator is moving down to floor " + destinationFloor.getFloorNumber();
+				shouldMove = true;
+			} else {
+				this.motor.setElevatorState(ElevatorState.IDLE);
+				infoStr = "Elevator is already at Floor " + destinationFloor.getFloorNumber();
 			}
-			shouldMove = true;
 		}
 		
 		return shouldMove;
 	}
 	
+	/**
+	 * This method is resonsible for opening the Elevator doors
+	 */
 	public void openDoors() {
 		System.out.println("Elevator has arrived at floor " + currentFloor.getFloorNumber());
 		this.door.open();
 	}
 
+	
+	/**
+	 * This method is responsible for closing the Elevator doors while taking load/unload times into account
+	 */
 	public synchronized void closeDoors() {
     	
         try {
@@ -123,12 +163,17 @@ public class Elevator extends Thread {
     }
 
 	/**
-	 * @return the currentFloor
+	 * Getter for the currentFloor attribute (Elevators position)
+	 * 
+	 * @return Floor - the currentFloor
 	 */
 	public Floor getCurrentFloor() {
 		return currentFloor;
 	}
 	
+	/**
+	 * This method is responsible for changing the Elevator's position
+	 */
 	public void changeCurrentFloor() {
 		int indexedCurrentFloorNumber = currentFloor.getFloorNumber() - 1;
 		if (motor.getElevatorState() == ElevatorState.MOVING_UP) {
@@ -138,6 +183,11 @@ public class Elevator extends Thread {
 		}
 	}
 	
+	/**
+	 * Getter for the Motor's ElevatorState attribute
+	 * 
+	 * @return ElevatorState - the state of the Elevator
+	 */
 	public ElevatorState getMotorState() {
 		return motor.getElevatorState();
 	}
@@ -148,7 +198,9 @@ public class Elevator extends Thread {
 
 
 	/**
-	 * @return the elevatorNumber
+	 * Getter for elevatorNumber attribute
+	 * 
+	 * @return int - the elevatorNumber
 	 */
 	public int getElevatorNumber() {
 		return elevatorNumber;
@@ -156,7 +208,9 @@ public class Elevator extends Thread {
 
 
 	/**
-	 * @return the elevatorButtons
+	 * Getter for array of elevatorButtons
+	 * 
+	 * @return ElevatorButton[] - the elevatorButtons
 	 */
 	public ElevatorButton[] getElevatorButtons() {
 		return elevatorButtons;
@@ -164,16 +218,26 @@ public class Elevator extends Thread {
 
 
 	/**
-	 * @return the elevatorLamps
+	 * Getter for the array of elevatorLamps
+	 * 
+	 * @return ElevatorLamp[] - the elevatorLamps
 	 */
 	public ElevatorLamp[] getElevatorLamps() {
 		return elevatorLamps;
 	}
 	
+	/**
+	 * This method is responible for checking if the PriorityQueue of ElevatorEvents isEmpty 
+	 * 
+	 * @return boolean - true if the PriorityQueue of ElevatorEvents is NOT empty, else false 
+	 */
 	public boolean hasEvents() {
 		return !elevatorEventQueue.isEmpty();
 	}
 	
+	/**
+	 * The run() method which will be invoked once start() has been called on the Elevator thread.  
+	 */
 	@Override
 	public void run() {
         while(scheduler.hasEvents()) {
@@ -181,10 +245,20 @@ public class Elevator extends Thread {
         }
 	}
 
-	public Queue<ElevatorEvent> getElevatorEventQueue() {
+	/**
+	 * Getter for the PriorityQueue of ElevatorEvents
+	 * 
+	 * @return PriorityQueue<ElevatorEvent> - PriorityQueue of ElevatorEvents
+	 */
+	public PriorityQueue<ElevatorEvent> getElevatorEventQueue() {
 		return elevatorEventQueue;
 	}
 	
+	/**
+	 * This method is responsible for adding ElevatorEvents to the PriorityQueue of ElevatorEvents
+	 * 
+	 * @param elevatorEvent - the elevatorEvent to add
+	 */
 	public void addElevatorEvent(ElevatorEvent elevatorEvent) {
 		this.elevatorEventQueue.add(elevatorEvent);
 	}

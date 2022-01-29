@@ -16,9 +16,24 @@ import floorsubsystem.Floor;
 import scheduler.ElevatorEvent;
 import scheduler.Scheduler;
 
+/**
+ * The ElevatorSubsystem class is reponsible for parsing the file to generate elevator events 
+ * 
+ * @author Adi El-Sammak
+ * @version 1.0
+ *
+ */
 public class ElevatorSubsystem {
 	
-	// TODO - ADD ELEVATOR TO SCHEDULER LIST OF ELEVATORS
+	
+	/**
+	 * This method is responsible for generating the elevator events from the file being passed in
+	 * 
+	 * @param scheduler - the schduler of the system
+	 * @param filename - the file to be parsed containing the Elevator Events
+	 * @param elevator - the elevator to add the elevator event to 
+	 * @throws FileNotFoundException
+	 */
     public static void generateElevatorEvents(Scheduler scheduler, String filename, Elevator elevator) throws FileNotFoundException {
     	List<Floor> floors = scheduler.getFloors();
     	List<Integer> destinationFloors = new ArrayList<>();
