@@ -2,6 +2,13 @@ package floorsubsystem;
 
 import scheduler.Scheduler;
 
+/**
+ * Middle floor variant of the Floor class
+ * 
+ * @author Kareem El-Hajjar
+ * @version 1.0
+ * 
+ */
 public class MiddleFloor extends Floor {
 	
 	private final FloorButton upBtn;
@@ -9,6 +16,12 @@ public class MiddleFloor extends Floor {
 	private final FloorLamp upLamp;
 	private final FloorLamp downLamp;
 	
+	
+	/**
+	 * Parameterized constructor 
+	 * @param floorNumber, the floor's number
+	 * @param scheduler, the scheduler associated with the floor
+	 */
 	public MiddleFloor(int floorNumber, Scheduler scheduler) {
 		super(floorNumber, scheduler);
 		this.upBtn = new FloorButton(floorNumber, true);
@@ -17,26 +30,46 @@ public class MiddleFloor extends Floor {
 		this.downLamp = new FloorLamp();
 	}
 	
+	/**
+	 * Turn on the up button
+	 */
 	public void turnOnUpButton() {
 		this.upBtn.turnOn();
 	}
 	
+	/**
+	 * Turn off the up button
+	 */
 	public void turnOffUpButton() {
 		this.upBtn.turnOff();
 	}
 	
+	/**
+	 * Turn on the down button
+	 */
 	public void turnOnDownButton() {
 		this.downBtn.turnOn();
 	}
 	
+	/**
+	 * Turn off the down button
+	 */
 	public void turnOffDownButton() {
 		this.downBtn.turnOff();
 	}
 
+	/**
+	 * Getter for the upLamp attribute
+	 * @return FloorLamp - the upLamp attribute
+	 */
 	public FloorLamp getUpLamp() {
 		return upLamp;
 	}
-
+	
+	/**
+	 * Getter for the downLamp attribute
+	 * @return FloorLamp - the downLamp attribute
+	 */
 	public FloorLamp getDownLamp() {
 		return downLamp;
 	}

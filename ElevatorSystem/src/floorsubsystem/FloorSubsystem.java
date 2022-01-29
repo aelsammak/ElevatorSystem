@@ -14,9 +14,21 @@ import scheduler.Scheduler;
 
 import static java.lang.Math.abs;
 
+/**
+ * This class represents the floor sub-system, responsible for generating floor events and creating the floors
+ * 
+ * @author Kareem El-Hajjar
+ * @version 1.0
+ * 
+ */
 public class FloorSubsystem {
 	
-	
+	/**
+	 * Generates the Floors and the FloorEvents
+	 * @param scheduler, the scheduler associated with the floor sub-system
+	 * @param filename, the name of the file that contains the event information
+	 * @throws FileNotFoundException
+	 */
 	public static void generateFloorsAndEvents(Scheduler scheduler, String filename) throws FileNotFoundException {
 		List<Floor> floors = new ArrayList<>();
 		List<Integer> originalFloors = new ArrayList<>();
@@ -41,7 +53,6 @@ public class FloorSubsystem {
 			try {
 				currentDate = Common.CSV_DATE_FORMAT.parse("01-01-2022 "+ line[0]);
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
             timeList.add(abs(Common.SIMULATION_START_DATE.getTime() - currentDate.getTime())/1000);
@@ -74,6 +85,12 @@ public class FloorSubsystem {
         createFloorEvents(originalFloors, floors, isUpList, timeList);
 	}
 	
+	/**
+	 * Create the floors and fill the scheduler's floor list
+	 * @param maxFloorNumber, the top floor's number
+	 * @param scheduler, the scheduler associated with the floor sub-system
+	 * @param floors, the list of floors to add to the scheduler
+	 */
 	private static void createFloors(int maxFloorNumber, Scheduler scheduler, List<Floor> floors) {
         for(int floorNumber = 0; floorNumber < maxFloorNumber; floorNumber++) {
         	if(floorNumber == 0) {
@@ -87,6 +104,13 @@ public class FloorSubsystem {
         scheduler.setFloors(floors);
 	}
 	
+	/**
+	 * Create the FloorEvent's and fill each's floor eventQueue 
+	 * @param originalFloors, the list of floors from which the elevator is called 
+	 * @param floors, the list of all floors
+	 * @param isUpList, the list of button press directions
+	 * @param timeList, the list of event times
+	 */
 	private static void createFloorEvents(List<Integer> originalFloors, List<Floor> floors, List<Boolean> isUpList, List<Long> timeList) {
         for(int floorNumber : originalFloors) {
         	int tempIndex = 0;
