@@ -54,7 +54,6 @@ public class ElevatorSubsystem {
 			try {
 				currentDate = Common.CSV_DATE_FORMAT.parse("01-01-2022 "+ line[0]);
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
             timeList.add(abs(Common.SIMULATION_START_DATE.getTime() - currentDate.getTime())/1000);
