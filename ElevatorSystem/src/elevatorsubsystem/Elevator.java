@@ -62,7 +62,7 @@ public class Elevator extends Thread {
 			arrivalSensor.simulateElevatorMovement(currentFloor, destinationFloor);
 			this.motor.setElevatorState(ElevatorState.IDLE);
 			openDoors();
-			scheduler.elevatorArrivesAtFloor(currentFloor);
+			scheduler.elevatorArrivesAtFloor(this, currentFloor);
 		} else {
 			System.out.println(infoStr);
 		}
@@ -140,6 +140,10 @@ public class Elevator extends Thread {
 	
 	public ElevatorState getMotorState() {
 		return motor.getElevatorState();
+	}
+	
+	public void setMotorState(ElevatorState state) {
+		motor.setElevatorState(state);
 	}
 
 

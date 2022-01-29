@@ -3,7 +3,8 @@ package scheduler;
 import java.util.*;
 
 import elevatorsubsystem.Elevator;
-import floorsubsystem.Floor;
+import floorsubsystem.*;
+import common.ElevatorState;
 
 public class Scheduler extends Thread {
 	
@@ -54,28 +55,71 @@ public class Scheduler extends Thread {
 	
 	public void moveElevatorToPersonsFloor(Floor personsFloor) {
 		// while the Elevator's motor is moving (NOT idle), call this.wait()
-		
+		while(elevators.get(0).getMotorState() != ElevatorState.IDLE){
+			try {
+				this.wait();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();//<<<<<<<<<------------------------------
+			}
+		}
 		// Once the Elevator's motor is idle:
+		if (elevators.get(0).getCurrentFloor().getFloorNumber() != personsFloor.getFloorNumber()) {
+			elevators.get(0).moveToFloor(personsFloor);
+			elevators.get(0).openDoors();
+			elevatorArrivesAtFloor(elevators.get(0), personsFloor);
+		}
+		this.notifyAll();
 		// if the Elevator.getCurrentFloor().getFloorNumber() != personsFloor.getFloorNumber() then, call elevators.get(0).moveToFloor(personsFloor)
 		// else open the Elevator's doors (elevators.get(0).openDoors()) and call elevatorArrivesAtFloor(personsFloor)
-		// call this.notifyAll()
 	}
 	
 	public void moveElevatorToRequestedDestination(Floor destinationFloor) {
 		// while the Elevator's motor is moving (NOT idle), call this.wait()
-		
+		while(elevators.get(0).getMotorState() != ElevatorState.IDLE){
+			try {
+				this.wait();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();//<<<<<<<<<------------------------------
+			}
+		}
 		// Once the Elevator's motor is idle:
 		System.out.println("Elevator button " + destinationFloor.getFloorNumber() + " has been pressed");
-		// Turn on the ElevatorButton AND ElevatorLamp corresponding to the destinationFloor's floor number
-		// if the Elevator.getCurrentFloor().getFloorNumber() != destinationFloor.getFloorNumber() then, call elevators.get(0).moveToFloor(destinationFloor)
+		elevators.get(0).getElevatorButtons()[destinationFloor.getFloorNumber() - 1].turnOn();
+		elevators.get(0).getElevatorLamps()[destinationFloor.getFloorNumber() - 1].turnOn();// Turn on the ElevatorButton AND ElevatorLamp corresponding to the destinationFloor's floor number
+		if (elevators.get(0).getCurrentFloor().getFloorNumber() != destinationFloor.getFloorNumber()){
+			elevators.get(0).moveToFloor(destinationFloor);
+		}// if the Elevator.getCurrentFloor().getFloorNumber() != destinationFloor.getFloorNumber() then, call elevators.get(0).moveToFloor(destinationFloor)
+		else {
+			elevators.get(0).openDoors();
+			elevatorArrivesAtFloor(elevators.get(0),destinationFloor);
+		}
 		// else open the Elevator's doors (elevators.get(0).openDoors()) and call elevatorArrivesAtFloor(destinationFloor)
-		// set the Elevator's motor to the idle elevatorState
-		// call this.notifyAll()
+		elevators.get(0).setMotorState(ElevatorState.IDLE);// set the Elevator's motor to the idle elevatorState
+		this.notifyAll();
 	}
 	
-	public synchronized void elevatorArrivesAtFloor(Floor currentFloor) {
-		// turns off floor lamps and unpress the corresponding floor button
-		// tells elevator to close doors
+	public synchronized void elevatorArrivesAtFloor(Elevator elevator, Floor currentFloor) {
+		if (currentFloor instanceof MiddleFloor) {  // turns off floor lamps and unpress the corresponding floor button
+			((MiddleFloor) currentFloor).getUpLamp().turnOff();
+			((MiddleFloor) currentFloor).getDownLamp().turnOff();
+			((MiddleFloor) currentFloor).turnOffDownButton();
+			((MiddleFloor) currentFloor).turnOffUpButton();
+		}
+		else if(currentFloor instanceof TopFloor) {
+			((TopFloor) currentFloor).getDownLamp().turnOff();
+			((TopFloor) currentFloor).turnOffDownButton();
+		}
+		else {
+			((BottomFloor) currentFloor).getUpLamp().turnOff();
+			((BottomFloor) currentFloor).turnOffUpButton();
+		}
+		
+		
+		
+		elevator.closeDoors();
+		// tells elevator to close doors !?!?!? no reference to which elevator
 	}
 	
 	public Floor getFloorByIndex(int floorIndex) {
