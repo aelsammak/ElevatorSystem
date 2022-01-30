@@ -8,6 +8,9 @@ import elevatorsubsystem.Elevator;
 import elevatorsubsystem.ElevatorSubsystem;
 import floorsubsystem.Floor;
 import floorsubsystem.FloorSubsystem;
+import scheduler.ElevatorEvent;
+import scheduler.Event;
+import scheduler.FloorEvent;
 import scheduler.Scheduler;
 
 /**
@@ -30,13 +33,11 @@ public class Main {
         try {
             FloorSubsystem.generateFloorsAndEvents(scheduler, FILE_NAME);
             Elevator elevator = new Elevator(1, scheduler);
-            scheduler.addElevator(elevator);
             ElevatorSubsystem.generateElevatorEvents(scheduler, FILE_NAME, elevator);
+            scheduler.addElevator(elevator);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        
-        scheduler.start();
         
         for(Floor floor : scheduler.getFloors()) {
         	floor.start();
@@ -45,6 +46,8 @@ public class Main {
         for(Elevator elevator : scheduler.getElevators()) {
         	elevator.start();
         }
+        
+        scheduler.start();
 	}
 
 }

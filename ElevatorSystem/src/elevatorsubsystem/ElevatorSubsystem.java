@@ -44,27 +44,31 @@ public class ElevatorSubsystem {
         while (scanner.hasNext()) {
             String[] line = scanner.nextLine().split(",");
             
-            int destinationFloor = Integer.parseInt(line[3]);
-            
-            // Fill destinationFloors
-            destinationFloors.add(destinationFloor);
-            
-            // Fill timeList
-            Date currentDate = null;
-			try {
-				currentDate = Common.CSV_DATE_FORMAT.parse("01-01-2022 "+ line[0]);
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-            timeList.add(abs(Common.SIMULATION_START_DATE.getTime() - currentDate.getTime())/1000);
+            if (line.length != 0) {
+	            
+	            int destinationFloor = Integer.parseInt(line[3]);
+	            
+	            // Fill destinationFloors
+	            destinationFloors.add(destinationFloor);
+	            
+	            // Fill timeList
+	            Date currentDate = null;
+				try {
+					currentDate = Common.CSV_DATE_FORMAT.parse("01-01-2022 "+ line[0]);
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+	            timeList.add(abs(Common.SIMULATION_START_DATE.getTime() - currentDate.getTime())/1000);
+            } else {
+            	break;
+            }
         }
         
+        int tempIndex = 0;
         for (int destinationFloor : destinationFloors) {
-        	int tempIndex = 0;
         	elevator.addElevatorEvent(new ElevatorEvent(elevator, floors.get(destinationFloor - 1), timeList.get(tempIndex)));
         	tempIndex++;
         }
-
     }
 
 }

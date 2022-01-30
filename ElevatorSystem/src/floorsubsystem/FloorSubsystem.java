@@ -25,6 +25,7 @@ public class FloorSubsystem {
 	
 	/**
 	 * Generates the Floors and the FloorEvents
+	 * 
 	 * @param scheduler, the scheduler associated with the floor sub-system
 	 * @param filename, the name of the file that contains the event information
 	 * @throws FileNotFoundException
@@ -42,37 +43,42 @@ public class FloorSubsystem {
         while (scanner.hasNext()) {
             String[] line = scanner.nextLine().split(",");
             
-            int originalFloor = Integer.parseInt(line[1]);
-            int destinationFloor = Integer.parseInt(line[3]);
-            
-            // Fill originalFloors
-            originalFloors.add(originalFloor);
-            
-            // Fill timeList
-            Date currentDate = null;
-			try {
-				currentDate = Common.CSV_DATE_FORMAT.parse("01-01-2022 "+ line[0]);
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-            timeList.add(abs(Common.SIMULATION_START_DATE.getTime() - currentDate.getTime())/1000);
-            
-            // Fill isUpList
-            if(line[2].strip().toUpperCase() == "UP") {
-            	isUpList.add(true);
-            } else if(line[2].strip().toUpperCase() == "DOWN"){
-            	isUpList.add(false);
-            }
-            
-            // Find max floor
-            if(originalFloor >= destinationFloor) {
-            	if(originalFloor > maxFloorNumber) {
-            		maxFloorNumber = originalFloor;
-            	} 
+            if (line.length != 0) {
+                
+                int originalFloor = Integer.parseInt(line[1]);
+                int destinationFloor = Integer.parseInt(line[3]);
+                
+                // Fill originalFloors
+                originalFloors.add(originalFloor);
+                
+                // Fill timeList
+                Date currentDate = null;
+    			try {
+    				currentDate = Common.CSV_DATE_FORMAT.parse("01-01-2022 "+ line[0]);
+    			} catch (ParseException e) {
+    				e.printStackTrace();
+    			}
+                timeList.add(abs(Common.SIMULATION_START_DATE.getTime() - currentDate.getTime())/1000);
+                
+                // Fill isUpList
+                if(line[2].strip().toUpperCase().equals("UP")) {
+                	isUpList.add(true);
+                } else if(line[2].strip().toUpperCase().equals("DOWN")){
+                	isUpList.add(false);
+                }
+                
+                // Find max floor
+                if(originalFloor >= destinationFloor) {
+                	if(originalFloor > maxFloorNumber) {
+                		maxFloorNumber = originalFloor;
+                	} 
+                } else {
+                	if(destinationFloor > maxFloorNumber) {
+                		maxFloorNumber = destinationFloor;
+                	}
+                }
             } else {
-            	if(destinationFloor > maxFloorNumber) {
-            		maxFloorNumber = destinationFloor;
-            	}
+            	break;
             }
         }
         
@@ -87,6 +93,7 @@ public class FloorSubsystem {
 	
 	/**
 	 * Create the floors and fill the scheduler's floor list
+	 * 
 	 * @param maxFloorNumber, the top floor's number
 	 * @param scheduler, the scheduler associated with the floor sub-system
 	 * @param floors, the list of floors to add to the scheduler
@@ -94,11 +101,11 @@ public class FloorSubsystem {
 	private static void createFloors(int maxFloorNumber, Scheduler scheduler, List<Floor> floors) {
         for(int floorNumber = 0; floorNumber < maxFloorNumber; floorNumber++) {
         	if(floorNumber == 0) {
-        		floors.add(new BottomFloor(floorNumber+1, scheduler));
+        		floors.add(new BottomFloor(floorNumber + 1, scheduler));
         	} else if(floorNumber == maxFloorNumber - 1) {
-        		floors.add(new TopFloor(floorNumber+1, scheduler));
+        		floors.add(new TopFloor(floorNumber + 1, scheduler));
         	} else {
-        		floors.add(new MiddleFloor(floorNumber+1, scheduler));
+        		floors.add(new MiddleFloor(floorNumber + 1, scheduler));
         	}
         }
         scheduler.setFloors(floors);
@@ -106,14 +113,15 @@ public class FloorSubsystem {
 	
 	/**
 	 * Create the FloorEvent's and fill each's floor eventQueue 
+	 * 
 	 * @param originalFloors, the list of floors from which the elevator is called 
 	 * @param floors, the list of all floors
 	 * @param isUpList, the list of button press directions
 	 * @param timeList, the list of event times
 	 */
 	private static void createFloorEvents(List<Integer> originalFloors, List<Floor> floors, List<Boolean> isUpList, List<Long> timeList) {
+		int tempIndex = 0;
         for(int floorNumber : originalFloors) {
-        	int tempIndex = 0;
         	Floor currentFloor = floors.get(floorNumber - 1);
         	currentFloor.addFloorEvent(new FloorEvent(currentFloor, isUpList.get(tempIndex), timeList.get(tempIndex)));
         	tempIndex++;

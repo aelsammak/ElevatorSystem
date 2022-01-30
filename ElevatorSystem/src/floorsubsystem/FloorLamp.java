@@ -19,6 +19,7 @@ public class FloorLamp {
 
 	/**
 	 * Getter for the isTurnedOn attribute
+	 * 
 	 * @return boolean - the isTurnedOn attribute
 	 */
 	public boolean isTurnedOn() {

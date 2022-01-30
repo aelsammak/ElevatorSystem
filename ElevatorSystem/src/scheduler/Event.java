@@ -6,7 +6,6 @@ package scheduler;
 /**
  * The Event class represents the event that occurs when a button is pressed
  * 
- * 
  * @author Kareem El-Hajjar
  * @author Adi El-Sammak
  * @version 1.0

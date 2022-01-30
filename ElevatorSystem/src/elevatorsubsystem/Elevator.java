@@ -42,11 +42,12 @@ public class Elevator extends Thread {
 		this.door = new Door(elevatorNumber);
 		this.arrivalSensor = new ArrivalSensor(this);
 		this.elevatorEventQueue = new PriorityQueue<>();
+		this.currentFloor = scheduler.getFloors().get(0);
 		
 		this.elevatorButtons = new ElevatorButton[Common.NUM_FLOORS];
 		this.elevatorLamps = new ElevatorLamp[Common.NUM_FLOORS];
 		
-        for (int i = 0; i <= Common.NUM_FLOORS; i++) {
+        for (int i = 0; i < Common.NUM_FLOORS; i++) {
         	elevatorButtons[i] = new ElevatorButton(i);
         	elevatorLamps[i] = new ElevatorLamp(i);
         }
@@ -57,7 +58,7 @@ public class Elevator extends Thread {
 	 * 
 	 * @param destinationFloor - the floor to which the Elevator must move to
 	 */
-	public synchronized void moveToFloor(Floor destinationFloor) {
+	public synchronized void moveToFloor(Floor destinationFloor, boolean isElevatorEvent) {
 		while (this.getMotorState() != ElevatorState.IDLE) {
 			try {
 				this.wait();
@@ -69,6 +70,10 @@ public class Elevator extends Thread {
 		
 		simulateElevatorArrival(destinationFloor);
 		
+		if (isElevatorEvent) {
+			elevatorEventQueue.poll();
+		}
+		
 		this.notifyAll();
 	}
 	
@@ -78,15 +83,11 @@ public class Elevator extends Thread {
 	 * @param destinationFloor - the floor to which the Elevator must move to
 	 */
 	private void simulateElevatorArrival(Floor destinationFloor) {
-		String infoStr = "";
-		if (elevatorShouldMove(infoStr, destinationFloor)) {
-			System.out.println(infoStr);
+		if (elevatorShouldMove(destinationFloor)) {
 			arrivalSensor.simulateElevatorMovement(currentFloor, destinationFloor);
 			this.motor.setElevatorState(ElevatorState.IDLE);
 			openDoors();
 			scheduler.elevatorArrivesAtFloor(this, currentFloor);
-		} else {
-			System.out.println(infoStr);
 		}
 	}
 	
@@ -97,38 +98,38 @@ public class Elevator extends Thread {
 	 * @param destinationFloor - the floor to which the Elevator must move to
 	 * @return boolean - true if the Elevator should move, else false
 	 */
-	private boolean elevatorShouldMove(String infoStr, Floor destinationFloor) {
+	private boolean elevatorShouldMove(Floor destinationFloor) {
 		boolean shouldMove = false;
 		if (destinationFloor instanceof TopFloor) {
 			if (destinationFloor.getFloorNumber() > currentFloor.getFloorNumber()) {
 				this.motor.setElevatorState(ElevatorState.MOVING_UP);
-				infoStr = "Elevator is moving down to floor " + destinationFloor.getFloorNumber();
+				System.out.println("Elevator is moving up to floor " + destinationFloor.getFloorNumber());
 				shouldMove = true;
 			} else {
 				this.motor.setElevatorState(ElevatorState.IDLE);
-				infoStr = "Elevator is already at Top Floor";
+				System.out.println("Elevator is already at Top Floor");
 			}
 		} else if (destinationFloor instanceof BottomFloor) {
 			if (destinationFloor.getFloorNumber() < currentFloor.getFloorNumber()) {
 				this.motor.setElevatorState(ElevatorState.MOVING_DOWN);
-				infoStr = "Elevator is moving up to floor " + destinationFloor.getFloorNumber();
+				System.out.println("Elevator is moving down to floor " + destinationFloor.getFloorNumber());
 				shouldMove = true;
 			} else {
 				this.motor.setElevatorState(ElevatorState.IDLE);
-				infoStr = "Elevator is already at Bottom Floor";
+				System.out.println("Elevator is already at Bottom Floor");
 			}
 		} else {
 			if (destinationFloor.getFloorNumber() > currentFloor.getFloorNumber()) {
 				this.motor.setElevatorState(ElevatorState.MOVING_UP);
-				infoStr = "Elevator is moving up to floor " + destinationFloor.getFloorNumber();
+				System.out.println("Elevator is moving up to floor " + destinationFloor.getFloorNumber());
 				shouldMove = true;
 			} else if (destinationFloor.getFloorNumber() < currentFloor.getFloorNumber()) {
 				this.motor.setElevatorState(ElevatorState.MOVING_DOWN);
-				infoStr = "Elevator is moving down to floor " + destinationFloor.getFloorNumber();
+				System.out.println("Elevator is moving down to floor " + destinationFloor.getFloorNumber());
 				shouldMove = true;
 			} else {
 				this.motor.setElevatorState(ElevatorState.IDLE);
-				infoStr = "Elevator is already at Floor " + destinationFloor.getFloorNumber();
+				System.out.println("Elevator is already at Floor " + destinationFloor.getFloorNumber());
 			}
 		}
 		
@@ -141,6 +142,15 @@ public class Elevator extends Thread {
 	public void openDoors() {
 		System.out.println("Elevator has arrived at floor " + currentFloor.getFloorNumber());
 		this.door.open();
+	}
+	
+	/**
+	 * Returns Floor number at which the Elevator is on
+	 * 
+	 * @return int - the floor number
+	 */
+	public int getFloorNumber() {
+		return currentFloor.getFloorNumber();
 	}
 
 	
@@ -158,8 +168,8 @@ public class Elevator extends Thread {
         
         this.door.close();
         System.out.println("Elevator has closed doors at floor " + currentFloor.getFloorNumber());
-        elevatorButtons[currentFloor.getFloorNumber()].turnOff();
-        elevatorLamps[currentFloor.getFloorNumber()].turnOff();
+        elevatorButtons[currentFloor.getFloorNumber() - 1].turnOff();
+        elevatorLamps[currentFloor.getFloorNumber() - 1].turnOff();
     }
 
 	/**
@@ -192,6 +202,11 @@ public class Elevator extends Thread {
 		return motor.getElevatorState();
 	}
 	
+	/**
+	 * Setter for the motor's Elevator state
+	 * 
+	 * @param state - the elevator state
+	 */
 	public void setMotorState(ElevatorState state) {
 		motor.setElevatorState(state);
 	}
@@ -241,8 +256,9 @@ public class Elevator extends Thread {
 	@Override
 	public void run() {
         while(scheduler.hasEvents()) {
-
+        	
         }
+        System.out.println("ELEVATOR THREAD IS DONE");
 	}
 
 	/**

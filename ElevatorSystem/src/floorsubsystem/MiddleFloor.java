@@ -16,9 +16,9 @@ public class MiddleFloor extends Floor {
 	private final FloorLamp upLamp;
 	private final FloorLamp downLamp;
 	
-	
 	/**
 	 * Parameterized constructor 
+	 * 
 	 * @param floorNumber, the floor's number
 	 * @param scheduler, the scheduler associated with the floor
 	 */
@@ -60,6 +60,7 @@ public class MiddleFloor extends Floor {
 
 	/**
 	 * Getter for the upLamp attribute
+	 * 
 	 * @return FloorLamp - the upLamp attribute
 	 */
 	public FloorLamp getUpLamp() {
@@ -68,6 +69,7 @@ public class MiddleFloor extends Floor {
 	
 	/**
 	 * Getter for the downLamp attribute
+	 * 
 	 * @return FloorLamp - the downLamp attribute
 	 */
 	public FloorLamp getDownLamp() {

@@ -15,6 +15,7 @@ public class FloorButton {
 	
 	/**
 	 * Parameterized constructor 
+	 * 
 	 * @param floorNumber, the number of the floor that is associated with the button
 	 * @param isUp, true if button is for going up, false otherwise
 	 */
@@ -26,6 +27,7 @@ public class FloorButton {
 	
 	/**
 	 * Getter for isPressed attribute
+	 * 
 	 * @return boolean - the isPressed attribute
 	 */
 	public boolean isPressed() {
@@ -34,6 +36,7 @@ public class FloorButton {
 	
 	/**
 	 * Getter for the isUp attribute
+	 * 
 	 * @return boolean - the isUp attribute
 	 */
 	public boolean isUp() {
@@ -42,6 +45,7 @@ public class FloorButton {
 	
 	/**
 	 * Getter for the floorNumber attribute
+	 * 
 	 * @return int - the floorNumber attribute
 	 */
 	public int getFloorNumber() {

@@ -16,6 +16,7 @@ public class TopFloor extends Floor {
 	
 	/**
 	 * Parameterized constructor 
+	 * 
 	 * @param floorNumber, the floor's number
 	 * @param scheduler, the scheduler associated with the floor
 	 */
@@ -41,6 +42,7 @@ public class TopFloor extends Floor {
 	
 	/**
 	 * Getter for the downLamp attribute
+	 * 
 	 * @return FloorLamp - the downLamp attribute
 	 */
 	public FloorLamp getDownLamp() {

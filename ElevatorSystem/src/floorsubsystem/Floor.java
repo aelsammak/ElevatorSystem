@@ -4,6 +4,7 @@ import scheduler.FloorEvent;
 import scheduler.Scheduler;
 
 import java.util.LinkedList;
+import java.util.PriorityQueue;
 import java.util.Queue;
 
 /**
@@ -17,17 +18,18 @@ public class Floor extends Thread {
 	
 	private final int floorNumber;
 	private final Scheduler scheduler;
-	private final Queue<FloorEvent> floorEventQueue;
+	private final PriorityQueue<FloorEvent> floorEventQueue;
 	
 	/**
 	 * Parameterized constructor
+	 * 
 	 * @param floorNumber, the floor's number
 	 * @param scheduler, the scheduler associated with the floor
 	 */
 	public Floor(int floorNumber, Scheduler scheduler) {
 		this.floorNumber = floorNumber;
 		this.scheduler = scheduler;
-		this.floorEventQueue = new LinkedList<FloorEvent>();
+		this.floorEventQueue = new PriorityQueue<>();
 	}
 		
 	/**
@@ -55,10 +57,12 @@ public class Floor extends Thread {
                 floorEventQueue.poll();
             }
         }
+		System.out.println("FLOOR THREAD #" + this.getFloorNumber() + " IS DONE");
 	}
 	
 	/**
 	 * Returns true if the there are events in the eventQueue
+	 * 
 	 * @return boolean - false if empty, true otherwise
 	 */
 	public boolean hasEvents() {
@@ -67,6 +71,7 @@ public class Floor extends Thread {
 
 	/**
 	 * Getter for floorNumber attribute
+	 * 
 	 * @return int - the floorNumber attribute
 	 */
 	public int getFloorNumber() {
@@ -75,14 +80,20 @@ public class Floor extends Thread {
 	
 	/**
 	 * Checks if it is time for the FloorEvent at the top of the queue to be sent to scheduler
+	 * 
 	 * @return boolean - false if queue is empty or the right amount of time hasn't passed yet, true otherwise
 	 */
-	private boolean isPriorityFloorEvent() {
-		return (!floorEventQueue.isEmpty() && floorEventQueue.peek().getTimeLeftTillEvent() <= scheduler.getElapsedTime());
+	private synchronized boolean isPriorityFloorEvent() {
+		if (floorEventQueue.peek() != null) {
+			return (floorEventQueue.peek().getTimeLeftTillEvent() <= scheduler.getElapsedTime());
+		} else {
+			return false;
+		}
 	}
 	
 	/**
 	 * Adds a FloorEvent to the event queue
+	 * 
 	 * @param floorEvent, the FloorEvent to be added to the queue
 	 */
 	public void addFloorEvent(FloorEvent floorEvent) {
