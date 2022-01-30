@@ -20,7 +20,7 @@ public class Scheduler extends Thread {
 	
 	/**
 	 * Constructor for the Scheduler.
-	 * Initializes the list of elevators, the event Priority Queue and sets the elaped time to 0.
+	 * Initializes the list of elevators, the event Priority Queue and sets the elapsed time to 0.
 	 */
 	public Scheduler() {
 		elevators = new ArrayList<Elevator>();
@@ -44,6 +44,9 @@ public class Scheduler extends Thread {
 		elevators.remove(elevator);
 	}
 	
+	/**
+	 * Method to determine the next type of event in the event queue and call the corresponding handler function.
+	 */
 	private synchronized void handleEvent() {
 		if (!eventQueue.isEmpty()) {
 			Event currentEvent = eventQueue.peek();
@@ -55,16 +58,30 @@ public class Scheduler extends Thread {
 		}
 	} 
 	
+	/**
+	 * Method that handles a floor event.
+	 * It calls moveElevatorToPersonsFloor() to moves the elevator to the person's floor to pick them up and removes the floor event from the event queue
+	 * @param floorEvent The floor event created when a passenger pushes a button to call an elevator
+	 */
 	public void handleFloorEvent(FloorEvent floorEvent) {
 		moveElevatorToPersonsFloor(floorEvent.getFloor());
 		eventQueue.poll();
 	}
 	
+	/**
+	 * Method that handles an elevator event.
+	 * It calls moveElevatorToRequestedDestination() to move the elevator to the persons' destination floor and removes the elevator event from the event queue
+	 * @param elevatorEvent The elevator event created when a passenger pushes a destination floor from within elevator
+	 */
 	public void handleElevatorEvent(ElevatorEvent elevatorEvent) {
 		moveElevatorToRequestedDestination(elevatorEvent.getDestinationFloor());
 		eventQueue.poll();
 	}
 	
+	/**
+	 * Method that adds a floor event and corresponding elevator event to the event queue
+	 * @param floorEvent The floor event created when a passenger pushes a button to call an elevator
+	 */
 	public synchronized void addEvents(FloorEvent floorEvent) {
 		eventQueue.add(floorEvent);
 		eventQueue.add(elevators.get(0).getElevatorEventQueue().poll());
@@ -151,14 +168,27 @@ public class Scheduler extends Thread {
 		elevator.closeDoors();
 	}
 	
+	/**
+	 * Gets the floor object from the list of floors at the given index
+	 * @param floorIndex The index at which the floor is found in the floors list
+	 * @return A floor object from the list of floors at the corresponding index
+	 */
 	public Floor getFloorByIndex(int floorIndex) {
 		return floors.get(floorIndex);
 	}
 	
+	/**
+	 * Method to return the elapsed time since the start of the scheduler thread in seconds
+	 * @return A long for the elapsed time in seconds
+	 */
 	public long getElapsedTime() {
 		return elapsedTime;
 	}
 	
+	/**
+	 * Checks if there are any floor events on each floor and elevator events in each elevator
+	 * @return boolean true if there are any events and false otherwise
+	 */
     public boolean hasEvents() {
         for(Floor floor : floors) {
             if (!floor.hasEvents()) {
@@ -175,19 +205,36 @@ public class Scheduler extends Thread {
         return true;
     }
     
+    /**
+     * Gets a list of all elevators handled by scheduler
+     * @return list of elevators
+     */
     public List<Elevator> getElevators() {
     	return elevators;
     }
     
+    /**
+     * Gets a list of all floors handled by scheduler
+     * @return list of floor objects
+     */
     public List<Floor> getFloors() {
     	return floors;
     }
     
+    /**
+     * Creates the list of floors handled by the scheduler
+     * @param floors A list of floor objects
+     */
     public void setFloors(List<Floor> floors) {
     	this.floors = floors;
     }
 	
 	@Override
+	/**
+	 * Method to be executed when scheduler thread starts. 
+	 * Runs so long as there are floor and elevator events to be handled
+	 * Updates the elapsed time since the start of scheduler thread
+	 */
 	public void run() {
         Date d = new Date();
         long startTime = d.getTime();
@@ -198,6 +245,10 @@ public class Scheduler extends Thread {
         }
 	}
 
+	/**
+	 * Method to get the queue of events containing floor and elevator events
+	 * @return The queue of events
+	 */
 	public PriorityQueue<Event> getEventQueue() {
 		return eventQueue;
 	}
