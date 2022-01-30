@@ -13,10 +13,14 @@ public class TopFloor extends Floor {
 		this.downLamp = new FloorLamp();
 	}
 	
-	public void pressDownButton() {
+	public void turnOnDownButton() {
 		this.downBtn.turnOn();
 	}
-
+	
+	public void turnOffDownButton() {
+		this.downBtn.turnOff();
+	}
+	
 	public FloorLamp getDownLamp() {
 		return downLamp;
 	}

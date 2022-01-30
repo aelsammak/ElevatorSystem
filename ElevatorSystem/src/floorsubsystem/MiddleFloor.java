@@ -17,12 +17,20 @@ public class MiddleFloor extends Floor {
 		this.downLamp = new FloorLamp();
 	}
 	
-	public void pressDownButton() {
+	public void turnOnUpButton() {
+		this.upBtn.turnOn();
+	}
+	
+	public void turnOffUpButton() {
+		this.upBtn.turnOff();
+	}
+	
+	public void turnOnDownButton() {
 		this.downBtn.turnOn();
 	}
 	
-	public void pressUpButton() {
-		this.upBtn.turnOn();
+	public void turnOffDownButton() {
+		this.downBtn.turnOff();
 	}
 
 	public FloorLamp getUpLamp() {
