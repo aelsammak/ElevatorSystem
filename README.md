@@ -1,6 +1,6 @@
 # SYSC 3303A - Project (Elevator System)
 __Lab Section:__ L1 (Group 10)\
-__Members:__ Kareem El-Hajjar, Adi El-Sammak, Ben Herriott, Erica Morgan, Cam Sommerville
+__Members:__ Kareem El-Hajjar, Adi El-Sammak, Ben Herriott, Erica Morgan, Cam Sommerville\
 __Author:__ Ben Herriott
 __Revisions:__
 
