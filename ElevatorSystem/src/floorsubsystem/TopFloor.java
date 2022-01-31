@@ -1,49 +1,50 @@
 package floorsubsystem;
 
-import java.util.List;
-
-import common.Person;
-
-public class TopFloor extends Floor {
-	
-	private final FloorButton downBtn;
-	
-	private final FloorLamp downLamp;
-	
-	public TopFloor(int floorNumber, List<Person> peopleWaiting) {
-		super(floorNumber, peopleWaiting);
-		this.downBtn = new FloorButton(floorNumber, false);
-		this.downLamp = new FloorLamp();
-	}
-	
-	public void pressDownButton() {
-		this.downBtn.turnOn();
-	}
-
-	public FloorLamp getDownLamp() {
-		return downLamp;
-	}
-}
-=======
-package floorsubsystem;
-
 import scheduler.Scheduler;
 
+/**
+ * Top floor variant of the Floor class
+ * 
+ * @author Kareem El-Hajjar
+ * @version 1.0
+ * 
+ */
 public class TopFloor extends Floor {
 	
 	private final FloorButton downBtn;
 	private final FloorLamp downLamp;
 	
+	/**
+	 * Parameterized constructor 
+	 * 
+	 * @param floorNumber, the floor's number
+	 * @param scheduler, the scheduler associated with the floor
+	 */
 	public TopFloor(int floorNumber, Scheduler scheduler) {
 		super(floorNumber, scheduler);
 		this.downBtn = new FloorButton(floorNumber, false);
 		this.downLamp = new FloorLamp();
 	}
 	
-	public void pressDownButton() {
+	/**
+	 * Turn on the down button
+	 */
+	public void turnOnDownButton() {
 		this.downBtn.turnOn();
 	}
-
+	
+	/**
+	 * Turn off the down button
+	 */
+	public void turnOffDownButton() {
+		this.downBtn.turnOff();
+	}
+	
+	/**
+	 * Getter for the downLamp attribute
+	 * 
+	 * @return FloorLamp - the downLamp attribute
+	 */
 	public FloorLamp getDownLamp() {
 		return downLamp;
 	}

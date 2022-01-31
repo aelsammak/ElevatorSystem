@@ -4,6 +4,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * The Common class is responsible for storing common attributes for other classes within the system to access
+ * 
+ * @version 1.0
+ * 
+ */
 public class Common {
 	
 	public static int NUM_FLOORS;
@@ -18,6 +24,11 @@ public class Common {
 		}
     }
     
+    /**
+     * Setter for the NUM_FLOORS attribute
+     * 
+     * @param maxFloors - the total number of floors
+     */
     public static void setMaxNumFloors(int maxFloors) {
     	NUM_FLOORS = maxFloors;
     }
