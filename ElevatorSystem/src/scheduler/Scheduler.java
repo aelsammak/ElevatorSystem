@@ -57,7 +57,7 @@ public class Scheduler extends Thread {
 			Event currentEvent = eventQueue.peek();
 			if (currentEvent instanceof FloorEvent) {
 				handleFloorEvent((FloorEvent) currentEvent);
-			} else {
+			} else if (currentEvent instanceof ElevatorEvent) {
 				handleElevatorEvent((ElevatorEvent) currentEvent);
 			}
 		}
@@ -90,9 +90,9 @@ public class Scheduler extends Thread {
 	 * 
 	 * @param floorEvent The floor event created when a passenger pushes a button to call an elevator
 	 */
-	public synchronized void addEvents(FloorEvent floorEvent) {
+	public void addEvents(FloorEvent floorEvent) {
 		eventQueue.add(floorEvent);
-		eventQueue.add(elevators.get(0).getElevatorEventQueue().peek());
+		eventQueue.add(elevators.get(0).getElevatorEventQueue().poll());
 	}
 	
 	/**
@@ -111,14 +111,14 @@ public class Scheduler extends Thread {
 		}
 		
 		if (elevators.get(0).getFloorNumber() != personsFloor.getFloorNumber()) {
-			elevators.get(0).moveToFloor(personsFloor, false);
+			elevators.get(0).moveToFloor(personsFloor);
+			this.notifyAll();
 		} else {
 			System.out.println("The elevator is already on floor: " + personsFloor.getFloorNumber());
 			elevators.get(0).openDoors();
 			elevatorArrivesAtFloor(elevators.get(0), personsFloor);
 		}
 		
-		this.notifyAll();
 	}
 	
 	/**
@@ -141,14 +141,12 @@ public class Scheduler extends Thread {
 		elevators.get(0).getElevatorLamps()[destinationFloor.getFloorNumber() - 1].turnOn();
 		
 		if (elevators.get(0).getFloorNumber() != destinationFloor.getFloorNumber()) {
-			elevators.get(0).moveToFloor(destinationFloor, true);
+			elevators.get(0).moveToFloor(destinationFloor);
 		} else {
 			System.out.println("The elevator is already on floor: " + destinationFloor.getFloorNumber());
 			elevators.get(0).openDoors();
 			elevatorArrivesAtFloor(elevators.get(0), destinationFloor);
 		}
-		
-		elevators.get(0).setMotorState(ElevatorState.IDLE);
 		
 		this.notifyAll();
 	}
@@ -159,6 +157,7 @@ public class Scheduler extends Thread {
 	 * 
 	 * @param elevator Elevator that just arrived.
 	 * @param currentFloor floor the elevator arrived at.
+	 * @param isElevatorEvent true if ElevatorEvent, else false
 	 */
 	public synchronized void elevatorArrivesAtFloor(Elevator elevator, Floor currentFloor) {
 		if (currentFloor instanceof MiddleFloor) {
@@ -203,16 +202,20 @@ public class Scheduler extends Thread {
 	 * @return boolean true if there are any events and false otherwise
 	 */
     public boolean hasEvents() {
-        for(Floor floor : floors) {
+        for (Elevator elevator : elevators) {
+            if (elevator.hasEvents()) {
+                return true;
+            }
+        }
+    	
+        for (Floor floor : floors) {
             if (floor.hasEvents()) {
                 return true;
             }
         }
         
-        for(Elevator elevator : elevators) {
-            if (elevator.hasEvents()) {
-                return true;
-            }
+        if (!eventQueue.isEmpty()) {
+        	return true;
         }
         
         return false;

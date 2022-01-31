@@ -1,11 +1,10 @@
 package floorsubsystem;
 
 import scheduler.FloorEvent;
+import scheduler.FloorEventComparator;
 import scheduler.Scheduler;
 
-import java.util.LinkedList;
 import java.util.PriorityQueue;
-import java.util.Queue;
 
 /**
  * This class represents the floor and is responsible for sending FloorEvents to the scheduler class.
@@ -29,7 +28,7 @@ public class Floor extends Thread {
 	public Floor(int floorNumber, Scheduler scheduler) {
 		this.floorNumber = floorNumber;
 		this.scheduler = scheduler;
-		this.floorEventQueue = new PriorityQueue<>();
+		this.floorEventQueue = new PriorityQueue<>(new FloorEventComparator());
 	}
 		
 	/**
@@ -37,25 +36,8 @@ public class Floor extends Thread {
 	 */
 	@Override
 	public void run() {
-		while(scheduler.hasEvents()) {
-            if(this.isPriorityFloorEvent()) {
-            	FloorEvent currentFloorEvent = floorEventQueue.peek();
-            	
-                if(currentFloorEvent.getFloor() instanceof MiddleFloor) {
-                	if(currentFloorEvent.isUpButton()) {
-                		((MiddleFloor)(currentFloorEvent.getFloor())).turnOnUpButton();
-                	} else {
-                		((MiddleFloor)(currentFloorEvent.getFloor())).turnOnDownButton();
-                	}
-                } else if(currentFloorEvent.getFloor() instanceof TopFloor){
-                	((TopFloor)(currentFloorEvent.getFloor())).turnOnDownButton();
-                } else {
-                	((BottomFloor)(currentFloorEvent.getFloor())).turnOnUpButton();
-                }
-                
-                scheduler.addEvents(currentFloorEvent);
-                floorEventQueue.poll();
-            }
+		while(scheduler.hasEvents() && scheduler.isAlive()) {
+			handlePriorityFloorEvent();
         }
 		System.out.println("FLOOR THREAD #" + this.getFloorNumber() + " IS DONE");
 	}
@@ -80,14 +62,26 @@ public class Floor extends Thread {
 	
 	/**
 	 * Checks if it is time for the FloorEvent at the top of the queue to be sent to scheduler
-	 * 
-	 * @return boolean - false if queue is empty or the right amount of time hasn't passed yet, true otherwise
 	 */
-	private synchronized boolean isPriorityFloorEvent() {
+	private synchronized void handlePriorityFloorEvent() {
 		if (floorEventQueue.peek() != null) {
-			return (floorEventQueue.peek().getTimeLeftTillEvent() <= scheduler.getElapsedTime());
-		} else {
-			return false;
+			if (floorEventQueue.peek().getTimeLeftTillEvent() <= scheduler.getElapsedTime()) {
+				FloorEvent currentFloorEvent = floorEventQueue.poll();
+            	
+                if(currentFloorEvent.getFloor() instanceof MiddleFloor) {
+                	if(currentFloorEvent.isUpButton()) {
+                		((MiddleFloor)(currentFloorEvent.getFloor())).turnOnUpButton();
+                	} else {
+                		((MiddleFloor)(currentFloorEvent.getFloor())).turnOnDownButton();
+                	}
+                } else if(currentFloorEvent.getFloor() instanceof TopFloor){
+                	((TopFloor)(currentFloorEvent.getFloor())).turnOnDownButton();
+                } else {
+                	((BottomFloor)(currentFloorEvent.getFloor())).turnOnUpButton();
+                }
+                
+                scheduler.addEvents(currentFloorEvent);
+			}
 		}
 	}
 	

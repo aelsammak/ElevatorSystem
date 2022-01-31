@@ -7,6 +7,7 @@ import floorsubsystem.BottomFloor;
 import floorsubsystem.Floor;
 import floorsubsystem.TopFloor;
 import scheduler.ElevatorEvent;
+import scheduler.ElevatorEventComparator;
 import scheduler.Scheduler;
 
 /**
@@ -41,7 +42,7 @@ public class Elevator extends Thread {
 		this.motor = new Motor(elevatorNumber);
 		this.door = new Door(elevatorNumber);
 		this.arrivalSensor = new ArrivalSensor(this);
-		this.elevatorEventQueue = new PriorityQueue<>();
+		this.elevatorEventQueue = new PriorityQueue<>(new ElevatorEventComparator());
 		this.currentFloor = scheduler.getFloors().get(0);
 		
 		this.elevatorButtons = new ElevatorButton[Common.NUM_FLOORS];
@@ -58,7 +59,7 @@ public class Elevator extends Thread {
 	 * 
 	 * @param destinationFloor - the floor to which the Elevator must move to
 	 */
-	public synchronized void moveToFloor(Floor destinationFloor, boolean isElevatorEvent) {
+	public synchronized void moveToFloor(Floor destinationFloor) {
 		while (this.getMotorState() != ElevatorState.IDLE) {
 			try {
 				this.wait();
@@ -69,10 +70,6 @@ public class Elevator extends Thread {
 		}
 		
 		simulateElevatorArrival(destinationFloor);
-		
-		if (isElevatorEvent) {
-			elevatorEventQueue.poll();
-		}
 		
 		this.notifyAll();
 	}
@@ -255,7 +252,7 @@ public class Elevator extends Thread {
 	 */
 	@Override
 	public void run() {
-        while(scheduler.hasEvents()) {
+        while(scheduler.hasEvents() && scheduler.isAlive()) {
         	
         }
         System.out.println("ELEVATOR THREAD IS DONE");

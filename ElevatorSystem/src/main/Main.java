@@ -39,6 +39,8 @@ public class Main {
             e.printStackTrace();
         }
         
+        scheduler.start();
+        
         for(Floor floor : scheduler.getFloors()) {
         	floor.start();
         }
@@ -47,7 +49,6 @@ public class Main {
         	elevator.start();
         }
         
-        scheduler.start();
 	}
 
 }
