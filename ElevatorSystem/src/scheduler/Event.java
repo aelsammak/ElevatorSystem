@@ -4,9 +4,10 @@
 package scheduler;
 
 /**
- * Event class is responsible for holding the information when a passenger carries out an action.
- * The parent class used for elevator and floor events.
- * @author Cam Sommerville, Erica Morgan
+ * The Event class represents the event that occurs when a button is pressed
+ * 
+ * @author Kareem El-Hajjar
+ * @author Adi El-Sammak
  * @version 1.0
  *
  */
@@ -15,36 +16,36 @@ public class Event implements Comparable<Event> {
 	private long timeLeftTillEvent;
 	
 	/**
-	 * Contructor for the event. Sets how much time is left until event should happen.
-	 * @param timeLeftTillEvent The time left until event, in seconds.
+	 * Constructor used to create an instance of the Event class
+	 * 
+	 * @param timeLeftTillEvent - the time left until the event
 	 */
 	public Event(long timeLeftTillEvent) {
 		this.timeLeftTillEvent = timeLeftTillEvent;
 	}
 
 	/**
-	 * Get the time left until the event should occur
-	 * @return The time left until event in seconds
+	 * Getter for the timeLeftTillEvent attribute
+	 * 
+	 * @return long - the time left until the event
 	 */
 	public long getTimeLeftTillEvent() {
 		return timeLeftTillEvent;
 	}
 
 	/**
-	 * Sets the time left until the event should occur
-	 * @param timeLeftTillEvent The time left until event in seconds
+	 * Setter for the timeLeftTillEvent attribute
 	 */
 	public void setTimeLeftTillEvent(long timeLeftTillEvent) {
 		this.timeLeftTillEvent = timeLeftTillEvent;
 	}
 	
+	/**
+	 * Compare to method used by the Priority Queue
+	 * 
+	 *  @param e - the event to compare
+	 */
     @Override
-    /**
-     * Method used to compare the priority of two events.
-     * The event with less time left until event will be given a higher priority.
-     * @param e The event with which this event is being compared
-     * @return An int 1 if the current event is given a higher priority, and -1 otherwise.
-     */
     public int compareTo(Event e) {
         long otherEventTime = e.getTimeLeftTillEvent();
         return (timeLeftTillEvent < otherEventTime ? 1  : -1);

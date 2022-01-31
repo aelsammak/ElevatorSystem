@@ -4,8 +4,9 @@ import elevatorsubsystem.Elevator;
 import floorsubsystem.Floor;
 
 /**
- * ElevatorEvent class is responsible for holding all the information necessary when a passenger pushes a button in the elevator
- * @author Cam Sommerville, Erica Morgan
+ * The ElevatorEvent class represents an event that occurs when a button is pressed within the Elevator
+ * 
+ * @author Adi El-Sammak
  * @version 1.0
  *
  */
@@ -15,10 +16,11 @@ public class ElevatorEvent extends Event {
 	private Floor destinationFloor;
 	
 	/**
-	 * Constructor for the elevator event. Sets the elevator and floor involved in the event.
-	 * @param elevator The elevator where the button was pushed
-	 * @param destinationFloor The passengers destination floor 
-	 * @param timeLeftTillEvent The time left until the event happens in seconds
+	 * Constructor used to create an instance of the ElevatorEvent class
+	 * 
+	 * @param elevator - the Elevator that the button is pressed in 
+	 * @param destinationFloor - the requested destination floor
+	 * @param timeLeftTillEvent - the time left until the event
 	 */
 	public ElevatorEvent(Elevator elevator, Floor destinationFloor, long timeLeftTillEvent) {
 		super(timeLeftTillEvent);
@@ -27,19 +29,32 @@ public class ElevatorEvent extends Event {
 	}
 	
 	/**
-	 * Gets the elevator where button was pushed
-	 * @return An elevator 
+	 * Getter for the elevator attribute
+	 * 
+	 * @return Elevator - the Elevator that the button is pressed in
 	 */
 	public Elevator getElevator() {
 		return elevator;
 	}
 	
 	/**
-	 * Gets the destination floor passenger pushed in elevator
-	 * @return A floor
+	 * Getter for the destinationFloor attribute
+	 * 
+	 * @return Floor - the requested destination floor
 	 */
 	public Floor getDestinationFloor() {
 		return destinationFloor;
 	}
+	
+	/**
+	 * Compare to method used by the Priority Queue
+	 * 
+	 *  @param e - the event to compare
+	 */
+    @Override
+    public int compareTo(Event e) {
+        long otherEventTime = e.getTimeLeftTillEvent();
+        return (this.getTimeLeftTillEvent() < otherEventTime ? -1  : 1);
+    }
 	
 }

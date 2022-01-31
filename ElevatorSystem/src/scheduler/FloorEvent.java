@@ -3,24 +3,26 @@
  */
 package scheduler;
 
-import floorsubsystem.Floor;
-
 /**
- * FloorEvent class is responsible for holding all the information necessary when a passenger calls for an elevator from a floor
- * @author Cam Sommerville, Erica Morgan
+ * The FloorEvent class represents an event that occurs when a floor button is pressed requesting for the Elevator's arrival
+ * 
+ * @author Kareem El-Hajjar
  * @version 1.0
  *
  */
+import floorsubsystem.Floor;
+
 public class FloorEvent extends Event {
 	
 	private boolean isUpButton;
 	private Floor floor;
 	
 	/**
-	 * Constructor for a floor event. Sets the floor, which direction was pressed, and time until event
-	 * @param floor The floor the passenger is waiting on
-	 * @param isUpButton A boolean for the direction of the button. True if up, false if down.
-	 * @param timeLeftTillEvent The time left in seconds, until the button is pushed.
+	 * Constructor used to create an instance of the FloorEvent class
+	 * 
+	 * @param floor - the floor that the button is pressed on 
+	 * @param isUpButton - true if up button, else false
+	 * @param timeLeftTillEvent - the time left until the event
 	 */
 	public FloorEvent(Floor floor, boolean isUpButton, long timeLeftTillEvent) {
 		super(timeLeftTillEvent);
@@ -29,27 +31,41 @@ public class FloorEvent extends Event {
 	}
 	
 	/**
-	 * Gets the floor where the passenger called the elevator
-	 * @return A floor
+	 * Getter for the floor attribute
+	 * 
+	 * @return Floor - the floor that the button is pressed on 
 	 */
 	public Floor getFloor() {
 		return floor;
 	}
 
 	/**
-	 * Determines the direction of the button that was pressed by passenger who called elevator
-	 * @return A boolean true if up button was pressed, false if down button 
+	 * Getter for the isUpButton attribute
+	 * 
+	 * @return boolean - true if up button, else false
 	 */
 	public boolean isUpButton() {
 		return isUpButton;
 	}
 
 	/**
-	 * Sets whether the up or down button was pressed
-	 * @param isUpButton A boolean true if up button was pressed, false if down button
+	 * Setter for the isUpButton attribute
+	 * 
+	 * @param isUpButton - true if up button, else false
 	 */
 	public void setUpButton(boolean isUpButton) {
 		this.isUpButton = isUpButton;
 	}
+	
+	/**
+	 * Compare to method used by the Priority Queue
+	 * 
+	 *  @param e - the event to compare
+	 */
+    @Override
+    public int compareTo(Event e) {
+        long otherEventTime = e.getTimeLeftTillEvent();
+        return (this.getTimeLeftTillEvent() < otherEventTime ? 1  : -1);
+    }
 	
 }
