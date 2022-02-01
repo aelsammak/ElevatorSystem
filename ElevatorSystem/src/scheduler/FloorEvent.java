@@ -57,15 +57,15 @@ public class FloorEvent extends Event {
 		this.isUpButton = isUpButton;
 	}
 	
-	/**
-	 * Compare to method used by the Priority Queue
-	 * 
-	 *  @param e - the event to compare
-	 */
-    @Override
-    public int compareTo(Event e) {
-        long otherEventTime = e.getTimeLeftTillEvent();
-        return (this.getTimeLeftTillEvent() < otherEventTime ? 1  : -1);
-    }
+//	/**
+//	 * Compare to method used by the Priority Queue
+//	 * 
+//	 *  @param e - the event to compare
+//	 */
+//    @Override
+//    public int compareTo(Event e) {
+//        long otherEventTime = e.getTimeLeftTillEvent();
+//        return (this.getTimeLeftTillEvent() < otherEventTime ? -1  : 1);
+//    }
 	
 }

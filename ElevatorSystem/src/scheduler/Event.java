@@ -11,7 +11,7 @@ package scheduler;
  * @version 1.0
  *
  */
-public class Event implements Comparable<Event> {
+public class Event {
 	
 	private long timeLeftTillEvent;
 	
@@ -39,16 +39,5 @@ public class Event implements Comparable<Event> {
 	public void setTimeLeftTillEvent(long timeLeftTillEvent) {
 		this.timeLeftTillEvent = timeLeftTillEvent;
 	}
-	
-	/**
-	 * Compare to method used by the Priority Queue
-	 * 
-	 *  @param e - the event to compare
-	 */
-    @Override
-    public int compareTo(Event e) {
-        long otherEventTime = e.getTimeLeftTillEvent();
-        return (timeLeftTillEvent < otherEventTime ? 1  : -1);
-    }
 	
 }
