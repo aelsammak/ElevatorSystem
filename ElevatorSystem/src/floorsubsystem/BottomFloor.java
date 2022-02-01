@@ -46,4 +46,18 @@ public class BottomFloor extends Floor {
 	public FloorLamp getUpLamp() {
 		return upLamp;
 	}
+	
+	/**
+	 * Turn on the up lamp
+	 */
+	public void turnOnUpLamp() {
+		this.upLamp.turnOn();
+	}
+	
+	/**
+	 * Turn off the up lamp
+	 */
+	public void turnOffUpLamp() {
+		this.upLamp.turnOff();
+	}
 }

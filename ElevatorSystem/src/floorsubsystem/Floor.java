@@ -71,13 +71,17 @@ public class Floor extends Thread {
                 if(currentFloorEvent.getFloor() instanceof MiddleFloor) {
                 	if(currentFloorEvent.isUpButton()) {
                 		((MiddleFloor)(currentFloorEvent.getFloor())).turnOnUpButton();
+                		((MiddleFloor)(currentFloorEvent.getFloor())).turnOnUpLamp();
                 	} else {
                 		((MiddleFloor)(currentFloorEvent.getFloor())).turnOnDownButton();
+                		((MiddleFloor)(currentFloorEvent.getFloor())).turnOnDownLamp();
                 	}
                 } else if(currentFloorEvent.getFloor() instanceof TopFloor){
                 	((TopFloor)(currentFloorEvent.getFloor())).turnOnDownButton();
+                	((TopFloor)(currentFloorEvent.getFloor())).turnOnDownLamp();
                 } else {
                 	((BottomFloor)(currentFloorEvent.getFloor())).turnOnUpButton();
+                	((BottomFloor)(currentFloorEvent.getFloor())).turnOnUpLamp();
                 }
                 
                 scheduler.addEvents(currentFloorEvent);

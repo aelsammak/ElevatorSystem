@@ -161,17 +161,17 @@ public class Scheduler extends Thread {
 	 */
 	public synchronized void elevatorArrivesAtFloor(Elevator elevator, Floor currentFloor) {
 		if (currentFloor instanceof MiddleFloor) {
-			((MiddleFloor) currentFloor).getUpLamp().turnOff();
-			((MiddleFloor) currentFloor).getDownLamp().turnOff();
+			((MiddleFloor) currentFloor).turnOffUpLamp();
+			((MiddleFloor) currentFloor).turnOffDownLamp();
 			((MiddleFloor) currentFloor).turnOffDownButton();
 			((MiddleFloor) currentFloor).turnOffUpButton();
 		}
 		else if(currentFloor instanceof TopFloor) {
-			((TopFloor) currentFloor).getDownLamp().turnOff();
+			((TopFloor) currentFloor).turnOffDownLamp();
 			((TopFloor) currentFloor).turnOffDownButton();
 		}
 		else {
-			((BottomFloor) currentFloor).getUpLamp().turnOff();
+			((BottomFloor) currentFloor).turnOffUpLamp();
 			((BottomFloor) currentFloor).turnOffUpButton();
 		}
 		elevator.closeDoors();
