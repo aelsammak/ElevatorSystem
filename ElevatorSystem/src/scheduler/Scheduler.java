@@ -142,13 +142,13 @@ public class Scheduler extends Thread {
 		
 		if (elevators.get(0).getFloorNumber() != destinationFloor.getFloorNumber()) {
 			elevators.get(0).moveToFloor(destinationFloor);
+			this.notifyAll();
 		} else {
 			System.out.println("The elevator is already on floor: " + destinationFloor.getFloorNumber());
 			elevators.get(0).openDoors();
 			elevatorArrivesAtFloor(elevators.get(0), destinationFloor);
 		}
-		
-		this.notifyAll();
+
 	}
 	
 	/**
