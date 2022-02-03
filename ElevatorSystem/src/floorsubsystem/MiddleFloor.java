@@ -75,4 +75,34 @@ public class MiddleFloor extends Floor {
 	public FloorLamp getDownLamp() {
 		return downLamp;
 	}
+	
+	/**
+	 * Turn on the up lamp
+	 */
+	public void turnOnUpLamp() {
+		this.upLamp.turnOn();
+	}
+	
+	/**
+	 * Turn off the up lamp
+	 */
+	public void turnOffUpLamp() {
+		this.upLamp.turnOff();
+	}
+	
+	/**
+	 * Turn on the down lamp
+	 */
+	public void turnOnDownLamp() {
+		this.downLamp.turnOn();
+	}
+	
+	/**
+	 * Turn off the down lamp
+	 */
+	public void turnOffDownLamp() {
+		this.downLamp.turnOff();
+	}
+	
+	
 }
