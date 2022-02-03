@@ -36,7 +36,9 @@ __Setup Instructions__:
      -  Click Finish
 
 __Execution Instructions__:
-- While in Eclipse, click run
+- In Eclipse
+  - Navigate to the /ElevatorSystem/src/main/Main.java
+  - Right-click on Main.java then click Run as -> Java Application
 
 __Testing Instructions__: TBD
 
@@ -65,6 +67,8 @@ __List of files:__ root of code files ('/ElevatorSystem/src'):
   - Event.java - super class for events that occur within the control system
     - FloorEvent.java - Handle a request/event made by simulated up/down button pressed on a specific floor
     - ElevatorEvent.java - Handle a request/event made by simulated floor button pressed from within a specific elevator
+  - FloorEventComparator.java - class to rank floor events based on time left until event, giving higher priority to events with less time left
+  - ElevatorEventComparator.java - class to rank elevator events based on time left until event, giving higher priority to events with more time left
 - /main/main.java - class that is responsible for running simulation and starting all threads
 - measurements - Recorded timings used to simulate elevator times within the program
 
