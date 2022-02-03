@@ -2,15 +2,42 @@
 __Lab Section:__ L1 (Group 10)\
 __Members:__ Kareem El-Hajjar, Adi El-Sammak, Ben Herriott, Erica Morgan, Cam Sommerville\
 __Author:__ Ben Herriott, Erica Morgan
-__Revisions:__
 
 __Purpose:__ Design and develop a multi-car elevator system and simulator utilizing concurrent programming. The system will use a scheduler to control elevator routing, an elevator subsystem to handle individual car operations, and a floor subsystem to handle elevator requests on each floor.
 
-__Setup Instructions__: 
-- Download JDK-15.0.2 (https://www.oracle.com/java/technologies/javase/jdk15-archive-downloads.html)
-- 
+__Requirements__: 
+- Integrated Development Environment (IDE): Eclipse Java IDE
+- Java Development Kit: JDK-15.0.2 
+- Plugins: Egit
+- Credentials: GitHub username and personal access token (PAC)
 
-__Execution Instructions__: TBD\
+__Setup Instructions__: 
+
+- Clone Repository
+  - Clone repository via Eclipse
+      - Go to File -> Import -> Git -> Projects from git -> Next -> Clone URI
+        - Enter URI: https://github.com/aelsammak/ElevatorSystem.git
+        - Enter username and password and click Next- username is GitHub username, password is GitHub personal access token
+      - Ensure all branches are checked and click Next
+      - Choose directory to store project and click Next
+      - Select Working Tree and click Next
+      - Click Finish
+  - Cloning repository via terminal
+     -  Go to https://github.com/aelsammak/ElevatorSystem/
+     -  Above the list of files click "Code"
+     -  Under "Clone with HTTPS" click clipboard
+     -  Open Terminal
+     -  Change the current working directory to the location where you want the cloned directory
+     -  Type git clone, and then paste the URL you copied earlier
+     -  `$ git clone https://github.com/aelsammak/ElevatorSystem.git`
+     -  Press Enter to create your local clone
+     -  Open Eclipse and Go to File -> Import -> General -> Existing Projects into Workspace
+     -  Select root directory where project is kept
+     -  Click Finish
+
+__Execution Instructions__:
+- While in Eclipse, click run
+
 __Testing Instructions__: TBD
 
 __List of files:__ root of code files ('/ElevatorSystem/src'):
