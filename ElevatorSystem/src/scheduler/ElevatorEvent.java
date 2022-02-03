@@ -46,4 +46,13 @@ public class ElevatorEvent extends Event {
 		return destinationFloor;
 	}
 	
+	/**
+	 * Method for testing purposes
+	 * @return String - formatted string about ElevatorEvent
+	 */
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return super.toString() + " Elevator Number: " + this.elevator.getElevatorNumber() + " Destination: " + this.destinationFloor.getFloorNumber();
+	}
 }

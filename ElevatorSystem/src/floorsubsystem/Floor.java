@@ -61,9 +61,18 @@ public class Floor extends Thread {
 	}
 	
 	/**
+	 * Getter for floorEventQueue
+	 * @return PriorityQueue<FloorEvent> - Queue of floor events
+	 */
+	public PriorityQueue<FloorEvent> getFloorEventQueue() {
+		return this.floorEventQueue; 
+	}
+	
+	
+	/**
 	 * Checks if it is time for the FloorEvent at the top of the queue to be sent to scheduler
 	 */
-	private synchronized void handlePriorityFloorEvent() {
+	public synchronized void handlePriorityFloorEvent() {
 		if (floorEventQueue.peek() != null) {
 			if (floorEventQueue.peek().getTimeLeftTillEvent() <= scheduler.getElapsedTime()) {
 				FloorEvent currentFloorEvent = floorEventQueue.poll();

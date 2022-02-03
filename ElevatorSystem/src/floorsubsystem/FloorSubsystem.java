@@ -98,7 +98,7 @@ public class FloorSubsystem {
 	 * @param scheduler, the scheduler associated with the floor sub-system
 	 * @param floors, the list of floors to add to the scheduler
 	 */
-	private static void createFloors(int maxFloorNumber, Scheduler scheduler, List<Floor> floors) {
+	public static void createFloors(int maxFloorNumber, Scheduler scheduler, List<Floor> floors) {
         for(int floorNumber = 0; floorNumber < maxFloorNumber; floorNumber++) {
         	if(floorNumber == 0) {
         		floors.add(new BottomFloor(floorNumber + 1, scheduler));

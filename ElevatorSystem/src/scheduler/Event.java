@@ -40,4 +40,12 @@ public class Event {
 		this.timeLeftTillEvent = timeLeftTillEvent;
 	}
 	
+	/**
+	 * Method for testing purposes
+	 * @return String - formatted string about event
+	 */
+	public String toString() {
+		return "Time until event: " + this.timeLeftTillEvent;  
+	}
+	
 }
