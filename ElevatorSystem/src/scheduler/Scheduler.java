@@ -197,6 +197,15 @@ public class Scheduler extends Thread {
 	}
 	
 	/**
+	 * Setter for elaspedTime purely for testing purposes. 
+	 * 
+	 * @param elapsedTime amount of time in seconds to increment by
+	 */
+	public void setElapsedTime(long elapsedTime) {
+		this.elapsedTime = elapsedTime;
+	}
+	
+	/**
 	 * Checks if there are any floor events on each floor and elevator events in each elevator
 	 * 
 	 * @return boolean true if there are any events and false otherwise

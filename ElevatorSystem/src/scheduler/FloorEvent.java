@@ -57,6 +57,15 @@ public class FloorEvent extends Event {
 		this.isUpButton = isUpButton;
 	}
 	
+	/**
+	 * Method for testing purposes
+	 * @return String - formatted string about FloorEvent
+	 */
+	@Override
+	public String toString() {
+		return super.toString() + " Floor number of Event: " + this.floor.getFloorNumber() + " Direction: " + this.isUpButton; 
+	}
+	
 //	/**
 //	 * Compare to method used by the Priority Queue
 //	 * 
