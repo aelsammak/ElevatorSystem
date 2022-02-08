@@ -1,5 +1,8 @@
 package elevatorsubsystem;
 
+import static java.lang.Math.abs;
+
+import java.util.Date;
 import java.util.PriorityQueue;
 import common.Common;
 import common.ElevatorState;
@@ -81,9 +84,10 @@ public class Elevator extends Thread {
 	 */
 	private void simulateElevatorArrival(Floor destinationFloor) {
 		if (elevatorShouldMove(destinationFloor)) {
+			Floor originalFloor = currentFloor;
 			arrivalSensor.simulateElevatorMovement(currentFloor, destinationFloor);
 			this.motor.setElevatorState(ElevatorState.IDLE);
-			openDoors();
+			openDoors(originalFloor, destinationFloor);
 			scheduler.elevatorArrivesAtFloor(this, currentFloor);
 		}
 	}
@@ -100,33 +104,33 @@ public class Elevator extends Thread {
 		if (destinationFloor instanceof TopFloor) {
 			if (destinationFloor.getFloorNumber() > currentFloor.getFloorNumber()) {
 				this.motor.setElevatorState(ElevatorState.MOVING_UP);
-				System.out.println("Elevator is moving up to floor " + destinationFloor.getFloorNumber());
+				System.out.println("[Elevator @ " + Common.TIMESTAMP_FORMAT.format(new Date(Common.SIMULATION_START_DATE.getTime() + (scheduler.getElapsedTime() * 1000))) + "] Elevator is moving up to floor " + destinationFloor.getFloorNumber());
 				shouldMove = true;
 			} else {
 				this.motor.setElevatorState(ElevatorState.IDLE);
-				System.out.println("Elevator is already at Top Floor");
+				System.out.println("[Elevator @ " + Common.TIMESTAMP_FORMAT.format(new Date(Common.SIMULATION_START_DATE.getTime() + (scheduler.getElapsedTime() * 1000))) + "] Elevator is already at Top Floor");
 			}
 		} else if (destinationFloor instanceof BottomFloor) {
 			if (destinationFloor.getFloorNumber() < currentFloor.getFloorNumber()) {
 				this.motor.setElevatorState(ElevatorState.MOVING_DOWN);
-				System.out.println("Elevator is moving down to floor " + destinationFloor.getFloorNumber());
+				System.out.println("[Elevator @ " + Common.TIMESTAMP_FORMAT.format(new Date(Common.SIMULATION_START_DATE.getTime() + (scheduler.getElapsedTime() * 1000))) + "] Elevator is moving down to floor " + destinationFloor.getFloorNumber());
 				shouldMove = true;
 			} else {
 				this.motor.setElevatorState(ElevatorState.IDLE);
-				System.out.println("Elevator is already at Bottom Floor");
+				System.out.println("[Elevator @ " + Common.TIMESTAMP_FORMAT.format(new Date(Common.SIMULATION_START_DATE.getTime() + (scheduler.getElapsedTime() * 1000))) + "] Elevator is already at Bottom Floor");
 			}
 		} else {
 			if (destinationFloor.getFloorNumber() > currentFloor.getFloorNumber()) {
 				this.motor.setElevatorState(ElevatorState.MOVING_UP);
-				System.out.println("Elevator is moving up to floor " + destinationFloor.getFloorNumber());
+				System.out.println("[Elevator @ " + Common.TIMESTAMP_FORMAT.format(new Date(Common.SIMULATION_START_DATE.getTime() + (scheduler.getElapsedTime() * 1000))) + "] Elevator is moving up to floor " + destinationFloor.getFloorNumber());
 				shouldMove = true;
 			} else if (destinationFloor.getFloorNumber() < currentFloor.getFloorNumber()) {
 				this.motor.setElevatorState(ElevatorState.MOVING_DOWN);
-				System.out.println("Elevator is moving down to floor " + destinationFloor.getFloorNumber());
+				System.out.println("[Elevator @ " + Common.TIMESTAMP_FORMAT.format(new Date(Common.SIMULATION_START_DATE.getTime() + (scheduler.getElapsedTime() * 1000))) + "] Elevator is moving down to floor " + destinationFloor.getFloorNumber());
 				shouldMove = true;
 			} else {
 				this.motor.setElevatorState(ElevatorState.IDLE);
-				System.out.println("Elevator is already at Floor " + destinationFloor.getFloorNumber());
+				System.out.println("[Elevator @ " + Common.TIMESTAMP_FORMAT.format(new Date(Common.SIMULATION_START_DATE.getTime() + (scheduler.getElapsedTime() * 1000))) + "] Elevator is already at Floor " + destinationFloor.getFloorNumber());
 			}
 		}
 		
@@ -136,8 +140,8 @@ public class Elevator extends Thread {
 	/**
 	 * This method is resonsible for opening the Elevator doors
 	 */
-	public void openDoors() {
-		System.out.println("Elevator has arrived at floor " + currentFloor.getFloorNumber());
+	public void openDoors(Floor originalFloor, Floor destinationFloor) {
+		System.out.println("[Elevator @ " + Common.TIMESTAMP_FORMAT.format(new Date(Common.SIMULATION_START_DATE.getTime() + (scheduler.getElapsedTime() * 1000) + (ArrivalSensor.TIME_BETWEEN_ONE_FLOOR * abs(destinationFloor.getFloorNumber() - originalFloor.getFloorNumber())))) + "] Elevator has arrived at floor " + currentFloor.getFloorNumber());
 		this.door.open();
 	}
 	
@@ -164,7 +168,7 @@ public class Elevator extends Thread {
         }
         
         this.door.close();
-        System.out.println("Elevator has closed doors at floor " + currentFloor.getFloorNumber());
+        System.out.println("[Elevator @ " + Common.TIMESTAMP_FORMAT.format(new Date(Common.SIMULATION_START_DATE.getTime() + (scheduler.getElapsedTime() * 1000) + (LOAD_UNLOAD_TIME * 1000))) + "] Elevator has closed doors at floor " + currentFloor.getFloorNumber());
         elevatorButtons[currentFloor.getFloorNumber() - 1].turnOff();
         elevatorLamps[currentFloor.getFloorNumber() - 1].turnOff();
     }

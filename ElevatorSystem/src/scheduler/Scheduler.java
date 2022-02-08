@@ -4,6 +4,7 @@ import java.util.*;
 
 import elevatorsubsystem.Elevator;
 import floorsubsystem.*;
+import common.Common;
 import common.ElevatorState;
 
 /**
@@ -110,12 +111,14 @@ public class Scheduler extends Thread {
 			}
 		}
 		
+		System.out.println("[Scheduler @ " + Common.TIMESTAMP_FORMAT.format(new Date(Common.SIMULATION_START_DATE.getTime() + (elapsedTime * 1000))) + "] Elevator was called on floor " + personsFloor.getFloorNumber());
+		
 		if (elevators.get(0).getFloorNumber() != personsFloor.getFloorNumber()) {
 			elevators.get(0).moveToFloor(personsFloor);
 			this.notifyAll();
 		} else {
-			System.out.println("The elevator is already on floor: " + personsFloor.getFloorNumber());
-			elevators.get(0).openDoors();
+			System.out.println("[Scheduler @ " + Common.TIMESTAMP_FORMAT.format(new Date(Common.SIMULATION_START_DATE.getTime() + (elapsedTime * 1000))) + "] Elevator is already on floor " + personsFloor.getFloorNumber());
+			elevators.get(0).openDoors(elevators.get(0).getCurrentFloor(), personsFloor);
 			elevatorArrivesAtFloor(elevators.get(0), personsFloor);
 		}
 		
@@ -136,7 +139,7 @@ public class Scheduler extends Thread {
 			}
 		}
 		
-		System.out.println("Elevator button " + destinationFloor.getFloorNumber() + " has been pressed");
+		System.out.println("[Scheduler @ " + Common.TIMESTAMP_FORMAT.format(new Date(Common.SIMULATION_START_DATE.getTime() + (elapsedTime * 1000))) + "] Elevator button " + destinationFloor.getFloorNumber() + " has been pressed");
 		elevators.get(0).getElevatorButtons()[destinationFloor.getFloorNumber() - 1].turnOn();
 		elevators.get(0).getElevatorLamps()[destinationFloor.getFloorNumber() - 1].turnOn();
 		
@@ -144,8 +147,8 @@ public class Scheduler extends Thread {
 			elevators.get(0).moveToFloor(destinationFloor);
 			this.notifyAll();
 		} else {
-			System.out.println("The elevator is already on floor: " + destinationFloor.getFloorNumber());
-			elevators.get(0).openDoors();
+			System.out.println("[Scheduler @ " + Common.TIMESTAMP_FORMAT.format(new Date(Common.SIMULATION_START_DATE.getTime() + (elapsedTime * 1000))) + "] Elevator is already on floor " + destinationFloor.getFloorNumber());
+			elevators.get(0).openDoors(elevators.get(0).getCurrentFloor(), destinationFloor);
 			elevatorArrivesAtFloor(elevators.get(0), destinationFloor);
 		}
 

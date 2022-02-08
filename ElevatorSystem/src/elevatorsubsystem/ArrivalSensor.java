@@ -14,7 +14,7 @@ public class ArrivalSensor {
 	
 	private static final long DISTANCE_BETWEEN_FLOORS = (long) 3.02;
 	private static final long MAX_SPEED = (long) 1.80;
-	private static final long TIME_BETWEEN_ONE_FLOOR = (long) (DISTANCE_BETWEEN_FLOORS / MAX_SPEED) * 1000;
+	public static final long TIME_BETWEEN_ONE_FLOOR = (long) (DISTANCE_BETWEEN_FLOORS / MAX_SPEED) * 1000;
 	private Elevator elevator;
 
 	/**
