@@ -3,9 +3,9 @@ package scheduler;
 import java.util.*;
 
 import elevatorsubsystem.Elevator;
+import elevatorsubsystem.ElevatorState;
 import floorsubsystem.*;
 import common.Common;
-import common.ElevatorState;
 
 /**
  * Scheduler class is responsible for storing and dispatching elevators in response to passenger requests
@@ -21,6 +21,7 @@ public class Scheduler extends Thread {
 	private List<Floor> floors;
 	private Queue<Event> eventQueue;
 	private long elapsedTime;
+	private SchedulerState schedulerState;
 	
 	/**
 	 * Constructor for the Scheduler.
@@ -30,6 +31,7 @@ public class Scheduler extends Thread {
 		elevators = new ArrayList<Elevator>();
 		this.eventQueue = new LinkedList<>();
 		this.elapsedTime = 0;
+		schedulerState = SchedulerState.IDLE;
 	}
 	
 	/**
@@ -56,11 +58,13 @@ public class Scheduler extends Thread {
 	private synchronized void handleEvent() {
 		if (!eventQueue.isEmpty()) {
 			Event currentEvent = eventQueue.peek();
+			schedulerState = SchedulerState.HANDLING_EVENTS;
 			if (currentEvent instanceof FloorEvent) {
 				handleFloorEvent((FloorEvent) currentEvent);
 			} else if (currentEvent instanceof ElevatorEvent) {
 				handleElevatorEvent((ElevatorEvent) currentEvent);
 			}
+			schedulerState = SchedulerState.IDLE;
 		}
 	} 
 	
@@ -284,5 +288,14 @@ public class Scheduler extends Thread {
 	 */
 	public Queue<Event> getEventQueue() {
 		return eventQueue;
+	}
+
+	/**
+	 * Getter for the SchdulerState attribute
+	 * 
+	 * @return SchedulerState the scheduler's state
+	 */
+	public SchedulerState getSchedulerState() {
+		return schedulerState;
 	}
 }

@@ -1,14 +1,12 @@
 package test;
 
-import static org.junit.Assert.*;
-
-import org.junit.Test;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 
 /**
  * Test runner for the application. Runs all test cases created within the application. JUNIT 4 has been used.
+ * 
  * @author Ben Herriott
  * @version 1.0
  */

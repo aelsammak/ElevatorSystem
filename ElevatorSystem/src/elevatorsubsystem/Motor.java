@@ -1,7 +1,5 @@
 package elevatorsubsystem;
 
-import common.ElevatorState;
-
 /**
  * The Motor class represents the Elevator's motor
  * 

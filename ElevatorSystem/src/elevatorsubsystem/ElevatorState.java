@@ -1,4 +1,4 @@
-package common;
+package elevatorsubsystem;
 
 /**
  * This enum is responsible for representing the different states of the Elevator's motor

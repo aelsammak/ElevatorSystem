@@ -133,7 +133,6 @@ public class FloorSubsystem {
         	Floor currentFloor = floors.get(floorNumber - 1);
         	currentFloor.addFloorEvent(new FloorEvent(currentFloor, isUpList.get(tempIndex), timeList.get(tempIndex)));
         	tempIndex++;
-        	//System.out.println("FLOOR EVENT #" + currentFloor.getPriorityQueue().poll().getFloor().getFloorNumber());
         }
 	}
 }

@@ -3,11 +3,13 @@ package test;
 import static org.junit.Assert.*;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import org.junit.Test;
 
 import common.Common;
+import common.Config;
 import elevatorsubsystem.Elevator;
 import elevatorsubsystem.ElevatorSubsystem;
 import floorsubsystem.Floor;
@@ -19,19 +21,21 @@ import scheduler.Scheduler;
 /**
  * Test for elevator movements to both floor and elevator events. Floor event moving the elevator to someone's floor based on a floor button click.
  * Elevator event a person enters the elevator and clicks a floor number test whether the elevator moves to both floors correctly. 
+ * 
  * @author Ben Herriott
  * @version 1.0
  */
 public class ElevatorTest {
 	@Test
-	public void test3() throws InterruptedException {
+	public void test3() throws InterruptedException, IOException {
 		// create the scheduler and mimic elevator and floor setup
 		System.out.println("Starting elevator movement test");
 		Scheduler scheduler = new Scheduler();
         ArrayList<Floor> f = new ArrayList<Floor>(); 
 		Common.setMaxNumFloors(3);
+		Config config = new Config();
         FloorSubsystem.createFloors(4, scheduler, f);
-		Elevator e = new Elevator(1, scheduler); 
+		Elevator e = new Elevator(1, scheduler, config); 
 		scheduler.addElevator(e);
 		
 		// check there are no floor events
