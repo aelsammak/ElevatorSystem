@@ -48,14 +48,15 @@ __Testing Instructions__:
 
 __List of files:__ root of code files ('/ElevatorSystem/src'):
 - /common: 
-  - Common.java - base config
-  - ElevatorState.java - state config/constants for elevators
-- /elevator:
+  - Common.java - class responsible for storing common attributes for other classes within the system to access
+  - Config.java - class responsible for loading all the properties necessary for the simulation from a given config file.
+- /elevatorsubsystem:
   - ArrivalSensor.java - arrival logic for elevator reaching a floor
   - Door.java - door class maintaining an elevator door's state
   - Elevator.java - overarching class maintaining all logic and functionality for an elevator
   - ElevatorButton.java - class for state of an individual elevator button
   - ElevatorLamp.java - class for state of an individual elevator lamps
+  - ElevatorState.java - enum responsible for representing the different states of the Elevator's motor
   - Motor.java - class for motors operation and state for an elevator
   - ElevatorSubsystem.java - reponsible for parsing the file to generate elevator events
 - /floorsubsystem:
@@ -73,11 +74,16 @@ __List of files:__ root of code files ('/ElevatorSystem/src'):
     - ElevatorEvent.java - Handle a request/event made by simulated floor button pressed from within a specific elevator
   - FloorEventComparator.java - class to rank floor events based on time left until event, giving higher priority to events with less time left
   - ElevatorEventComparator.java - class to rank elevator events based on time left until event, giving higher priority to events with more time left
+  - SchedulerState.java - enum responsible for representing the different states of the Scheduler
 - /test:
   - InitialTest.java - contains test cases for testing reading and parsing of data from csvs
   - ElevatorTest.java - contains test cases for elevator movement between floors for events
   - TestSuiteRunner.java - responsible for running all tests within the project
-- /main/main.java - class that is responsible for running simulation and starting all threads
+  - StateChangeTest.java - contains test cases specifically focused on testing state changes of elevators as they move up and down floors.
+- /main:
+  - Main.java - class that is responsible for running simulation and starting all threads
+- /resources:
+  - config.cfg - config file used to configure the parameters and initial settings for the program
 - measurements - Recorded timings used to simulate elevator times within the program
 
 __Responsibilities:__
@@ -85,7 +91,8 @@ __Responsibilities:__
 - Floor Subsystem: Kareem El-Hajjar
 - Scheduler Subsystem: Erica Morgan & Cam Sommerville
 - Elevator Timings: Erica Morgan
-- UML: Cam Sommerville, Erica Morgan
-- SEQUENCE DIAGRAM: Adi El-Sammak & Kareem
-- TESTING: Ben Herriott
+- UML Class Diagram: Cam Sommerville, Erica Morgan
+- Sequence Diagram: Adi El-Sammak & Kareem
+- State Machine Diagrams: Adi El-Sammak, Cam Sommerville & Kareem El-Hajjar
+- Testing: Ben Herriott
 - README: Ben Herriott, Erica Morgan
