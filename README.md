@@ -1,7 +1,7 @@
 # SYSC 3303A - Project (Elevator System)
 __Lab Section:__ L1 (Group 10)\
 __Members:__ Kareem El-Hajjar, Adi El-Sammak, Ben Herriott, Erica Morgan, Cam Sommerville\
-__Author:__ Ben Herriott, Erica Morgan
+__Authors:__ Ben Herriott, Erica Morgan
 
 __Purpose:__ Design and develop a multi-car elevator system and simulator utilizing concurrent programming. The system will use a scheduler to control elevator routing, an elevator subsystem to handle individual car operations, and a floor subsystem to handle elevator requests on each floor.
 
@@ -40,7 +40,11 @@ __Execution Instructions__:
   - Navigate to the /ElevatorSystem/src/main/Main.java
   - Right-click on Main.java then click Run as -> Java Application
 
-__Testing Instructions__: TBD
+__Testing Instructions__:
+- In Eclipse
+  - Navigate to the /ElevatorSystem/src/test/TestSuiteRunner.java
+  - Right-click on TestSuiteRunner.java then click Run as -> Java Application
+  - Note: this will run all test cases contained within the project
 
 __List of files:__ root of code files ('/ElevatorSystem/src'):
 - /common: 
@@ -69,6 +73,10 @@ __List of files:__ root of code files ('/ElevatorSystem/src'):
     - ElevatorEvent.java - Handle a request/event made by simulated floor button pressed from within a specific elevator
   - FloorEventComparator.java - class to rank floor events based on time left until event, giving higher priority to events with less time left
   - ElevatorEventComparator.java - class to rank elevator events based on time left until event, giving higher priority to events with more time left
+- /test:
+  - InitialTest.java - contains test cases for testing reading and parsing of data from csvs
+  - ElevatorTest.java - contains test cases for elevator movement between floors for events
+  - TestSuiteRunner.java - responsible for running all tests within the project
 - /main/main.java - class that is responsible for running simulation and starting all threads
 - measurements - Recorded timings used to simulate elevator times within the program
 
