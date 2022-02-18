@@ -298,4 +298,12 @@ public class Scheduler extends Thread {
 	public SchedulerState getSchedulerState() {
 		return schedulerState;
 	}
+	
+	/**
+	 * Setter for the SchdulerState attribute, just for testing purposes currently
+	 * 
+	 */
+	public void setSchedulerState(SchedulerState state) {
+		this.schedulerState = state;
+	}
 }
