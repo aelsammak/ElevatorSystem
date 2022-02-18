@@ -100,7 +100,7 @@ public class Elevator extends Thread {
 	 * @param destinationFloor - the floor to which the Elevator must move to
 	 * @return boolean - true if the Elevator should move, else false
 	 */
-	private boolean elevatorShouldMove(Floor destinationFloor) {
+	public boolean elevatorShouldMove(Floor destinationFloor) {
 		boolean shouldMove = false;
 		if (destinationFloor instanceof TopFloor) {
 			if (destinationFloor.getFloorNumber() > currentFloor.getFloorNumber()) {
