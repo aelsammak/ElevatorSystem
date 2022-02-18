@@ -2,7 +2,6 @@ package test;
 
 import static org.junit.Assert.*;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -12,7 +11,6 @@ import org.junit.Test;
 import common.Common;
 import common.Config;
 import elevatorsubsystem.Elevator;
-import elevatorsubsystem.ElevatorSubsystem;
 import floorsubsystem.Floor;
 import floorsubsystem.FloorSubsystem;
 import scheduler.ElevatorEvent;
@@ -27,6 +25,7 @@ import scheduler.Scheduler;
  * @version 1.0
  */
 public class ElevatorTest {
+	
 	private Scheduler scheduler;
 	private ArrayList<Floor> f;
 	private Elevator e;
@@ -53,7 +52,7 @@ public class ElevatorTest {
 	}
 	
 	@Test
-	public void test3() throws InterruptedException, IOException {
+	public void moveElevatorToFloorTest() throws InterruptedException, IOException {
 		// create the scheduler and mimic elevator and floor setup
 		System.out.println("Starting elevator movement test");
 		// check there are no floor events
