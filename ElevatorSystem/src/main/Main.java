@@ -1,13 +1,13 @@
 package main;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import common.Config;
 import elevatorsubsystem.Elevator;
 import elevatorsubsystem.ElevatorSubsystem;
 import floorsubsystem.Floor;
 import floorsubsystem.FloorSubsystem;
-import scheduler.ElevatorEvent;
-import scheduler.Event;
-import scheduler.FloorEvent;
 import scheduler.Scheduler;
 
 /**
@@ -17,20 +17,20 @@ import scheduler.Scheduler;
  * 
  */
 public class Main {
-	
-	private static final String FILE_NAME = "simulation.csv";
 
 	/**
 	 * The main method which intializes and starts the scheduler, floor and elevator threads
 	 * 
 	 * @param args
+	 * @throws IOException 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
+		Config config = new Config();
         Scheduler scheduler = new Scheduler();
         try {
-            FloorSubsystem.generateFloorsAndEvents(scheduler, FILE_NAME);
-            Elevator elevator = new Elevator(1, scheduler);
-            ElevatorSubsystem.generateElevatorEvents(scheduler, FILE_NAME, elevator);
+            FloorSubsystem.generateFloorsAndEvents(scheduler, config.getProperty("csvFileName"));
+            Elevator elevator = new Elevator(1, scheduler, config);
+            ElevatorSubsystem.generateElevatorEvents(scheduler, config.getProperty("csvFileName"), elevator);
             scheduler.addElevator(elevator);
         } catch (FileNotFoundException e) {
             e.printStackTrace();

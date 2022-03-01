@@ -40,6 +40,7 @@ public class FloorSubsystem {
         
         Scanner scanner = new Scanner(new File(filename));
         
+        boolean isFirstDate = true;
         while (scanner.hasNext()) {
             String[] line = scanner.nextLine().split(",");
             
@@ -58,6 +59,13 @@ public class FloorSubsystem {
     			} catch (ParseException e) {
     				e.printStackTrace();
     			}
+    			
+				/* Set the SIMULATION_START_DATE to the first date */
+				if (isFirstDate) {
+					Common.SIMULATION_START_DATE = currentDate;
+					isFirstDate = false;
+				}
+    			
                 timeList.add(abs(Common.SIMULATION_START_DATE.getTime() - currentDate.getTime())/1000);
                 
                 // Fill isUpList
@@ -125,7 +133,6 @@ public class FloorSubsystem {
         	Floor currentFloor = floors.get(floorNumber - 1);
         	currentFloor.addFloorEvent(new FloorEvent(currentFloor, isUpList.get(tempIndex), timeList.get(tempIndex)));
         	tempIndex++;
-        	//System.out.println("FLOOR EVENT #" + currentFloor.getPriorityQueue().poll().getFloor().getFloorNumber());
         }
 	}
 }
