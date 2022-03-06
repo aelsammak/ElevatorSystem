@@ -7,6 +7,9 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
 
+/**
+ * The RPC class is used as helper class for RPC communication.
+ */
 public class RPC {
 	
 	private final InetAddress destAddress;
@@ -14,6 +17,13 @@ public class RPC {
     private DatagramSocket sendReceiveSocket;
     private final int BUF_SIZE = 100;
 
+    /**
+     * Constructor for the RPC class.
+     * 
+     * @param destAddress - the destination address
+     * @param destinationPort - the destination port
+     * @param receivePort - the receive port
+     */
     public RPC(InetAddress destAddress, int destinationPort, int receivePort) {
         this.destAddress = destAddress;
         this.destinationPort = destinationPort;
@@ -21,6 +31,9 @@ public class RPC {
         initSocket();
     }
     
+    /**
+     * This method is responsible for creating the sendReceive socket
+     */
     private void initSocket() {
         try {
             sendReceiveSocket = new DatagramSocket(receivePort);
@@ -30,6 +43,11 @@ public class RPC {
         }
     }
 
+    /**
+     * This method is responsible for sending a packet
+     * 
+     * @param msg - the bytes to send
+     */
     public void sendPacket(byte[] msg) {
         DatagramPacket sendPacket = new DatagramPacket(msg, msg.length, destAddress, destinationPort);
         
@@ -41,6 +59,11 @@ public class RPC {
         }
     }
     
+    /**
+     * This method is responsible for receiving a packet
+     * 
+     * @return byte[] - the bytes received from the packet
+     */
     public byte[] receivePacket() {
         byte[] data = new byte[BUF_SIZE];
 
@@ -62,6 +85,11 @@ public class RPC {
         return result;
     }
     
+    /**
+     * This method is used to timeout the socket to the milliseconds provided.
+     * 
+     * @param ms - the milliseconds to timeout socket to
+     */
     public void setSocketTimeout(int ms) {
     	try {
 			sendReceiveSocket.setSoTimeout(ms);

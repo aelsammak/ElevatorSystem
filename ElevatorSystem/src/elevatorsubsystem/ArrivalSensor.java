@@ -8,7 +8,7 @@ import common.Common;
  * The ArrivalSensor class represents the Elevator's ArrivalSensor
  * 
  * @author Adi El-Sammak
- * @version 1.0
+ * @version 3.0
  *
  */
 public class ArrivalSensor {

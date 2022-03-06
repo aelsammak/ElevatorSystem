@@ -31,11 +31,11 @@ public class ElevatorSubsystem extends Thread {
 
 	/* The starting port number used for receiving packets from the elevator */
 	/* The elevatorNumber will be added to this port to offset this port number and give a unique port number */
-	private static final int ELEVSUBSYSTEM_RECEIVE_FROM_ELEV_PORT = 9001;
+	private static final int ELEVSUBSYSTEM_RECEIVE_FROM_ELEV_PORT = 9002;
 
 	/* The starting port number used for receiving packets by the elevator */
 	/* The elevatorNumber will be added to this port to offset this port number and give a unique port number */
-	private static final int ELEV_RECEIVE_PORT = 10201;
+	private static final int ELEV_RECEIVE_PORT = 10202;
 
 	
 	/**

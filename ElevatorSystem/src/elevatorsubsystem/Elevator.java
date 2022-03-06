@@ -31,6 +31,16 @@ public class Elevator extends Thread {
 	private InetAddress addr;
 	private FileLoader fileLoader;
 	
+	/**
+	 * Constructor for the Elevator class. 
+	 * 
+	 * @param elevatorNumber - the elevatorNumber
+	 * @param currentFloor - the currentFloor of the elevator
+	 * @param destPort - the destination port for the elevator
+	 * @param recPort - the receive port for the elevator
+	 * @param fileLoader - the file loader
+	 * @throws UnknownHostException - thrown if the host specified is unknown
+	 */
 	public Elevator(int elevatorNumber, int currentFloor, int destPort, int recPort, FileLoader fileLoader) throws UnknownHostException {
 		this.fileLoader = fileLoader;
 		this.elevatorNumber = elevatorNumber;
@@ -42,6 +52,7 @@ public class Elevator extends Thread {
 		this.addr = InetAddress.getLocalHost();
 		transmitter = new RPC(addr, destPort, recPort);
 		
+		/* init elevator buttons and lamps */
 		elevatorButtons = new ElevatorButton[Common.NUM_FLOORS];
 		elevatorLamps = new ElevatorLamp[Common.NUM_FLOORS];
 		
@@ -51,12 +62,17 @@ public class Elevator extends Thread {
         }
 	}
 
+	/**
+	 * This method is responsible for moving the Elevator to the specified floor number being passed.
+	 * 
+	 * @param floorNumber - the floor the elevator should move to
+	 */
 	public void moveToFloor(int floorNumber) {
 		
 		targetFloor = floorNumber;
 		destinationFloors.add((Integer)floorNumber);
 
-		//If statements to checks the location of the destination floor relative to the current floor
+		/* if statements to checks the location of the destination floor relative to the current floor */
 		if(currentFloor > floorNumber) {
 			setMotorState(MotorState.MOVING_DOWN);
 		} else if (currentFloor < floorNumber) {
@@ -75,11 +91,15 @@ public class Elevator extends Thread {
 		arrivalSensor.simulateElevatorMovement(currentFloor, targetFloor);
 	}
 
+	/**
+	 * This method is used to notify the ElevatorSubSystem who will then notify the Scheduler of its arrival.
+	 * This method will also service the passenger IF they need to get to a destination floor.
+	 */
 	public void notifyElevatorArrival() {
 		openDoors();
-		setMotorState(MotorState.IDLE); // set state to idle
+		setMotorState(MotorState.IDLE);
 		System.out.println("\nELEVATOR: Elevator #" + elevatorNumber + " | ARRIVED at Floor #" + targetFloor + " | MotorState: " + getMotorState() + " @ time = " + LocalTime.now());
-		removeDestinationFloor(targetFloor);  //calls method remove floor to remove it from the arraylist
+		removeDestinationFloor(targetFloor);
 		
 		if (elevatorButtons[currentFloor - 1].isPressed()) {
 			elevatorButtons[currentFloor - 1].turnOff();
@@ -92,8 +112,10 @@ public class Elevator extends Thread {
 		servePassengerToDestFloor();
 	}
 	
-	private void servePassengerToDestFloor() {
-		
+	/**
+	 * This method is used to serve the passenger to their destination floor if they are currently in the elevator 
+	 */
+	private void servePassengerToDestFloor() {		
 		if (fileLoader.getDestinations().containsKey(currentFloor)) {
 			if (!fileLoader.getDestinations().get(currentFloor).isEmpty()) {
 				int nextDest = fileLoader.getDestinations().get(currentFloor).get(0);
@@ -106,6 +128,10 @@ public class Elevator extends Thread {
 		}
 	}
 	
+	/**
+	 * This method is used to either increment or decrement the elevators current floor based on motorState. 
+	 * This method is called to change the elevator's position with respect to time.
+	 */
 	public void updatePosition() {
 		if (getMotorState() == MotorState.MOVING_UP) {
 			currentFloor++;
@@ -114,7 +140,11 @@ public class Elevator extends Thread {
 		}
 	}
 	
-	
+	/**
+	 * This method is used to remove a floor from the Elevator's list of destination floors
+	 * 
+	 * @param floorNumber - the floor number to be removed
+	 */
 	public void removeDestinationFloor(int floorNumber) {
 		destinationFloors.remove((Integer)floorNumber);
 	}
@@ -135,6 +165,11 @@ public class Elevator extends Thread {
 		return currentFloor;
 	}
 	
+	/**
+	 * Sets the current floor number of the elevator to the floor number being passed in.
+	 * 
+	 * @param floorNumber - the new current floor number
+	 */
 	public void setCurrentFloorNumber(int floorNumber) {
 		currentFloor = floorNumber;
 	}
@@ -192,32 +227,35 @@ public class Elevator extends Thread {
 		return elevatorLamps;
 	}
 	
+	/**
+	 * This method is used to send and receive a packet to the Scheduler.
+	 */
 	public void sendAndReceive() {
 		byte[] msg = Common.encodeElevMsgIntoBytes(elevatorNumber, currentFloor, getMotorState(), targetFloor);
 		transmitter.sendPacket(msg);
 		msg = transmitter.receivePacket();
 	}
-	
-	// receive method that first sends an ack check msg to ElevatorSubsystem
-	// and then receives instructions for a specific elevator
+
+	/**
+	 * This method first sends an acknowledgement check msg to the ElevatorSubSystem and then receives a msg with the instructions from Scheduler.
+	 */
 	public void receive() {
-		byte[] ackcheckMsg;  // byte array variables for the msgs
+		byte[] ackcheckMsg;
 		byte[] receiveMsg;
 		
-		ackcheckMsg = Common.encodeAckMsgIntoBytes(Common.ACKOWLEDGEMENT.CHECK); // using the Common.java to encode check msg
-		transmitter.sendPacket(ackcheckMsg);  // sends the msg request to elevator subsystem using UDP
+		ackcheckMsg = Common.encodeAckMsgIntoBytes(Common.ACKOWLEDGEMENT.CHECK);
+		transmitter.sendPacket(ackcheckMsg);
 
-		receiveMsg = transmitter.receivePacket();  // stores the elevatorSubsystem's response in byte array
+		receiveMsg = transmitter.receivePacket();
 		
 		if (receiveMsg == null) {
 			return;
 		}
 		
 		if (Common.findType(receiveMsg) != Common.MESSAGETYPE.ACKNOWLEDGEMENT) {
-			int received[] = Common.decode(receiveMsg); //decode the received msg that stores the info in an integer array
-			moveToFloor(received[1]); //Common.java identifies msg[1] as destination floor
+			int received[] = Common.decode(receiveMsg);
+			moveToFloor(received[1]);
 		}
-
 	}
 
 	/**
