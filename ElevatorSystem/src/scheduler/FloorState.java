@@ -1,5 +1,12 @@
 package scheduler;
 
+/**
+ *  Keeps track of floor state
+ *  
+ * @author Cam Sommerville
+ * @author Erica Morgan
+ * @version 3.0
+ */
 public class FloorState {
 	
     private int floorNumber;

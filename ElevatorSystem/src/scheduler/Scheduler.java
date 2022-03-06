@@ -20,13 +20,19 @@ import floorsubsystem.FloorSubsystem;
 public class Scheduler extends Thread {
 	
 	public static final int SCHEDULER_RECEIVE_PORT = 10004;
+	
 	private final byte[] ackCheckMSG = Common.encodeAckMsgIntoBytes(Common.ACKOWLEDGEMENT.CHECK);
 	private SchedulerState schedulerState;
 	private ElevatorState[] elevatorStates;
 	private FloorState[] floorStates;
 	private Queue<byte[]> msgsToElevatorSubSystem, msgsToFloorSubSystem;
 	private RPC rpcFloor, rpcElevator;
-
+	
+	/**
+	 * Default constructor
+	 * 
+	 * @throws Exception 
+	 */
 	public Scheduler() throws Exception {
 		schedulerState = SchedulerState.WAITING;
 		this.elevatorStates = new ElevatorState[Common.NUM_ELEVATORS];
@@ -41,23 +47,31 @@ public class Scheduler extends Thread {
 		rpcFloor = new RPC(InetAddress.getLocalHost(), FloorSubsystem.FLOORSUBSYSTEM_RECV_PORT, FloorSubsystem.FLOORSUBSYSTEM_DEST_PORT);
 	}
 	
+	/**
+	 * Getter for schedulerState attribute
+	 * 
+	 * @return SchedulerState - the schedulerState attribute
+	 */
 	public SchedulerState getSchedulerState() {
 		return schedulerState;
 	}
 
-	private void elevtSubAddMsg (byte[] msg) {
+	/**
+	 * Adds a message to the message queue to ElevatorSubsystem
+	 * 
+	 * @param msg - the message to send as a byte array
+	 */
+	private void elevatorSubAddMsg (byte[] msg) {
 		int[] message = Common.decode(msg);
 		int elevatorNumber = message[0];
 		int currentFloorNumber = message[1];
 		int motorDir = message[2];
 		int targetFloor = message[3];
 
-		// update elevatorStates
 		elevatorStates[elevatorNumber - 1].setCurrentFloorNumber(currentFloorNumber);
 		elevatorStates[elevatorNumber - 1].setMotorDir(motorDir);
 		elevatorStates[elevatorNumber - 1].setTargetFloor(targetFloor);
 
-		/* if the the elevator stops on a floor, turn off corresponding floor buttons & lamps */
 		if (motorDir == 0) {
 
 			if (targetFloor < currentFloorNumber) {
@@ -80,8 +94,9 @@ public class Scheduler extends Thread {
     }
 
 	/**
-	 *
-	 * @param msg The message sent by the floor subsystem.
+	 * Adds a message to the message queue to FloorSubsystem
+	 * 
+	 * @param msg - the message to send as a byte array
 	 */
 	private void floorSubAddMsg (byte[] msg) {
 		int[] message = Common.decode(msg);
@@ -97,18 +112,27 @@ public class Scheduler extends Thread {
 		msgsToElevatorSubSystem.offer(oneMsgToElevtSub);
 	}
 
+	/**
+	 * Finds the closest elevator given current floor number and requested direction
+	 * 
+	 * @param floorNumber - the current floor number
+	 * @param isFloorBtnUp - the direction requested
+	 * @return int - the closest elevator's number
+	 */
 	private int findClosestElevator(int floorNumber, boolean isFloorBtnUp) {
 		int result = 0;
 		int[] distances = new int[Common.NUM_ELEVATORS];
-		// find distance for all elevators
+		
+		// Find every elevator's distance fomr the current floor
 		for (int i = 0; i < Common.NUM_ELEVATORS; i++) {
 			int dis = findDistance(floorNumber, isFloorBtnUp, elevatorStates[i]);
 			distances[i] = dis;
 		}
 	
-		/* Find the Elevator with the smallest distance to the floor */
+		// Find the closest elevator 
 		int index = 0;
 		int min = distances[0];
+		
 		for (int i = 0; i < distances.length; i++) {
 			if (distances[i] < min) {
 				min = distances[i];
@@ -121,30 +145,40 @@ public class Scheduler extends Thread {
 	}
 
 
+	/**
+	 * Finds the distance of an elevator from the current floor
+	 * 
+	 * @param floor - the current floor number
+	 * @param isUp - the direction the elevator is requested
+	 * @param elevatorState - the current elevator state
+	 * @return int - the distance in floors
+	 */
 	private int findDistance(int floor, boolean isUp, ElevatorState elevatorState) {
 		int distance = 0;
 		int elevCurrPosition = elevatorState.getCurrentFloorNumber();
 		int elevDir = elevatorState.getMotorDir();
 		int elevDest = elevatorState.getTargetFloor();
 	
-		int floorDiff = elevCurrPosition - floor; /* positive means floor is below the elevator; negative means above */
+		int floorDiff = elevCurrPosition - floor; 
 		if (elevCurrPosition == elevDest) {
 			distance = Math.abs(floorDiff);
 		} else if ((floorDiff > 0 && !isUp && elevDir == -1) || (floorDiff < 0 && isUp && elevDir == 1)) {
 			distance = Math.min(Math.abs(elevCurrPosition - floor), Math.abs(elevCurrPosition - floor));
-		} else { /* elevator needs turn around */
-			if (elevDir == -1) { /* elevator is going down */
+		} else { 
+			if (elevDir == -1) { 
 				distance = elevCurrPosition + floor;
-			} else { /* elevator is going up */
+			} else { 
 				distance = (Common.NUM_FLOORS - elevCurrPosition) + (Common.NUM_FLOORS - floor);
 			}
 		}
 		return distance;
 	}
 
-	// communicate with FloorSub
+	/**
+	 * Send/Receive from the FloorSubsystem
+	 */
 	private void sendReceiveFloorSub() {
-		// send to FloorSub
+		// SEND
 		schedulerState = SchedulerState.SENDING;
 		byte[] msgSend = msgsToFloorSubSystem.poll();
 		if (msgSend != null) {
@@ -158,7 +192,7 @@ public class Scheduler extends Thread {
 		}
 		schedulerState = SchedulerState.WAITING;
 
-		// receive from FloorSub
+		// RECEIVE
 		schedulerState = SchedulerState.RECEIVING;
 		byte[] msgReceive = rpcFloor.receivePacket();
 		if (Common.findType(msgReceive) != Common.MESSAGETYPE.ACKNOWLEDGEMENT) {
@@ -169,9 +203,11 @@ public class Scheduler extends Thread {
 		schedulerState = SchedulerState.WAITING;
 	}
 
-	// communicate with ElevtSub
+	/**
+	 * Send/Receive from the ElevatorSubsystem
+	 */
 	private void sendReceiveElevtSub() {
-		// check ElevtSub
+		// SEND
 		schedulerState = SchedulerState.SENDING;
 		byte[] msgSend = msgsToElevatorSubSystem.poll();
 		if ( msgSend != null) {
@@ -183,17 +219,20 @@ public class Scheduler extends Thread {
 		}
 		schedulerState = SchedulerState.WAITING;
 
-		// receive from ElevtSub
+		// RECEIVE
 		schedulerState = SchedulerState.RECEIVING;
 		byte[] msgReceive = rpcElevator.receivePacket();
 		if (Common.findType(msgReceive) != Common.MESSAGETYPE.ACKNOWLEDGEMENT){
-			elevtSubAddMsg(msgReceive);
+			elevatorSubAddMsg(msgReceive);
 			System.out.println("SCHEDULER: Method: RECEIVE | From: ElevatorSubSystem | Msg: " + Common.decodeSchedulerFromElevMsgToString(Common.decode(msgReceive))  + " @ time = " + LocalTime.now());
 
 		}
 		schedulerState = SchedulerState.WAITING;
 	}
 
+	/**
+	 * Constantly sends and receives messages upon thread start.
+	 */
 	@Override
 	public void run() {
 		while (true) {

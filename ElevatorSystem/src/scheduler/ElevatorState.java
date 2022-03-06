@@ -1,5 +1,12 @@
 package scheduler;
 
+/**
+ *  Keeps track of elevator state
+ *  
+ * @author Cam Sommerville
+ * @author Erica Morgan
+ * @version 3.0
+ */
 public class ElevatorState {
 	
 	private int elevatorNumber; 

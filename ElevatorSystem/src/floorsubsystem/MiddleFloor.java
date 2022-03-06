@@ -18,7 +18,6 @@ public class MiddleFloor extends Floor {
 	 * Parameterized constructor 
 	 * 
 	 * @param floorNumber, the floor's number
-	 * @param scheduler, the scheduler associated with the floor
 	 */
 	public MiddleFloor(int floorNumber) {
 		super(floorNumber);

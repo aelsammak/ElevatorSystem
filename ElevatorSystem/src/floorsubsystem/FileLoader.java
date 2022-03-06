@@ -2,12 +2,10 @@ package floorsubsystem;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.lang.constant.Constable;
 import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -15,20 +13,33 @@ import java.util.Scanner;
 
 import common.Common;
 
+/**
+ * The FileLoader is responsible for reading the instructions from the simulation.csv file
+ * 
+ * @author Kareem El-Hajjar
+ * @author Adi El-Sammak
+ * @version 3.0
+ */
 public class FileLoader {
 	
 	private File simulationFile = new File(Common.config.getProperty("csvFileName"));
     private Scanner scanner;
-    private boolean reachedEndOFile;
     private String currLine;
     private String[] csvSimInfo;
-    private static String SIMULATION_START_TIME = "8:00:00"; 
     private LocalTime localTime;
-    private HashMap<Integer, ArrayList<Integer>> destinations; // Saves destination floors for each departure floor
+    private HashMap<Integer, ArrayList<Integer>> destinations; 
+    private boolean reachedEndOFile;
+    private static String SIMULATION_START_TIME = "8:00:00"; 
 
+    /**
+     * Default constructor for FileLoader 
+     * 
+     * @throws Exception - If file not found
+     */
     public FileLoader() throws Exception {
-    	localTime = LocalTime.now();
+    	localTime = LocalTime.now(); // Get LocalTime
     	reachedEndOFile = false;
+    	
         try {
             scanner = new Scanner(simulationFile);
         } catch (FileNotFoundException e) {
@@ -36,29 +47,36 @@ public class FileLoader {
             reachedEndOFile = true;
         }
 
-        // Initialize destinations
         destinations = new HashMap<Integer, ArrayList<Integer>>();
-
-        // Call nextLine() to load the first instruction
         this.nextLine();
     }
     
+    /**
+     * Getter for the destinations attribute.
+     * 
+     * @return HashMap<Integer, ArrayList<Integer>> - the HashMap containing the destinations
+     */
     public HashMap<Integer, ArrayList<Integer>> getDestinations() {
     	return destinations;
     }
 
-    // Add curLine instruction into destinations,
-    // should only be called by nextLine()
+    /**
+     * Adds destinations to the destinations HashMap based on departure floor
+     */
     private void pushDestinations() {
         if (!destinations.containsKey(departFloor())){
-            // create new arraylist on demand
             destinations.put(departFloor(), new ArrayList<Integer>());
         }
-        // add to arraylist
+        
         destinations.get(departFloor()).add(destFloor());
     }
     
-    // Public method to get departure floor of current instruction
+    
+    /**
+     * Return the departure floor for the current instruction
+     * 
+     * @return int - the departure floor number
+     */
     public int departFloor() {
         int result = 0;
         try{
@@ -69,7 +87,11 @@ public class FileLoader {
         return result;
     }
     
-    // Public method to get destination floor of current instruction
+    /**
+     * Return the destination floor for the current instruction
+     * 
+     * @return int - the destination floor number
+     */
     private int destFloor() {
         int result = 0;
         try {
@@ -80,26 +102,42 @@ public class FileLoader {
         return result;
     }
     
+    /**
+     * Returns whether or not there is another instruction in the simulation.
+     * 
+     * @return boolean - true if there is another instruction, false otherwise
+     */
     public boolean hasNextInstruction() {
         return !reachedEndOFile && scanner.hasNextLine();
     }
 
-    // Returns a new line of the instruction file
+    /**
+     * Reads a line in the file
+     * 
+     * @return String - the next line in the file as a String
+     */
     private String readLine() {
         return reachedEndOFile ? "" : scanner.nextLine();
     }
 
-    // Public method to switch to next instruction
+    /**
+     * Switches to the next instruction in the file
+     * 
+     * @return boolean - true if there is another instruction, false otherwise
+     * @throws Exception - incorrect file format
+     */
     public boolean nextLine() throws Exception {
         if (hasNextInstruction()) {
             currLine = readLine();
+            
             if(!currLine.equals("")) {
-                // Split line into 4 segments: Time, Departure floor, Direction, Destination floor
+            	
+                // Split line by comma: Time | Departure floor | Direction | Destination floor
                 csvSimInfo = currLine.split(",");
+                
                 if (csvSimInfo.length == 0) {
                     throw new Exception("ERROR: Parsing the simulation file format is not supported");
                 }
-                // Update destinations
                 pushDestinations();
                 return true;
             }
@@ -107,7 +145,11 @@ public class FileLoader {
         return false;
     }
 
-    // Public method to get time of current instruction
+    /**
+     * Get the time of the current instruction and apply appropriate offset
+     * 
+     * @return LocalTime - the time of the instruction
+     */
     @SuppressWarnings("deprecation")
 	public LocalTime getTime() {
     	int[] offsets = findOffsets();
@@ -125,10 +167,15 @@ public class FileLoader {
     		    ZoneId.systemDefault()).toLocalTime();
     }
     
+    /**
+     * Find the offsets of LocalTime with respect to the simulation start time
+     * 
+     * @return int[] - the list of offsets
+     */
     private int[] findOffsets() {
     	int[] offsets = new int[3];
     	String[] simStart = SIMULATION_START_TIME.split(":");
-    	//int offsetHours = 0, offsetMinutes = 0, offsetSeconds = 0;
+    	
     	for (int i = 0; i < simStart.length; i++) {
     		if (i == 0) {
     			int hours = Integer.parseInt(simStart[i]);
@@ -162,7 +209,11 @@ public class FileLoader {
     	return offsets;
     }
 
-    // Public method to get request direction of current instruction
+    /**
+     * Returns the direction of the current instruction
+     * 
+     * @return boolean - the direction of the instruction
+     */
     public boolean isUp() {
     	return csvSimInfo[2].strip().toUpperCase().equals("UP");
     }

@@ -16,7 +16,6 @@ public class TopFloor extends Floor {
 	 * Parameterized constructor 
 	 * 
 	 * @param floorNumber, the floor's number
-	 * @param scheduler, the scheduler associated with the floor
 	 */
 	public TopFloor(int floorNumber) {
 		super(floorNumber);

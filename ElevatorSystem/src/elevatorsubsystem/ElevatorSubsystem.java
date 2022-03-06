@@ -34,14 +34,14 @@ public class ElevatorSubsystem extends Thread {
 	*  2nd elevator = 9001
 	*  3rd elevator = 9002
 	*  etc... */
-	private static final int ELEVSUBSYSTEM_RECEIVE_FROM_ELEV_PORT = 9000;
+	private static final int ELEVSUBSYSTEM_RECEIVE_FROM_ELEV_PORT = 9001;
 
 	/* The Initial port number used for receiving by elevator
 	 *  1st elevator = 10201
 	 *  2nd elevator = 10202
 	 *  3rd elevator = 10203
 	 *  etc... */
-	private static final int ELEV_RECEIVE_PORT = 10200;
+	private static final int ELEV_RECEIVE_PORT = 10201;
 
 	
 	public ElevatorSubsystem(FileLoader fileLoader) throws Exception {
