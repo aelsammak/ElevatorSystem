@@ -10,10 +10,10 @@ import floorsubsystem.FileLoader;
 import scheduler.Scheduler;
 
 /**
- * The ElevatorSubsystem class is reponsible for parsing the file to generate elevator events 
+ * The ElevatorSubsystem class acts as the intermediate between the Elevators and the Scheduler. 
  * 
  * @author Adi El-Sammak
- * @version 1.0
+ * @version 3.0
  *
  */
 public class ElevatorSubsystem extends Thread {
@@ -22,71 +22,68 @@ public class ElevatorSubsystem extends Thread {
 	private int elevatorNumber = 0;
 	private HashMap<Integer, LinkedList<byte[]>> elevatorMsgBuffer;
 	private LinkedList<byte[]> schedulerMsgBuffer;
+	private final InetAddress SCHEDULER_ADDR;
+	private final InetAddress ELEVATOR_ADDR;
 	
 	/* PORTS */
 	/* PLEASE NOTE: THIS PORT MIGHT NEED TO CHANGE DEPENDING IF YOUR LOCAL SYSTEM IS USING THIS PORT NUMBER */
-	private final InetAddress SCHEDULER_ADDR;
-	private final InetAddress ELEVATOR_ADDR;
 	public static final int ELEVSUBSYSTEM_RECEIVE_PORT  = 10003;
 
-	/* The Initial port number used for receiving from elevator
-	*  1st elevator = 9000
-	*  2nd elevator = 9001
-	*  3rd elevator = 9002
-	*  etc... */
+	/* The starting port number used for receiving packets from the elevator */
+	/* The elevatorNumber will be added to this port to offset this port number and give a unique port number */
 	private static final int ELEVSUBSYSTEM_RECEIVE_FROM_ELEV_PORT = 9001;
 
-	/* The Initial port number used for receiving by elevator
-	 *  1st elevator = 10201
-	 *  2nd elevator = 10202
-	 *  3rd elevator = 10203
-	 *  etc... */
+	/* The starting port number used for receiving packets by the elevator */
+	/* The elevatorNumber will be added to this port to offset this port number and give a unique port number */
 	private static final int ELEV_RECEIVE_PORT = 10201;
 
 	
+	/**
+	 * Constructor for the ElevatorSubSystem class.
+	 * 
+	 * @param fileLoader - the file loader
+	 * @throws Exception - invalid setting
+	 */
 	public ElevatorSubsystem(FileLoader fileLoader) throws Exception {
 		
 		if (Common.NUM_ELEVATORS <= 0) {
-			throw new Exception("incompatible setting: numElev should be at least 1.");
+			throw new Exception("Invalid setting: NUM_ELEVATORS should be at least 1.");
 		}
 		
-		// Init inet address
+		/* Initialize InetAddresses */
 		SCHEDULER_ADDR = InetAddress.getLocalHost();
 		ELEVATOR_ADDR = InetAddress.getLocalHost();
 
-		// Init elevators
+		/* Initialize Elevators */
 		elevators = new Thread[Common.NUM_ELEVATORS];
 		for (int i = 0; i < Common.NUM_ELEVATORS; ++i){
 			int elevatorNumber = i + 1;
 			elevators[i] = new Elevator(elevatorNumber, 1, ELEVSUBSYSTEM_RECEIVE_FROM_ELEV_PORT + elevatorNumber, ELEV_RECEIVE_PORT + elevatorNumber, fileLoader);
 		}
 
-		// Init Buffers
+		/* Initialize buffers */
 		elevatorMsgBuffer = new HashMap<Integer, LinkedList<byte[]>>();
 		schedulerMsgBuffer = new LinkedList<byte[]>();
 	}
 	
-	// This thread communicates with scheduler
+	/**
+	 * This method is used to create schedulerCommunicator threads which will be used by the ElevatorSubSystem to communicate with the Schduler.
+	 */
 	private void schedulerCommunicator() {
-		// initialize vars
 		RPC schedulerTransmitter = new RPC(SCHEDULER_ADDR, Scheduler.SCHEDULER_RECEIVE_PORT, ELEVSUBSYSTEM_RECEIVE_PORT);
 		byte[] msg;
 
 		while(true) {
-			// receive message from scheduler:
-			// 1. scheduler ready to receive a new message
-			// 2. scheduler has a message for one of the elevators
 			msg = schedulerTransmitter.receivePacket();
 
 			if(Common.findType(msg) == Common.MESSAGETYPE.ACKNOWLEDGEMENT) {
-				// Received confirmation
+				/* Received Ack */
 				Common.ACKOWLEDGEMENT confirmationType = Common.findAcknowledgement(msg);
 				if(confirmationType == Common.ACKOWLEDGEMENT.CHECK){
-					// Scheduler wants to check message
-					// send anything needs to be sent to scheduler
+					/* Ack is of type CHECK */
 					msg = getMsgFromSchedulerBuffer();
 					if (msg == null){
-						// no message for scheduler, send a confirmation instead
+						/* No msg for Scheduler, send an ACK instead */
 						msg = Common.encodeAckMsgIntoBytes(Common.ACKOWLEDGEMENT.NO_MSG);
 					}
 
@@ -96,41 +93,36 @@ public class ElevatorSubsystem extends Thread {
 				}
 
 			} else {
-				// Received message for elevator
-				// make received message available for elevator
+				/* Msg received for Elevator */
 				addToElevatorBuffer(msg);
 				msg = Common.encodeAckMsgIntoBytes(Common.ACKOWLEDGEMENT.RECEIVED);
 			}
-			// Reply to Scheduler
+			/* Reply to Scheduler */
 			schedulerTransmitter.sendPacket(msg);
 		}
 	}
 
-	// This thread communicates with a single elevator
+	/**
+	 * This method is used to create elevatorCommunicator threads which will be used by the ElevatorSubSystem to communicate with an Elevator.
+	 */
 	private void elevatorCommunicator() {
-		// serialNumber = elevator number
 		int elevatorNumber = incrementElevatorNumber();
-		// Enable buffer for current elevator
 		inititializeElevBuffers(elevatorNumber);
-		// initialize vars
+		
 		RPC elevatorTransmitter = new RPC(ELEVATOR_ADDR, ELEV_RECEIVE_PORT + elevatorNumber, ELEVSUBSYSTEM_RECEIVE_FROM_ELEV_PORT + elevatorNumber);
 		byte[] msg;
 
-		while(true){
-			// receive message from elevator:
-			// 1. elevator ready to receive a new message
-			// 2. elevator have a message for scheduler
+		while(true) {
 			msg = elevatorTransmitter.receivePacket();
 
 			if(Common.findType(msg) == Common.MESSAGETYPE.ACKNOWLEDGEMENT){
-				// Received confirmation
+				/* Received Ack */
 				Common.ACKOWLEDGEMENT confirmationType = Common.findAcknowledgement(msg);
 				if(confirmationType == Common.ACKOWLEDGEMENT.CHECK) {
-					// Elevator wants to check message
-					// send anything needs to be sent to elevator
+					/* Ack is of type CHECK */
 					msg = getMsgFromElevatorBuffer(elevatorNumber);
 					if (msg == null) {
-						// no message for elevator, send a confirmation instead
+						/* No msg for Elevator, send an ACK instead */
 						msg = Common.encodeAckMsgIntoBytes(Common.ACKOWLEDGEMENT.NO_MSG);
 					}
 
@@ -140,34 +132,48 @@ public class ElevatorSubsystem extends Thread {
 				}
 
 			} else {
-				// Elevator wants to send message
-				// make received message available for scheduler
+				/* Msg received for Scheduler */
 				addToSchedulerBuffer(msg);
 				msg = Common.encodeAckMsgIntoBytes(Common.ACKOWLEDGEMENT.RECEIVED);
 
 			}
-			// Reply to Elevator
+			/* Reply to Scheduler */
 			elevatorTransmitter.sendPacket(msg);
 		}
 	}
 
-	// ONLY used when starting new elevator communicators
+	/**
+	 * This method is used to increment the elevator number to be used as an offset when initializing elevator communcator threads
+	 * 
+	 * @return int - the elevator number
+	 */
 	private synchronized int incrementElevatorNumber() {
 		return ++elevatorNumber;
 	}
 
-	// Initialize buffer for elevator with serialNumber
-	// ONLY used when starting new elevator communicators
+	/**
+	 * This method is used to initialize the elevator buffers using the elevatorNumber when initializing elevator communcator threads
+	 * 
+	 * @param elevatorNumber - the elevator number
+	 */
 	private synchronized void inititializeElevBuffers(Integer elevatorNumber) {
 		elevatorMsgBuffer.put(elevatorNumber, new LinkedList<byte[]>());
 	}
 
-	// Add msg to scheduler queue
+	/**
+	 * This method is used add a msg to the scheduler's buffer
+	 * 
+	 * @param msg - the msg to add
+	 */
 	private synchronized void addToSchedulerBuffer(byte[] msg) {
 		schedulerMsgBuffer.add(msg);
 	}
 	
-	// Get msg for scheduler
+	/**
+	 * This method is used to get a msg from the scheduler's buffer
+	 * 
+	 * @return byte[] - the msg
+	 */
 	private synchronized byte[] getMsgFromSchedulerBuffer() {
 		if(schedulerMsgBuffer.isEmpty()) {
 			return null;
@@ -175,22 +181,27 @@ public class ElevatorSubsystem extends Thread {
 		return schedulerMsgBuffer.pop();
 	}
 
-	// Add msg to elevator queue
+	/**
+	 * This method is used to add a msg to the Elevator's buffer
+	 * 
+	 * @param msg - the msg to add
+	 */
 	private synchronized void addToElevatorBuffer(byte[] msg) {
-		// System.out.println("ElevSub holding msg for Elevator...");
-		// message should be a scheduler msg
 		Common.MESSAGETYPE messageType = Common.findType(msg);
 		if(messageType == Common.MESSAGETYPE.SCHEDULER){
-			// decodeScheduler: index 0 corresponds to elev number
 			Integer elevatorNum = Common.decode(msg)[0];
-			// add msg to elevator's queue
 			elevatorMsgBuffer.get(elevatorNum).add(msg);
 		} else {
 			System.out.println("ERROR: Unexpected msg from Scheduler: " + messageType);
 		}
 	}
 	
-	// Get msg for elevator (providing elevator number)
+	/**
+	 * This method is used to a get a msg from the Elevator's buffer
+	 * 
+	 * @param elevatorNumber - the elevator number
+	 * @return byte[] - the msg
+	 */
 	private synchronized byte[] getMsgFromElevatorBuffer(Integer elevatorNumber) {
 		if(elevatorMsgBuffer.get(elevatorNumber).isEmpty()) {
 			return null;
@@ -198,20 +209,23 @@ public class ElevatorSubsystem extends Thread {
 		return elevatorMsgBuffer.get(elevatorNumber).pop();
 	}
 	
+	/**
+	 * Creates scheduler and elevator communicator threads which send and receive.
+	 */
 	public void run() {
-		// init & start scheduler communicator
+		/* Initialize and start the scheduler communicator threads */
 		Thread schedulerCommunicator = new Thread(this::schedulerCommunicator);
 		schedulerCommunicator.start();
 	
-		// init & start elevator communicator(s)
+		/* Initialize and start the elevator communicator threads */
 		Thread[] elevatorCommunicators = new Thread[Common.NUM_ELEVATORS];
 		for(int i = 0; i < Common.NUM_ELEVATORS; ++i){
 			elevatorCommunicators[i] = new Thread(this::elevatorCommunicator);
 			elevatorCommunicators[i].start();
-			// start elevator thread
 			System.out.println("Starting elevator " + (i + 1) + " thread.");
 			elevators[i].start();
 		}
 	}
 
 }
+
