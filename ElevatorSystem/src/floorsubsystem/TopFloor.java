@@ -1,7 +1,5 @@
 package floorsubsystem;
 
-import scheduler.Scheduler;
-
 /**
  * Top floor variant of the Floor class
  * 
@@ -20,8 +18,8 @@ public class TopFloor extends Floor {
 	 * @param floorNumber, the floor's number
 	 * @param scheduler, the scheduler associated with the floor
 	 */
-	public TopFloor(int floorNumber, Scheduler scheduler) {
-		super(floorNumber, scheduler);
+	public TopFloor(int floorNumber) {
+		super(floorNumber);
 		this.downBtn = new FloorButton(floorNumber, false);
 		this.downLamp = new FloorLamp();
 	}

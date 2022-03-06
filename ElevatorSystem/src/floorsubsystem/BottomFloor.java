@@ -19,8 +19,8 @@ public class BottomFloor extends Floor {
 	 * @param floorNumber, the floor's number
 	 * @param scheduler, the scheduler associated with the floor
 	 */
-	public BottomFloor(int floorNumber, Scheduler scheduler) {
-		super(floorNumber, scheduler);
+	public BottomFloor(int floorNumber) {
+		super(floorNumber);
 		this.upBtn = new FloorButton(floorNumber, true);
 		this.upLamp = new FloorLamp();
 	}

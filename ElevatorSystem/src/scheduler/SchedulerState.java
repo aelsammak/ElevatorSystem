@@ -6,11 +6,11 @@ package scheduler;
  * @author Adi El-Sammak
  * @author Kareem El-Hajjar
  * @author Cam Sommerville
- * @version 2.0
+ * @version 3.0
  *
  */
 public enum SchedulerState {
 	
-	HANDLING_EVENTS, IDLE
+	WAITING, SENDING, RECEIVING
 
 }
