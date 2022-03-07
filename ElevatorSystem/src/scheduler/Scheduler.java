@@ -206,7 +206,7 @@ public class Scheduler extends Thread {
 	/**
 	 * Send/Receive from the ElevatorSubsystem
 	 */
-	private void sendReceiveElevtSub() {
+	private void sendReceiveElevSub() {
 		// SEND
 		schedulerState = SchedulerState.SENDING;
 		byte[] msgSend = msgsToElevatorSubSystem.poll();
@@ -239,7 +239,7 @@ public class Scheduler extends Thread {
 			try {
 				sendReceiveFloorSub();
 				Thread.sleep(200);
-				sendReceiveElevtSub();
+				sendReceiveElevSub();
 				Thread.sleep(200);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
