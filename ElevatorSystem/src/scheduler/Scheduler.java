@@ -179,7 +179,7 @@ public class Scheduler extends Thread {
 	 */
 	private void sendReceiveFloorSub() {
 		// SEND
-		schedulerState = SchedulerState.SENDING;
+		schedulerState = SchedulerState.SENDING_FLOORSUB;
 		byte[] msgSend = msgsToFloorSubSystem.poll();
 		if (msgSend != null) {
 			rpcFloor.sendPacket(msgSend);
@@ -193,7 +193,7 @@ public class Scheduler extends Thread {
 		schedulerState = SchedulerState.WAITING;
 
 		// RECEIVE
-		schedulerState = SchedulerState.RECEIVING;
+		schedulerState = SchedulerState.RECEIVING_FLOORSUB;
 		byte[] msgReceive = rpcFloor.receivePacket();
 		if (Common.findType(msgReceive) != Common.MESSAGETYPE.ACKNOWLEDGEMENT) {
 			floorSubAddMsg(msgReceive);
@@ -208,7 +208,7 @@ public class Scheduler extends Thread {
 	 */
 	private void sendReceiveElevSub() {
 		// SEND
-		schedulerState = SchedulerState.SENDING;
+		schedulerState = SchedulerState.SENDING_ELEVSUB;
 		byte[] msgSend = msgsToElevatorSubSystem.poll();
 		if ( msgSend != null) {
 			rpcElevator.sendPacket(msgSend);
@@ -220,7 +220,7 @@ public class Scheduler extends Thread {
 		schedulerState = SchedulerState.WAITING;
 
 		// RECEIVE
-		schedulerState = SchedulerState.RECEIVING;
+		schedulerState = SchedulerState.RECEIVING_ELEVSUB;
 		byte[] msgReceive = rpcElevator.receivePacket();
 		if (Common.findType(msgReceive) != Common.MESSAGETYPE.ACKNOWLEDGEMENT){
 			elevatorSubAddMsg(msgReceive);
