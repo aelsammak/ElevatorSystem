@@ -8,7 +8,7 @@ import java.util.Properties;
  *
  * @author Adi El-Sammak
  * @author Kareem El-Hajjar
- * @version 2.0
+ * @version 3.0
  * 
  */
 public class Config {
@@ -34,6 +34,16 @@ public class Config {
      */
     public String getProperty(String key) {
         return this.props.getProperty(key);
+    }
+    
+    /**
+     * Gets the property from the config file as a int
+     *
+     * @param key the property key
+     * @return The property in int format
+     */
+    public int getIntProperty(String key) {
+    	return Integer.parseInt(getProperty(key));
     }
     
     /**

@@ -1,309 +1,250 @@
 package scheduler;
 
+import java.net.InetAddress;
+import java.time.LocalTime;
 import java.util.*;
 
-import elevatorsubsystem.Elevator;
-import elevatorsubsystem.ElevatorState;
-import floorsubsystem.*;
 import common.Common;
+import common.RPC;
+import elevatorsubsystem.ElevatorSubsystem;
+import floorsubsystem.FloorSubsystem;
 
 /**
  * Scheduler class is responsible for storing and dispatching elevators in response to passenger requests
  * 
  * @author Cam Sommerville
  * @author Erica Morgan
- * @version 1.0
+ * @version 3.0
  * 
  */
 public class Scheduler extends Thread {
 	
-	private List<Elevator> elevators;
-	private List<Floor> floors;
-	private Queue<Event> eventQueue;
-	private long elapsedTime;
+	public static final int SCHEDULER_RECEIVE_PORT = 10004;
+	
+	private final byte[] ackCheckMSG = Common.encodeAckMsgIntoBytes(Common.ACKOWLEDGEMENT.CHECK);
 	private SchedulerState schedulerState;
+	private ElevatorState[] elevatorStates;
+	private FloorState[] floorStates;
+	private Queue<byte[]> msgsToElevatorSubSystem, msgsToFloorSubSystem;
+	private RPC rpcFloor, rpcElevator;
 	
 	/**
-	 * Constructor for the Scheduler.
-	 * Initializes the list of elevators, the event Priority Queue and sets the elapsed time to 0.
-	 */
-	public Scheduler() {
-		elevators = new ArrayList<Elevator>();
-		this.eventQueue = new LinkedList<>();
-		this.elapsedTime = 0;
-		schedulerState = SchedulerState.IDLE;
-	}
-	
-	/**
-	 * Adds an elevator to the list of elevators handled by the scheduler.
+	 * Default constructor
 	 * 
-	 * @param elevator The Elevator to be added to list of elevators.
+	 * @throws Exception 
 	 */
-	public void addElevator(Elevator elevator) {
-		elevators.add(elevator);
-	}
-	
-	/**
-	 *  Removes an elevator from the list of elevators handled by the scheduler.
-	 *  
-	 * @param elevator The Elevator to be removed from the list of elevators.
-	 */
-	public void removeElevator(Elevator elevator) {
-		elevators.remove(elevator);
-	}
-	
-	/**
-	 * Method to determine the next type of event in the event queue and call the corresponding handler function.
-	 */
-	private synchronized void handleEvent() {
-		if (!eventQueue.isEmpty()) {
-			Event currentEvent = eventQueue.peek();
-			schedulerState = SchedulerState.HANDLING_EVENTS;
-			if (currentEvent instanceof FloorEvent) {
-				handleFloorEvent((FloorEvent) currentEvent);
-			} else if (currentEvent instanceof ElevatorEvent) {
-				handleElevatorEvent((ElevatorEvent) currentEvent);
-			}
-			schedulerState = SchedulerState.IDLE;
-		}
-	} 
-	
-	/**
-	 * Method that handles a floor event.
-	 * It calls moveElevatorToPersonsFloor() to moves the elevator to the person's floor to pick them up and removes the floor event from the event queue
-	 * 
-	 * @param floorEvent The floor event created when a passenger pushes a button to call an elevator
-	 */
-	public void handleFloorEvent(FloorEvent floorEvent) {
-		moveElevatorToPersonsFloor(floorEvent.getFloor());
-		eventQueue.poll();
-	}
-	
-	/**
-	 * Method that handles an elevator event.
-	 * It calls moveElevatorToRequestedDestination() to move the elevator to the persons' destination floor and removes the elevator event from the event queue
-	 * 
-	 * @param elevatorEvent The elevator event created when a passenger pushes a destination floor from within elevator
-	 */
-	public void handleElevatorEvent(ElevatorEvent elevatorEvent) {
-		moveElevatorToRequestedDestination(elevatorEvent.getDestinationFloor());
-		eventQueue.poll();
-	}
-	
-	/**
-	 * Method that adds a floor event and corresponding elevator event to the event queue
-	 * 
-	 * @param floorEvent The floor event created when a passenger pushes a button to call an elevator
-	 */
-	public void addEvents(FloorEvent floorEvent) {
-		eventQueue.add(floorEvent);
-		eventQueue.add(elevators.get(0).getElevatorEventQueue().poll());
-	}
-	
-	/**
-	 * Method to move the elevator to the floor of the person requesting an elevator and opens the door.
-	 * calls the elevatorArrivesAtFloor method to handle the lamp and button updates when the elevator arrives.
-	 * 
-	 * @param personsFloor Floor where the person is requesting an elevator.
-	 */
-	public void moveElevatorToPersonsFloor(Floor personsFloor) {
-		while(elevators.get(0).getMotorState() != ElevatorState.IDLE){
-			try {
-				this.wait();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
+	public Scheduler() throws Exception {
+		schedulerState = SchedulerState.WAITING;
+		this.elevatorStates = new ElevatorState[Common.NUM_ELEVATORS];
+		this.floorStates = new FloorState[Common.NUM_FLOORS];
+		this.msgsToElevatorSubSystem = new LinkedList<byte[]>();
+		this.msgsToFloorSubSystem = new LinkedList<byte[]>();
 		
-		System.out.println("[Scheduler @ " + Common.TIMESTAMP_FORMAT.format(new Date(Common.SIMULATION_START_DATE.getTime() + (elapsedTime * 1000))) + "] Elevator was called on floor " + personsFloor.getFloorNumber());
-		
-		if (elevators.get(0).getFloorNumber() != personsFloor.getFloorNumber()) {
-			elevators.get(0).moveToFloor(personsFloor);
-			this.notifyAll();
-		} else {
-			System.out.println("[Scheduler @ " + Common.TIMESTAMP_FORMAT.format(new Date(Common.SIMULATION_START_DATE.getTime() + (elapsedTime * 1000))) + "] Elevator is already on floor " + personsFloor.getFloorNumber());
-			elevators.get(0).openDoors(elevators.get(0).getCurrentFloor(), personsFloor);
-			elevatorArrivesAtFloor(elevators.get(0), personsFloor);
-		}
-		
-	}
-	
-	/**
-	 * Method to move the elevator to the floor requested by the person in the elevator and opens the door.
-	 * calls the elevatorArrivesAtFloor method to handle the lamp and button updates when the elevator arrives.
-	 * 
-	 * @param destinationFloor Floor the passenger has requested to travel to.
-	 */
-	public void moveElevatorToRequestedDestination(Floor destinationFloor) {
-		while(elevators.get(0).getMotorState() != ElevatorState.IDLE){
-			try {
-				this.wait();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-		
-		System.out.println("[Scheduler @ " + Common.TIMESTAMP_FORMAT.format(new Date(Common.SIMULATION_START_DATE.getTime() + (elapsedTime * 1000))) + "] Elevator button " + destinationFloor.getFloorNumber() + " has been pressed");
-		elevators.get(0).getElevatorButtons()[destinationFloor.getFloorNumber() - 1].turnOn();
-		elevators.get(0).getElevatorLamps()[destinationFloor.getFloorNumber() - 1].turnOn();
-		
-		if (elevators.get(0).getFloorNumber() != destinationFloor.getFloorNumber()) {
-			elevators.get(0).moveToFloor(destinationFloor);
-			this.notifyAll();
-		} else {
-			System.out.println("[Scheduler @ " + Common.TIMESTAMP_FORMAT.format(new Date(Common.SIMULATION_START_DATE.getTime() + (elapsedTime * 1000))) + "] Elevator is already on floor " + destinationFloor.getFloorNumber());
-			elevators.get(0).openDoors(elevators.get(0).getCurrentFloor(), destinationFloor);
-			elevatorArrivesAtFloor(elevators.get(0), destinationFloor);
-		}
+		for (int elevNumber = 0; elevNumber < elevatorStates.length; elevNumber++) { elevatorStates[elevNumber] = new ElevatorState(elevNumber + 1); }
+		for (int floorNumber = 0; floorNumber < floorStates.length; floorNumber++) { floorStates[floorNumber]= new FloorState(floorNumber + 1); }
 
+		rpcElevator = new RPC(InetAddress.getLocalHost(), ElevatorSubsystem.ELEVSUBSYSTEM_RECEIVE_PORT, SCHEDULER_RECEIVE_PORT);
+		rpcFloor = new RPC(InetAddress.getLocalHost(), FloorSubsystem.FLOORSUBSYSTEM_RECV_PORT, FloorSubsystem.FLOORSUBSYSTEM_DEST_PORT);
 	}
 	
 	/**
-	 * Turns off all Lamps and Buttons at the floor the elevator has just arrived at.
-	 * Closes the elevator doors so it's ready to service next request.
+	 * Getter for schedulerState attribute
 	 * 
-	 * @param elevator Elevator that just arrived.
-	 * @param currentFloor floor the elevator arrived at.
-	 * @param isElevatorEvent true if ElevatorEvent, else false
-	 */
-	public synchronized void elevatorArrivesAtFloor(Elevator elevator, Floor currentFloor) {
-		if (currentFloor instanceof MiddleFloor) {
-			((MiddleFloor) currentFloor).turnOffUpLamp();
-			((MiddleFloor) currentFloor).turnOffDownLamp();
-			((MiddleFloor) currentFloor).turnOffDownButton();
-			((MiddleFloor) currentFloor).turnOffUpButton();
-		}
-		else if(currentFloor instanceof TopFloor) {
-			((TopFloor) currentFloor).turnOffDownLamp();
-			((TopFloor) currentFloor).turnOffDownButton();
-		}
-		else {
-			((BottomFloor) currentFloor).turnOffUpLamp();
-			((BottomFloor) currentFloor).turnOffUpButton();
-		}
-		elevator.closeDoors();
-	}
-	
-	/**
-	 * Gets the floor object from the list of floors at the given index
-	 * 
-	 * @param floorIndex The index at which the floor is found in the floors list
-	 * @return A floor object from the list of floors at the corresponding index
-	 */
-	public Floor getFloorByIndex(int floorIndex) {
-		return floors.get(floorIndex);
-	}
-	
-	/**
-	 * Method to return the elapsed time since the start of the scheduler thread in seconds
-	 * 
-	 * @return A long for the elapsed time in seconds
-	 */
-	public long getElapsedTime() {
-		return elapsedTime;
-	}
-	
-	/**
-	 * Setter for elaspedTime purely for testing purposes. 
-	 * 
-	 * @param elapsedTime amount of time in seconds to increment by
-	 */
-	public void setElapsedTime(long elapsedTime) {
-		this.elapsedTime = elapsedTime;
-	}
-	
-	/**
-	 * Checks if there are any floor events on each floor and elevator events in each elevator
-	 * 
-	 * @return boolean true if there are any events and false otherwise
-	 */
-    public boolean hasEvents() {
-        for (Elevator elevator : elevators) {
-            if (elevator.hasEvents()) {
-                return true;
-            }
-        }
-    	
-        for (Floor floor : floors) {
-            if (floor.hasEvents()) {
-                return true;
-            }
-        }
-        
-        if (!eventQueue.isEmpty()) {
-        	return true;
-        }
-        
-        return false;
-    }
-    
-    /**
-     * Gets a list of all elevators handled by scheduler
-     * 
-     * @return list of elevators
-     */
-    public List<Elevator> getElevators() {
-    	return elevators;
-    }
-    
-    /**
-     * Gets a list of all floors handled by scheduler
-     * 
-     * @return list of floor objects
-     */
-    public List<Floor> getFloors() {
-    	return floors;
-    }
-    
-    /**
-     * Creates the list of floors handled by the scheduler
-     * 
-     * @param floors A list of floor objects
-     */
-    public void setFloors(List<Floor> floors) {
-    	this.floors = floors;
-    }
-	
-	/**
-	 * Method to be executed when scheduler thread starts. 
-	 * Runs so long as there are floor and elevator events to be handled
-	 * Updates the elapsed time since the start of scheduler thread
-	 */
-    @Override
-	public void run() {
-        Date d = new Date();
-        long startTime = d.getTime();
-        while(hasEvents()) {
-            d = new Date();
-            elapsedTime = (d.getTime() - startTime) / 1000;
-            handleEvent();
-        }
-        System.out.println("SCHEDULER THREAD IS DONE");
-	}
-
-	/**
-	 * Method to get the queue of events containing floor and elevator events
-	 * 
-	 * @return The queue of events
-	 */
-	public Queue<Event> getEventQueue() {
-		return eventQueue;
-	}
-
-	/**
-	 * Getter for the SchdulerState attribute
-	 * 
-	 * @return SchedulerState the scheduler's state
+	 * @return SchedulerState - the schedulerState attribute
 	 */
 	public SchedulerState getSchedulerState() {
 		return schedulerState;
 	}
-	
+
 	/**
-	 * Setter for the SchdulerState attribute, just for testing purposes currently
+	 * Adds a message to the message queue to ElevatorSubsystem
 	 * 
+	 * @param msg - the message to send as a byte array
 	 */
-	public void setSchedulerState(SchedulerState state) {
-		this.schedulerState = state;
+	private void elevatorSubAddMsg (byte[] msg) {
+		int[] message = Common.decode(msg);
+		int elevatorNumber = message[0];
+		int currentFloorNumber = message[1];
+		int motorDir = message[2];
+		int targetFloor = message[3];
+
+		elevatorStates[elevatorNumber - 1].setCurrentFloorNumber(currentFloorNumber);
+		elevatorStates[elevatorNumber - 1].setMotorDir(motorDir);
+		elevatorStates[elevatorNumber - 1].setTargetFloor(targetFloor);
+
+		if (motorDir == 0) {
+
+			if (targetFloor < currentFloorNumber) {
+				byte[] oneMsgToFloorSub = Common.encodeSchedulerMsgIntoBytes(elevatorNumber, currentFloorNumber, false);
+				msgsToFloorSubSystem.offer(oneMsgToFloorSub);
+			}
+
+			if (currentFloorNumber != 1 && (targetFloor < currentFloorNumber || targetFloor == currentFloorNumber)) {
+				byte[] oneMsgToFloorSub = Common.encodeSchedulerMsgIntoBytes(elevatorNumber, currentFloorNumber, false);
+				msgsToFloorSubSystem.offer(oneMsgToFloorSub);
+			}
+			if (currentFloorNumber != floorStates.length && (targetFloor > currentFloorNumber || targetFloor == currentFloorNumber)) {
+				byte[] oneMsgToFloorSub = Common.encodeSchedulerMsgIntoBytes(elevatorNumber, currentFloorNumber, true);
+				msgsToFloorSubSystem.offer(oneMsgToFloorSub);
+			}
+
+		}
+
+        return;
+    }
+
+	/**
+	 * Adds a message to the message queue to FloorSubsystem
+	 * 
+	 * @param msg - the message to send as a byte array
+	 */
+	private void floorSubAddMsg (byte[] msg) {
+		int[] message = Common.decode(msg);
+		int floor = message[0];
+		
+		boolean isUp = false;  
+		if (message[1] == 1) {
+			isUp = true;
+		}
+
+		int closestElevt = findClosestElevator(floor, isUp);
+		byte[] oneMsgToElevtSub = Common.encodeSchedulerMsgIntoBytes(closestElevt, floor, isUp);
+		msgsToElevatorSubSystem.offer(oneMsgToElevtSub);
 	}
+
+	/**
+	 * Finds the closest elevator given current floor number and requested direction
+	 * 
+	 * @param floorNumber - the current floor number
+	 * @param isFloorBtnUp - the direction requested
+	 * @return int - the closest elevator's number
+	 */
+	private int findClosestElevator(int floorNumber, boolean isFloorBtnUp) {
+		int result = 0;
+		int[] distances = new int[Common.NUM_ELEVATORS];
+		
+		// Find every elevator's distance fomr the current floor
+		for (int i = 0; i < Common.NUM_ELEVATORS; i++) {
+			int dis = findDistance(floorNumber, isFloorBtnUp, elevatorStates[i]);
+			distances[i] = dis;
+		}
+	
+		// Find the closest elevator 
+		int index = 0;
+		int min = distances[0];
+		
+		for (int i = 0; i < distances.length; i++) {
+			if (distances[i] < min) {
+				min = distances[i];
+				index = i;
+			}
+		}
+		
+		result = index + 1;
+		return result;
+	}
+
+
+	/**
+	 * Finds the distance of an elevator from the current floor
+	 * 
+	 * @param floor - the current floor number
+	 * @param isUp - the direction the elevator is requested
+	 * @param elevatorState - the current elevator state
+	 * @return int - the distance in floors
+	 */
+	private int findDistance(int floor, boolean isUp, ElevatorState elevatorState) {
+		int distance = 0;
+		int elevCurrPosition = elevatorState.getCurrentFloorNumber();
+		int elevDir = elevatorState.getMotorDir();
+		int elevDest = elevatorState.getTargetFloor();
+	
+		int floorDiff = elevCurrPosition - floor; 
+		if (elevCurrPosition == elevDest) {
+			distance = Math.abs(floorDiff);
+		} else if ((floorDiff > 0 && !isUp && elevDir == -1) || (floorDiff < 0 && isUp && elevDir == 1)) {
+			distance = Math.min(Math.abs(elevCurrPosition - floor), Math.abs(elevCurrPosition - floor));
+		} else { 
+			if (elevDir == -1) { 
+				distance = elevCurrPosition + floor;
+			} else { 
+				distance = (Common.NUM_FLOORS - elevCurrPosition) + (Common.NUM_FLOORS - floor);
+			}
+		}
+		return distance;
+	}
+
+	/**
+	 * Send/Receive from the FloorSubsystem
+	 */
+	private void sendReceiveFloorSub() {
+		// SEND
+		schedulerState = SchedulerState.SENDING_FLOORSUB;
+		byte[] msgSend = msgsToFloorSubSystem.poll();
+		if (msgSend != null) {
+			rpcFloor.sendPacket(msgSend);
+			String sendMsg = Common.decodeSchedulerFloorMsgToString(Common.decode(msgSend));
+			if (sendMsg != "") {
+				System.out.println("SCHEDULER: Method: SEND | To: FloorSubSystem | Msg: " +  sendMsg + " @ time = " + LocalTime.now());
+			}
+		} else {
+			rpcFloor.sendPacket(ackCheckMSG);
+		}
+		schedulerState = SchedulerState.WAITING;
+
+		// RECEIVE
+		schedulerState = SchedulerState.RECEIVING_FLOORSUB;
+		byte[] msgReceive = rpcFloor.receivePacket();
+		if (Common.findType(msgReceive) != Common.MESSAGETYPE.ACKNOWLEDGEMENT) {
+			floorSubAddMsg(msgReceive);
+			System.out.println("SCHEDULER: Method: RECEIVE | From: FloorSubSystem | Msg: " + Common.decodeSchedulerFromFloorMsgToString(Common.decode(msgReceive)) + " @ time = " + LocalTime.now());
+
+		}
+		schedulerState = SchedulerState.WAITING;
+	}
+
+	/**
+	 * Send/Receive from the ElevatorSubsystem
+	 */
+	private void sendReceiveElevSub() {
+		// SEND
+		schedulerState = SchedulerState.SENDING_ELEVSUB;
+		byte[] msgSend = msgsToElevatorSubSystem.poll();
+		if ( msgSend != null) {
+			rpcElevator.sendPacket(msgSend);
+			System.out.println("SCHEDULER: Method: SEND | To: ElevatorSubSystem | Msg: " +  Common.decodeSchedulerElevMsgToString(Common.decode(msgSend)) + " @ time = " + LocalTime.now());
+
+		} else{
+			rpcElevator.sendPacket(ackCheckMSG);
+		}
+		schedulerState = SchedulerState.WAITING;
+
+		// RECEIVE
+		schedulerState = SchedulerState.RECEIVING_ELEVSUB;
+		byte[] msgReceive = rpcElevator.receivePacket();
+		if (Common.findType(msgReceive) != Common.MESSAGETYPE.ACKNOWLEDGEMENT){
+			elevatorSubAddMsg(msgReceive);
+			System.out.println("SCHEDULER: Method: RECEIVE | From: ElevatorSubSystem | Msg: " + Common.decodeSchedulerFromElevMsgToString(Common.decode(msgReceive))  + " @ time = " + LocalTime.now());
+
+		}
+		schedulerState = SchedulerState.WAITING;
+	}
+
+	/**
+	 * Constantly sends and receives messages upon thread start.
+	 */
+	@Override
+	public void run() {
+		while (true) {
+			try {
+				sendReceiveFloorSub();
+				Thread.sleep(200);
+				sendReceiveElevSub();
+				Thread.sleep(200);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
 }

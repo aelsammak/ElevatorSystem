@@ -1,12 +1,7 @@
 package main;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
-import common.Config;
-import elevatorsubsystem.Elevator;
 import elevatorsubsystem.ElevatorSubsystem;
-import floorsubsystem.Floor;
+import floorsubsystem.FileLoader;
 import floorsubsystem.FloorSubsystem;
 import scheduler.Scheduler;
 
@@ -22,30 +17,16 @@ public class Main {
 	 * The main method which intializes and starts the scheduler, floor and elevator threads
 	 * 
 	 * @param args
-	 * @throws IOException 
+	 * @throws Exception 
 	 */
-	public static void main(String[] args) throws IOException {
-		Config config = new Config();
-        Scheduler scheduler = new Scheduler();
-        try {
-            FloorSubsystem.generateFloorsAndEvents(scheduler, config.getProperty("csvFileName"));
-            Elevator elevator = new Elevator(1, scheduler, config);
-            ElevatorSubsystem.generateElevatorEvents(scheduler, config.getProperty("csvFileName"), elevator);
-            scheduler.addElevator(elevator);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        
-        scheduler.start();
-        
-        for(Floor floor : scheduler.getFloors()) {
-        	floor.start();
-        }
-        
-        for(Elevator elevator : scheduler.getElevators()) {
-        	elevator.start();
-        }
-        
+	public static void main(String[] args) throws Exception {
+		FileLoader fileLoader = new FileLoader();
+		Scheduler scheduler = new Scheduler();
+		FloorSubsystem floorSubsystem = new FloorSubsystem(fileLoader);
+		ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem(fileLoader);
+		floorSubsystem.start();
+		elevatorSubsystem.start();
+		scheduler.start();
 	}
 
 }
