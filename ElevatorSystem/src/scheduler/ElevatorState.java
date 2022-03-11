@@ -27,6 +27,20 @@ public class ElevatorState {
 	}
 	
 	/**
+	 * Constructor for testing 
+	 * @param elevatorNumber
+	 * @param currentFloor
+	 * @param dir
+	 * @param targetFloor
+	 */
+	public ElevatorState (int elevatorNumber, int currentFloor, int dir, int targetFloor) {
+		this.elevatorNumber = elevatorNumber;
+		this.currentFloorNumber = currentFloor;
+		this.motorDir = dir;
+		this.targetFloor = targetFloor;
+	}
+	
+	/**
 	 * Getter for the elevatorNumber Attribute
 	 * 
 	 * @return int - elevatorNumber
@@ -87,6 +101,10 @@ public class ElevatorState {
 	 */
 	public void setTargetFloor(int targetFloor) { 
 		this.targetFloor = targetFloor; 
+	}
+	
+	public String toString() {
+		return "Elevator #: " + this.elevatorNumber + " Current Floor: " + this.currentFloorNumber + " Elevator State: " + this.motorDir + " Destination Floor: " + this.targetFloor;
 	}
 
 }
