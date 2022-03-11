@@ -50,36 +50,36 @@ __List of files:__ root of code files ('/ElevatorSystem/src'):
 - /common: 
   - Common.java - class responsible for storing common attributes for other classes within the system to access
   - Config.java - class responsible for loading all the properties necessary for the simulation from a given config file.
+  - RPC.java - class used as helper class for RPC communication.
 - /elevatorsubsystem:
-  - ArrivalSensor.java - arrival logic for elevator reaching a floor
-  - Door.java - door class maintaining an elevator door's state
-  - Elevator.java - overarching class maintaining all logic and functionality for an elevator
-  - ElevatorButton.java - class for state of an individual elevator button
-  - ElevatorLamp.java - class for state of an individual elevator lamps
-  - ElevatorState.java - enum responsible for representing the different states of the Elevator's motor
-  - Motor.java - class for motors operation and state for an elevator
-  - ElevatorSubsystem.java - reponsible for parsing the file to generate elevator events
+  - ArrivalSensor.java - class represents the Elevator's ArrivalSensor
+  - Door.java - class represents the Elevator's doors
+  - Elevator.java - class represents a single Elevator in the ElevatorSubSystem
+  - ElevatorButton.java - class represents the Elevator's buttons
+  - ElevatorLamp.java - class represents the Elevator's lamps
+  - ElevatorSubsystem.java - class acts as the intermediate between the Elevators and the Scheduler
+  - Motor.java - class represents the Elevator's motor
+  - MotorState.java - enum responsible for representing the different states of the Elevator's motor
 - /floorsubsystem:
-  - Floor.java - base class for floor logic 
-  - TopFloor.java - child class of floor for uppermost floor
-  - MiddleFloor.java - child class of floor for middle floors
-  - BottomFloor.java - child class of floor for bottommost floor
-  - FloorButton.java - class for state of a specific floor's button 
-  - FloorLamp.java - class for state of a specific floor's lamp
-  - FloorSubsystem.java - responsible for generating floor events and creating the floors
+  - BottomFloor.java - Bottom floor variant in the Floor class
+  - FileLoader.java - responsible for reading the instructions from the simulation.csv file
+  - Floor.java - class represents a single Floor in the FloorSubSystem. 
+  - FloorButton.java - class represents the floor button and all its functionality
+  - FloorLamp.java - class represents the floor lamp and all its functionality
+  - FloorSubsystem.java - class represents the FloorSubSystem
+  - MiddleFloor.java - Middle floor variant of the Floor class
+  - TopFloor.java - Top floor variant of the Floor class
 - /scheduler:
-  - Scheduler.java - class to handle floor and elevator events and schedule elevators/update floor information to handle requests
-  - Event.java - super class for events that occur within the control system
-    - FloorEvent.java - Handle a request/event made by simulated up/down button pressed on a specific floor
-    - ElevatorEvent.java - Handle a request/event made by simulated floor button pressed from within a specific elevator
-  - FloorEventComparator.java - class to rank floor events based on time left until event, giving higher priority to events with less time left
-  - ElevatorEventComparator.java - class to rank elevator events based on time left until event, giving higher priority to events with more time left
+  - ElevatorState.java - Keeps track of elevator state
+  - FloorState.java - Keeps track of floor state
+  - Scheduler.java - class responsible for storing and dispatching elevators in response to passenger requests
   - SchedulerState.java - enum responsible for representing the different states of the Scheduler
 - /test:
-  - InitialTest.java - contains test cases for testing reading and parsing of data from csvs
-  - ElevatorTest.java - contains test cases for elevator movement between floors for events
-  - TestSuiteRunner.java - responsible for running all tests within the project
-  - StateChangeTest.java - contains test cases specifically focused on testing state changes of elevators as they move up and down floors.
+  - ElevatorTest.java - tests the implemented elevator selection algorithm to see based on a floor request which elevator will be selected to best facilitate the request
+  - ElevatorTestHelper.java - helper class to mimic the work of the schedule on a series of elevators, code taken from the Scheduler class
+  - InitialTest.java - test cases specifically focused on testing reading and parsing of data from csv's to the floor and elevator subsystems.
+  - RPCTest.java - Tests all mechanisms of RPC within the application, from encoding to decoding to a simple send/recieve test
+  - TestSuiteRunner.java - runs all test cases created within the application
 - /main:
   - Main.java - class that is responsible for running simulation and starting all threads
 - /resources:
