@@ -10,7 +10,7 @@ package elevatorsubsystem;
 public class Motor {
 	
 	private final int elevatorNumber;
-	private ElevatorState elevatorState;
+	private MotorState state;
 	
 	/**
 	 * Constructor used to create an instance of the Motor class
@@ -19,7 +19,7 @@ public class Motor {
 	 */
 	public Motor(int elevatorNumber) {
 		this.elevatorNumber = elevatorNumber;
-		this.setElevatorState(ElevatorState.IDLE);
+		this.setState(MotorState.IDLE);
 	}
 
 	/**
@@ -36,8 +36,8 @@ public class Motor {
 	 * 
 	 * @return ElevatorState - the elevator state
 	 */
-	public ElevatorState getElevatorState() {
-		return elevatorState;
+	public MotorState getState() {
+		return state;
 	}
 
 	/**
@@ -45,8 +45,8 @@ public class Motor {
 	 * 
 	 * @param elevatorState - the elevator state
 	 */
-	public void setElevatorState(ElevatorState elevatorState) {
-		this.elevatorState = elevatorState;
+	public void setState(MotorState state){
+		this.state = state;
 	}
 
 }

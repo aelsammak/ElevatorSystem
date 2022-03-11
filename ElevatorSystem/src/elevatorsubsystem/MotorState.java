@@ -7,7 +7,7 @@ package elevatorsubsystem;
  * @version 1.0
  *
  */
-public enum ElevatorState {
+public enum MotorState {
 	
 	MOVING_UP, MOVING_DOWN, IDLE;
 
