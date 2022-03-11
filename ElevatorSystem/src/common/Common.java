@@ -79,7 +79,7 @@ public class Common {
 	 * byte[4] -> currentFloorOfElev, 
 	 * byte[6] -> motorState [1 for UP, -1 for DOWN, 0 for IDLE],
 	 * byte[8] -> targetFloor
-	 * Useless bytes (separator == 127): byte[1], byte[3], byte[5], byte[7], byte[9]
+	 * Useless bytes (separator == 150): byte[1], byte[3], byte[5], byte[7], byte[9]
 	 * 
 	 * @param elevatorNumber - the elevatorNumber
 	 * @param currentFloor - the currentFloor
@@ -90,11 +90,11 @@ public class Common {
 	public static byte[] encodeElevMsgIntoBytes(int elevatorNumber, int currentFloor, MotorState state, int targetFloor) {
 		byte[] msg = new byte[10];
 		msg[0] = MESSAGETYPE.ELEVATOR.value;
-		msg[1] = (byte)127;
+		msg[1] = (byte)150;
 		msg[2] = (byte)elevatorNumber;
-		msg[3] = (byte)127;
+		msg[3] = (byte)150;
 		msg[4] = (byte)currentFloor;
-		msg[5] = (byte)127;
+		msg[5] = (byte)150;
 		if(state == MotorState.MOVING_UP) {
 			msg[6] = (byte)1;
 		} else if (state == MotorState.MOVING_DOWN) {
@@ -102,9 +102,9 @@ public class Common {
 		} else {
 			msg[6] = (byte)0;
 		}
-		msg[7] = (byte)127;
+		msg[7] = (byte)150;
 		msg[8] = (byte)targetFloor;
-		msg[9] = (byte)127;
+		msg[9] = (byte)150;
 		return msg;
 	}
 	
@@ -115,7 +115,7 @@ public class Common {
 	 * byte[0] -> MESSAGETYPE.FLOOR.value (1), 
 	 * byte[2] -> floorNumber, 
 	 * byte[4] -> isFloorBtnUp
-	 * Useless bytes (separator == 127): byte[1], byte[3], byte[5]
+	 * Useless bytes (separator == 150): byte[1], byte[3], byte[5]
 	 * 
 	 * @param floorNumber - the floorNumber
 	 * @param isFloorBtnUp - is the Floor Btn Up
@@ -124,11 +124,11 @@ public class Common {
 	public static byte[] encodeFloorMsgIntoBytes(int floorNumber, boolean isFloorBtnUp) {
 		byte[] msg = new byte[6];
 		msg[0] = MESSAGETYPE.FLOOR.value;
-		msg[1] = (byte)127;
+		msg[1] = (byte)150;
 		msg[2] = (byte)floorNumber;
-		msg[3] = (byte)127;
+		msg[3] = (byte)150;
 		msg[4] = isFloorBtnUp ? (byte) 1 : (byte) 0;
-		msg[5] = (byte)127;
+		msg[5] = (byte)150;
 		return msg;
 	}
 	
@@ -140,7 +140,7 @@ public class Common {
 	 * byte[2] -> elevatorNumber, 
 	 * byte[4] -> sharedFloorNumber, 
 	 * byte[6] -> isFloorBtnUp
-	 * Useless bytes (separator == 127): byte[1], byte[3], byte[5], byte[7]
+	 * Useless bytes (separator == 150): byte[1], byte[3], byte[5], byte[7]
 	 * 
 	 * @param elevatorNumber - the elevatorNumber
 	 * @param sharedFloorNumber - the sharedFloorNumber
@@ -150,13 +150,13 @@ public class Common {
 	public static byte[] encodeSchedulerMsgIntoBytes(int elevatorNumber, int sharedFloorNumber, boolean isFloorBtnUp) {
 		byte[] msg = new byte[8];
 		msg[0] = MESSAGETYPE.SCHEDULER.value;
-		msg[1] = (byte)127;
+		msg[1] = (byte)150;
 		msg[2] = (byte)elevatorNumber;
-		msg[3] = (byte)127;
+		msg[3] = (byte)150;
 		msg[4] = (byte)sharedFloorNumber;
-		msg[5] = (byte)127;
+		msg[5] = (byte)150;
 		msg[6] = isFloorBtnUp ? (byte) 1 : (byte) 0;
-		msg[7] = (byte)127;
+		msg[7] = (byte)150;
 		return msg;
 	}
 	
