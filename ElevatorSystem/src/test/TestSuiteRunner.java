@@ -16,7 +16,7 @@ public class TestSuiteRunner {
 	        String resultsOfFailedTests = "";
 
 	        //Runs all tests in TestSuite
-	        Result result = JUnitCore.runClasses(InitialTest.class, ElevatorTest.class, StateChangeTest.class);
+	        Result result = JUnitCore.runClasses(InitialTest.class, ElevatorTest.class, RPCTest.class);
 
 	        //Collect all failures to print out for feedback
 	        for (Failure failure : result.getFailures()) {
