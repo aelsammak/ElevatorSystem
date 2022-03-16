@@ -24,6 +24,7 @@ public class ElevatorSubsystem extends Thread {
 	private LinkedList<byte[]> schedulerMsgBuffer;
 	private final InetAddress SCHEDULER_ADDR;
 	private final InetAddress ELEVATOR_ADDR;
+	private final FileLoader fileLoader;
 	
 	/* PORTS */
 	/* PLEASE NOTE: THIS PORT MIGHT NEED TO CHANGE DEPENDING IF YOUR LOCAL SYSTEM IS USING THIS PORT NUMBER */
@@ -41,10 +42,9 @@ public class ElevatorSubsystem extends Thread {
 	/**
 	 * Constructor for the ElevatorSubSystem class.
 	 * 
-	 * @param fileLoader - the file loader
 	 * @throws Exception - invalid setting
 	 */
-	public ElevatorSubsystem(FileLoader fileLoader) throws Exception {
+	public ElevatorSubsystem() throws Exception {
 		
 		if (Common.NUM_ELEVATORS <= 0) {
 			throw new Exception("Invalid setting: NUM_ELEVATORS should be at least 1.");
@@ -55,6 +55,7 @@ public class ElevatorSubsystem extends Thread {
 		ELEVATOR_ADDR = InetAddress.getLocalHost();
 
 		/* Initialize Elevators */
+		fileLoader = new FileLoader();
 		elevators = new Thread[Common.NUM_ELEVATORS];
 		for (int i = 0; i < Common.NUM_ELEVATORS; ++i){
 			int elevatorNumber = i + 1;
@@ -96,6 +97,7 @@ public class ElevatorSubsystem extends Thread {
 				/* Msg received for Elevator */
 				addToElevatorBuffer(msg);
 				msg = Common.encodeAckMsgIntoBytes(Common.ACKOWLEDGEMENT.RECEIVED);
+				
 			}
 			/* Reply to Scheduler */
 			schedulerTransmitter.sendPacket(msg);
@@ -135,7 +137,7 @@ public class ElevatorSubsystem extends Thread {
 				/* Msg received for Scheduler */
 				addToSchedulerBuffer(msg);
 				msg = Common.encodeAckMsgIntoBytes(Common.ACKOWLEDGEMENT.RECEIVED);
-
+				
 			}
 			/* Reply to Scheduler */
 			elevatorTransmitter.sendPacket(msg);
@@ -227,5 +229,16 @@ public class ElevatorSubsystem extends Thread {
 		}
 	}
 
+	public static void main(String[] args) {
+        ElevatorSubsystem elevatorSubsystem;
+		try {
+			elevatorSubsystem = new ElevatorSubsystem();
+			elevatorSubsystem.start();
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+        
+    }
 }
 

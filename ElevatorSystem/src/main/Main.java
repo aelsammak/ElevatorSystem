@@ -6,7 +6,7 @@ import floorsubsystem.FloorSubsystem;
 import scheduler.Scheduler;
 
 /**
- * The Main class is reponsible for running the simulation by starting all the threads
+ * The Main class is responsible for running the simulation by starting all the threads
  * 
  * @version 1.0
  * 
@@ -14,16 +14,15 @@ import scheduler.Scheduler;
 public class Main {
 
 	/**
-	 * The main method which intializes and starts the scheduler, floor and elevator threads
+	 * The main method which initializes and starts the scheduler, floor and elevator threads
 	 * 
 	 * @param args
 	 * @throws Exception 
 	 */
 	public static void main(String[] args) throws Exception {
-		FileLoader fileLoader = new FileLoader();
 		Scheduler scheduler = new Scheduler();
-		FloorSubsystem floorSubsystem = new FloorSubsystem(fileLoader);
-		ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem(fileLoader);
+		FloorSubsystem floorSubsystem = new FloorSubsystem();
+		ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
 		floorSubsystem.start();
 		elevatorSubsystem.start();
 		scheduler.start();

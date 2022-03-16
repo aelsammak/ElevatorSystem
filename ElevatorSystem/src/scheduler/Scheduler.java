@@ -247,4 +247,16 @@ public class Scheduler extends Thread {
 		}
 	}
 	
+	public static void main(String[] args) {
+        Scheduler scheduler;
+		try {
+			scheduler = new Scheduler();
+			scheduler.start();
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+        
+    }
+	
 }
