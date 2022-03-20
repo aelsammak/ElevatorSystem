@@ -6,6 +6,7 @@ import java.util.LinkedList;
 
 import common.Common;
 import common.RPC;
+import elevatorsubsystem.ElevatorSubsystem;
 
 /**
  * This class represents the FloorSubSystem.
@@ -28,17 +29,16 @@ public class FloorSubsystem extends Thread {
     /**
      * Parameterized constructor
      * 
-     * @param fileLoader - the instance of the FileLoader class used in this subsystem
      * @throws Exception - Invalid setting
      */
-    public FloorSubsystem(FileLoader fileLoader) throws Exception{
+    public FloorSubsystem() throws Exception{
         if (Common.NUM_FLOORS <= 1) {
             throw new Exception("Invalid setting: NUM_FLOORS should be at least 2.");
         }
 
         floors = new Floor[Common.NUM_FLOORS];
         createFloors(Common.NUM_FLOORS, floors);
-        simulationFile = fileLoader;
+        simulationFile =  new FileLoader();
         
         rpc = new RPC(InetAddress.getLocalHost(), FLOORSUBSYSTEM_DEST_PORT, FLOORSUBSYSTEM_RECV_PORT);
         rpc.setSocketTimeout(2000);
@@ -212,6 +212,18 @@ public class FloorSubsystem extends Thread {
             }
             receive();
         }
+    }
+    
+    public static void main(String[] args) {
+        FloorSubsystem floorSubsystem;
+		try {
+			floorSubsystem = new FloorSubsystem();
+			floorSubsystem.start();
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+        
     }
 
 }

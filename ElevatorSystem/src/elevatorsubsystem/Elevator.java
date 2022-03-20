@@ -30,6 +30,7 @@ public class Elevator extends Thread {
 	private RPC transmitter;
 	private InetAddress addr;
 	private FileLoader fileLoader;
+	private int nextButtonClick;
 	
 	/**
 	 * Constructor for the Elevator class. 
@@ -55,6 +56,14 @@ public class Elevator extends Thread {
 		/* init elevator buttons and lamps */
 		elevatorButtons = new ElevatorButton[Common.NUM_FLOORS];
 		elevatorLamps = new ElevatorLamp[Common.NUM_FLOORS];
+		
+		try {
+			while(fileLoader.hasNextInstruction()) {
+				fileLoader.nextLine();
+			}
+		} catch (Exception e) {
+			
+		}
 		
         for (int i = 0; i < Common.NUM_FLOORS; i++) {
         	elevatorButtons[i] = new ElevatorButton(i);
@@ -116,15 +125,14 @@ public class Elevator extends Thread {
 	 * This method is used to serve the passenger to their destination floor if they are currently in the elevator 
 	 */
 	private void servePassengerToDestFloor() {		
-		if (fileLoader.getDestinations().containsKey(currentFloor)) {
-			if (!fileLoader.getDestinations().get(currentFloor).isEmpty()) {
-				int nextDest = fileLoader.getDestinations().get(currentFloor).get(0);
-				fileLoader.getDestinations().get(currentFloor).remove((Integer) nextDest);
-				System.out.println("\nELEVATOR: Elevator #" + elevatorNumber + " car button " + nextDest + " has been pressed @ time = " + LocalTime.now());
-				elevatorButtons[nextDest - 1].turnOn();
-		        elevatorLamps[nextDest - 1].turnOn();
-				moveToFloor(nextDest);
-			}
+		
+		if (nextButtonClick != -1) {
+			int nextDest = nextButtonClick;
+			nextButtonClick = -1;
+			System.out.println("\nELEVATOR: Elevator #" + elevatorNumber + " car button " + nextDest + " has been pressed @ time = " + LocalTime.now());
+			elevatorButtons[nextDest - 1].turnOn();
+		    elevatorLamps[nextDest - 1].turnOn();
+			moveToFloor(nextDest);
 		}
 	}
 	
@@ -254,6 +262,13 @@ public class Elevator extends Thread {
 		
 		if (Common.findType(receiveMsg) != Common.MESSAGETYPE.ACKNOWLEDGEMENT) {
 			int received[] = Common.decode(receiveMsg);
+			if(fileLoader.getDestinations().containsKey((Integer)received[1])) {
+				nextButtonClick = fileLoader.getDestinations().get((Integer)received[1]).get(0);
+				fileLoader.getDestinations().get((Integer)received[1]).remove(0);
+			} else {
+				nextButtonClick = -1;
+			}
+			
 			moveToFloor(received[1]);
 		}
 	}
