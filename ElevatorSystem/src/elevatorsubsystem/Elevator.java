@@ -1,5 +1,7 @@
 package elevatorsubsystem;
 
+import static java.lang.Math.abs;
+
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.time.LocalTime;
@@ -88,12 +90,12 @@ public class Elevator extends Thread {
 			setMotorState(MotorState.MOVING_UP);
 		} else {
 			setMotorState(MotorState.IDLE);
-			System.out.println("ELEVATOR: Elevator #" + elevatorNumber + " | CurrentFloor: " + currentFloor + " == TargetFloor: " + targetFloor  + " | MotorState: " + getMotorState() + " @ time = " + LocalTime.now());
+			System.out.println("Time: " + LocalTime.now() + " | ELEVATOR: Elevator #" + elevatorNumber + " | CurrentFloor: " + currentFloor + " == TargetFloor: " + targetFloor  + " | MotorState: " + getMotorState());
 			removeDestinationFloor(floorNumber);
 			return;
 		}
 		
-		System.out.println("ELEVATOR: Elevator #" + elevatorNumber + " | CurrentFloor: " + currentFloor + " | MotorState: " + getMotorState() + " | TargetFloor: " + targetFloor + " @ time = " + LocalTime.now());
+		System.out.println("Time: " + LocalTime.now() + " | ELEVATOR: Elevator #" + elevatorNumber + " | CurrentFloor: " + currentFloor + " | MotorState: " + getMotorState() + " | TargetFloor: " + targetFloor);
 		
 		sendAndReceive();
 		
@@ -107,13 +109,13 @@ public class Elevator extends Thread {
 	public void notifyElevatorArrival() {
 		openDoors();
 		setMotorState(MotorState.IDLE);
-		System.out.println("\nELEVATOR: Elevator #" + elevatorNumber + " | ARRIVED at Floor #" + targetFloor + " | MotorState: " + getMotorState() + " @ time = " + LocalTime.now());
+		System.out.println("\nTime: " + LocalTime.now() + " | ELEVATOR: Elevator #" + elevatorNumber + " | ARRIVED at Floor #" + targetFloor + " | MotorState: " + getMotorState());
 		removeDestinationFloor(targetFloor);
 		
 		if (elevatorButtons[currentFloor - 1].isPressed()) {
 			elevatorButtons[currentFloor - 1].turnOff();
 	        elevatorLamps[currentFloor - 1].turnOff();
-	        System.out.println("ELEVATOR: Turning OFF Elevator #" + elevatorNumber + " car button " + currentFloor + " @ time = " + LocalTime.now());
+	        System.out.println("Time: " + LocalTime.now() + " | ELEVATOR: Turning OFF Elevator #" + elevatorNumber + " car button " + currentFloor);
 		}
 		
 		sendAndReceive();
@@ -125,11 +127,10 @@ public class Elevator extends Thread {
 	 * This method is used to serve the passenger to their destination floor if they are currently in the elevator 
 	 */
 	private void servePassengerToDestFloor() {		
-		
 		if (nextButtonClick != -1) {
 			int nextDest = nextButtonClick;
 			nextButtonClick = -1;
-			System.out.println("\nELEVATOR: Elevator #" + elevatorNumber + " car button " + nextDest + " has been pressed @ time = " + LocalTime.now());
+			System.out.println("\nTime: " + LocalTime.now() + " | ELEVATOR: Elevator #" + elevatorNumber + " car button " + nextDest + " has been pressed");
 			elevatorButtons[nextDest - 1].turnOn();
 		    elevatorLamps[nextDest - 1].turnOn();
 			moveToFloor(nextDest);

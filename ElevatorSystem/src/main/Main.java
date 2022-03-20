@@ -1,7 +1,6 @@
 package main;
 
 import elevatorsubsystem.ElevatorSubsystem;
-import floorsubsystem.FileLoader;
 import floorsubsystem.FloorSubsystem;
 import scheduler.Scheduler;
 

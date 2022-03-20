@@ -108,23 +108,23 @@ public class FloorSubsystem extends Thread {
         		if (simulationFile.isUp()) {
         			((MiddleFloor) currentFloor).turnOnUpButton();
         			((MiddleFloor) currentFloor).turnOnUpLamp();
-        			System.out.println("\nFLOOR: Floor #" + currentFloor.getFloorNumber() + " UP button pressed @ time = " + LocalTime.now());
+        			System.out.println("Time: " + LocalTime.now() + " | FLOOR: Floor #" + currentFloor.getFloorNumber() + " UP button pressed \n");
         		} else {
         			((MiddleFloor) currentFloor).turnOnDownLamp();
         			((MiddleFloor) currentFloor).turnOnDownButton();
-        			System.out.println("\nFLOOR: Floor #" + currentFloor.getFloorNumber() + " DOWN button pressed @ time = " + LocalTime.now());
+        			System.out.println("Time: " + LocalTime.now() + " | FLOOR: Floor #" + currentFloor.getFloorNumber() + " DOWN button pressed \n");
         		}
     		} else if(currentFloor instanceof TopFloor) {
     			((TopFloor) currentFloor).turnOnDownLamp();
     			((TopFloor) currentFloor).turnOnDownButton();
-    			System.out.println("\nFLOOR: Floor #" + currentFloor.getFloorNumber() + " DOWN button pressed @ time = " + LocalTime.now());
+    			System.out.println("Time: " + LocalTime.now() + " | FLOOR: Floor #" + currentFloor.getFloorNumber() + " DOWN button pressed \n");
     		} else {
     			((BottomFloor) currentFloor).turnOnUpLamp();
     			((BottomFloor) currentFloor).turnOnUpButton();
-    			System.out.println("\nFLOOR: Floor #" + currentFloor.getFloorNumber() + " UP button pressed @ time = " + LocalTime.now());
+    			System.out.println("Time: " + LocalTime.now() + " | FLOOR: Floor #" + currentFloor.getFloorNumber() + " UP button pressed \n");
     		}
         } else {
-            System.out.println("ERROR: Departure Floor # " + departureFloor + " out of range");
+            System.out.println("Time: " + LocalTime.now() + " | FLOOR: ERROR Departure Floor #" + departureFloor + " out of range");
             return;
         }
 
@@ -162,32 +162,32 @@ public class FloorSubsystem extends Thread {
 	        	Floor currentFloor = floors[arrivalFloor - 1];
 	        	if (currentFloor instanceof MiddleFloor) {
 	        		if (isUpBtn && ((MiddleFloor) currentFloor).getUpLamp().isTurnedOn()) {
-	        			System.out.println("FLOOR: Turning OFF Floor #" + arrivalFloor + " "+ (isUpBtn ? "UP" : "DOWN") + " button & lamp @ time = " + LocalTime.now());
+	        			System.out.println("Time: " + LocalTime.now() + " | FLOOR: Turning OFF Floor #" + arrivalFloor + " "+ (isUpBtn ? "UP" : "DOWN") + " button & lamp \n" );
 	        			((MiddleFloor) currentFloor).turnOffUpButton();
 	        			((MiddleFloor) currentFloor).turnOffUpLamp();
 	        		} else if (((MiddleFloor) currentFloor).getDownLamp().isTurnedOn()) {
-	        			System.out.println("FLOOR: Turning OFF Floor #" + arrivalFloor + " "+ (isUpBtn ? "UP" : "DOWN") + " button & lamp @ time = " + LocalTime.now());
+	        			System.out.println("Time: " + LocalTime.now() + " | FLOOR: Turning OFF Floor #" + arrivalFloor + " "+ (isUpBtn ? "UP" : "DOWN") + " button & lamp \n");
 	        			((MiddleFloor) currentFloor).turnOffDownLamp();
 	        			((MiddleFloor) currentFloor).turnOffDownButton();
 	        		}
 	    		}
 	    		else if(currentFloor instanceof TopFloor) {
 	    			if (((TopFloor) currentFloor).getDownLamp().isTurnedOn()) {
-		    			System.out.println("FLOOR: Turning OFF Floor # " + arrivalFloor + " "+ (isUpBtn ? "UP" : "DOWN") + " button & lamp @ time = " + LocalTime.now());
+		    			System.out.println("Time: " + LocalTime.now() + " | FLOOR: Turning OFF Floor # " + arrivalFloor + " "+ (isUpBtn ? "UP" : "DOWN") + " button & lamp \n");
 		    			((TopFloor) currentFloor).turnOffDownLamp();
 		    			((TopFloor) currentFloor).turnOffDownButton();
 	    			}
 	    		}
 	    		else {
 	    			if (((BottomFloor) currentFloor).getUpLamp().isTurnedOn()) {
-		    			System.out.println("FLOOR: Turning OFF Floor # " + arrivalFloor + " "+ (isUpBtn ? "UP" : "DOWN") + " button & lamp @ time = " + LocalTime.now());
+		    			System.out.println("Time: " + LocalTime.now() + " | FLOOR: Turning OFF Floor # " + arrivalFloor + " "+ (isUpBtn ? "UP" : "DOWN") + " button & lamp \n");
 		    			((BottomFloor) currentFloor).turnOffUpLamp();
 		    			((BottomFloor) currentFloor).turnOffUpButton();
 	    			}
 	    			
 	    		}
 	        } else {
-	            System.out.println("ERROR: Arrival Floor #" + arrivalFloor + " out of range");
+	            System.out.println("Time: " + LocalTime.now() + " | FLOOR: ERROR Arrival Floor #" + arrivalFloor + " out of range");
 	            return;
 	        }
         }

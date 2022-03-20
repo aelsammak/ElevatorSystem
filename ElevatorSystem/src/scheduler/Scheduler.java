@@ -185,7 +185,7 @@ public class Scheduler extends Thread {
 			rpcFloor.sendPacket(msgSend);
 			String sendMsg = Common.decodeSchedulerFloorMsgToString(Common.decode(msgSend));
 			if (sendMsg != "") {
-				System.out.println("SCHEDULER: Method: SEND | To: FloorSubSystem | Msg: " +  sendMsg + " @ time = " + LocalTime.now());
+				System.out.println("Time: " + LocalTime.now() + " | SCHEDULER: Method: SEND | To: FloorSubSystem | Msg: " +  sendMsg);
 			}
 		} else {
 			rpcFloor.sendPacket(ackCheckMSG);
@@ -197,7 +197,7 @@ public class Scheduler extends Thread {
 		byte[] msgReceive = rpcFloor.receivePacket();
 		if (Common.findType(msgReceive) != Common.MESSAGETYPE.ACKNOWLEDGEMENT) {
 			floorSubAddMsg(msgReceive);
-			System.out.println("SCHEDULER: Method: RECEIVE | From: FloorSubSystem | Msg: " + Common.decodeSchedulerFromFloorMsgToString(Common.decode(msgReceive)) + " @ time = " + LocalTime.now());
+			System.out.println("Time: " + LocalTime.now() + " | SCHEDULER: Method: RECEIVE | From: FloorSubSystem | Msg: " + Common.decodeSchedulerFromFloorMsgToString(Common.decode(msgReceive)));
 
 		}
 		schedulerState = SchedulerState.WAITING;
@@ -212,9 +212,8 @@ public class Scheduler extends Thread {
 		byte[] msgSend = msgsToElevatorSubSystem.poll();
 		if ( msgSend != null) {
 			rpcElevator.sendPacket(msgSend);
-			System.out.println("SCHEDULER: Method: SEND | To: ElevatorSubSystem | Msg: " +  Common.decodeSchedulerElevMsgToString(Common.decode(msgSend)) + " @ time = " + LocalTime.now());
-
-		} else{
+			System.out.println("Time: " + LocalTime.now() + " | SCHEDULER: Method: SEND | To: ElevatorSubSystem | Msg: " +  Common.decodeSchedulerElevMsgToString(Common.decode(msgSend)));
+		} else {
 			rpcElevator.sendPacket(ackCheckMSG);
 		}
 		schedulerState = SchedulerState.WAITING;
@@ -224,8 +223,7 @@ public class Scheduler extends Thread {
 		byte[] msgReceive = rpcElevator.receivePacket();
 		if (Common.findType(msgReceive) != Common.MESSAGETYPE.ACKNOWLEDGEMENT){
 			elevatorSubAddMsg(msgReceive);
-			System.out.println("SCHEDULER: Method: RECEIVE | From: ElevatorSubSystem | Msg: " + Common.decodeSchedulerFromElevMsgToString(Common.decode(msgReceive))  + " @ time = " + LocalTime.now());
-
+			System.out.println("Time: " + LocalTime.now() + " | SCHEDULER: Method: RECEIVE | From: ElevatorSubSystem | Msg: " + Common.decodeSchedulerFromElevMsgToString(Common.decode(msgReceive)));
 		}
 		schedulerState = SchedulerState.WAITING;
 	}
