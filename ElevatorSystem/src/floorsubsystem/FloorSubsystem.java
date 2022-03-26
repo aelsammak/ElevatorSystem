@@ -38,7 +38,6 @@ public class FloorSubsystem extends Thread {
 
         floors = new Floor[Common.NUM_FLOORS];
         createFloors(Common.NUM_FLOORS, floors);
-        simulationFile =  new FileLoader();
         
         rpc = new RPC(InetAddress.getLocalHost(), FLOORSUBSYSTEM_DEST_PORT, FLOORSUBSYSTEM_RECV_PORT);
         rpc.setSocketTimeout(2000);
@@ -194,11 +193,34 @@ public class FloorSubsystem extends Thread {
         rpc.sendPacket(msg);
     }
     
+    private void waitToStartSim() {
+    	byte[] message;
+    	while (true) {
+    		try {
+    			message = rpc.receivePacket();
+    		} catch (Exception e) {
+				continue;
+			}
+    		if (message != null) {
+        		if (Common.findType(message) == Common.MESSAGETYPE.START_SIM) {
+        			rpc.sendPacket(Common.encodeAckMsgIntoBytes(Common.ACKOWLEDGEMENT.NO_MSG));
+        			break;
+                }
+    		}
+    	}
+    }
+    
     /**
      * Constantly receive and send messages upon thread start.
      */
     @Override
 	public void run() {
+    	waitToStartSim();
+    	try {
+			simulationFile =  new FileLoader();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
         boolean instructionSent = false;
         while (true) {        	
             if (instructionSent) {

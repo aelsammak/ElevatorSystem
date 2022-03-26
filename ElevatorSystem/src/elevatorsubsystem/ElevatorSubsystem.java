@@ -1,6 +1,7 @@
 package elevatorsubsystem;
 
 import java.net.InetAddress;
+import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -24,7 +25,8 @@ public class ElevatorSubsystem extends Thread {
 	private LinkedList<byte[]> schedulerMsgBuffer;
 	private final InetAddress SCHEDULER_ADDR;
 	private final InetAddress ELEVATOR_ADDR;
-	private final FileLoader fileLoader;
+	private FileLoader fileLoader;
+	private RPC schedulerTransmitter;
 	
 	/* PORTS */
 	/* PLEASE NOTE: THIS PORT MIGHT NEED TO CHANGE DEPENDING IF YOUR LOCAL SYSTEM IS USING THIS PORT NUMBER */
@@ -54,24 +56,24 @@ public class ElevatorSubsystem extends Thread {
 		SCHEDULER_ADDR = InetAddress.getLocalHost();
 		ELEVATOR_ADDR = InetAddress.getLocalHost();
 
-		/* Initialize Elevators */
-		fileLoader = new FileLoader();
-		elevators = new Thread[Common.NUM_ELEVATORS];
-		for (int i = 0; i < Common.NUM_ELEVATORS; ++i){
-			int elevatorNumber = i + 1;
-			elevators[i] = new Elevator(elevatorNumber, 1, ELEVSUBSYSTEM_RECEIVE_FROM_ELEV_PORT + elevatorNumber, ELEV_RECEIVE_PORT + elevatorNumber, fileLoader);
-		}
+//		/* Initialize Elevators */
+//		fileLoader = new FileLoader();
+//		elevators = new Thread[Common.NUM_ELEVATORS];
+//		for (int i = 0; i < Common.NUM_ELEVATORS; ++i) {
+//			int elevatorNumber = i + 1;
+//			elevators[i] = new Elevator(elevatorNumber, 1, ELEVSUBSYSTEM_RECEIVE_FROM_ELEV_PORT + elevatorNumber, ELEV_RECEIVE_PORT + elevatorNumber, fileLoader);
+//		}
 
 		/* Initialize buffers */
 		elevatorMsgBuffer = new HashMap<Integer, LinkedList<byte[]>>();
 		schedulerMsgBuffer = new LinkedList<byte[]>();
+		schedulerTransmitter = new RPC(SCHEDULER_ADDR, Scheduler.SCHEDULER_RECEIVE_PORT, ELEVSUBSYSTEM_RECEIVE_PORT);
 	}
 	
 	/**
 	 * This method is used to create schedulerCommunicator threads which will be used by the ElevatorSubSystem to communicate with the Schduler.
 	 */
 	private void schedulerCommunicator() {
-		RPC schedulerTransmitter = new RPC(SCHEDULER_ADDR, Scheduler.SCHEDULER_RECEIVE_PORT, ELEVSUBSYSTEM_RECEIVE_PORT);
 		byte[] msg;
 
 		while(true) {
@@ -117,7 +119,7 @@ public class ElevatorSubsystem extends Thread {
 		while(true) {
 			msg = elevatorTransmitter.receivePacket();
 
-			if(Common.findType(msg) == Common.MESSAGETYPE.ACKNOWLEDGEMENT){
+			if(Common.findType(msg) == Common.MESSAGETYPE.ACKNOWLEDGEMENT) {
 				/* Received Ack */
 				Common.ACKOWLEDGEMENT confirmationType = Common.findAcknowledgement(msg);
 				if(confirmationType == Common.ACKOWLEDGEMENT.CHECK) {
@@ -211,10 +213,42 @@ public class ElevatorSubsystem extends Thread {
 		return elevatorMsgBuffer.get(elevatorNumber).pop();
 	}
 	
+	private void waitToStartSim() {
+    	byte[] message;
+    	while (true) {
+    		try {
+    			message = schedulerTransmitter.receivePacket();
+    		} catch (Exception e) {
+				continue;
+			}
+    		if (message != null) {
+        		if (Common.findType(message) == Common.MESSAGETYPE.START_SIM) {
+        			schedulerTransmitter.sendPacket(Common.encodeAckMsgIntoBytes(Common.ACKOWLEDGEMENT.NO_MSG));
+        			break;
+                }
+    		}
+    	}
+	}
+	
+	
 	/**
 	 * Creates scheduler and elevator communicator threads which send and receive.
 	 */
 	public void run() {
+		waitToStartSim();
+		
+		/* Initialize Elevators */
+		try {
+			fileLoader = new FileLoader();
+			elevators = new Thread[Common.NUM_ELEVATORS];
+			for (int i = 0; i < Common.NUM_ELEVATORS; ++i) {
+				int elevatorNumber = i + 1;
+				elevators[i] = new Elevator(elevatorNumber, 1, ELEVSUBSYSTEM_RECEIVE_FROM_ELEV_PORT + elevatorNumber, ELEV_RECEIVE_PORT + elevatorNumber, fileLoader);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		/* Initialize and start the scheduler communicator threads */
 		Thread schedulerCommunicator = new Thread(this::schedulerCommunicator);
 		schedulerCommunicator.start();

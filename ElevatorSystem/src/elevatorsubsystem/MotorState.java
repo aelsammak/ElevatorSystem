@@ -9,6 +9,6 @@ package elevatorsubsystem;
  */
 public enum MotorState {
 	
-	MOVING_UP, MOVING_DOWN, IDLE;
+	MOVING_UP, MOVING_DOWN, IDLE, HARD_FAULT, TRANSIENT_FAULT;
 
 }

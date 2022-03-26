@@ -19,11 +19,11 @@ public class Main {
 	 * @throws Exception 
 	 */
 	public static void main(String[] args) throws Exception {
-		Scheduler scheduler = new Scheduler();
 		FloorSubsystem floorSubsystem = new FloorSubsystem();
 		ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
 		floorSubsystem.start();
 		elevatorSubsystem.start();
+		Scheduler scheduler = new Scheduler();
 		scheduler.start();
 	}
 
