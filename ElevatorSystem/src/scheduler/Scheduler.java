@@ -45,6 +45,23 @@ public class Scheduler extends Thread {
 
 		rpcElevator = new RPC(InetAddress.getLocalHost(), ElevatorSubsystem.ELEVSUBSYSTEM_RECEIVE_PORT, SCHEDULER_RECEIVE_PORT);
 		rpcFloor = new RPC(InetAddress.getLocalHost(), FloorSubsystem.FLOORSUBSYSTEM_RECV_PORT, FloorSubsystem.FLOORSUBSYSTEM_DEST_PORT);
+		
+		rpcFloor.sendPacket(Common.encodeStartMsg(true));
+		rpcElevator.sendPacket(Common.encodeStartMsg(true));
+		byte[] msgReceiveFloor, msgReceiveElev;
+		
+		while (true) {
+			msgReceiveFloor = rpcFloor.receivePacket();
+			msgReceiveElev = rpcElevator.receivePacket();
+			if (msgReceiveFloor != null && msgReceiveElev != null) {
+				if (Common.findType(msgReceiveFloor) == Common.MESSAGETYPE.ACKNOWLEDGEMENT && Common.findType(msgReceiveElev) == Common.MESSAGETYPE.ACKNOWLEDGEMENT) {
+					if (Common.findAcknowledgement(msgReceiveFloor) == Common.ACKOWLEDGEMENT.NO_MSG && Common.findAcknowledgement(msgReceiveElev) == Common.ACKOWLEDGEMENT.NO_MSG) {
+						System.out.println("RECEIVED START SIM FROM FLOORSUBSYSTEM & ELEVATORSUSBSYSTEM");
+						break;
+					}
+				}
+			}
+		}
 	}
 	
 	/**
@@ -93,6 +110,28 @@ public class Scheduler extends Thread {
         return;
     }
 
+	private void elevtSubAddErrorMsg(byte[] msg) {
+		int[] message = Common.decode(msg);
+		int elevNum   = message[0];
+		int curFloor  = message[1];
+		int destFloor = message[2];
+		int dirFloor  = message[3];
+		
+		boolean isUp = false;  
+		if (dirFloor == 1) {
+			isUp = true;
+		}
+
+		/* remove the stuck elev from scheduling list */
+		elevatorStates[elevNum-1] = null;
+		if(destFloor == -1) return;
+
+		int closestElevt = findClosestElevator(destFloor, isUp);
+		byte[] oneMsgToElevtSub = Common.encodeSchedulerMsgIntoBytes(closestElevt, destFloor, isUp);
+		msgsToElevatorSubSystem.offer(oneMsgToElevtSub);
+		return;
+	}
+
 	/**
 	 * Adds a message to the message queue to FloorSubsystem
 	 * 
@@ -123,13 +162,17 @@ public class Scheduler extends Thread {
 		int result = 0;
 		int[] distances = new int[Common.NUM_ELEVATORS];
 		
-		// Find every elevator's distance fomr the current floor
+		/* Find every elevator's distance from the current floor */
 		for (int i = 0; i < Common.NUM_ELEVATORS; i++) {
-			int dis = findDistance(floorNumber, isFloorBtnUp, elevatorStates[i]);
-			distances[i] = dis;
+			if (elevatorStates[i] != null) {
+				int dis = findDistance(floorNumber, isFloorBtnUp, elevatorStates[i]);
+				distances[i] = dis;
+			} else{
+				distances[i] = 99999;
+			}
 		}
-	
-		// Find the closest elevator 
+		
+		/* Find the closest elevator */ 
 		int index = 0;
 		int min = distances[0];
 		
@@ -163,7 +206,7 @@ public class Scheduler extends Thread {
 		if (elevCurrPosition == elevDest) {
 			distance = Math.abs(floorDiff);
 		} else if ((floorDiff > 0 && !isUp && elevDir == -1) || (floorDiff < 0 && isUp && elevDir == 1)) {
-			distance = Math.min(Math.abs(elevCurrPosition - floor), Math.abs(elevCurrPosition - floor));
+			distance = Math.min(Math.abs(elevCurrPosition - floor), Math.abs(elevDest - floor));
 		} else { 
 			if (elevDir == -1) { 
 				distance = elevCurrPosition + floor;
@@ -185,7 +228,7 @@ public class Scheduler extends Thread {
 			rpcFloor.sendPacket(msgSend);
 			String sendMsg = Common.decodeSchedulerFloorMsgToString(Common.decode(msgSend));
 			if (sendMsg != "") {
-				System.out.println("SCHEDULER: Method: SEND | To: FloorSubSystem | Msg: " +  sendMsg + " @ time = " + LocalTime.now());
+				System.out.println("Time: " + LocalTime.now() + " | SCHEDULER: Method: SEND | To: FloorSubSystem | Msg: " +  sendMsg);
 			}
 		} else {
 			rpcFloor.sendPacket(ackCheckMSG);
@@ -197,7 +240,7 @@ public class Scheduler extends Thread {
 		byte[] msgReceive = rpcFloor.receivePacket();
 		if (Common.findType(msgReceive) != Common.MESSAGETYPE.ACKNOWLEDGEMENT) {
 			floorSubAddMsg(msgReceive);
-			System.out.println("SCHEDULER: Method: RECEIVE | From: FloorSubSystem | Msg: " + Common.decodeSchedulerFromFloorMsgToString(Common.decode(msgReceive)) + " @ time = " + LocalTime.now());
+			System.out.println("Time: " + LocalTime.now() + " | SCHEDULER: Method: RECEIVE | From: FloorSubSystem | Msg: " + Common.decodeSchedulerFromFloorMsgToString(Common.decode(msgReceive)));
 
 		}
 		schedulerState = SchedulerState.WAITING;
@@ -212,9 +255,8 @@ public class Scheduler extends Thread {
 		byte[] msgSend = msgsToElevatorSubSystem.poll();
 		if ( msgSend != null) {
 			rpcElevator.sendPacket(msgSend);
-			System.out.println("SCHEDULER: Method: SEND | To: ElevatorSubSystem | Msg: " +  Common.decodeSchedulerElevMsgToString(Common.decode(msgSend)) + " @ time = " + LocalTime.now());
-
-		} else{
+			System.out.println("Time: " + LocalTime.now() + " | SCHEDULER: Method: SEND | To: ElevatorSubSystem | Msg: " +  Common.decodeSchedulerElevMsgToString(Common.decode(msgSend)));
+		} else {
 			rpcElevator.sendPacket(ackCheckMSG);
 		}
 		schedulerState = SchedulerState.WAITING;
@@ -222,10 +264,18 @@ public class Scheduler extends Thread {
 		// RECEIVE
 		schedulerState = SchedulerState.RECEIVING_ELEVSUB;
 		byte[] msgReceive = rpcElevator.receivePacket();
-		if (Common.findType(msgReceive) != Common.MESSAGETYPE.ACKNOWLEDGEMENT){
+		if (Common.findType(msgReceive) == Common.MESSAGETYPE.ELEV_ERROR) {
+			System.out.println("Time: " + LocalTime.now() + " | SCHEDULER: Elevator #" + Common.decode(msgReceive)[0] + " IS STUCK");
+			elevtSubAddErrorMsg(msgReceive);
+		} else if (Common.findType(msgReceive) != Common.MESSAGETYPE.ACKNOWLEDGEMENT) {
+			if (elevatorStates[Common.decode(msgReceive)[0] - 1] == null) {
+				System.out.println("Time: " + LocalTime.now() + " | SCHEDULER: Elevator #" + Common.decode(msgReceive)[0] + " IS UNSTUCK");
+				elevatorStates[Common.decode(msgReceive)[0] - 1] = new ElevatorState(Common.decode(msgReceive)[0], Common.decode(msgReceive)[1], Common.decode(msgReceive)[2], Common.decode(msgReceive)[3]);
+			}
+			if (Common.decode(msgReceive)[0] == Common.decode(msgReceive)[3]) {
+				System.out.println("Time: " + LocalTime.now() + " | SCHEDULER: Method: RECEIVE | From: ElevatorSubSystem | Msg: " + Common.decodeSchedulerFromElevMsgToString(Common.decode(msgReceive)));
+			}
 			elevatorSubAddMsg(msgReceive);
-			System.out.println("SCHEDULER: Method: RECEIVE | From: ElevatorSubSystem | Msg: " + Common.decodeSchedulerFromElevMsgToString(Common.decode(msgReceive))  + " @ time = " + LocalTime.now());
-
 		}
 		schedulerState = SchedulerState.WAITING;
 	}
@@ -246,5 +296,17 @@ public class Scheduler extends Thread {
 			}
 		}
 	}
+	
+	public static void main(String[] args) {
+        Scheduler scheduler;
+		try {
+			scheduler = new Scheduler();
+			scheduler.start();
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+        
+    }
 	
 }

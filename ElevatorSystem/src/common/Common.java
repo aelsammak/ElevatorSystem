@@ -2,6 +2,8 @@ package common;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+
+import common.Common.ELEV_ERROR;
 import elevatorsubsystem.MotorState;
 
 /**
@@ -32,7 +34,9 @@ public class Common {
 		ELEVATOR		((byte) 0),
 		FLOOR			((byte) 1),
 		SCHEDULER		((byte) 2),
-		ACKNOWLEDGEMENT	((byte) 3);
+		ACKNOWLEDGEMENT	((byte) 3),
+		ELEV_ERROR		((byte) 4),
+		START_SIM		((byte) 5);
 
 		private final byte value;
 		
@@ -68,6 +72,96 @@ public class Common {
 			}
 			return INVALID;
 		}
+	}
+	
+	/* Elevator error reporting messages types */
+	public enum ELEV_ERROR {
+		INVALID			((byte) -1, "INVALID"),
+		UNKNOWN			((byte) 0, "UNKNOWN"),
+		STUCK_BETWEEN	((byte) 1, "STUCKBETWEEN"),
+		DOOR_OPEN		((byte) 2, "DOORSTUCKOPEN"),
+		DOOR_CLOSE		((byte) 3, "DOORSTUCKCLOSED");
+
+		// Enum initializer
+		private final byte value;
+		private final String name;
+		private byte elevNum;
+		private byte currFloor;
+		private byte destFloor;
+		private byte dirFloor;
+
+		private ELEV_ERROR(byte b, String n){
+			this.value = b;
+			this.name = n;
+		}
+
+		private byte[] encode() {
+			byte[] msg = new byte[6];
+			msg[0] = MESSAGETYPE.ELEV_ERROR.value;
+			msg[1] = value;
+			msg[2] = elevNum;
+			msg[3] = currFloor;
+			msg[4] = destFloor;
+			msg[5] = dirFloor;
+			return msg;
+		}
+
+		// Determine which type the byte corresponds to
+		public static ELEV_ERROR findError(byte b){
+			for (ELEV_ERROR err: ELEV_ERROR.values()){
+				if(err.value == b) return err;
+			}
+			return INVALID;
+		}
+
+		// Determine which type the byte corresponds to & init details.
+		public static ELEV_ERROR decode(byte[] msg){
+			ELEV_ERROR elevError = findError(msg[1]);
+			elevError.elevNum 				= msg[2];
+			elevError.currFloor 			= msg[3];
+			elevError.destFloor 			= msg[4];
+			elevError.dirFloor				= msg[5];
+			return elevError;
+		}
+
+		// Decode the elev error msg to int[]
+		// {elevNum, curFloor, destFloor, dirFloor}
+		private static int[] decodeElevErrorMsgFromBytes(byte[] msg) {
+			int[] result = new int[4];
+			result[0] 		= msg[2];
+			result[1] 		= msg[3];
+			result[2] 		= msg[4];
+			result[3]		= msg[5];
+			return result;
+		}
+		
+	}
+	
+	public static byte[] encodeStartMsg(boolean startSim) {
+		byte[] msg = new byte[3];
+		msg[0] = MESSAGETYPE.START_SIM.value;
+		msg[1] = (byte)150;
+		msg[2] = (byte)(startSim ? 1 : 0);
+		return msg;
+	}
+	
+	private static int[] decodeStartMsgFromBytes(byte[] msg) {
+		int[] decodedMsg = new int[2];
+		decodedMsg[0] = (int)msg[0];
+		decodedMsg[1] = (int)msg[1];
+		return decodedMsg;
+	}
+	
+	/**
+	 * encode elevator error message into byte[]
+	 */
+	public static byte[] encodeElevError(ELEV_ERROR err, int elevNum, int curFloor, int destFloor, boolean dirFloor) {
+		ELEV_ERROR elevError = err;
+		elevError.elevNum = (byte) elevNum;
+		elevError.currFloor = (byte) curFloor;
+		elevError.destFloor = (byte) destFloor;
+		elevError.dirFloor = (byte) (dirFloor ? 1 : 0);
+		return err.encode();
 	}
 
 	/**
@@ -202,6 +296,10 @@ public class Common {
 				return decodeSchedulerMsgFromBytes(msg);
 			case ACKNOWLEDGEMENT:
 				return decodeAckMsgFromBytes(msg);
+			case ELEV_ERROR:
+				return ELEV_ERROR.decodeElevErrorMsgFromBytes(msg);
+			case START_SIM:
+				return decodeStartMsgFromBytes(msg);
 			default:
 				return null;
 		}
@@ -345,8 +443,18 @@ public class Common {
 	 * @param msg - byte[] of ack message
 	 * @return ACKOWLEDGEMENT - the ack that this message belongs to
 	 */
-	public static ACKOWLEDGEMENT findAcknowledgement(byte[] msg){
+	public static ACKOWLEDGEMENT findAcknowledgement(byte[] msg) {
 		return ACKOWLEDGEMENT.findAcknowledgement(msg[1]);
+	}
+	
+	/**
+	 * This method is used to find the type of Elevator Error
+	 *
+	 * @param msg - byte[] of elev error message
+	 * @return ELEV_ERROR - the elev error that this message belongs to
+	 */
+	public static ELEV_ERROR findElevError(byte[] msg) {
+		return ELEV_ERROR.decode(msg);
 	}
 
 }

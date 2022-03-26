@@ -4,9 +4,12 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.NoSuchElementException;
 
 import common.Common;
 import common.RPC;
+import common.Common.ELEV_ERROR;
 import floorsubsystem.FileLoader;
 
 /**
@@ -30,6 +33,9 @@ public class Elevator extends Thread {
 	private RPC transmitter;
 	private InetAddress addr;
 	private FileLoader fileLoader;
+	private int nextButtonClick;
+	private StuckSensor stuckSensor;
+	private boolean isStuck;
 	
 	/**
 	 * Constructor for the Elevator class. 
@@ -47,14 +53,25 @@ public class Elevator extends Thread {
 		motor = new Motor(elevatorNumber);
 		door = new Door(elevatorNumber);
 		arrivalSensor = new ArrivalSensor(this);
+		stuckSensor = new StuckSensor(this);
+		isStuck = false;
 		destinationFloors = new ArrayList<Integer>();
 		this.currentFloor = currentFloor;
 		this.addr = InetAddress.getLocalHost();
 		transmitter = new RPC(addr, destPort, recPort);
+		targetFloor = currentFloor;
 		
 		/* init elevator buttons and lamps */
 		elevatorButtons = new ElevatorButton[Common.NUM_FLOORS];
 		elevatorLamps = new ElevatorLamp[Common.NUM_FLOORS];
+		
+		try {
+			while(fileLoader.hasNextInstruction()) {
+				fileLoader.nextLine();
+			}
+		} catch (Exception e) {
+			
+		}
 		
         for (int i = 0; i < Common.NUM_FLOORS; i++) {
         	elevatorButtons[i] = new ElevatorButton(i);
@@ -67,28 +84,30 @@ public class Elevator extends Thread {
 	 * 
 	 * @param floorNumber - the floor the elevator should move to
 	 */
-	public void moveToFloor(int floorNumber) {
+	public void moveToFloor() {
 		
-		targetFloor = floorNumber;
-		destinationFloors.add((Integer)floorNumber);
+		targetFloor = getFloor();
 
 		/* if statements to checks the location of the destination floor relative to the current floor */
-		if(currentFloor > floorNumber) {
-			setMotorState(MotorState.MOVING_DOWN);
-		} else if (currentFloor < floorNumber) {
-			setMotorState(MotorState.MOVING_UP);
-		} else {
-			setMotorState(MotorState.IDLE);
-			System.out.println("ELEVATOR: Elevator #" + elevatorNumber + " | CurrentFloor: " + currentFloor + " == TargetFloor: " + targetFloor  + " | MotorState: " + getMotorState() + " @ time = " + LocalTime.now());
-			removeDestinationFloor(floorNumber);
-			return;
+		if (targetFloor != -1 && getMotorState() == MotorState.IDLE) {
+			if(currentFloor > targetFloor) {
+				setMotorState(MotorState.MOVING_DOWN);
+			} else if (currentFloor < targetFloor) {
+				setMotorState(MotorState.MOVING_UP);
+			} else {
+				setMotorState(MotorState.IDLE);
+				System.out.println("Time: " + LocalTime.now() + " | ELEVATOR: Elevator #" + elevatorNumber + " | CurrentFloor: " + currentFloor + " == TargetFloor: " + targetFloor  + " | MotorState: " + getMotorState());
+				notifyElevatorArrival();
+				return;
+			}
+			
+			System.out.println("Time: " + LocalTime.now() + " | ELEVATOR: Elevator #" + elevatorNumber + " | CurrentFloor: " + currentFloor + " | MotorState: " + getMotorState() + " | TargetFloor: " + targetFloor);
+			
+			sendAndReceive();
+			
+			arrivalSensor.simulateElevatorMovement(currentFloor, targetFloor);
 		}
 		
-		System.out.println("ELEVATOR: Elevator #" + elevatorNumber + " | CurrentFloor: " + currentFloor + " | MotorState: " + getMotorState() + " | TargetFloor: " + targetFloor + " @ time = " + LocalTime.now());
-		
-		sendAndReceive();
-		
-		arrivalSensor.simulateElevatorMovement(currentFloor, targetFloor);
 	}
 
 	/**
@@ -98,33 +117,42 @@ public class Elevator extends Thread {
 	public void notifyElevatorArrival() {
 		openDoors();
 		setMotorState(MotorState.IDLE);
-		System.out.println("\nELEVATOR: Elevator #" + elevatorNumber + " | ARRIVED at Floor #" + targetFloor + " | MotorState: " + getMotorState() + " @ time = " + LocalTime.now());
+		System.out.println("\nTime: " + LocalTime.now() + " | ELEVATOR: Elevator #" + elevatorNumber + " | ARRIVED at Floor #" + targetFloor + " | MotorState: " + getMotorState());
 		removeDestinationFloor(targetFloor);
-		
-		if (elevatorButtons[currentFloor - 1].isPressed()) {
-			elevatorButtons[currentFloor - 1].turnOff();
-	        elevatorLamps[currentFloor - 1].turnOff();
-	        System.out.println("ELEVATOR: Turning OFF Elevator #" + elevatorNumber + " car button " + currentFloor + " @ time = " + LocalTime.now());
-		}
 		
 		sendAndReceive();
 		closeDoors();
+		if (elevatorButtons[currentFloor - 1].isPressed()) {
+			elevatorButtons[currentFloor - 1].turnOff();
+	        elevatorLamps[currentFloor - 1].turnOff();
+	        System.out.println("Time: " + LocalTime.now() + " | ELEVATOR: Turning OFF Elevator #" + elevatorNumber + " car button " + currentFloor);
+		}
 		servePassengerToDestFloor();
+	}
+	
+	private void removeDestinationFloor(int targetFloor2) {
+		destinationFloors.remove((Integer)targetFloor2);		
+	}
+
+	public void notifyElevatorUnStuck() {
+		isStuck = false;
+		setMotorState(MotorState.IDLE);
+		System.out.println("Time: " + LocalTime.now() + " | ELEVATOR: Elevator #" + elevatorNumber + " is UNSTUCK");
+		sendAndReceive();
 	}
 	
 	/**
 	 * This method is used to serve the passenger to their destination floor if they are currently in the elevator 
 	 */
 	private void servePassengerToDestFloor() {		
-		if (fileLoader.getDestinations().containsKey(currentFloor)) {
-			if (!fileLoader.getDestinations().get(currentFloor).isEmpty()) {
-				int nextDest = fileLoader.getDestinations().get(currentFloor).get(0);
-				fileLoader.getDestinations().get(currentFloor).remove((Integer) nextDest);
-				System.out.println("\nELEVATOR: Elevator #" + elevatorNumber + " car button " + nextDest + " has been pressed @ time = " + LocalTime.now());
-				elevatorButtons[nextDest - 1].turnOn();
-		        elevatorLamps[nextDest - 1].turnOn();
-				moveToFloor(nextDest);
-			}
+		if (nextButtonClick != -1) {
+			int nextDest = nextButtonClick;
+			nextButtonClick = -1;
+			System.out.println("\nTime: " + LocalTime.now() + " | ELEVATOR: Elevator #" + elevatorNumber + " car button " + nextDest + " has been pressed");
+			elevatorButtons[nextDest - 1].turnOn();
+		    elevatorLamps[nextDest - 1].turnOn();
+		    destinationFloors.add((Integer)nextDest);
+		    moveToFloor();
 		}
 	}
 	
@@ -138,15 +166,92 @@ public class Elevator extends Thread {
 		} else if (getMotorState() == MotorState.MOVING_DOWN) {
 			currentFloor--;
 		}
+		sendAndReceive();
 	}
 	
-	/**
-	 * This method is used to remove a floor from the Elevator's list of destination floors
-	 * 
-	 * @param floorNumber - the floor number to be removed
-	 */
-	public void removeDestinationFloor(int floorNumber) {
-		destinationFloors.remove((Integer)floorNumber);
+	public boolean handleError() {
+		// check if fault has not occurred, if it hasnt then return false, else coninue till end and return true
+		if (fileLoader.getFaults().containsKey(elevatorNumber)) {
+			if (LocalTime.now().isAfter(fileLoader.getFaults().get(elevatorNumber))) {
+				boolean isHardFault = false;
+				isStuck = true;
+				fileLoader.getFaults().remove(elevatorNumber);
+				if (getFloor() != -1 && !this.door.isOpen()) {
+					isHardFault = true;
+				}
+				Common.ELEV_ERROR errorType;
+				MotorState motorState;
+				if (isHardFault) {
+					errorType = ELEV_ERROR.STUCK_BETWEEN;
+					motorState = MotorState.HARD_FAULT;
+					System.out.println("/************HARD FAULT************\\");
+					System.out.println("Time: " + LocalTime.now() + " | ELEVATOR: Elevator #" + elevatorNumber 
+							+ " is stuck between Floor #" + currentFloor + " and Floor #" 
+							+ (getMotorState() == MotorState.MOVING_UP ? currentFloor + 1 : currentFloor - 1));
+					System.out.println("/**********************************\\");
+				} else {
+					errorType = ELEV_ERROR.DOOR_CLOSE;
+					motorState = MotorState.TRANSIENT_FAULT;
+					System.out.println("/************TRANSIENT FAULT************\\");
+					System.out.println("Time: " + LocalTime.now() + " | ELEVATOR: Elevator #" + elevatorNumber 
+							+ " is stuck door " + (this.door.isOpen() ?  "open" : "closed") + " at Floor #" + currentFloor);
+					System.out.println("/**********************************\\");
+				}
+				
+				// while loop through all destinations and send to scheduler until empty
+				byte[] msg;
+				if (this.door.isOpen() && !elevatorButtons[currentFloor - 1].isPressed()) {
+					fileLoader.getDestinations().get(targetFloor).add(nextButtonClick);
+					System.out.println("Removing floors...");
+					msg = Common.encodeElevError(errorType, elevatorNumber, currentFloor, targetFloor, (getMotorState() == MotorState.MOVING_UP ? true : false));
+					transmitter.sendPacket(msg);
+					nextButtonClick = -1;
+				} else if (getFloor() == -1) {
+					System.out.println("No Floors to reassign...");
+					msg = Common.encodeElevError(errorType, elevatorNumber, currentFloor, -1, (getMotorState() == MotorState.MOVING_UP ? true : false));
+					transmitter.sendPacket(msg);
+				}
+				
+				while(getFloor() != -1) {
+					if (elevatorButtons[getFloor() - 1].isPressed()) {
+						removeDestinationFloor(getFloor());
+						elevatorButtons[currentFloor - 1].turnOff();
+				        elevatorLamps[currentFloor - 1].turnOff();
+						continue;
+					}
+					fileLoader.getDestinations().get(getFloor()).add(nextButtonClick);
+					System.out.println("Removing floors...");
+					msg = Common.encodeElevError(errorType, elevatorNumber, currentFloor, getFloor(), (getMotorState() == MotorState.MOVING_UP ? true : false));
+					transmitter.sendPacket(msg);
+					removeDestinationFloor(getFloor());
+				}
+				
+				setMotorState(motorState);
+				
+				if (isHardFault) {
+					Thread.currentThread().interrupt();
+				}
+				
+				return true;
+			}
+		}
+		
+		return false;
+		
+	}
+	
+	public Integer getFloor() {
+		int target = -1;
+		try {
+			if(getMotorState() == MotorState.MOVING_UP) {
+				target = Collections.min(destinationFloors);
+			} else {
+				target = Collections.max(destinationFloors);
+			}
+			return target;
+		} catch (NoSuchElementException e) {
+			return -1;
+		}
 	}
 	
 	/**
@@ -177,9 +282,30 @@ public class Elevator extends Thread {
 	/**
 	 * This method is responsible for closing the Elevator doors while taking load/unload times into account
 	 */
-	public void closeDoors() {
+	public synchronized void closeDoors() {
+		Long loadTime = Common.config.getLongProperty("LOAD_UNLOAD_TIME");
+		
+		float loadTimeFloat = ((float) loadTime / 10);
+		loadTime = ((Float) loadTimeFloat).longValue();
+		
+		System.out.println("LOAD TIME: " + loadTime);
+    	
+        try {
+        	for (int i = 0; i < 10; i++) {
+        		wait(loadTime);
+        		handleError();
+        		if (isStuck) {
+        			stuckSensor.simulateStuck();
+        		}
+        	}
+        } catch (InterruptedException e) {
+        	System.out.println("In method closeDoors()");
+            e.printStackTrace();
+        }
+        
         this.door.close();
     }
+
 	
 	/**
 	 * Getter for the Motor's ElevatorState attribute
@@ -207,7 +333,6 @@ public class Elevator extends Thread {
 	public int getElevatorNumber() {
 		return elevatorNumber;
 	}
-
 
 	/**
 	 * Getter for array of elevatorButtons
@@ -254,7 +379,20 @@ public class Elevator extends Thread {
 		
 		if (Common.findType(receiveMsg) != Common.MESSAGETYPE.ACKNOWLEDGEMENT) {
 			int received[] = Common.decode(receiveMsg);
-			moveToFloor(received[1]);
+			if (!isStuck) {
+				if (!handleError()) {
+					if (fileLoader.getDestinations().containsKey((Integer)received[1])) {
+						nextButtonClick = fileLoader.getDestinations().get((Integer)received[1]).get(0);
+						fileLoader.getDestinations().get((Integer)received[1]).remove(0);
+					} else {
+						nextButtonClick = -1;
+					}
+					destinationFloors.add((Integer) received[1]);
+					moveToFloor();
+				}	
+			} else {
+				stuckSensor.simulateStuck();
+			}
 		}
 	}
 
@@ -263,12 +401,16 @@ public class Elevator extends Thread {
 	 */
 	@Override
 	public void run() {
-		while (true) {
+		while (getMotorState() != MotorState.HARD_FAULT) {
 			receive();
+			handleError();
+			if (isStuck) {
+				stuckSensor.simulateStuck();
+			}
 			try {
 				Thread.sleep(200);
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
 		}
 	}

@@ -2,7 +2,10 @@ package elevatorsubsystem;
 
 import static java.lang.Math.abs;
 
+import java.util.Timer;
+
 import common.Common;
+import timer.TimerController;
 
 /**
  * The ArrivalSensor class represents the Elevator's ArrivalSensor
@@ -35,7 +38,10 @@ public class ArrivalSensor {
     		for (int i = 0; i < abs(destinationFloor - currentFloor); i++) {
     			wait(Common.config.getLongProperty("TIME_BETWEEN_ONE_FLOOR"));
     			elevator.updatePosition();
-    		}
+    			if (elevator.handleError()) {
+					return; 
+    			}
+    		}	
     		elevator.notifyElevatorArrival();
 		} catch (Exception e) {
 			System.out.println("In method simulateElevatorMovement()");

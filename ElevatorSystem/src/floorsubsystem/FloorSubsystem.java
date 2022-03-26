@@ -6,6 +6,7 @@ import java.util.LinkedList;
 
 import common.Common;
 import common.RPC;
+import elevatorsubsystem.ElevatorSubsystem;
 
 /**
  * This class represents the FloorSubSystem.
@@ -28,17 +29,15 @@ public class FloorSubsystem extends Thread {
     /**
      * Parameterized constructor
      * 
-     * @param fileLoader - the instance of the FileLoader class used in this subsystem
      * @throws Exception - Invalid setting
      */
-    public FloorSubsystem(FileLoader fileLoader) throws Exception{
+    public FloorSubsystem() throws Exception{
         if (Common.NUM_FLOORS <= 1) {
             throw new Exception("Invalid setting: NUM_FLOORS should be at least 2.");
         }
 
         floors = new Floor[Common.NUM_FLOORS];
         createFloors(Common.NUM_FLOORS, floors);
-        simulationFile = fileLoader;
         
         rpc = new RPC(InetAddress.getLocalHost(), FLOORSUBSYSTEM_DEST_PORT, FLOORSUBSYSTEM_RECV_PORT);
         rpc.setSocketTimeout(2000);
@@ -108,23 +107,23 @@ public class FloorSubsystem extends Thread {
         		if (simulationFile.isUp()) {
         			((MiddleFloor) currentFloor).turnOnUpButton();
         			((MiddleFloor) currentFloor).turnOnUpLamp();
-        			System.out.println("\nFLOOR: Floor #" + currentFloor.getFloorNumber() + " UP button pressed @ time = " + LocalTime.now());
+        			System.out.println("Time: " + LocalTime.now() + " | FLOOR: Floor #" + currentFloor.getFloorNumber() + " UP button pressed \n");
         		} else {
         			((MiddleFloor) currentFloor).turnOnDownLamp();
         			((MiddleFloor) currentFloor).turnOnDownButton();
-        			System.out.println("\nFLOOR: Floor #" + currentFloor.getFloorNumber() + " DOWN button pressed @ time = " + LocalTime.now());
+        			System.out.println("Time: " + LocalTime.now() + " | FLOOR: Floor #" + currentFloor.getFloorNumber() + " DOWN button pressed \n");
         		}
     		} else if(currentFloor instanceof TopFloor) {
     			((TopFloor) currentFloor).turnOnDownLamp();
     			((TopFloor) currentFloor).turnOnDownButton();
-    			System.out.println("\nFLOOR: Floor #" + currentFloor.getFloorNumber() + " DOWN button pressed @ time = " + LocalTime.now());
+    			System.out.println("Time: " + LocalTime.now() + " | FLOOR: Floor #" + currentFloor.getFloorNumber() + " DOWN button pressed \n");
     		} else {
     			((BottomFloor) currentFloor).turnOnUpLamp();
     			((BottomFloor) currentFloor).turnOnUpButton();
-    			System.out.println("\nFLOOR: Floor #" + currentFloor.getFloorNumber() + " UP button pressed @ time = " + LocalTime.now());
+    			System.out.println("Time: " + LocalTime.now() + " | FLOOR: Floor #" + currentFloor.getFloorNumber() + " UP button pressed \n");
     		}
         } else {
-            System.out.println("ERROR: Departure Floor # " + departureFloor + " out of range");
+            System.out.println("Time: " + LocalTime.now() + " | FLOOR: ERROR Departure Floor #" + departureFloor + " out of range");
             return;
         }
 
@@ -162,36 +161,53 @@ public class FloorSubsystem extends Thread {
 	        	Floor currentFloor = floors[arrivalFloor - 1];
 	        	if (currentFloor instanceof MiddleFloor) {
 	        		if (isUpBtn && ((MiddleFloor) currentFloor).getUpLamp().isTurnedOn()) {
-	        			System.out.println("FLOOR: Turning OFF Floor #" + arrivalFloor + " "+ (isUpBtn ? "UP" : "DOWN") + " button & lamp @ time = " + LocalTime.now());
+	        			System.out.println("Time: " + LocalTime.now() + " | FLOOR: Turning OFF Floor #" + arrivalFloor + " "+ (isUpBtn ? "UP" : "DOWN") + " button & lamp \n" );
 	        			((MiddleFloor) currentFloor).turnOffUpButton();
 	        			((MiddleFloor) currentFloor).turnOffUpLamp();
 	        		} else if (((MiddleFloor) currentFloor).getDownLamp().isTurnedOn()) {
-	        			System.out.println("FLOOR: Turning OFF Floor #" + arrivalFloor + " "+ (isUpBtn ? "UP" : "DOWN") + " button & lamp @ time = " + LocalTime.now());
+	        			System.out.println("Time: " + LocalTime.now() + " | FLOOR: Turning OFF Floor #" + arrivalFloor + " "+ (isUpBtn ? "UP" : "DOWN") + " button & lamp \n");
 	        			((MiddleFloor) currentFloor).turnOffDownLamp();
 	        			((MiddleFloor) currentFloor).turnOffDownButton();
 	        		}
 	    		}
 	    		else if(currentFloor instanceof TopFloor) {
 	    			if (((TopFloor) currentFloor).getDownLamp().isTurnedOn()) {
-		    			System.out.println("FLOOR: Turning OFF Floor # " + arrivalFloor + " "+ (isUpBtn ? "UP" : "DOWN") + " button & lamp @ time = " + LocalTime.now());
+		    			System.out.println("Time: " + LocalTime.now() + " | FLOOR: Turning OFF Floor # " + arrivalFloor + " "+ (isUpBtn ? "UP" : "DOWN") + " button & lamp \n");
 		    			((TopFloor) currentFloor).turnOffDownLamp();
 		    			((TopFloor) currentFloor).turnOffDownButton();
 	    			}
 	    		}
 	    		else {
 	    			if (((BottomFloor) currentFloor).getUpLamp().isTurnedOn()) {
-		    			System.out.println("FLOOR: Turning OFF Floor # " + arrivalFloor + " "+ (isUpBtn ? "UP" : "DOWN") + " button & lamp @ time = " + LocalTime.now());
+		    			System.out.println("Time: " + LocalTime.now() + " | FLOOR: Turning OFF Floor # " + arrivalFloor + " "+ (isUpBtn ? "UP" : "DOWN") + " button & lamp \n");
 		    			((BottomFloor) currentFloor).turnOffUpLamp();
 		    			((BottomFloor) currentFloor).turnOffUpButton();
 	    			}
 	    			
 	    		}
 	        } else {
-	            System.out.println("ERROR: Arrival Floor #" + arrivalFloor + " out of range");
+	            System.out.println("Time: " + LocalTime.now() + " | FLOOR: ERROR Arrival Floor #" + arrivalFloor + " out of range");
 	            return;
 	        }
         }
         rpc.sendPacket(msg);
+    }
+    
+    private void waitToStartSim() {
+    	byte[] message;
+    	while (true) {
+    		try {
+    			message = rpc.receivePacket();
+    		} catch (Exception e) {
+				continue;
+			}
+    		if (message != null) {
+        		if (Common.findType(message) == Common.MESSAGETYPE.START_SIM) {
+        			rpc.sendPacket(Common.encodeAckMsgIntoBytes(Common.ACKOWLEDGEMENT.NO_MSG));
+        			break;
+                }
+    		}
+    	}
     }
     
     /**
@@ -199,6 +215,12 @@ public class FloorSubsystem extends Thread {
      */
     @Override
 	public void run() {
+    	waitToStartSim();
+    	try {
+			simulationFile =  new FileLoader();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
         boolean instructionSent = false;
         while (true) {        	
             if (instructionSent) {
@@ -212,6 +234,18 @@ public class FloorSubsystem extends Thread {
             }
             receive();
         }
+    }
+    
+    public static void main(String[] args) {
+        FloorSubsystem floorSubsystem;
+		try {
+			floorSubsystem = new FloorSubsystem();
+			floorSubsystem.start();
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+        
     }
 
 }
