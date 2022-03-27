@@ -1,0 +1,941 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="1737px" preserveAspectRatio="none" style="width:4320px;height:1737px;background:#FFFFFF;" version="1.1" viewBox="0 0 4320 1737" width="4320px" zoomAndPan="magnify"><defs><filter height="300%" id="f1wxxydmve5w26" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[54bb6d7a037149ef75f792f06aa0aa50]
+cluster Common--><polygon fill="#FFFFFF" filter="url(#f1wxxydmve5w26)" points="2492,817,2559,817,2566,840.6094,3453,840.6094,3453,1730,2492,1730,2492,817" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="2492" x2="2566" y1="840.6094" y2="840.6094"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="61" x="2496" y="833.5332">Common</text><!--MD5=[70dcdfc5882dadea648fda670cf84e3b]
+cluster ElevatorSubsytem--><polygon fill="#FFFFFF" filter="url(#f1wxxydmve5w26)" points="16,6,149,6,156,29.6094,1427,29.6094,1427,1311,16,1311,16,6" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="16" x2="156" y1="29.6094" y2="29.6094"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="127" x="20" y="22.5332">ElevatorSubsytem</text><!--MD5=[e18caf6935793ca07931a4b09fe86d03]
+cluster Scheduler--><polygon fill="#FFFFFF" filter="url(#f1wxxydmve5w26)" points="3477,328.5,3555,328.5,3562,352.1094,4303,352.1094,4303,1249,3477,1249,3477,328.5" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="3477" x2="3562" y1="352.1094" y2="352.1094"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="72" x="3481" y="345.0332">Scheduler</text><!--MD5=[8b09610cda66cef9b5a8b6c1876e8d15]
+cluster FloorSubsystem--><polygon fill="#FFFFFF" filter="url(#f1wxxydmve5w26)" points="1451,356,1570,356,1577,379.6094,2468,379.6094,2468,1723.5,1451,1723.5,1451,356" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="1451" x2="1577" y1="379.6094" y2="379.6094"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="113" x="1455" y="372.5332">FloorSubsystem</text><!--MD5=[7407bfabdbe29b1a7243eabbd24dd953]
+class Common--><rect codeLine="2" fill="#FEFECE" filter="url(#f1wxxydmve5w26)" height="532.2578" id="Common" style="stroke:#A80036;stroke-width:1.5;" width="539" x="2897.5" y="853"/><ellipse cx="3136.75" cy="869" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M3139.5156,864.875 Q3139.6719,864.6563 3139.8594,864.5469 Q3140.0469,864.4375 3140.2656,864.4375 Q3140.6406,864.4375 3140.875,864.6953 Q3141.1094,864.9531 3141.1094,865.5625 L3141.1094,867.0156 Q3141.1094,867.625 3140.875,867.8906 Q3140.6406,868.1563 3140.2656,868.1563 Q3139.9219,868.1563 3139.7188,867.9531 Q3139.5156,867.7656 3139.4063,867.25 Q3139.3594,866.8906 3139.1719,866.7031 Q3138.8438,866.3281 3138.2344,866.1094 Q3137.625,865.8906 3137,865.8906 Q3136.2344,865.8906 3135.6016,866.2188 Q3134.9688,866.5469 3134.4766,867.2969 Q3133.9844,868.0469 3133.9844,869.0781 L3133.9844,870.1719 Q3133.9844,871.4063 3134.875,872.2266 Q3135.7656,873.0469 3137.3594,873.0469 Q3138.2969,873.0469 3138.9531,872.7969 Q3139.3438,872.6406 3139.7656,872.2031 Q3140.0313,871.9375 3140.1797,871.8594 Q3140.3281,871.7813 3140.5313,871.7813 Q3140.8594,871.7813 3141.1172,872.0391 Q3141.375,872.2969 3141.375,872.6406 Q3141.375,872.9844 3141.0313,873.3906 Q3140.5313,873.9688 3139.7344,874.2969 Q3138.6563,874.75 3137.3594,874.75 Q3135.8438,874.75 3134.6406,874.125 Q3133.6563,873.625 3132.9688,872.5547 Q3132.2813,871.4844 3132.2813,870.2031 L3132.2813,869.0469 Q3132.2813,867.7188 3132.8984,866.5703 Q3133.5156,865.4219 3134.6094,864.8047 Q3135.7031,864.1875 3136.9375,864.1875 Q3137.6719,864.1875 3138.3203,864.3516 Q3138.9688,864.5156 3139.5156,864.875 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="52" x="3157.25" y="873.9102">Common</text><line style="stroke:#A80036;stroke-width:1.5;" x1="2898.5" x2="3435.5" y1="885" y2="885"/><ellipse cx="2908.5" cy="896" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;fill:none;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="66" x="2917.5" y="900.4189">config: config</text><ellipse cx="2908.5" cy="909.8359" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;fill:none;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" text-decoration="underline" textLength="87" x="2917.5" y="914.2549">NUM_FLOORS: int</text><ellipse cx="2908.5" cy="923.6719" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;fill:none;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" text-decoration="underline" textLength="107" x="2917.5" y="928.0908">NUM_ELEVATORS: int</text><ellipse cx="2908.5" cy="937.5078" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;fill:none;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" text-decoration="underline" textLength="198" x="2917.5" y="941.9268">TIMESTAMP_FORMAT: SimpleDateFormat</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="0" x="2920.5" y="955.7627"/><ellipse cx="2908.5" cy="965.1797" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;fill:none;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="105" x="2917.5" y="969.5986">enum MESSAGETYPE</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="30" x="2917.5" y="983.4346">Invalid</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="39" x="2917.5" y="997.2705">Elevator</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="24" x="2917.5" y="1011.1064">Floor</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="49" x="2917.5" y="1024.9424">Scheduler</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="90" x="2917.5" y="1038.7783">Acknowledgement</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="67" x="2917.5" y="1052.6143">ELEV_ERROR</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="57" x="2917.5" y="1066.4502">START_SIM</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2905.5" y="1072.8672"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="53" x="2917.5" y="1080.2861">value: byte</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="0" x="2920.5" y="1094.1221"/><ellipse cx="2908.5" cy="1103.5391" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;fill:none;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="96" x="2917.5" y="1107.958">enum ELEV_ERROR</text><line style="stroke:#A80036;stroke-width:1.5;" x1="2898.5" x2="3435.5" y1="1114.375" y2="1114.375"/><ellipse cx="2908.5" cy="1125.375" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" text-decoration="underline" textLength="203" x="2917.5" y="1129.7939">encodeStartMsg(startSim: boolean): byte[]</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2905.5" y="1136.2109"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" text-decoration="underline" textLength="163" x="2917.5" y="1143.6299">decodeStartMsg(msg: byte[]): int[]</text><ellipse cx="2908.5" cy="1153.0469" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" text-decoration="underline" textLength="489" x="2917.5" y="1157.4658">encodeElevError(err: ELEV_ERROR, elevNum: int, curFloor: int, destFloor: int, dirFloor: boolean): byte[]</text><ellipse cx="2908.5" cy="1166.8828" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" text-decoration="underline" textLength="500" x="2917.5" y="1171.3018">encodeElevMsgIntoBytes(elevatorNumber: int, currentFloor: int, state: MotorState, targetFloor: int): byte[]</text><ellipse cx="2908.5" cy="1180.7188" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" text-decoration="underline" textLength="353" x="2917.5" y="1185.1377">encodeFloorMsgIntoBytes(floorNumber: int, isFloorBtnUp: boolean): byte[]</text><ellipse cx="2908.5" cy="1194.5547" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" text-decoration="underline" textLength="513" x="2917.5" y="1198.9736">encodeSchedulerMsgIntoBytes(elevatorNumber: int, sharedFloorNumber: int, isFloorBtnUp: boolean): byte[]</text><ellipse cx="2908.5" cy="1208.3906" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" text-decoration="underline" textLength="284" x="2917.5" y="1212.8096">encodeAckMsgIntoBytes(ack: ACKOWLEDGEMENT): byte[]</text><ellipse cx="2908.5" cy="1222.2266" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" text-decoration="underline" textLength="188" x="2917.5" y="1226.6455">findType(msg: byte[] ): MESSAGETYPE</text><ellipse cx="2908.5" cy="1236.0625" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" text-decoration="underline" textLength="120" x="2917.5" y="1240.4814">decode(msg: byte[]): int[]</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2905.5" y="1246.8984"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" text-decoration="underline" textLength="209" x="2917.5" y="1254.3174">decodeElevMsgFromBytes(byte[] msg): int[]</text><ellipse cx="2908.5" cy="1263.7344" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" text-decoration="underline" textLength="316" x="2917.5" y="1268.1533">decodeSchedulerFromElevMsgToString(decodedMsg: int[]): String</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2905.5" y="1274.5703"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" text-decoration="underline" textLength="213" x="2917.5" y="1281.9893">decodeFloorMsgFromBytes(byte[] msg): int[]</text><ellipse cx="2908.5" cy="1291.4063" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" text-decoration="underline" textLength="320" x="2917.5" y="1295.8252">decodeSchedulerFromFloorMsgToString(decodedMsg: int[]): String</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2905.5" y="1302.2422"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" text-decoration="underline" textLength="238" x="2917.5" y="1309.6611">decodeSchedulerMsgFromBytes(byte[] msg): int[]</text><ellipse cx="2908.5" cy="1319.0781" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" text-decoration="underline" textLength="296" x="2917.5" y="1323.4971">decodeSchedulerFloorMsgToString(decodedMsg: int[]): String</text><ellipse cx="2908.5" cy="1332.9141" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" text-decoration="underline" textLength="292" x="2917.5" y="1337.333">decodeSchedulerElevMsgToString(decodedMsg: int[]): String</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2905.5" y="1343.75"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" text-decoration="underline" textLength="208" x="2917.5" y="1351.1689">decodeAckMsgFromBytes(byte[] msg): int[]</text><ellipse cx="2908.5" cy="1360.5859" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" text-decoration="underline" textLength="279" x="2917.5" y="1365.0049">findAcknowledgement(byte[] msg): ACKNOWLEDGEMENT</text><ellipse cx="2908.5" cy="1374.4219" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" text-decoration="underline" textLength="196" x="2917.5" y="1378.8408">findElevError(msg: byte[]): ELEV_ERROR</text><!--MD5=[c29539c948c68059f64458d33272c018]
+class ELEV_ERROR--><rect codeLine="40" fill="#FEFECE" filter="url(#f1wxxydmve5w26)" height="269.375" id="ELEV_ERROR" style="stroke:#A80036;stroke-width:1.5;" width="262" x="2858" y="1445"/><ellipse cx="2944.25" cy="1461" fill="#EB937F" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M2943.1094,1461.7969 L2943.1094,1464.2969 L2947.4375,1464.2969 L2947.4375,1463.375 Q2947.4375,1462.7656 2947.6797,1462.5 Q2947.9219,1462.2344 2948.2969,1462.2344 Q2948.6719,1462.2344 2948.9063,1462.5 Q2949.1406,1462.7656 2949.1406,1463.375 L2949.1406,1466 L2941.1406,1466 Q2940.5156,1466 2940.2578,1465.7656 Q2940,1465.5313 2940,1465.1406 Q2940,1464.7656 2940.2656,1464.5313 Q2940.5313,1464.2969 2941.1406,1464.2969 L2941.4063,1464.2969 L2941.4063,1457.6406 L2941.1406,1457.6406 Q2940.5156,1457.6406 2940.2578,1457.4063 Q2940,1457.1719 2940,1456.7813 Q2940,1456.4063 2940.2578,1456.1719 Q2940.5156,1455.9375 2941.1406,1455.9375 L2948.7656,1455.9375 L2948.7656,1458.5313 Q2948.7656,1459.1406 2948.5391,1459.3984 Q2948.3125,1459.6563 2947.9219,1459.6563 Q2947.5469,1459.6563 2947.3125,1459.3984 Q2947.0781,1459.1406 2947.0781,1458.5313 L2947.0781,1457.6406 L2943.1094,1457.6406 L2943.1094,1460.0938 L2944.5938,1460.0938 Q2944.5938,1459.4375 2944.7188,1459.25 Q2944.9844,1458.8438 2945.4531,1458.8438 Q2945.8281,1458.8438 2946.0625,1459.1016 Q2946.2969,1459.3594 2946.2969,1459.9688 L2946.2969,1461.9375 Q2946.2969,1462.4844 2946.1719,1462.6719 Q2945.9063,1463.0625 2945.4531,1463.0625 Q2944.9844,1463.0625 2944.7188,1462.6563 Q2944.5938,1462.4688 2944.5938,1461.7969 L2943.1094,1461.7969 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="81" x="2964.75" y="1465.9102">ELEV_ERROR</text><line style="stroke:#A80036;stroke-width:1.5;" x1="2859" x2="3119" y1="1477" y2="1477"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="40" x="2878" y="1492.4189">INVALID</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="53" x="2878" y="1506.2549">UNKNOWN</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="88" x="2878" y="1520.0908">STUCK_BETWEEN</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="63" x="2878" y="1533.9268">DOOR_OPEN</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="70" x="2878" y="1547.7627">DOOR_CLOSE</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="0" x="2881" y="1561.5986"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2866" y="1568.0156"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="53" x="2878" y="1575.4346">value: byte</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2866" y="1581.8516"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="60" x="2878" y="1589.2705">name: String</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2866" y="1595.6875"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="68" x="2878" y="1603.1064">elevNum: byte</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2866" y="1609.5234"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="71" x="2878" y="1616.9424">currFloor: byte</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2866" y="1623.3594"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="72" x="2878" y="1630.7783">destFloor: byte</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2866" y="1637.1953"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="63" x="2878" y="1644.6143">dirFloor: byte</text><line style="stroke:#A80036;stroke-width:1.5;" x1="2859" x2="3119" y1="1651.0313" y2="1651.0313"/><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2866" y="1659.0313"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="187" x="2878" y="1666.4502">ELEV_ERROR(b: byte, n: String): byte[]</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2866" y="1672.8672"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="77" x="2878" y="1680.2861">encode(): byte[]</text><ellipse cx="2869" cy="1689.7031" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" text-decoration="underline" textLength="167" x="2878" y="1694.1221">decode(msg: byte[]):ELEV_ERROR</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2866" y="1700.5391"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" text-decoration="underline" textLength="236" x="2878" y="1707.958">decodeElevErrorMsgFromBytes(msg: byte[]): int[]</text><!--MD5=[4bf8aff396996fef456cd268939daa24]
+class Config--><rect codeLine="60" fill="#FEFECE" filter="url(#f1wxxydmve5w26)" height="131.0156" id="Config" style="stroke:#A80036;stroke-width:1.5;" width="195" x="3155.5" y="1514"/><ellipse cx="3230.75" cy="1530" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M3233.5156,1525.875 Q3233.6719,1525.6563 3233.8594,1525.5469 Q3234.0469,1525.4375 3234.2656,1525.4375 Q3234.6406,1525.4375 3234.875,1525.6953 Q3235.1094,1525.9531 3235.1094,1526.5625 L3235.1094,1528.0156 Q3235.1094,1528.625 3234.875,1528.8906 Q3234.6406,1529.1563 3234.2656,1529.1563 Q3233.9219,1529.1563 3233.7188,1528.9531 Q3233.5156,1528.7656 3233.4063,1528.25 Q3233.3594,1527.8906 3233.1719,1527.7031 Q3232.8438,1527.3281 3232.2344,1527.1094 Q3231.625,1526.8906 3231,1526.8906 Q3230.2344,1526.8906 3229.6016,1527.2188 Q3228.9688,1527.5469 3228.4766,1528.2969 Q3227.9844,1529.0469 3227.9844,1530.0781 L3227.9844,1531.1719 Q3227.9844,1532.4063 3228.875,1533.2266 Q3229.7656,1534.0469 3231.3594,1534.0469 Q3232.2969,1534.0469 3232.9531,1533.7969 Q3233.3438,1533.6406 3233.7656,1533.2031 Q3234.0313,1532.9375 3234.1797,1532.8594 Q3234.3281,1532.7813 3234.5313,1532.7813 Q3234.8594,1532.7813 3235.1172,1533.0391 Q3235.375,1533.2969 3235.375,1533.6406 Q3235.375,1533.9844 3235.0313,1534.3906 Q3234.5313,1534.9688 3233.7344,1535.2969 Q3232.6563,1535.75 3231.3594,1535.75 Q3229.8438,1535.75 3228.6406,1535.125 Q3227.6563,1534.625 3226.9688,1533.5547 Q3226.2813,1532.4844 3226.2813,1531.2031 L3226.2813,1530.0469 Q3226.2813,1528.7188 3226.8984,1527.5703 Q3227.5156,1526.4219 3228.6094,1525.8047 Q3229.7031,1525.1875 3230.9375,1525.1875 Q3231.6719,1525.1875 3232.3203,1525.3516 Q3232.9688,1525.5156 3233.5156,1525.875 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="36" x="3251.25" y="1534.9102">Config</text><line style="stroke:#A80036;stroke-width:1.5;" x1="3156.5" x2="3349.5" y1="1546" y2="1546"/><ellipse cx="3166.5" cy="1557" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;fill:none;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" text-decoration="underline" textLength="133" x="3175.5" y="1561.4189">CONFIG_FILE_NAME: String</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="3163.5" y="1567.8359"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="83" x="3175.5" y="1575.2549">props: Properties</text><line style="stroke:#A80036;stroke-width:1.5;" x1="3156.5" x2="3349.5" y1="1581.6719" y2="1581.6719"/><ellipse cx="3166.5" cy="1592.6719" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="39" x="3175.5" y="1597.0908">Config()</text><ellipse cx="3166.5" cy="1606.5078" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="149" x="3175.5" y="1610.9268">getProperty(key: String): String</text><ellipse cx="3166.5" cy="1620.3438" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="143" x="3175.5" y="1624.7627">getIntProperty(key: String): int</text><ellipse cx="3166.5" cy="1634.1797" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="169" x="3175.5" y="1638.5986">getLongProperty(key: String): Long</text><!--MD5=[cede79ee37af65a19915b02cd8e9432e]
+class RPC--><rect codeLine="69" fill="#FEFECE" filter="url(#f1wxxydmve5w26)" height="186.3594" id="RPC" style="stroke:#A80036;stroke-width:1.5;" width="354" x="2508" y="1026"/><ellipse cx="2667.75" cy="1042" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M2670.5156,1037.875 Q2670.6719,1037.6563 2670.8594,1037.5469 Q2671.0469,1037.4375 2671.2656,1037.4375 Q2671.6406,1037.4375 2671.875,1037.6953 Q2672.1094,1037.9531 2672.1094,1038.5625 L2672.1094,1040.0156 Q2672.1094,1040.625 2671.875,1040.8906 Q2671.6406,1041.1563 2671.2656,1041.1563 Q2670.9219,1041.1563 2670.7188,1040.9531 Q2670.5156,1040.7656 2670.4063,1040.25 Q2670.3594,1039.8906 2670.1719,1039.7031 Q2669.8438,1039.3281 2669.2344,1039.1094 Q2668.625,1038.8906 2668,1038.8906 Q2667.2344,1038.8906 2666.6016,1039.2188 Q2665.9688,1039.5469 2665.4766,1040.2969 Q2664.9844,1041.0469 2664.9844,1042.0781 L2664.9844,1043.1719 Q2664.9844,1044.4063 2665.875,1045.2266 Q2666.7656,1046.0469 2668.3594,1046.0469 Q2669.2969,1046.0469 2669.9531,1045.7969 Q2670.3438,1045.6406 2670.7656,1045.2031 Q2671.0313,1044.9375 2671.1797,1044.8594 Q2671.3281,1044.7813 2671.5313,1044.7813 Q2671.8594,1044.7813 2672.1172,1045.0391 Q2672.375,1045.2969 2672.375,1045.6406 Q2672.375,1045.9844 2672.0313,1046.3906 Q2671.5313,1046.9688 2670.7344,1047.2969 Q2669.6563,1047.75 2668.3594,1047.75 Q2666.8438,1047.75 2665.6406,1047.125 Q2664.6563,1046.625 2663.9688,1045.5547 Q2663.2813,1044.4844 2663.2813,1043.2031 L2663.2813,1042.0469 Q2663.2813,1040.7188 2663.8984,1039.5703 Q2664.5156,1038.4219 2665.6094,1037.8047 Q2666.7031,1037.1875 2667.9375,1037.1875 Q2668.6719,1037.1875 2669.3203,1037.3516 Q2669.9688,1037.5156 2670.5156,1037.875 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="26" x="2688.25" y="1046.9102">RPC</text><line style="stroke:#A80036;stroke-width:1.5;" x1="2509" x2="2861" y1="1058" y2="1058"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2516" y="1066"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="128" x="2528" y="1073.4189">destAddress: InetAddress</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2516" y="1079.8359"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="88" x="2528" y="1087.2549">destinationPort: int</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2516" y="1093.6719"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="72" x="2528" y="1101.0908">receivePort: int</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2516" y="1107.5078"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="183" x="2528" y="1114.9268">sendReceiveSocket: DataGramSocket</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2516" y="1121.3438"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="68" x="2528" y="1128.7627">BUF_SIZE : int</text><line style="stroke:#A80036;stroke-width:1.5;" x1="2509" x2="2861" y1="1135.1797" y2="1135.1797"/><ellipse cx="2519" cy="1146.1797" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="328" x="2528" y="1150.5986">RPC(destAddress: InetAddress, destinationPort: int, receivePort: int)</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2516" y="1157.0156"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="80" x="2528" y="1164.4346">initSocket(): void</text><ellipse cx="2519" cy="1173.8516" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="143" x="2528" y="1178.2705">sendPacket(msg: byte[]): void</text><ellipse cx="2519" cy="1187.6875" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="109" x="2528" y="1192.1064">receivePacket(): byte[]</text><ellipse cx="2519" cy="1201.5234" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="150" x="2528" y="1205.9424">setSocketTimeout(ms: int): void</text><!--MD5=[3c39efc0c374c7e5acc38680a0f7d180]
+class ElevatorLamp--><rect codeLine="87" fill="#FEFECE" filter="url(#f1wxxydmve5w26)" height="144.8516" id="ElevatorLamp" style="stroke:#A80036;stroke-width:1.5;" width="175" x="1018.5" y="42"/><ellipse cx="1063.75" cy="58" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M1066.5156,53.875 Q1066.6719,53.6563 1066.8594,53.5469 Q1067.0469,53.4375 1067.2656,53.4375 Q1067.6406,53.4375 1067.875,53.6953 Q1068.1094,53.9531 1068.1094,54.5625 L1068.1094,56.0156 Q1068.1094,56.625 1067.875,56.8906 Q1067.6406,57.1563 1067.2656,57.1563 Q1066.9219,57.1563 1066.7188,56.9531 Q1066.5156,56.7656 1066.4063,56.25 Q1066.3594,55.8906 1066.1719,55.7031 Q1065.8438,55.3281 1065.2344,55.1094 Q1064.625,54.8906 1064,54.8906 Q1063.2344,54.8906 1062.6016,55.2188 Q1061.9688,55.5469 1061.4766,56.2969 Q1060.9844,57.0469 1060.9844,58.0781 L1060.9844,59.1719 Q1060.9844,60.4063 1061.875,61.2266 Q1062.7656,62.0469 1064.3594,62.0469 Q1065.2969,62.0469 1065.9531,61.7969 Q1066.3438,61.6406 1066.7656,61.2031 Q1067.0313,60.9375 1067.1797,60.8594 Q1067.3281,60.7813 1067.5313,60.7813 Q1067.8594,60.7813 1068.1172,61.0391 Q1068.375,61.2969 1068.375,61.6406 Q1068.375,61.9844 1068.0313,62.3906 Q1067.5313,62.9688 1066.7344,63.2969 Q1065.6563,63.75 1064.3594,63.75 Q1062.8438,63.75 1061.6406,63.125 Q1060.6563,62.625 1059.9688,61.5547 Q1059.2813,60.4844 1059.2813,59.2031 L1059.2813,58.0469 Q1059.2813,56.7188 1059.8984,55.5703 Q1060.5156,54.4219 1061.6094,53.8047 Q1062.7031,53.1875 1063.9375,53.1875 Q1064.6719,53.1875 1065.3203,53.3516 Q1065.9688,53.5156 1066.5156,53.875 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="76" x="1084.25" y="62.9102">ElevatorLamp</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1019.5" x2="1192.5" y1="74" y2="74"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1026.5" y="82"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="76" x="1038.5" y="89.4189">floorNumber: int</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1026.5" y="95.8359"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="100" x="1038.5" y="103.2549">isTurnedOn: boolean</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1019.5" x2="1192.5" y1="109.6719" y2="109.6719"/><ellipse cx="1029.5" cy="120.6719" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="149" x="1038.5" y="125.0908">ElevatorLamp(floorNumber: int)</text><ellipse cx="1029.5" cy="134.5078" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="101" x="1038.5" y="138.9268">getFloorNumber(): int</text><ellipse cx="1029.5" cy="148.3438" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="108" x="1038.5" y="152.7627">isTurnedOn(): boolean</text><ellipse cx="1029.5" cy="162.1797" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="67" x="1038.5" y="166.5986">turnOn(): void</text><ellipse cx="1029.5" cy="176.0156" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="69" x="1038.5" y="180.4346">turnOff(): void</text><!--MD5=[7733550aad3fb2c24630e4e7b8bde4c7]
+class ElevatorSubsystem--><rect codeLine="97" fill="#FEFECE" filter="url(#f1wxxydmve5w26)" height="352.3906" id="ElevatorSubsystem" style="stroke:#A80036;stroke-width:1.5;" width="388" x="905" y="943"/><ellipse cx="1041.75" cy="959" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M1044.5156,954.875 Q1044.6719,954.6563 1044.8594,954.5469 Q1045.0469,954.4375 1045.2656,954.4375 Q1045.6406,954.4375 1045.875,954.6953 Q1046.1094,954.9531 1046.1094,955.5625 L1046.1094,957.0156 Q1046.1094,957.625 1045.875,957.8906 Q1045.6406,958.1563 1045.2656,958.1563 Q1044.9219,958.1563 1044.7188,957.9531 Q1044.5156,957.7656 1044.4063,957.25 Q1044.3594,956.8906 1044.1719,956.7031 Q1043.8438,956.3281 1043.2344,956.1094 Q1042.625,955.8906 1042,955.8906 Q1041.2344,955.8906 1040.6016,956.2188 Q1039.9688,956.5469 1039.4766,957.2969 Q1038.9844,958.0469 1038.9844,959.0781 L1038.9844,960.1719 Q1038.9844,961.4063 1039.875,962.2266 Q1040.7656,963.0469 1042.3594,963.0469 Q1043.2969,963.0469 1043.9531,962.7969 Q1044.3438,962.6406 1044.7656,962.2031 Q1045.0313,961.9375 1045.1797,961.8594 Q1045.3281,961.7813 1045.5313,961.7813 Q1045.8594,961.7813 1046.1172,962.0391 Q1046.375,962.2969 1046.375,962.6406 Q1046.375,962.9844 1046.0313,963.3906 Q1045.5313,963.9688 1044.7344,964.2969 Q1043.6563,964.75 1042.3594,964.75 Q1040.8438,964.75 1039.6406,964.125 Q1038.6563,963.625 1037.9688,962.5547 Q1037.2813,961.4844 1037.2813,960.2031 L1037.2813,959.0469 Q1037.2813,957.7188 1037.8984,956.5703 Q1038.5156,955.4219 1039.6094,954.8047 Q1040.7031,954.1875 1041.9375,954.1875 Q1042.6719,954.1875 1043.3203,954.3516 Q1043.9688,954.5156 1044.5156,954.875 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="106" x="1062.25" y="963.9102">ElevatorSubsystem</text><line style="stroke:#A80036;stroke-width:1.5;" x1="906" x2="1292" y1="975" y2="975"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="913" y="983"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="91" x="925" y="990.4189">elevators: Thread[]</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="913" y="996.8359"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="93" x="925" y="1004.2549">elevatorNumber: int</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="913" y="1010.6719"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="279" x="925" y="1018.0908">elevatorMsgBuffer: HashMap&lt;Integer, LinkedList&lt;byte[]&gt;&gt;</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="913" y="1024.5078"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="192" x="925" y="1031.9268">schedulerMsgBuffer: LinkedList&lt;byte[]&gt;</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="913" y="1038.3438"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="160" x="925" y="1045.7627">SCHEDULER_ADDR: InetAddress</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="913" y="1052.1797"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="155" x="925" y="1059.5986">ELEVATOR_ADDR: InetAddress</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="913" y="1066.0156"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="104" x="925" y="1073.4346">fileLoader: FileLoader</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="913" y="1079.8516"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="128" x="925" y="1087.2705">schedulerTransmitter: RPC</text><ellipse cx="916" cy="1096.6875" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;fill:none;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" text-decoration="underline" textLength="187" x="925" y="1101.1064">ELEVSUBSYSTEM_RECEIVE_PORT: int</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="913" y="1107.5234"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" text-decoration="underline" textLength="254" x="925" y="1114.9424">ELEVSUBSYSTEM_RECEIVE_FROM_ELEV_PORT: int</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="913" y="1121.3594"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" text-decoration="underline" textLength="124" x="925" y="1128.7783">ELEV_RECEIVE_PORT: int</text><line style="stroke:#A80036;stroke-width:1.5;" x1="906" x2="1292" y1="1135.1953" y2="1135.1953"/><ellipse cx="916" cy="1146.1953" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="205" x="925" y="1150.6143">ElevatorSubsystem(fileLoader: FileLoader)</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="913" y="1157.0313"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="150" x="925" y="1164.4502">schedulerCommunicator(): void</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="913" y="1170.8672"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="141" x="925" y="1178.2861">elevatorCommunicator(): void</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="913" y="1184.7031"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="225" x="925" y="1192.1221">{synchronized} incrementElevatorNumber(): int</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="913" y="1198.5391"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="205" x="925" y="1205.958">{synchronized} initializeElevBuffers(): void</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="913" y="1212.375"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="221" x="925" y="1219.7939">{synchronized} addToSchedulerBuffer(): void</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="913" y="1226.2109"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="257" x="925" y="1233.6299">{synchronized} getMsgFromSchedulerBuffer(): byte[]</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="913" y="1240.0469"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="218" x="925" y="1247.4658">{synchronized} addToElevatorBuffer(): byte[]</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="913" y="1253.8828"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="362" x="925" y="1261.3018">{synchronized} getMsgFromElevatorBuffer(elevatorNumber: Integer): byte[]</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="913" y="1267.7188"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="107" x="925" y="1275.1377">waitToStartSim(): void</text><ellipse cx="916" cy="1284.5547" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="50" x="925" y="1288.9736">run(): void</text><!--MD5=[93e485d66e62470c0e68a81214641dfb]
+class Elevator--><rect codeLine="123" fill="#FEFECE" filter="url(#f1wxxydmve5w26)" height="546.0938" id="Elevator" style="stroke:#A80036;stroke-width:1.5;" width="479" x="697.5" y="247"/><ellipse cx="910.75" cy="263" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M913.5156,258.875 Q913.6719,258.6563 913.8594,258.5469 Q914.0469,258.4375 914.2656,258.4375 Q914.6406,258.4375 914.875,258.6953 Q915.1094,258.9531 915.1094,259.5625 L915.1094,261.0156 Q915.1094,261.625 914.875,261.8906 Q914.6406,262.1563 914.2656,262.1563 Q913.9219,262.1563 913.7188,261.9531 Q913.5156,261.7656 913.4063,261.25 Q913.3594,260.8906 913.1719,260.7031 Q912.8438,260.3281 912.2344,260.1094 Q911.625,259.8906 911,259.8906 Q910.2344,259.8906 909.6016,260.2188 Q908.9688,260.5469 908.4766,261.2969 Q907.9844,262.0469 907.9844,263.0781 L907.9844,264.1719 Q907.9844,265.4063 908.875,266.2266 Q909.7656,267.0469 911.3594,267.0469 Q912.2969,267.0469 912.9531,266.7969 Q913.3438,266.6406 913.7656,266.2031 Q914.0313,265.9375 914.1797,265.8594 Q914.3281,265.7813 914.5313,265.7813 Q914.8594,265.7813 915.1172,266.0391 Q915.375,266.2969 915.375,266.6406 Q915.375,266.9844 915.0313,267.3906 Q914.5313,267.9688 913.7344,268.2969 Q912.6563,268.75 911.3594,268.75 Q909.8438,268.75 908.6406,268.125 Q907.6563,267.625 906.9688,266.5547 Q906.2813,265.4844 906.2813,264.2031 L906.2813,263.0469 Q906.2813,261.7188 906.8984,260.5703 Q907.5156,259.4219 908.6094,258.8047 Q909.7031,258.1875 910.9375,258.1875 Q911.6719,258.1875 912.3203,258.3516 Q912.9688,258.5156 913.5156,258.875 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="44" x="931.25" y="267.9102">Elevator</text><line style="stroke:#A80036;stroke-width:1.5;" x1="698.5" x2="1175.5" y1="279" y2="279"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="705.5" y="287"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="89" x="717.5" y="294.4189">currentFloor: Floor</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="705.5" y="300.8359"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="138" x="717.5" y="308.2549">ArrivalSensor: arrivalSensor</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="705.5" y="314.6719"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="93" x="717.5" y="322.0908">elevatorNumber: int</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="705.5" y="328.5078"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="158" x="717.5" y="335.9268">elevatorButtons: ElevatorButton[]</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="705.5" y="342.3438"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="148" x="717.5" y="349.7627">elevatorLamps: ElevatorLamp[]</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="705.5" y="356.1797"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="60" x="717.5" y="363.5986">motor: Motor</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="705.5" y="370.0156"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="51" x="717.5" y="377.4346">door: Door</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="705.5" y="383.8516"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="172" x="717.5" y="391.2705">destinationFloor: ArrayList&lt;Integer&gt;</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="705.5" y="397.6875"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="69" x="717.5" y="405.1064">targetFloor: int</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="705.5" y="411.5234"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="77" x="717.5" y="418.9424">transmitter: RPC</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="705.5" y="425.3594"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="87" x="717.5" y="432.7783">addr: InetAddress</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="705.5" y="439.1953"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="104" x="717.5" y="446.6143">fileLoader: FileLoader</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="705.5" y="453.0313"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="91" x="717.5" y="460.4502">nextButtonClick: int</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="705.5" y="466.8672"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="129" x="717.5" y="474.2861">stuckSensor: StuckSensor</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="705.5" y="480.7031"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="79" x="717.5" y="488.1221">isStuck: boolean</text><line style="stroke:#A80036;stroke-width:1.5;" x1="698.5" x2="1175.5" y1="494.5391" y2="494.5391"/><ellipse cx="708.5" cy="505.5391" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="453" x="717.5" y="509.958">Elevator(elevatorNumber: int, currentFloor: int, destPort: int, recPort: int, fileLoader: FileLoader)</text><ellipse cx="708.5" cy="519.375" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="202" x="717.5" y="523.7939">moveToFloor(destinationFloor: Floor): void</text><ellipse cx="708.5" cy="533.2109" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="132" x="717.5" y="537.6299">notifyElevatorArrival(): void</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="705.5" y="544.0469"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="222" x="717.5" y="551.4658">removeDestinationFloor(targetFloor2: int): void</text><ellipse cx="708.5" cy="560.8828" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="137" x="717.5" y="565.3018">notifyElevatorUnStuck():void</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="705.5" y="571.7188"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="172" x="717.5" y="579.1377">servePassengerToDestFloor(): void</text><ellipse cx="708.5" cy="588.5547" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="104" x="717.5" y="592.9736">updatePosition(): void</text><ellipse cx="708.5" cy="602.3906" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="108" x="717.5" y="606.8096">handleError(): boolean</text><ellipse cx="708.5" cy="616.2266" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="86" x="717.5" y="620.6455">getFloor(): Integer</text><ellipse cx="708.5" cy="630.0625" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="87" x="717.5" y="634.4814">openDoors(): void</text><ellipse cx="708.5" cy="643.8984" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="137" x="717.5" y="648.3174">getCurrentFloorNumber(): int</text><ellipse cx="708.5" cy="657.7344" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="222" x="717.5" y="662.1533">setCurrentFloorNumber(floorNumber: int): void</text><ellipse cx="708.5" cy="671.5703" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="89" x="717.5" y="675.9893">closeDoors(): void</text><ellipse cx="708.5" cy="685.4063" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="133" x="717.5" y="689.8252">getMotorState(): MotorState</text><ellipse cx="708.5" cy="699.2422" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="180" x="717.5" y="703.6611">setMotorState(MotorState state): void</text><ellipse cx="708.5" cy="713.0781" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="116" x="717.5" y="717.4971">getElevatorNumber(): int</text><ellipse cx="708.5" cy="726.9141" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="181" x="717.5" y="731.333">getElevatorButtons(): ElevatorButton[]</text><ellipse cx="708.5" cy="740.75" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="171" x="717.5" y="745.1689">getElevatorLamps(): ElevatorLamp[]</text><ellipse cx="708.5" cy="754.5859" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="117" x="717.5" y="759.0049">sendAndReceive(): void</text><ellipse cx="708.5" cy="768.4219" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="70" x="717.5" y="772.8408">receive(): void</text><ellipse cx="708.5" cy="782.2578" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="50" x="717.5" y="786.6768">run(): void</text><!--MD5=[05f1a7330b1ceb1ed664acf8e30033c9]
+class Motor--><rect codeLine="163" fill="#FEFECE" filter="url(#f1wxxydmve5w26)" height="131.0156" id="Motor" style="stroke:#A80036;stroke-width:1.5;" width="182" x="1229" y="49"/><ellipse cx="1300.75" cy="65" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M1303.5156,60.875 Q1303.6719,60.6563 1303.8594,60.5469 Q1304.0469,60.4375 1304.2656,60.4375 Q1304.6406,60.4375 1304.875,60.6953 Q1305.1094,60.9531 1305.1094,61.5625 L1305.1094,63.0156 Q1305.1094,63.625 1304.875,63.8906 Q1304.6406,64.1563 1304.2656,64.1563 Q1303.9219,64.1563 1303.7188,63.9531 Q1303.5156,63.7656 1303.4063,63.25 Q1303.3594,62.8906 1303.1719,62.7031 Q1302.8438,62.3281 1302.2344,62.1094 Q1301.625,61.8906 1301,61.8906 Q1300.2344,61.8906 1299.6016,62.2188 Q1298.9688,62.5469 1298.4766,63.2969 Q1297.9844,64.0469 1297.9844,65.0781 L1297.9844,66.1719 Q1297.9844,67.4063 1298.875,68.2266 Q1299.7656,69.0469 1301.3594,69.0469 Q1302.2969,69.0469 1302.9531,68.7969 Q1303.3438,68.6406 1303.7656,68.2031 Q1304.0313,67.9375 1304.1797,67.8594 Q1304.3281,67.7813 1304.5313,67.7813 Q1304.8594,67.7813 1305.1172,68.0391 Q1305.375,68.2969 1305.375,68.6406 Q1305.375,68.9844 1305.0313,69.3906 Q1304.5313,69.9688 1303.7344,70.2969 Q1302.6563,70.75 1301.3594,70.75 Q1299.8438,70.75 1298.6406,70.125 Q1297.6563,69.625 1296.9688,68.5547 Q1296.2813,67.4844 1296.2813,66.2031 L1296.2813,65.0469 Q1296.2813,63.7188 1296.8984,62.5703 Q1297.5156,61.4219 1298.6094,60.8047 Q1299.7031,60.1875 1300.9375,60.1875 Q1301.6719,60.1875 1302.3203,60.3516 Q1302.9688,60.5156 1303.5156,60.875 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="30" x="1321.25" y="69.9102">Motor</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1230" x2="1410" y1="81" y2="81"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1237" y="89"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="93" x="1249" y="96.4189">elevatorNumber: int</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1237" y="102.8359"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="82" x="1249" y="110.2549">MotorState: state</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1230" x2="1410" y1="116.6719" y2="116.6719"/><ellipse cx="1240" cy="127.6719" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="128" x="1249" y="132.0908">Motor(elevatorNumber: int)</text><ellipse cx="1240" cy="141.5078" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="116" x="1249" y="145.9268">getElevatorNumber(): int</text><ellipse cx="1240" cy="155.3438" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="106" x="1249" y="159.7627">getState(): MotorState</text><ellipse cx="1240" cy="169.1797" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="156" x="1249" y="173.5986">setState(state: MotorState): void</text><!--MD5=[ff61424299de7fbd1b7bbdfe7c644dfd]
+class Door--><rect codeLine="172" fill="#FEFECE" filter="url(#f1wxxydmve5w26)" height="144.8516" id="Door" style="stroke:#A80036;stroke-width:1.5;" width="150" x="618" y="42"/><ellipse cx="675.25" cy="58" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M678.0156,53.875 Q678.1719,53.6563 678.3594,53.5469 Q678.5469,53.4375 678.7656,53.4375 Q679.1406,53.4375 679.375,53.6953 Q679.6094,53.9531 679.6094,54.5625 L679.6094,56.0156 Q679.6094,56.625 679.375,56.8906 Q679.1406,57.1563 678.7656,57.1563 Q678.4219,57.1563 678.2188,56.9531 Q678.0156,56.7656 677.9063,56.25 Q677.8594,55.8906 677.6719,55.7031 Q677.3438,55.3281 676.7344,55.1094 Q676.125,54.8906 675.5,54.8906 Q674.7344,54.8906 674.1016,55.2188 Q673.4688,55.5469 672.9766,56.2969 Q672.4844,57.0469 672.4844,58.0781 L672.4844,59.1719 Q672.4844,60.4063 673.375,61.2266 Q674.2656,62.0469 675.8594,62.0469 Q676.7969,62.0469 677.4531,61.7969 Q677.8438,61.6406 678.2656,61.2031 Q678.5313,60.9375 678.6797,60.8594 Q678.8281,60.7813 679.0313,60.7813 Q679.3594,60.7813 679.6172,61.0391 Q679.875,61.2969 679.875,61.6406 Q679.875,61.9844 679.5313,62.3906 Q679.0313,62.9688 678.2344,63.2969 Q677.1563,63.75 675.8594,63.75 Q674.3438,63.75 673.1406,63.125 Q672.1563,62.625 671.4688,61.5547 Q670.7813,60.4844 670.7813,59.2031 L670.7813,58.0469 Q670.7813,56.7188 671.3984,55.5703 Q672.0156,54.4219 673.1094,53.8047 Q674.2031,53.1875 675.4375,53.1875 Q676.1719,53.1875 676.8203,53.3516 Q677.4688,53.5156 678.0156,53.875 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="27" x="695.75" y="62.9102">Door</text><line style="stroke:#A80036;stroke-width:1.5;" x1="619" x2="767" y1="74" y2="74"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="626" y="82"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="93" x="638" y="89.4189">elevatorNumber: int</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="626" y="95.8359"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="78" x="638" y="103.2549">isOpen: boolean</text><line style="stroke:#A80036;stroke-width:1.5;" x1="619" x2="767" y1="109.6719" y2="109.6719"/><ellipse cx="629" cy="120.6719" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="124" x="638" y="125.0908">Door(elevatorNumber: int)</text><ellipse cx="629" cy="134.5078" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="116" x="638" y="138.9268">getElevatorNumber(): int</text><ellipse cx="629" cy="148.3438" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="58" x="638" y="152.7627">open(): void</text><ellipse cx="629" cy="162.1797" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="60" x="638" y="166.5986">close(): void</text><ellipse cx="629" cy="176.0156" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="86" x="638" y="180.4346">isOpen(): boolean</text><!--MD5=[8632763f6ddd3328d56579cd58b33c23]
+class ArrivalSensor--><rect codeLine="182" fill="#FEFECE" filter="url(#f1wxxydmve5w26)" height="89.5078" id="ArrivalSensor" style="stroke:#A80036;stroke-width:1.5;" width="336" x="247" y="69.5"/><ellipse cx="374.25" cy="85.5" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M377.0156,81.375 Q377.1719,81.1563 377.3594,81.0469 Q377.5469,80.9375 377.7656,80.9375 Q378.1406,80.9375 378.375,81.1953 Q378.6094,81.4531 378.6094,82.0625 L378.6094,83.5156 Q378.6094,84.125 378.375,84.3906 Q378.1406,84.6563 377.7656,84.6563 Q377.4219,84.6563 377.2188,84.4531 Q377.0156,84.2656 376.9063,83.75 Q376.8594,83.3906 376.6719,83.2031 Q376.3438,82.8281 375.7344,82.6094 Q375.125,82.3906 374.5,82.3906 Q373.7344,82.3906 373.1016,82.7188 Q372.4688,83.0469 371.9766,83.7969 Q371.4844,84.5469 371.4844,85.5781 L371.4844,86.6719 Q371.4844,87.9063 372.375,88.7266 Q373.2656,89.5469 374.8594,89.5469 Q375.7969,89.5469 376.4531,89.2969 Q376.8438,89.1406 377.2656,88.7031 Q377.5313,88.4375 377.6797,88.3594 Q377.8281,88.2813 378.0313,88.2813 Q378.3594,88.2813 378.6172,88.5391 Q378.875,88.7969 378.875,89.1406 Q378.875,89.4844 378.5313,89.8906 Q378.0313,90.4688 377.2344,90.7969 Q376.1563,91.25 374.8594,91.25 Q373.3438,91.25 372.1406,90.625 Q371.1563,90.125 370.4688,89.0547 Q369.7813,87.9844 369.7813,86.7031 L369.7813,85.5469 Q369.7813,84.2188 370.3984,83.0703 Q371.0156,81.9219 372.1094,81.3047 Q373.2031,80.6875 374.4375,80.6875 Q375.1719,80.6875 375.8203,80.8516 Q376.4688,81.0156 377.0156,81.375 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="73" x="394.75" y="90.4102">ArrivalSensor</text><line style="stroke:#A80036;stroke-width:1.5;" x1="248" x2="582" y1="101.5" y2="101.5"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="255" y="109.5"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="84" x="267" y="116.9189">elevator: Elevator</text><line style="stroke:#A80036;stroke-width:1.5;" x1="248" x2="582" y1="123.3359" y2="123.3359"/><ellipse cx="258" cy="134.3359" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="159" x="267" y="138.7549">ArrivalSensor(elevator: Elevator)</text><ellipse cx="258" cy="148.1719" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="310" x="267" y="152.5908">simulateElevatorMovement(currentFloor: int, destinationFloor: int)</text><!--MD5=[31cf3440068abc2fb5a62be911e36a92]
+class ElevatorButton--><rect codeLine="188" fill="#FEFECE" filter="url(#f1wxxydmve5w26)" height="144.8516" id="ElevatorButton" style="stroke:#A80036;stroke-width:1.5;" width="180" x="32" y="42"/><ellipse cx="78.25" cy="58" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M81.0156,53.875 Q81.1719,53.6563 81.3594,53.5469 Q81.5469,53.4375 81.7656,53.4375 Q82.1406,53.4375 82.375,53.6953 Q82.6094,53.9531 82.6094,54.5625 L82.6094,56.0156 Q82.6094,56.625 82.375,56.8906 Q82.1406,57.1563 81.7656,57.1563 Q81.4219,57.1563 81.2188,56.9531 Q81.0156,56.7656 80.9063,56.25 Q80.8594,55.8906 80.6719,55.7031 Q80.3438,55.3281 79.7344,55.1094 Q79.125,54.8906 78.5,54.8906 Q77.7344,54.8906 77.1016,55.2188 Q76.4688,55.5469 75.9766,56.2969 Q75.4844,57.0469 75.4844,58.0781 L75.4844,59.1719 Q75.4844,60.4063 76.375,61.2266 Q77.2656,62.0469 78.8594,62.0469 Q79.7969,62.0469 80.4531,61.7969 Q80.8438,61.6406 81.2656,61.2031 Q81.5313,60.9375 81.6797,60.8594 Q81.8281,60.7813 82.0313,60.7813 Q82.3594,60.7813 82.6172,61.0391 Q82.875,61.2969 82.875,61.6406 Q82.875,61.9844 82.5313,62.3906 Q82.0313,62.9688 81.2344,63.2969 Q80.1563,63.75 78.8594,63.75 Q77.3438,63.75 76.1406,63.125 Q75.1563,62.625 74.4688,61.5547 Q73.7813,60.4844 73.7813,59.2031 L73.7813,58.0469 Q73.7813,56.7188 74.3984,55.5703 Q75.0156,54.4219 76.1094,53.8047 Q77.2031,53.1875 78.4375,53.1875 Q79.1719,53.1875 79.8203,53.3516 Q80.4688,53.5156 81.0156,53.875 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="79" x="98.75" y="62.9102">ElevatorButton</text><line style="stroke:#A80036;stroke-width:1.5;" x1="33" x2="211" y1="74" y2="74"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="40" y="82"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="76" x="52" y="89.4189">floorNumber: int</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="40" y="95.8359"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="92" x="52" y="103.2549">isPressed: boolean</text><line style="stroke:#A80036;stroke-width:1.5;" x1="33" x2="211" y1="109.6719" y2="109.6719"/><ellipse cx="43" cy="120.6719" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="154" x="52" y="125.0908">ElevatorButton(floorNumber: int)</text><ellipse cx="43" cy="134.5078" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="101" x="52" y="138.9268">getFloorNumber(): int</text><ellipse cx="43" cy="148.3438" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="100" x="52" y="152.7627">isPressed(): boolean</text><ellipse cx="43" cy="162.1797" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="67" x="52" y="166.5986">turnOn(): void</text><ellipse cx="43" cy="176.0156" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="69" x="52" y="180.4346">turnOff(): void</text><!--MD5=[39b5006a5841aa1710cd2dae8e6c4337]
+class MotorState--><rect codeLine="199" fill="#FEFECE" filter="url(#f1wxxydmve5w26)" height="117.1797" id="MotorState" style="stroke:#A80036;stroke-width:1.5;" width="107" x="1256.5" y="461.5"/><ellipse cx="1279.15" cy="477.5" fill="#EB937F" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M1278.0094,478.2969 L1278.0094,480.7969 L1282.3375,480.7969 L1282.3375,479.875 Q1282.3375,479.2656 1282.5797,479 Q1282.8219,478.7344 1283.1969,478.7344 Q1283.5719,478.7344 1283.8063,479 Q1284.0406,479.2656 1284.0406,479.875 L1284.0406,482.5 L1276.0406,482.5 Q1275.4156,482.5 1275.1578,482.2656 Q1274.9,482.0313 1274.9,481.6406 Q1274.9,481.2656 1275.1656,481.0313 Q1275.4313,480.7969 1276.0406,480.7969 L1276.3063,480.7969 L1276.3063,474.1406 L1276.0406,474.1406 Q1275.4156,474.1406 1275.1578,473.9063 Q1274.9,473.6719 1274.9,473.2813 Q1274.9,472.9063 1275.1578,472.6719 Q1275.4156,472.4375 1276.0406,472.4375 L1283.6656,472.4375 L1283.6656,475.0313 Q1283.6656,475.6406 1283.4391,475.8984 Q1283.2125,476.1563 1282.8219,476.1563 Q1282.4469,476.1563 1282.2125,475.8984 Q1281.9781,475.6406 1281.9781,475.0313 L1281.9781,474.1406 L1278.0094,474.1406 L1278.0094,476.5938 L1279.4938,476.5938 Q1279.4938,475.9375 1279.6188,475.75 Q1279.8844,475.3438 1280.3531,475.3438 Q1280.7281,475.3438 1280.9625,475.6016 Q1281.1969,475.8594 1281.1969,476.4688 L1281.1969,478.4375 Q1281.1969,478.9844 1281.0719,479.1719 Q1280.8063,479.5625 1280.3531,479.5625 Q1279.8844,479.5625 1279.6188,479.1563 Q1279.4938,478.9688 1279.4938,478.2969 L1278.0094,478.2969 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="58" x="1294.85" y="482.4102">MotorState</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1257.5" x2="1362.5" y1="493.5" y2="493.5"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="60" x="1262.5" y="508.9189">MOVING_UP</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="79" x="1262.5" y="522.7549">MOVING_DOWN</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="21" x="1262.5" y="536.5908">IDLE</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="68" x="1262.5" y="550.4268">HARD_FAULT</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="95" x="1262.5" y="564.2627">TRANSIENT_FAULT</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1257.5" x2="1362.5" y1="570.6797" y2="570.6797"/><!--MD5=[34ce679eea60871ea8cde6cc47a78112]
+class StuckSensor--><rect codeLine="207" fill="#FEFECE" filter="url(#f1wxxydmve5w26)" height="75.6719" id="StuckSensor" style="stroke:#A80036;stroke-width:1.5;" width="180" x="803" y="76.5"/><ellipse cx="853.75" cy="92.5" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M856.5156,88.375 Q856.6719,88.1563 856.8594,88.0469 Q857.0469,87.9375 857.2656,87.9375 Q857.6406,87.9375 857.875,88.1953 Q858.1094,88.4531 858.1094,89.0625 L858.1094,90.5156 Q858.1094,91.125 857.875,91.3906 Q857.6406,91.6563 857.2656,91.6563 Q856.9219,91.6563 856.7188,91.4531 Q856.5156,91.2656 856.4063,90.75 Q856.3594,90.3906 856.1719,90.2031 Q855.8438,89.8281 855.2344,89.6094 Q854.625,89.3906 854,89.3906 Q853.2344,89.3906 852.6016,89.7188 Q851.9688,90.0469 851.4766,90.7969 Q850.9844,91.5469 850.9844,92.5781 L850.9844,93.6719 Q850.9844,94.9063 851.875,95.7266 Q852.7656,96.5469 854.3594,96.5469 Q855.2969,96.5469 855.9531,96.2969 Q856.3438,96.1406 856.7656,95.7031 Q857.0313,95.4375 857.1797,95.3594 Q857.3281,95.2813 857.5313,95.2813 Q857.8594,95.2813 858.1172,95.5391 Q858.375,95.7969 858.375,96.1406 Q858.375,96.4844 858.0313,96.8906 Q857.5313,97.4688 856.7344,97.7969 Q855.6563,98.25 854.3594,98.25 Q852.8438,98.25 851.6406,97.625 Q850.6563,97.125 849.9688,96.0547 Q849.2813,94.9844 849.2813,93.7031 L849.2813,92.5469 Q849.2813,91.2188 849.8984,90.0703 Q850.5156,88.9219 851.6094,88.3047 Q852.7031,87.6875 853.9375,87.6875 Q854.6719,87.6875 855.3203,87.8516 Q855.9688,88.0156 856.5156,88.375 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="70" x="874.25" y="97.4102">StuckSensor</text><line style="stroke:#A80036;stroke-width:1.5;" x1="804" x2="982" y1="108.5" y2="108.5"/><line style="stroke:#A80036;stroke-width:1.5;" x1="804" x2="982" y1="116.5" y2="116.5"/><ellipse cx="814" cy="127.5" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="154" x="823" y="131.9189">StuckSensor(elevator: Elevator)</text><ellipse cx="814" cy="141.3359" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="100" x="823" y="145.7549">simulateStuck(): void</text><!--MD5=[8523c9eb2e1b5151dfc9c2a797373c5f]
+class Scheduler--><rect codeLine="223" fill="#FEFECE" filter="url(#f1wxxydmve5w26)" height="310.8828" id="Scheduler" style="stroke:#A80036;stroke-width:1.5;" width="361" x="3504.5" y="364.5"/><ellipse cx="3652.75" cy="380.5" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M3655.5156,376.375 Q3655.6719,376.1563 3655.8594,376.0469 Q3656.0469,375.9375 3656.2656,375.9375 Q3656.6406,375.9375 3656.875,376.1953 Q3657.1094,376.4531 3657.1094,377.0625 L3657.1094,378.5156 Q3657.1094,379.125 3656.875,379.3906 Q3656.6406,379.6563 3656.2656,379.6563 Q3655.9219,379.6563 3655.7188,379.4531 Q3655.5156,379.2656 3655.4063,378.75 Q3655.3594,378.3906 3655.1719,378.2031 Q3654.8438,377.8281 3654.2344,377.6094 Q3653.625,377.3906 3653,377.3906 Q3652.2344,377.3906 3651.6016,377.7188 Q3650.9688,378.0469 3650.4766,378.7969 Q3649.9844,379.5469 3649.9844,380.5781 L3649.9844,381.6719 Q3649.9844,382.9063 3650.875,383.7266 Q3651.7656,384.5469 3653.3594,384.5469 Q3654.2969,384.5469 3654.9531,384.2969 Q3655.3438,384.1406 3655.7656,383.7031 Q3656.0313,383.4375 3656.1797,383.3594 Q3656.3281,383.2813 3656.5313,383.2813 Q3656.8594,383.2813 3657.1172,383.5391 Q3657.375,383.7969 3657.375,384.1406 Q3657.375,384.4844 3657.0313,384.8906 Q3656.5313,385.4688 3655.7344,385.7969 Q3654.6563,386.25 3653.3594,386.25 Q3651.8438,386.25 3650.6406,385.625 Q3649.6563,385.125 3648.9688,384.0547 Q3648.2813,382.9844 3648.2813,381.7031 L3648.2813,380.5469 Q3648.2813,379.2188 3648.8984,378.0703 Q3649.5156,376.9219 3650.6094,376.3047 Q3651.7031,375.6875 3652.9375,375.6875 Q3653.6719,375.6875 3654.3203,375.8516 Q3654.9688,376.0156 3655.5156,376.375 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="56" x="3673.25" y="385.4102">Scheduler</text><line style="stroke:#A80036;stroke-width:1.5;" x1="3505.5" x2="3864.5" y1="396.5" y2="396.5"/><ellipse cx="3515.5" cy="407.5" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;fill:none;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" text-decoration="underline" textLength="159" x="3524.5" y="411.9189">SCGEDULER_RECEIVE_PORT: int</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="3512.5" y="418.3359"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="103" x="3524.5" y="425.7549">ackCheckMSG: byte[]</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="3512.5" y="432.1719"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="153" x="3524.5" y="439.5908">schedulerState: SchedulerState</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="3512.5" y="446.0078"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="146" x="3524.5" y="453.4268">elevatorStates: ElevatorState[]</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="3512.5" y="459.8438"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="114" x="3524.5" y="467.2627">floorStates: FloorState[]</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="3512.5" y="473.6797"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="209" x="3524.5" y="481.0986">msgsToElevatorSubSystem: Queue&lt;byte[]&gt;</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="3512.5" y="487.5156"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="194" x="3524.5" y="494.9346">msgsToFloorSubSystem: Queue&lt;byte[]&gt;</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="3512.5" y="501.3516"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="66" x="3524.5" y="508.7705">rpcFloor: RPC</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="3512.5" y="515.1875"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="81" x="3524.5" y="522.6064">rpcElevator: RPC</text><line style="stroke:#A80036;stroke-width:1.5;" x1="3505.5" x2="3864.5" y1="529.0234" y2="529.0234"/><ellipse cx="3515.5" cy="540.0234" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="57" x="3524.5" y="544.4424">Scheduler()</text><ellipse cx="3515.5" cy="553.8594" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="177" x="3524.5" y="558.2783">getSchedulerState(): SchedulerState</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="3512.5" y="564.6953"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="185" x="3524.5" y="572.1143">elevatorSubAddMsg(msg: byte[]): void</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="3512.5" y="578.5313"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="209" x="3524.5" y="585.9502">elevatorSubAddErrorMsg(msg: byte[]): void</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="3512.5" y="592.3672"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="168" x="3524.5" y="599.7861">floorSubAddMsg(msg: byte[]): void</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="3512.5" y="606.2031"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="305" x="3524.5" y="613.6221">findClosestElevator(floorNumber: int, isFloorBtnUp: boolean): int</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="3512.5" y="620.0391"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="335" x="3524.5" y="627.458">findDistance(floor: int, isUp: boolean, elevatorState: ElevatorState): int</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="3512.5" y="633.875"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="140" x="3524.5" y="641.2939">sendReceiveFloorSub(): void</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="3512.5" y="647.7109"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="136" x="3524.5" y="655.1299">sendReceiveElevSub(): void</text><ellipse cx="3515.5" cy="664.5469" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="50" x="3524.5" y="668.9658">run(): void</text><!--MD5=[5c55c965348f374d1b2ac966046800bc]
+class ElevatorState--><rect codeLine="246" fill="#FEFECE" filter="url(#f1wxxydmve5w26)" height="227.8672" id="ElevatorState" style="stroke:#A80036;stroke-width:1.5;" width="383" x="3493.5" y="1005"/><ellipse cx="3644.75" cy="1021" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M3647.5156,1016.875 Q3647.6719,1016.6563 3647.8594,1016.5469 Q3648.0469,1016.4375 3648.2656,1016.4375 Q3648.6406,1016.4375 3648.875,1016.6953 Q3649.1094,1016.9531 3649.1094,1017.5625 L3649.1094,1019.0156 Q3649.1094,1019.625 3648.875,1019.8906 Q3648.6406,1020.1563 3648.2656,1020.1563 Q3647.9219,1020.1563 3647.7188,1019.9531 Q3647.5156,1019.7656 3647.4063,1019.25 Q3647.3594,1018.8906 3647.1719,1018.7031 Q3646.8438,1018.3281 3646.2344,1018.1094 Q3645.625,1017.8906 3645,1017.8906 Q3644.2344,1017.8906 3643.6016,1018.2188 Q3642.9688,1018.5469 3642.4766,1019.2969 Q3641.9844,1020.0469 3641.9844,1021.0781 L3641.9844,1022.1719 Q3641.9844,1023.4063 3642.875,1024.2266 Q3643.7656,1025.0469 3645.3594,1025.0469 Q3646.2969,1025.0469 3646.9531,1024.7969 Q3647.3438,1024.6406 3647.7656,1024.2031 Q3648.0313,1023.9375 3648.1797,1023.8594 Q3648.3281,1023.7813 3648.5313,1023.7813 Q3648.8594,1023.7813 3649.1172,1024.0391 Q3649.375,1024.2969 3649.375,1024.6406 Q3649.375,1024.9844 3649.0313,1025.3906 Q3648.5313,1025.9688 3647.7344,1026.2969 Q3646.6563,1026.75 3645.3594,1026.75 Q3643.8438,1026.75 3642.6406,1026.125 Q3641.6563,1025.625 3640.9688,1024.5547 Q3640.2813,1023.4844 3640.2813,1022.2031 L3640.2813,1021.0469 Q3640.2813,1019.7188 3640.8984,1018.5703 Q3641.5156,1017.4219 3642.6094,1016.8047 Q3643.7031,1016.1875 3644.9375,1016.1875 Q3645.6719,1016.1875 3646.3203,1016.3516 Q3646.9688,1016.5156 3647.5156,1016.875 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="72" x="3665.25" y="1025.9102">ElevatorState</text><line style="stroke:#A80036;stroke-width:1.5;" x1="3494.5" x2="3875.5" y1="1037" y2="1037"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="3501.5" y="1045"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="93" x="3513.5" y="1052.4189">elevatorNumber: int</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="3501.5" y="1058.8359"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="113" x="3513.5" y="1066.2549">currentFloorNumber: int</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="3501.5" y="1072.6719"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="57" x="3513.5" y="1080.0908">motorDir: int</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="3501.5" y="1086.5078"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="69" x="3513.5" y="1093.9268">targetFloor: int</text><line style="stroke:#A80036;stroke-width:1.5;" x1="3494.5" x2="3875.5" y1="1100.3438" y2="1100.3438"/><ellipse cx="3504.5" cy="1111.3438" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="165" x="3513.5" y="1115.7627">ElevatorState(elevatorNumber: int)</text><ellipse cx="3504.5" cy="1125.1797" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="357" x="3513.5" y="1129.5986">ElevatorState(elevatorNumber: int, currentFloor: int, dir: int, targetFloor: int)</text><ellipse cx="3504.5" cy="1139.0156" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="116" x="3513.5" y="1143.4346">getElevatorNumber(): int</text><ellipse cx="3504.5" cy="1152.8516" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="137" x="3513.5" y="1157.2705">getCurrentFloorNumber(): int</text><ellipse cx="3504.5" cy="1166.6875" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="259" x="3513.5" y="1171.1064">setCurrentFloorNumber(currentFloorNumber: int): void</text><ellipse cx="3504.5" cy="1180.5234" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="80" x="3513.5" y="1184.9424">getMotorDir(): int</text><ellipse cx="3504.5" cy="1194.3594" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="146" x="3513.5" y="1198.7783">setMotorDir(motorDir: int): void</text><ellipse cx="3504.5" cy="1208.1953" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="95" x="3513.5" y="1212.6143">getTargetFloor(): int</text><ellipse cx="3504.5" cy="1222.0313" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="173" x="3513.5" y="1226.4502">setTargetFloor(targetFloor: int): void</text><!--MD5=[7d3e34a0a663118e8c958dbb557eb0ff]
+class FloorState--><rect codeLine="263" fill="#FEFECE" filter="url(#f1wxxydmve5w26)" height="186.3594" id="FloorState" style="stroke:#A80036;stroke-width:1.5;" width="212" x="3912" y="1026"/><ellipse cx="3985.75" cy="1042" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M3988.5156,1037.875 Q3988.6719,1037.6563 3988.8594,1037.5469 Q3989.0469,1037.4375 3989.2656,1037.4375 Q3989.6406,1037.4375 3989.875,1037.6953 Q3990.1094,1037.9531 3990.1094,1038.5625 L3990.1094,1040.0156 Q3990.1094,1040.625 3989.875,1040.8906 Q3989.6406,1041.1563 3989.2656,1041.1563 Q3988.9219,1041.1563 3988.7188,1040.9531 Q3988.5156,1040.7656 3988.4063,1040.25 Q3988.3594,1039.8906 3988.1719,1039.7031 Q3987.8438,1039.3281 3987.2344,1039.1094 Q3986.625,1038.8906 3986,1038.8906 Q3985.2344,1038.8906 3984.6016,1039.2188 Q3983.9688,1039.5469 3983.4766,1040.2969 Q3982.9844,1041.0469 3982.9844,1042.0781 L3982.9844,1043.1719 Q3982.9844,1044.4063 3983.875,1045.2266 Q3984.7656,1046.0469 3986.3594,1046.0469 Q3987.2969,1046.0469 3987.9531,1045.7969 Q3988.3438,1045.6406 3988.7656,1045.2031 Q3989.0313,1044.9375 3989.1797,1044.8594 Q3989.3281,1044.7813 3989.5313,1044.7813 Q3989.8594,1044.7813 3990.1172,1045.0391 Q3990.375,1045.2969 3990.375,1045.6406 Q3990.375,1045.9844 3990.0313,1046.3906 Q3989.5313,1046.9688 3988.7344,1047.2969 Q3987.6563,1047.75 3986.3594,1047.75 Q3984.8438,1047.75 3983.6406,1047.125 Q3982.6563,1046.625 3981.9688,1045.5547 Q3981.2813,1044.4844 3981.2813,1043.2031 L3981.2813,1042.0469 Q3981.2813,1040.7188 3981.8984,1039.5703 Q3982.5156,1038.4219 3983.6094,1037.8047 Q3984.7031,1037.1875 3985.9375,1037.1875 Q3986.6719,1037.1875 3987.3203,1037.3516 Q3987.9688,1037.5156 3988.5156,1037.875 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="56" x="4006.25" y="1046.9102">FloorState</text><line style="stroke:#A80036;stroke-width:1.5;" x1="3913" x2="4123" y1="1058" y2="1058"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="3920" y="1066"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="76" x="3932" y="1073.4189">floorNumber: int</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="3920" y="1079.8359"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="30" x="3932" y="1087.2549">UP: int</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="3920" y="1093.6719"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="49" x="3932" y="1101.0908">DOWN: int</text><line style="stroke:#A80036;stroke-width:1.5;" x1="3913" x2="4123" y1="1107.5078" y2="1107.5078"/><ellipse cx="3923" cy="1118.5078" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="133" x="3932" y="1122.9268">FloorState(floorNumber: int)</text><ellipse cx="3923" cy="1132.3438" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="53" x="3932" y="1136.7627">getUp(): int</text><ellipse cx="3923" cy="1146.1797" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="69" x="3932" y="1150.5986">getDown(): int</text><ellipse cx="3923" cy="1160.0156" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="92" x="3932" y="1164.4346">setUp(UP: int): void</text><ellipse cx="3923" cy="1173.8516" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="127" x="3932" y="1178.2705">setDown(DOWN: int): void</text><ellipse cx="3923" cy="1187.6875" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="101" x="3932" y="1192.1064">getFloorNumber(): int</text><ellipse cx="3923" cy="1201.5234" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="186" x="3932" y="1205.9424">setFloorNumber(floorNumber: int): void</text><!--MD5=[09b848891557ffb1890b4d117cfc9828]
+class SchedulerState--><rect codeLine="277" fill="#FEFECE" filter="url(#f1wxxydmve5w26)" height="117.1797" id="SchedulerState" style="stroke:#A80036;stroke-width:1.5;" width="127" x="4159.5" y="1060.5"/><ellipse cx="4179.45" cy="1076.5" fill="#EB937F" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M4178.3094,1077.2969 L4178.3094,1079.7969 L4182.6375,1079.7969 L4182.6375,1078.875 Q4182.6375,1078.2656 4182.8797,1078 Q4183.1219,1077.7344 4183.4969,1077.7344 Q4183.8719,1077.7344 4184.1063,1078 Q4184.3406,1078.2656 4184.3406,1078.875 L4184.3406,1081.5 L4176.3406,1081.5 Q4175.7156,1081.5 4175.4578,1081.2656 Q4175.2,1081.0313 4175.2,1080.6406 Q4175.2,1080.2656 4175.4656,1080.0313 Q4175.7313,1079.7969 4176.3406,1079.7969 L4176.6063,1079.7969 L4176.6063,1073.1406 L4176.3406,1073.1406 Q4175.7156,1073.1406 4175.4578,1072.9063 Q4175.2,1072.6719 4175.2,1072.2813 Q4175.2,1071.9063 4175.4578,1071.6719 Q4175.7156,1071.4375 4176.3406,1071.4375 L4183.9656,1071.4375 L4183.9656,1074.0313 Q4183.9656,1074.6406 4183.7391,1074.8984 Q4183.5125,1075.1563 4183.1219,1075.1563 Q4182.7469,1075.1563 4182.5125,1074.8984 Q4182.2781,1074.6406 4182.2781,1074.0313 L4182.2781,1073.1406 L4178.3094,1073.1406 L4178.3094,1075.5938 L4179.7938,1075.5938 Q4179.7938,1074.9375 4179.9188,1074.75 Q4180.1844,1074.3438 4180.6531,1074.3438 Q4181.0281,1074.3438 4181.2625,1074.6016 Q4181.4969,1074.8594 4181.4969,1075.4688 L4181.4969,1077.4375 Q4181.4969,1077.9844 4181.3719,1078.1719 Q4181.1063,1078.5625 4180.6531,1078.5625 Q4180.1844,1078.5625 4179.9188,1078.1563 Q4179.7938,1077.9688 4179.7938,1077.2969 L4178.3094,1077.2969 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="84" x="4194.55" y="1081.4102">SchedulerState</text><line style="stroke:#A80036;stroke-width:1.5;" x1="4160.5" x2="4285.5" y1="1092.5" y2="1092.5"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="43" x="4165.5" y="1107.9189">WAITING</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="97" x="4165.5" y="1121.7549">SENDING_ELEVSUB</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="106" x="4165.5" y="1135.5908">RECEIVING_ELEVSUB</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="106" x="4165.5" y="1149.4268">SENDING_FLOORSUB</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="115" x="4165.5" y="1163.2627">RECEIVING_FLOORSUB</text><line style="stroke:#A80036;stroke-width:1.5;" x1="4160.5" x2="4285.5" y1="1169.6797" y2="1169.6797"/><!--MD5=[b098efa4dd65edfeebe973e4edec7c36]
+class Floor--><rect codeLine="287" fill="#FEFECE" filter="url(#f1wxxydmve5w26)" height="89.5078" id="Floor" style="stroke:#A80036;stroke-width:1.5;" width="131" x="1853.5" y="1074"/><ellipse cx="1900.75" cy="1090" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M1903.5156,1085.875 Q1903.6719,1085.6563 1903.8594,1085.5469 Q1904.0469,1085.4375 1904.2656,1085.4375 Q1904.6406,1085.4375 1904.875,1085.6953 Q1905.1094,1085.9531 1905.1094,1086.5625 L1905.1094,1088.0156 Q1905.1094,1088.625 1904.875,1088.8906 Q1904.6406,1089.1563 1904.2656,1089.1563 Q1903.9219,1089.1563 1903.7188,1088.9531 Q1903.5156,1088.7656 1903.4063,1088.25 Q1903.3594,1087.8906 1903.1719,1087.7031 Q1902.8438,1087.3281 1902.2344,1087.1094 Q1901.625,1086.8906 1901,1086.8906 Q1900.2344,1086.8906 1899.6016,1087.2188 Q1898.9688,1087.5469 1898.4766,1088.2969 Q1897.9844,1089.0469 1897.9844,1090.0781 L1897.9844,1091.1719 Q1897.9844,1092.4063 1898.875,1093.2266 Q1899.7656,1094.0469 1901.3594,1094.0469 Q1902.2969,1094.0469 1902.9531,1093.7969 Q1903.3438,1093.6406 1903.7656,1093.2031 Q1904.0313,1092.9375 1904.1797,1092.8594 Q1904.3281,1092.7813 1904.5313,1092.7813 Q1904.8594,1092.7813 1905.1172,1093.0391 Q1905.375,1093.2969 1905.375,1093.6406 Q1905.375,1093.9844 1905.0313,1094.3906 Q1904.5313,1094.9688 1903.7344,1095.2969 Q1902.6563,1095.75 1901.3594,1095.75 Q1899.8438,1095.75 1898.6406,1095.125 Q1897.6563,1094.625 1896.9688,1093.5547 Q1896.2813,1092.4844 1896.2813,1091.2031 L1896.2813,1090.0469 Q1896.2813,1088.7188 1896.8984,1087.5703 Q1897.5156,1086.4219 1898.6094,1085.8047 Q1899.7031,1085.1875 1900.9375,1085.1875 Q1901.6719,1085.1875 1902.3203,1085.3516 Q1902.9688,1085.5156 1903.5156,1085.875 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="28" x="1921.25" y="1094.9102">Floor</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1854.5" x2="1983.5" y1="1106" y2="1106"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1861.5" y="1114"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="73" x="1873.5" y="1121.4189">floorNumber:int</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1854.5" x2="1983.5" y1="1127.8359" y2="1127.8359"/><ellipse cx="1864.5" cy="1138.8359" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="105" x="1873.5" y="1143.2549">Floor(floorNumber:int)</text><ellipse cx="1864.5" cy="1152.6719" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="101" x="1873.5" y="1157.0908">getFloorNumber(): int</text><!--MD5=[183a6393f9ddf9e247b37d7c25fff0a2]
+class MiddleFloor--><rect codeLine="293" fill="#FEFECE" filter="url(#f1wxxydmve5w26)" height="255.5391" id="MiddleFloor" style="stroke:#A80036;stroke-width:1.5;" width="161" x="1633.5" y="1451.5"/><ellipse cx="1677.75" cy="1467.5" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M1680.5156,1463.375 Q1680.6719,1463.1563 1680.8594,1463.0469 Q1681.0469,1462.9375 1681.2656,1462.9375 Q1681.6406,1462.9375 1681.875,1463.1953 Q1682.1094,1463.4531 1682.1094,1464.0625 L1682.1094,1465.5156 Q1682.1094,1466.125 1681.875,1466.3906 Q1681.6406,1466.6563 1681.2656,1466.6563 Q1680.9219,1466.6563 1680.7188,1466.4531 Q1680.5156,1466.2656 1680.4063,1465.75 Q1680.3594,1465.3906 1680.1719,1465.2031 Q1679.8438,1464.8281 1679.2344,1464.6094 Q1678.625,1464.3906 1678,1464.3906 Q1677.2344,1464.3906 1676.6016,1464.7188 Q1675.9688,1465.0469 1675.4766,1465.7969 Q1674.9844,1466.5469 1674.9844,1467.5781 L1674.9844,1468.6719 Q1674.9844,1469.9063 1675.875,1470.7266 Q1676.7656,1471.5469 1678.3594,1471.5469 Q1679.2969,1471.5469 1679.9531,1471.2969 Q1680.3438,1471.1406 1680.7656,1470.7031 Q1681.0313,1470.4375 1681.1797,1470.3594 Q1681.3281,1470.2813 1681.5313,1470.2813 Q1681.8594,1470.2813 1682.1172,1470.5391 Q1682.375,1470.7969 1682.375,1471.1406 Q1682.375,1471.4844 1682.0313,1471.8906 Q1681.5313,1472.4688 1680.7344,1472.7969 Q1679.6563,1473.25 1678.3594,1473.25 Q1676.8438,1473.25 1675.6406,1472.625 Q1674.6563,1472.125 1673.9688,1471.0547 Q1673.2813,1469.9844 1673.2813,1468.7031 L1673.2813,1467.5469 Q1673.2813,1466.2188 1673.8984,1465.0703 Q1674.5156,1463.9219 1675.6094,1463.3047 Q1676.7031,1462.6875 1677.9375,1462.6875 Q1678.6719,1462.6875 1679.3203,1462.8516 Q1679.9688,1463.0156 1680.5156,1463.375 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="64" x="1698.25" y="1472.4102">MiddleFloor</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1634.5" x2="1793.5" y1="1483.5" y2="1483.5"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1641.5" y="1491.5"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="89" x="1653.5" y="1498.9189">upBtn: FloorButton</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1641.5" y="1505.3359"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="105" x="1653.5" y="1512.7549">downBtn: FloorButton</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1641.5" y="1519.1719"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="94" x="1653.5" y="1526.5908">upLamp: FloorLamp</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1641.5" y="1533.0078"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="110" x="1653.5" y="1540.4268">downLamp: FloorLamp</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1634.5" x2="1793.5" y1="1546.8438" y2="1546.8438"/><ellipse cx="1644.5" cy="1557.8438" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="135" x="1653.5" y="1562.2627">MiddleFloor(floorNumber:int)</text><ellipse cx="1644.5" cy="1571.6797" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="108" x="1653.5" y="1576.0986">turnOnUpButton():void</text><ellipse cx="1644.5" cy="1585.5156" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="110" x="1653.5" y="1589.9346">turnOffUpButton():void</text><ellipse cx="1644.5" cy="1599.3516" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="124" x="1653.5" y="1603.7705">turnOnDownButton():void</text><ellipse cx="1644.5" cy="1613.1875" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="126" x="1653.5" y="1617.6064">turnOffDownButton():void</text><ellipse cx="1644.5" cy="1627.0234" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="115" x="1653.5" y="1631.4424">getUpLamp():FloorLamp</text><ellipse cx="1644.5" cy="1640.8594" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="131" x="1653.5" y="1645.2783">getDownLamp():FloorLamp</text><ellipse cx="1644.5" cy="1654.6953" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="103" x="1653.5" y="1659.1143">turnOnUpLamp():void</text><ellipse cx="1644.5" cy="1668.5313" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="105" x="1653.5" y="1672.9502">turnOffUpLamp():void</text><ellipse cx="1644.5" cy="1682.3672" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="119" x="1653.5" y="1686.7861">turnOnDownLamp():void</text><ellipse cx="1644.5" cy="1696.2031" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="121" x="1653.5" y="1700.6221">turnOffDownLamp():void</text><!--MD5=[800b865c31afe34b1694d8f4d165fe4d]
+class BottomFloor--><rect codeLine="312" fill="#FEFECE" filter="url(#f1wxxydmve5w26)" height="158.6875" id="BottomFloor" style="stroke:#A80036;stroke-width:1.5;" width="164" x="1830" y="1500"/><ellipse cx="1874.25" cy="1516" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M1877.0156,1511.875 Q1877.1719,1511.6563 1877.3594,1511.5469 Q1877.5469,1511.4375 1877.7656,1511.4375 Q1878.1406,1511.4375 1878.375,1511.6953 Q1878.6094,1511.9531 1878.6094,1512.5625 L1878.6094,1514.0156 Q1878.6094,1514.625 1878.375,1514.8906 Q1878.1406,1515.1563 1877.7656,1515.1563 Q1877.4219,1515.1563 1877.2188,1514.9531 Q1877.0156,1514.7656 1876.9063,1514.25 Q1876.8594,1513.8906 1876.6719,1513.7031 Q1876.3438,1513.3281 1875.7344,1513.1094 Q1875.125,1512.8906 1874.5,1512.8906 Q1873.7344,1512.8906 1873.1016,1513.2188 Q1872.4688,1513.5469 1871.9766,1514.2969 Q1871.4844,1515.0469 1871.4844,1516.0781 L1871.4844,1517.1719 Q1871.4844,1518.4063 1872.375,1519.2266 Q1873.2656,1520.0469 1874.8594,1520.0469 Q1875.7969,1520.0469 1876.4531,1519.7969 Q1876.8438,1519.6406 1877.2656,1519.2031 Q1877.5313,1518.9375 1877.6797,1518.8594 Q1877.8281,1518.7813 1878.0313,1518.7813 Q1878.3594,1518.7813 1878.6172,1519.0391 Q1878.875,1519.2969 1878.875,1519.6406 Q1878.875,1519.9844 1878.5313,1520.3906 Q1878.0313,1520.9688 1877.2344,1521.2969 Q1876.1563,1521.75 1874.8594,1521.75 Q1873.3438,1521.75 1872.1406,1521.125 Q1871.1563,1520.625 1870.4688,1519.5547 Q1869.7813,1518.4844 1869.7813,1517.2031 L1869.7813,1516.0469 Q1869.7813,1514.7188 1870.3984,1513.5703 Q1871.0156,1512.4219 1872.1094,1511.8047 Q1873.2031,1511.1875 1874.4375,1511.1875 Q1875.1719,1511.1875 1875.8203,1511.3516 Q1876.4688,1511.5156 1877.0156,1511.875 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="67" x="1894.75" y="1520.9102">BottomFloor</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1831" x2="1993" y1="1532" y2="1532"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1838" y="1540"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="89" x="1850" y="1547.4189">upBtn: FloorButton</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1838" y="1553.8359"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="94" x="1850" y="1561.2549">upLamp: FloorLamp</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1831" x2="1993" y1="1567.6719" y2="1567.6719"/><ellipse cx="1841" cy="1578.6719" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="138" x="1850" y="1583.0908">BottomFloor(floorNumber:int)</text><ellipse cx="1841" cy="1592.5078" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="108" x="1850" y="1596.9268">turnOnUpButton():void</text><ellipse cx="1841" cy="1606.3438" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="110" x="1850" y="1610.7627">turnOffUpButton():void</text><ellipse cx="1841" cy="1620.1797" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="115" x="1850" y="1624.5986">getUpLamp():FloorLamp</text><ellipse cx="1841" cy="1634.0156" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="103" x="1850" y="1638.4346">turnOnUpLamp():void</text><ellipse cx="1841" cy="1647.8516" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="105" x="1850" y="1652.2705">turnOffUpLamp():void</text><!--MD5=[aaa364cbceb4df98b3bb46edfba8b956]
+class TopFloor--><rect codeLine="324" fill="#FEFECE" filter="url(#f1wxxydmve5w26)" height="158.6875" id="TopFloor" style="stroke:#A80036;stroke-width:1.5;" width="157" x="2029.5" y="1500"/><ellipse cx="2079.25" cy="1516" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M2082.0156,1511.875 Q2082.1719,1511.6563 2082.3594,1511.5469 Q2082.5469,1511.4375 2082.7656,1511.4375 Q2083.1406,1511.4375 2083.375,1511.6953 Q2083.6094,1511.9531 2083.6094,1512.5625 L2083.6094,1514.0156 Q2083.6094,1514.625 2083.375,1514.8906 Q2083.1406,1515.1563 2082.7656,1515.1563 Q2082.4219,1515.1563 2082.2188,1514.9531 Q2082.0156,1514.7656 2081.9063,1514.25 Q2081.8594,1513.8906 2081.6719,1513.7031 Q2081.3438,1513.3281 2080.7344,1513.1094 Q2080.125,1512.8906 2079.5,1512.8906 Q2078.7344,1512.8906 2078.1016,1513.2188 Q2077.4688,1513.5469 2076.9766,1514.2969 Q2076.4844,1515.0469 2076.4844,1516.0781 L2076.4844,1517.1719 Q2076.4844,1518.4063 2077.375,1519.2266 Q2078.2656,1520.0469 2079.8594,1520.0469 Q2080.7969,1520.0469 2081.4531,1519.7969 Q2081.8438,1519.6406 2082.2656,1519.2031 Q2082.5313,1518.9375 2082.6797,1518.8594 Q2082.8281,1518.7813 2083.0313,1518.7813 Q2083.3594,1518.7813 2083.6172,1519.0391 Q2083.875,1519.2969 2083.875,1519.6406 Q2083.875,1519.9844 2083.5313,1520.3906 Q2083.0313,1520.9688 2082.2344,1521.2969 Q2081.1563,1521.75 2079.8594,1521.75 Q2078.3438,1521.75 2077.1406,1521.125 Q2076.1563,1520.625 2075.4688,1519.5547 Q2074.7813,1518.4844 2074.7813,1517.2031 L2074.7813,1516.0469 Q2074.7813,1514.7188 2075.3984,1513.5703 Q2076.0156,1512.4219 2077.1094,1511.8047 Q2078.2031,1511.1875 2079.4375,1511.1875 Q2080.1719,1511.1875 2080.8203,1511.3516 Q2081.4688,1511.5156 2082.0156,1511.875 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="49" x="2099.75" y="1520.9102">TopFloor</text><line style="stroke:#A80036;stroke-width:1.5;" x1="2030.5" x2="2185.5" y1="1532" y2="1532"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2037.5" y="1540"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="105" x="2049.5" y="1547.4189">downBtn: FloorButton</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2037.5" y="1553.8359"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="110" x="2049.5" y="1561.2549">downLamp: FloorLamp</text><line style="stroke:#A80036;stroke-width:1.5;" x1="2030.5" x2="2185.5" y1="1567.6719" y2="1567.6719"/><ellipse cx="2040.5" cy="1578.6719" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="123" x="2049.5" y="1583.0908">TopFloor(floorNumber:int)</text><ellipse cx="2040.5" cy="1592.5078" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="124" x="2049.5" y="1596.9268">turnOnDownButton():void</text><ellipse cx="2040.5" cy="1606.3438" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="126" x="2049.5" y="1610.7627">turnOffDownButton():void</text><ellipse cx="2040.5" cy="1620.1797" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="131" x="2049.5" y="1624.5986">getDownLamp():FloorLamp</text><ellipse cx="2040.5" cy="1634.0156" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="119" x="2049.5" y="1638.4346">turnOnDownLamp():void</text><ellipse cx="2040.5" cy="1647.8516" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="121" x="2049.5" y="1652.2705">turnOffDownLamp():void</text><!--MD5=[ba1f2f6d2f0fc9108108a7b19adff774]
+class FloorButton--><rect codeLine="336" fill="#FEFECE" filter="url(#f1wxxydmve5w26)" height="172.5234" id="FloorButton" style="stroke:#A80036;stroke-width:1.5;" width="230" x="2222" y="1493"/><ellipse cx="2301.25" cy="1509" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M2304.0156,1504.875 Q2304.1719,1504.6563 2304.3594,1504.5469 Q2304.5469,1504.4375 2304.7656,1504.4375 Q2305.1406,1504.4375 2305.375,1504.6953 Q2305.6094,1504.9531 2305.6094,1505.5625 L2305.6094,1507.0156 Q2305.6094,1507.625 2305.375,1507.8906 Q2305.1406,1508.1563 2304.7656,1508.1563 Q2304.4219,1508.1563 2304.2188,1507.9531 Q2304.0156,1507.7656 2303.9063,1507.25 Q2303.8594,1506.8906 2303.6719,1506.7031 Q2303.3438,1506.3281 2302.7344,1506.1094 Q2302.125,1505.8906 2301.5,1505.8906 Q2300.7344,1505.8906 2300.1016,1506.2188 Q2299.4688,1506.5469 2298.9766,1507.2969 Q2298.4844,1508.0469 2298.4844,1509.0781 L2298.4844,1510.1719 Q2298.4844,1511.4063 2299.375,1512.2266 Q2300.2656,1513.0469 2301.8594,1513.0469 Q2302.7969,1513.0469 2303.4531,1512.7969 Q2303.8438,1512.6406 2304.2656,1512.2031 Q2304.5313,1511.9375 2304.6797,1511.8594 Q2304.8281,1511.7813 2305.0313,1511.7813 Q2305.3594,1511.7813 2305.6172,1512.0391 Q2305.875,1512.2969 2305.875,1512.6406 Q2305.875,1512.9844 2305.5313,1513.3906 Q2305.0313,1513.9688 2304.2344,1514.2969 Q2303.1563,1514.75 2301.8594,1514.75 Q2300.3438,1514.75 2299.1406,1514.125 Q2298.1563,1513.625 2297.4688,1512.5547 Q2296.7813,1511.4844 2296.7813,1510.2031 L2296.7813,1509.0469 Q2296.7813,1507.7188 2297.3984,1506.5703 Q2298.0156,1505.4219 2299.1094,1504.8047 Q2300.2031,1504.1875 2301.4375,1504.1875 Q2302.1719,1504.1875 2302.8203,1504.3516 Q2303.4688,1504.5156 2304.0156,1504.875 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="63" x="2321.75" y="1513.9102">FloorButton</text><line style="stroke:#A80036;stroke-width:1.5;" x1="2223" x2="2451" y1="1525" y2="1525"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2230" y="1533"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="89" x="2242" y="1540.4189">isPressed:boolean</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2230" y="1546.8359"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="73" x="2242" y="1554.2549">floorNumber:int</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2230" y="1560.6719"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="62" x="2242" y="1568.0908">isUp:boolean</text><line style="stroke:#A80036;stroke-width:1.5;" x1="2223" x2="2451" y1="1574.5078" y2="1574.5078"/><ellipse cx="2233" cy="1585.5078" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="204" x="2242" y="1589.9268">FloorButton(floorNumber:int, isUp:boolean)</text><ellipse cx="2233" cy="1599.3438" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="97" x="2242" y="1603.7627">isPressed():boolean</text><ellipse cx="2233" cy="1613.1797" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="70" x="2242" y="1617.5986">isUp():boolean</text><ellipse cx="2233" cy="1627.0156" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="98" x="2242" y="1631.4346">getFloorNumber():int</text><ellipse cx="2233" cy="1640.8516" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="64" x="2242" y="1645.2705">turnOn():void</text><ellipse cx="2233" cy="1654.6875" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="66" x="2242" y="1659.1064">turnOff():void</text><!--MD5=[1a3b33eacb204ede197b79cfb424c97d]
+class FloorLamp--><rect codeLine="349" fill="#FEFECE" filter="url(#f1wxxydmve5w26)" height="117.1797" id="FloorLamp" style="stroke:#A80036;stroke-width:1.5;" width="131" x="1467.5" y="1521"/><ellipse cx="1500.05" cy="1537" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M1502.8156,1532.875 Q1502.9719,1532.6563 1503.1594,1532.5469 Q1503.3469,1532.4375 1503.5656,1532.4375 Q1503.9406,1532.4375 1504.175,1532.6953 Q1504.4094,1532.9531 1504.4094,1533.5625 L1504.4094,1535.0156 Q1504.4094,1535.625 1504.175,1535.8906 Q1503.9406,1536.1563 1503.5656,1536.1563 Q1503.2219,1536.1563 1503.0188,1535.9531 Q1502.8156,1535.7656 1502.7063,1535.25 Q1502.6594,1534.8906 1502.4719,1534.7031 Q1502.1438,1534.3281 1501.5344,1534.1094 Q1500.925,1533.8906 1500.3,1533.8906 Q1499.5344,1533.8906 1498.9016,1534.2188 Q1498.2688,1534.5469 1497.7766,1535.2969 Q1497.2844,1536.0469 1497.2844,1537.0781 L1497.2844,1538.1719 Q1497.2844,1539.4063 1498.175,1540.2266 Q1499.0656,1541.0469 1500.6594,1541.0469 Q1501.5969,1541.0469 1502.2531,1540.7969 Q1502.6438,1540.6406 1503.0656,1540.2031 Q1503.3313,1539.9375 1503.4797,1539.8594 Q1503.6281,1539.7813 1503.8313,1539.7813 Q1504.1594,1539.7813 1504.4172,1540.0391 Q1504.675,1540.2969 1504.675,1540.6406 Q1504.675,1540.9844 1504.3313,1541.3906 Q1503.8313,1541.9688 1503.0344,1542.2969 Q1501.9563,1542.75 1500.6594,1542.75 Q1499.1438,1542.75 1497.9406,1542.125 Q1496.9563,1541.625 1496.2688,1540.5547 Q1495.5813,1539.4844 1495.5813,1538.2031 L1495.5813,1537.0469 Q1495.5813,1535.7188 1496.1984,1534.5703 Q1496.8156,1533.4219 1497.9094,1532.8047 Q1499.0031,1532.1875 1500.2375,1532.1875 Q1500.9719,1532.1875 1501.6203,1532.3516 Q1502.2688,1532.5156 1502.8156,1532.875 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="60" x="1517.95" y="1541.9102">FloorLamp</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1468.5" x2="1597.5" y1="1553" y2="1553"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1475.5" y="1561"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="97" x="1487.5" y="1568.4189">isTurnedOn:boolean</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1468.5" x2="1597.5" y1="1574.8359" y2="1574.8359"/><ellipse cx="1478.5" cy="1585.8359" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="58" x="1487.5" y="1590.2549">FloorLamp()</text><ellipse cx="1478.5" cy="1599.6719" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="105" x="1487.5" y="1604.0908">isTurnedOn():boolean</text><ellipse cx="1478.5" cy="1613.5078" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="64" x="1487.5" y="1617.9268">turnOn():void</text><ellipse cx="1478.5" cy="1627.3438" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="66" x="1487.5" y="1631.7627">turnOff():void</text><!--MD5=[84c6549adfcb4810bdc50ea2cad48d52]
+class FloorSubsystem--><rect codeLine="358" fill="#FEFECE" filter="url(#f1wxxydmve5w26)" height="255.5391" id="FloorSubsystem" style="stroke:#A80036;stroke-width:1.5;" width="280" x="2099" y="392"/><ellipse cx="2189.75" cy="408" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M2192.5156,403.875 Q2192.6719,403.6563 2192.8594,403.5469 Q2193.0469,403.4375 2193.2656,403.4375 Q2193.6406,403.4375 2193.875,403.6953 Q2194.1094,403.9531 2194.1094,404.5625 L2194.1094,406.0156 Q2194.1094,406.625 2193.875,406.8906 Q2193.6406,407.1563 2193.2656,407.1563 Q2192.9219,407.1563 2192.7188,406.9531 Q2192.5156,406.7656 2192.4063,406.25 Q2192.3594,405.8906 2192.1719,405.7031 Q2191.8438,405.3281 2191.2344,405.1094 Q2190.625,404.8906 2190,404.8906 Q2189.2344,404.8906 2188.6016,405.2188 Q2187.9688,405.5469 2187.4766,406.2969 Q2186.9844,407.0469 2186.9844,408.0781 L2186.9844,409.1719 Q2186.9844,410.4063 2187.875,411.2266 Q2188.7656,412.0469 2190.3594,412.0469 Q2191.2969,412.0469 2191.9531,411.7969 Q2192.3438,411.6406 2192.7656,411.2031 Q2193.0313,410.9375 2193.1797,410.8594 Q2193.3281,410.7813 2193.5313,410.7813 Q2193.8594,410.7813 2194.1172,411.0391 Q2194.375,411.2969 2194.375,411.6406 Q2194.375,411.9844 2194.0313,412.3906 Q2193.5313,412.9688 2192.7344,413.2969 Q2191.6563,413.75 2190.3594,413.75 Q2188.8438,413.75 2187.6406,413.125 Q2186.6563,412.625 2185.9688,411.5547 Q2185.2813,410.4844 2185.2813,409.2031 L2185.2813,408.0469 Q2185.2813,406.7188 2185.8984,405.5703 Q2186.5156,404.4219 2187.6094,403.8047 Q2188.7031,403.1875 2189.9375,403.1875 Q2190.6719,403.1875 2191.3203,403.3516 Q2191.9688,403.5156 2192.5156,403.875 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="90" x="2210.25" y="412.9102">FloorSubsystem</text><line style="stroke:#A80036;stroke-width:1.5;" x1="2100" x2="2378" y1="424" y2="424"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2107" y="432"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="66" x="2119" y="439.4189">Floors: Floor[]</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2107" y="445.8359"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="169" x="2119" y="453.2549">messageQueue: LinkedList&lt;byte[]&gt;</text><ellipse cx="2110" cy="462.6719" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;fill:none;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="119" x="2119" y="467.0908">simulationFile: FileLoader</text><ellipse cx="2110" cy="476.5078" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;fill:none;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="42" x="2119" y="480.9268">rpc: RPC</text><ellipse cx="2110" cy="490.3438" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;fill:none;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="180" x="2119" y="494.7627">FLOORSUBSYSTEM_DEST_PORT: int</text><ellipse cx="2110" cy="504.1797" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;fill:none;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="182" x="2119" y="508.5986">FLOORSUBSYSTEM_RECV_PORT: int</text><line style="stroke:#A80036;stroke-width:1.5;" x1="2100" x2="2378" y1="515.0156" y2="515.0156"/><ellipse cx="2110" cy="526.0156" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="190" x="2119" y="530.4346">FloorSubsystem(fileLoader: FileLoader)</text><ellipse cx="2110" cy="539.8516" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="254" x="2119" y="544.2705">createFloors(maxFloorNumber:int, floors:Floor[]):void</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2107" y="550.6875"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="149" x="2119" y="558.1064">addToQueue(msg: byte[]): void</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2107" y="564.5234"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="132" x="2119" y="571.9424">getMsgFromQueue(): byte[]</text><ellipse cx="2110" cy="581.3594" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="105" x="2119" y="585.7783">nextInstruction(): void</text><ellipse cx="2110" cy="595.1953" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="106" x="2119" y="599.6143">readInstruction(): void</text><ellipse cx="2110" cy="609.0313" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="70" x="2119" y="613.4502">receive(): void</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2107" y="619.8672"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="107" x="2119" y="627.2861">waitToStartSim(): void</text><ellipse cx="2110" cy="636.7031" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="50" x="2119" y="641.1221">run(): void</text><!--MD5=[a568183ee4ee9bf267962d4b60161a9a]
+class FileLoader--><rect codeLine="377" fill="#FEFECE" filter="url(#f1wxxydmve5w26)" height="338.5547" id="FileLoader" style="stroke:#A80036;stroke-width:1.5;" width="410" x="2034" y="949.5"/><ellipse cx="2205.25" cy="965.5" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M2208.0156,961.375 Q2208.1719,961.1563 2208.3594,961.0469 Q2208.5469,960.9375 2208.7656,960.9375 Q2209.1406,960.9375 2209.375,961.1953 Q2209.6094,961.4531 2209.6094,962.0625 L2209.6094,963.5156 Q2209.6094,964.125 2209.375,964.3906 Q2209.1406,964.6563 2208.7656,964.6563 Q2208.4219,964.6563 2208.2188,964.4531 Q2208.0156,964.2656 2207.9063,963.75 Q2207.8594,963.3906 2207.6719,963.2031 Q2207.3438,962.8281 2206.7344,962.6094 Q2206.125,962.3906 2205.5,962.3906 Q2204.7344,962.3906 2204.1016,962.7188 Q2203.4688,963.0469 2202.9766,963.7969 Q2202.4844,964.5469 2202.4844,965.5781 L2202.4844,966.6719 Q2202.4844,967.9063 2203.375,968.7266 Q2204.2656,969.5469 2205.8594,969.5469 Q2206.7969,969.5469 2207.4531,969.2969 Q2207.8438,969.1406 2208.2656,968.7031 Q2208.5313,968.4375 2208.6797,968.3594 Q2208.8281,968.2813 2209.0313,968.2813 Q2209.3594,968.2813 2209.6172,968.5391 Q2209.875,968.7969 2209.875,969.1406 Q2209.875,969.4844 2209.5313,969.8906 Q2209.0313,970.4688 2208.2344,970.7969 Q2207.1563,971.25 2205.8594,971.25 Q2204.3438,971.25 2203.1406,970.625 Q2202.1563,970.125 2201.4688,969.0547 Q2200.7813,967.9844 2200.7813,966.7031 L2200.7813,965.5469 Q2200.7813,964.2188 2201.3984,963.0703 Q2202.0156,961.9219 2203.1094,961.3047 Q2204.2031,960.6875 2205.4375,960.6875 Q2206.1719,960.6875 2206.8203,960.8516 Q2207.4688,961.0156 2208.0156,961.375 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="59" x="2225.75" y="970.4102">FileLoader</text><line style="stroke:#A80036;stroke-width:1.5;" x1="2035" x2="2443" y1="981.5" y2="981.5"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2042" y="989.5"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="82" x="2054" y="996.9189">simulationFile:File</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2042" y="1003.3359"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="84" x="2054" y="1010.7549">scanner:Scanner</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2042" y="1017.1719"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="71" x="2054" y="1024.5908">currLine:String</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2042" y="1031.0078"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="90" x="2054" y="1038.4268">csvSimInfo:String[]</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2042" y="1044.8438"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="95" x="2054" y="1052.2627">localTime:LocalTime</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2042" y="1058.6797"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="247" x="2054" y="1066.0986">destinations:HashMap&lt;Integer, ArrayList&lt;Integer&gt;&gt;</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2042" y="1072.5156"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="174" x="2054" y="1079.9346">faults:HashMap&lt;Integer, LocalTime&gt;</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2042" y="1086.3516"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="123" x="2054" y="1093.7705">reachedEndOFile:boolean</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2042" y="1100.1875"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" text-decoration="underline" textLength="160" x="2054" y="1107.6064">SIMULATION_START_TIME:String</text><line style="stroke:#A80036;stroke-width:1.5;" x1="2035" x2="2443" y1="1114.0234" y2="1114.0234"/><ellipse cx="2045" cy="1125.0234" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="58" x="2054" y="1129.4424">FileLoader()</text><ellipse cx="2045" cy="1138.8594" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="274" x="2054" y="1143.2783">getDestinations(): HashMap&lt;Integer, ArrayList&lt;Integer&gt;&gt;</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2042" y="1149.6953"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="117" x="2054" y="1157.1143">pushDestinations(): void</text><ellipse cx="2045" cy="1166.5313" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="384" x="2054" y="1170.9502">popDestinations(departFloor:int, goingUp:boolean, elevatorNumber:int):  Integer[]</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2042" y="1177.3672"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="87" x="2054" y="1184.7861">pushFaults(): void</text><ellipse cx="2045" cy="1194.2031" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="80" x="2054" y="1198.6221">departFloor(): int</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2042" y="1205.0391"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="70" x="2054" y="1212.458">destFloor(): int</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2042" y="1218.875"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="84" x="2054" y="1226.2939">readLine(): String</text><ellipse cx="2045" cy="1235.7109" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="93" x="2054" y="1240.1299">nextLine(): boolean</text><ellipse cx="2045" cy="1249.5469" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="99" x="2054" y="1253.9658">getTime(): LocalTime</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2042" y="1260.3828"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="86" x="2054" y="1267.8018">findOffsets(): int[]</text><ellipse cx="2045" cy="1277.2188" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="73" x="2054" y="1281.6377">isUp(): boolean</text><!--MD5=[948346f2dfe9866ea883595a582714fa]
+class Thread--><rect fill="#FEFECE" filter="url(#f1wxxydmve5w26)" height="48" id="Thread" style="stroke:#A80036;stroke-width:1.5;" width="71" x="2203.5" y="90.5"/><ellipse cx="2218.5" cy="106.5" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M2221.2656,102.375 Q2221.4219,102.1563 2221.6094,102.0469 Q2221.7969,101.9375 2222.0156,101.9375 Q2222.3906,101.9375 2222.625,102.1953 Q2222.8594,102.4531 2222.8594,103.0625 L2222.8594,104.5156 Q2222.8594,105.125 2222.625,105.3906 Q2222.3906,105.6563 2222.0156,105.6563 Q2221.6719,105.6563 2221.4688,105.4531 Q2221.2656,105.2656 2221.1563,104.75 Q2221.1094,104.3906 2220.9219,104.2031 Q2220.5938,103.8281 2219.9844,103.6094 Q2219.375,103.3906 2218.75,103.3906 Q2217.9844,103.3906 2217.3516,103.7188 Q2216.7188,104.0469 2216.2266,104.7969 Q2215.7344,105.5469 2215.7344,106.5781 L2215.7344,107.6719 Q2215.7344,108.9063 2216.625,109.7266 Q2217.5156,110.5469 2219.1094,110.5469 Q2220.0469,110.5469 2220.7031,110.2969 Q2221.0938,110.1406 2221.5156,109.7031 Q2221.7813,109.4375 2221.9297,109.3594 Q2222.0781,109.2813 2222.2813,109.2813 Q2222.6094,109.2813 2222.8672,109.5391 Q2223.125,109.7969 2223.125,110.1406 Q2223.125,110.4844 2222.7813,110.8906 Q2222.2813,111.4688 2221.4844,111.7969 Q2220.4063,112.25 2219.1094,112.25 Q2217.5938,112.25 2216.3906,111.625 Q2215.4063,111.125 2214.7188,110.0547 Q2214.0313,108.9844 2214.0313,107.7031 L2214.0313,106.5469 Q2214.0313,105.2188 2214.6484,104.0703 Q2215.2656,102.9219 2216.3594,102.3047 Q2217.4531,101.6875 2218.6875,101.6875 Q2219.4219,101.6875 2220.0703,101.8516 Q2220.7188,102.0156 2221.2656,102.375 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="39" x="2232.5" y="111.4102">Thread</text><line style="stroke:#A80036;stroke-width:1.5;" x1="2204.5" x2="2273.5" y1="122.5" y2="122.5"/><line style="stroke:#A80036;stroke-width:1.5;" x1="2204.5" x2="2273.5" y1="130.5" y2="130.5"/><!--MD5=[202419df66c8a258a0f32bd3e98d95f5]
+reverse link Common to Config--><path codeLine="83" d="M3219.13,1397.93 C3227.24,1441.19 3234.9,1482.03 3240.88,1513.88 " fill="none" id="Common-backto-Config" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="3216.72,1385.05,3213.8969,1391.6855,3218.9362,1396.8436,3221.7593,1390.208,3216.72,1385.05" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="3211.0922" y="1406.6824">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="3232.1716" y="1503.3413">1</text><!--MD5=[ac928085e991edb78d4cd0110f001e82]
+reverse link Common to ELEV_ERROR--><path codeLine="84" d="M3059.27,1397.5 C3052.98,1413.71 3046.82,1429.58 3040.92,1444.76 " fill="none" id="Common-backto-ELEV_ERROR" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="3064.1,1385.05,3058.198,1389.1932,3059.7526,1396.2348,3065.6545,1392.0915,3064.1,1385.05" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="3053.9413" y="1406.6824">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="3036.7193" y="1434.0023">1</text><!--MD5=[9a2a0095f870dcf31663f5b19266fccd]
+link ElevatorLamp to Elevator--><path codeLine="213" d="M1075.98,187.17 C1069.95,201.57 1063.28,217.51 1056.21,234.38 " fill="none" id="ElevatorLamp-to-Elevator" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1051,246.82,1057.0081,242.8322,1055.6378,235.7525,1049.6297,239.7403,1051,246.82" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="5" x="1067.8804" y="208.3778">*</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="1047.2805" y="235.9714">1</text><!--MD5=[dfa94267fc79f5e2543ca223563b8f71]
+link ElevatorButton to Elevator--><path codeLine="214" d="M212.15,176.56 C218.13,180.18 224.12,183.7 230,187 C377.18,269.7 548.41,350.48 685.5,411.65 " fill="none" id="ElevatorButton-to-Elevator" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="697.4,416.95,693.543,410.8571,686.4353,412.0739,690.2923,418.1668,697.4,416.95" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="5" x="220.1121" y="178.7224">*</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="682.4233" y="410.8055">1</text><!--MD5=[d59e3548c957c6eef2499567b372b7db]
+link ArrivalSensor to Elevator--><path codeLine="215" d="M472.36,159.84 C524.99,200.52 606.78,263.74 687.16,325.87 " fill="none" id="ArrivalSensor-to-Elevator" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="697.46,333.84,695.1559,327.0069,687.9623,326.5056,690.2663,333.3387,697.46,333.84" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="472.5974" y="180.5594">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="682.4853" y="324.9685">1</text><!--MD5=[4995df76d4d0e0d6bc68e5303c67cb7b]
+link Motor to Elevator--><path codeLine="216" d="M1258.46,180.33 C1237.47,202.45 1212.53,228.72 1185.97,256.7 " fill="none" id="Motor-to-Elevator" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1176.9,266.26,1183.9312,264.6594,1185.1581,257.5534,1178.1268,259.154,1176.9,266.26" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="1244.7528" y="201.4562">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="1184.1259" y="255.9885">1</text><!--MD5=[823368a9f711b805506270aaac383af8]
+link Door to Elevator--><path codeLine="217" d="M736.34,187.17 C745.22,201.85 755.06,218.13 765.48,235.36 " fill="none" id="Door-to-Elevator" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="772.41,246.82,772.7286,239.6159,766.2012,236.5511,765.8826,243.7551,772.41,246.82" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="733.1373" y="208.3778">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="760.4198" y="235.9714">1</text><!--MD5=[9b56f9eebd5842b6a12b60911c86c86d]
+link StuckSensor to Elevator--><path codeLine="218" d="M897.06,152.74 C899.34,173.66 902.42,201.88 905.86,233.43 " fill="none" id="StuckSensor-to-Elevator" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="907.3,246.64,910.63,240.2438,906.0067,234.7099,902.6766,241.1061,907.3,246.64" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="890.1492" y="173.6588">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="899.3144" y="235.7861">1</text><!--MD5=[a5e490722c528d0ccf8afd02c0be1eab]
+reverse link Elevator to ElevatorSubsystem--><path codeLine="219" d="M1012.26,798.35 C1025.59,847.47 1039.13,897.35 1051.42,942.65 " fill="none" id="Elevator-backto-ElevatorSubsystem" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1010.89,793.29,1009.3941,803.0246,1012.2032,798.1145,1017.1133,800.9235,1010.89,793.29" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="1005.7597" y="814.2603">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="1042.2651" y="932.367">1</text><!--MD5=[49ab9ea3a26d93428f064faf6144150c]
+link Motor to MotorState--><path codeLine="220" d="M1318.39,180.33 C1316.51,256.15 1313.42,380.81 1311.56,455.88 " fill="none" id="Motor-to-MotorState" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1311.43,461.2,1315.6346,452.2938,1311.5443,456.2013,1307.6367,452.1109,1311.43,461.2" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="1310.863" y="201.4562">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="1304.1777" y="450.5643">1</text><!--MD5=[f6f7ecabb955076b218d479d19941d1d]
+reverse link Floor to MiddleFloor--><path codeLine="423" d="M1890.83,1183.01 C1860.06,1251.83 1809.96,1363.88 1770.93,1451.18 " fill="none" id="Floor-backto-MiddleFloor" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="none" points="1884.6,1179.78,1899.16,1164.38,1897.38,1185.49,1884.6,1179.78" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[72d25c1a3e744e1993e099db6cb1eb77]
+reverse link Floor to TopFloor--><path codeLine="424" d="M1940.62,1183.09 C1959.56,1237.16 1988.44,1316.86 2017,1385 C2033,1423.17 2052.33,1464.8 2069.04,1499.63 " fill="none" id="Floor-backto-TopFloor" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="none" points="1933.96,1185.25,1934,1164.06,1947.18,1180.64,1933.96,1185.25" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[825b813e0e9153452cb2cd7b152015dc]
+reverse link Floor to BottomFloor--><path codeLine="425" d="M1918.01,1184.54 C1916.75,1267.3 1914.56,1410.74 1913.2,1499.81 " fill="none" id="Floor-backto-BottomFloor" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="none" points="1911.02,1184.27,1918.32,1164.38,1925.02,1184.48,1911.02,1184.27" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[5ffa9f25c851fdfe29b152234a208ea4]
+reverse link Floor to FloorButton--><path codeLine="426" d="M1925.46,1177.19 C1935.19,1236.95 1959.1,1329.58 2017,1385 C2080.05,1445.36 2129.54,1399.46 2204,1445 C2225.35,1458.06 2245.82,1475.23 2264.02,1492.9 " fill="none" id="Floor-backto-FloorButton" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1923.49,1164.22,1920.4385,1170.7536,1925.2959,1176.0833,1928.3474,1169.5497,1923.49,1164.22" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="1916.623" y="1184.9232">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="22" x="2234.5405" y="1482.0067">1..2</text><!--MD5=[5ce92ea09770e36a6facefa2f25463ac]
+reverse link Floor to FloorLamp--><path codeLine="427" d="M1863.18,1173.25 C1799.6,1235.35 1694.38,1342.6 1616,1445 C1597.84,1468.73 1580.03,1496.58 1565.59,1520.69 " fill="none" id="Floor-backto-FloorLamp" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1872.64,1164.05,1865.5498,1165.3651,1864.0368,1172.4157,1871.127,1171.1006,1872.64,1164.05" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="1858.6284" y="1185.0646">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="22" x="1546.2213" y="1510.0531">1..2</text><!--MD5=[f420196ee5c5e1310bc62aa460ef3c2c]
+link FloorSubsystem to Floor--><path codeLine="428" d="M2125.61,648.11 C2087.14,696.03 2046.48,752.64 2017,809 C1971.9,895.22 1943.02,1005.92 1929.02,1068.7 " fill="none" id="FloorSubsystem-to-Floor" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1927.88,1073.88,1933.742,1065.9657,1928.9677,1068.9997,1925.9336,1064.2254,1927.88,1073.88" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="2112.2176" y="669.0708">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="1921.7038" y="1063.3057">1</text><!--MD5=[51809690e75f7e2bb667ff80ad951fe7]
+link FloorSubsystem to FileLoader--><path codeLine="429" d="M2239,648.34 C2239,734.63 2239,849.75 2239,944.42 " fill="none" id="FloorSubsystem-to-FileLoader" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="2239,949.48,2243,940.48,2239,944.48,2235,940.48,2239,949.48" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="2231.8195" y="668.8861">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="2231.8305" y="938.3958">1</text><!--MD5=[4c78c94d74459b29fc404bfded00170e]
+reverse link Scheduler to SchedulerState--><path codeLine="432" d="M3877.48,601.07 C3970.08,648.73 4075.22,717.87 4142,809 C4197.07,884.15 4214.75,993.74 4220.39,1060.2 " fill="none" id="Scheduler-backto-SchedulerState" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="3865.67,595.07,3869.2076,601.3537,3876.3686,600.5051,3872.831,594.2213,3865.67,595.07" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="3873.4397" y="595.4045">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="4212.6453" y="1049.5643">1</text><!--MD5=[380409c7f01def9caf79ec9f0c1be500]
+reverse link Scheduler to FloorState--><path codeLine="433" d="M3815.65,686.47 C3843.42,725.46 3871.2,767.73 3894,809 C3932.5,878.7 3965.47,962.86 3987.72,1025.73 " fill="none" id="Scheduler-backto-FloorState" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="3807.82,675.56,3808.0727,682.7667,3814.8223,685.3052,3814.5695,678.0985,3807.82,675.56" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="3806.5996" y="696.9889">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="5" x="3980.1078" y="1015.1549">*</text><!--MD5=[b30231c146f30f363c72d76b0448d144]
+reverse link Scheduler to ElevatorState--><path codeLine="434" d="M3685,688.64 C3685,789.57 3685,915.39 3685,1004.67 " fill="none" id="Scheduler-backto-ElevatorState" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="3685,675.52,3681,681.52,3685,687.52,3689,681.52,3685,675.52" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="3677.8305" y="696.947">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="5" x="3679.832" y="993.9623">*</text><!--MD5=[bc730552c8e52437f0dd1dd46466833d]
+reverse link Thread to FloorSubsystem--><path codeLine="436" d="M2239,158.91 C2239,214.21 2239,312.18 2239,391.99 " fill="none" id="Thread-backto-FloorSubsystem" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="none" points="2232,158.64,2239,138.64,2246,158.64,2232,158.64" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[2b558522cedcc24b08f82920bee490e6]
+reverse link Thread to ElevatorSubsystem--><path codeLine="437" d="M2182.93,116.52 C2020.09,120.7 1552.29,141.81 1451,247 C1366.15,335.12 1431,681.36 1381,793 C1357.11,846.35 1321.47,897.45 1283.51,942.69 " fill="none" id="Thread-backto-ElevatorSubsystem" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="none" points="2183.23,109.51,2203.39,116.04,2183.56,123.5,2183.23,109.51" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[f28ca05007bb8c9a3287348d368c13be]
+reverse link Thread to Scheduler--><path codeLine="438" d="M2294.2,130.9 C2492.57,186.26 3174.93,376.67 3504.3,468.58 " fill="none" id="Thread-backto-Scheduler" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="none" points="2292.13,137.59,2274.74,125.47,2295.89,124.11,2292.13,137.59" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[522db232585c76a063ab4b15540bd72b]
+reverse link FloorSubsystem to RPC--><path codeLine="440" d="M2350.93,658.34 C2388.72,705.61 2430.76,759.19 2468,809 C2521.58,880.66 2579.72,963.76 2622.32,1025.71 " fill="none" id="FloorSubsystem-backto-RPC" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="2342.68,648.04,2343.3059,655.2239,2350.1779,657.4091,2349.552,650.2253,2342.68,648.04" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="2341.1586" y="668.997">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="2610.0463" y="1015.1333">1</text><!--MD5=[0b7ac22905cd61ba84f5687b4532f551]
+reverse link Scheduler to RPC--><path codeLine="441" d="M3491.37,553.01 C3316.34,590 3059.37,665.22 2880,809 C2808.48,866.33 2755.57,957.39 2723.05,1025.84 " fill="none" id="Scheduler-backto-RPC" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="3504.35,550.3,3497.6592,547.6105,3492.6032,552.7522,3499.294,555.4417,3504.35,550.3" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="3489.5812" y="548.7458">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="2718.8032" y="1015.2736">2</text><!--MD5=[1efad7b62c49676b4d685e7f527f4e47]
+reverse link Elevator to RPC--><path codeLine="442" d="M1188.16,768.53 C1204.66,777.92 1221.65,786.21 1239,793 C1302.59,817.89 2407.62,777.12 2468,809 C2554.66,854.76 2614.11,952.45 2648.58,1025.82 " fill="none" id="Elevator-backto-RPC" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1176.8,761.85,1179.9385,768.3423,1187.1385,767.9423,1184,761.45,1176.8,761.85" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="1184.7833" y="767.0226">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="2638.3989" y="1015.252">1</text><!--MD5=[a5a328c19ce4ac2e42b753c9a73a3060]
+@startuml Elevator Iteration 4
+package Common{
+    class Common{
+        +config: config
+        +{static}NUM_FLOORS: int
+        +{static}NUM_ELEVATORS: int
+        +{static}TIMESTAMP_FORMAT: SimpleDateFormat
+        
+        +enum MESSAGETYPE
+            Invalid
+            Elevator
+            Floor
+            Scheduler
+            Acknowledgement
+            ELEV_ERROR
+            START_SIM
+            -value: byte
+        
+        +enum ELEV_ERROR
+        +{static}encodeStartMsg(startSim: boolean): byte[]
+        -{static}decodeStartMsg(msg: byte[]): int[]
+        +{static}encodeElevError(err: ELEV_ERROR, elevNum: int, curFloor: int, destFloor: int, dirFloor: boolean): byte[]
+        +{static}encodeElevMsgIntoBytes(elevatorNumber: int, currentFloor: int, state: MotorState, targetFloor: int): byte[]
+        +{static}encodeFloorMsgIntoBytes(floorNumber: int, isFloorBtnUp: boolean): byte[]
+        +{static}encodeSchedulerMsgIntoBytes(elevatorNumber: int, sharedFloorNumber: int, isFloorBtnUp: boolean): byte[]
+        +{static}encodeAckMsgIntoBytes(ack: ACKOWLEDGEMENT): byte[]
+        +{static}findType(msg: byte[] ): MESSAGETYPE 
+        +{static}decode(msg: byte[]): int[]
+        -{static}decodeElevMsgFromBytes(byte[] msg): int[]
+        +{static}decodeSchedulerFromElevMsgToString(decodedMsg: int[]): String
+        -{static}decodeFloorMsgFromBytes(byte[] msg): int[]
+        +{static}decodeSchedulerFromFloorMsgToString(decodedMsg: int[]): String
+        -{static}decodeSchedulerMsgFromBytes(byte[] msg): int[]
+        +{static}decodeSchedulerFloorMsgToString(decodedMsg: int[]): String
+        +{static}decodeSchedulerElevMsgToString(decodedMsg: int[]): String
+        -{static}decodeAckMsgFromBytes(byte[] msg): int[]
+        +{static}findAcknowledgement(byte[] msg): ACKNOWLEDGEMENT
+        +{static}findElevError(msg: byte[]): ELEV_ERROR
+    }
+
+    enum ELEV_ERROR {
+        INVALID
+        UNKNOWN
+        STUCK_BETWEEN
+        DOOR_OPEN
+        DOOR_CLOSE
+
+        -value: byte 
+        -name: String 
+        -elevNum: byte 
+        -currFloor: byte 
+        -destFloor: byte 
+        -dirFloor: byte 
+
+        -ELEV_ERROR(b: byte, n: String): byte[]
+        -encode(): byte[]
+        +{static} decode(msg: byte[]):ELEV_ERROR
+        -{static}decodeElevErrorMsgFromBytes(msg: byte[]): int[]
+    }
+
+    class Config{
+        +{static}CONFIG_FILE_NAME: String
+        -props: Properties
+        +Config()
+        +getProperty(key: String): String
+        +getIntProperty(key: String): int
+        +getLongProperty(key: String): Long
+    }
+
+    class RPC{
+        -destAddress: InetAddress
+        -destinationPort: int
+        -receivePort: int
+        -sendReceiveSocket: DataGramSocket
+        -BUF_SIZE : int
+
+        +RPC(destAddress: InetAddress, destinationPort: int, receivePort: int)
+        -initSocket(): void
+        +sendPacket(msg: byte[]): void
+        +receivePacket(): byte[]
+        +setSocketTimeout(ms: int): void
+    }
+}
+Common "1" *- - "1" Config
+Common "1" *- - "1" ELEV_ERROR
+
+package ElevatorSubsytem{
+    Class ElevatorLamp{
+        -floorNumber: int
+	    -isTurnedOn: boolean
+
+        +ElevatorLamp(floorNumber: int)
+        +getFloorNumber(): int
+        +isTurnedOn(): boolean
+        +turnOn(): void
+        +turnOff(): void
+    }
+    Class ElevatorSubsystem{
+        -elevators: Thread[]
+        -elevatorNumber: int
+        -elevatorMsgBuffer: HashMap<Integer, LinkedList<byte[]>>
+        -schedulerMsgBuffer: LinkedList<byte[]>
+        -SCHEDULER_ADDR: InetAddress
+        -ELEVATOR_ADDR: InetAddress
+        -fileLoader: FileLoader
+        -schedulerTransmitter: RPC
+        +{static}ELEVSUBSYSTEM_RECEIVE_PORT: int
+        -{static}ELEVSUBSYSTEM_RECEIVE_FROM_ELEV_PORT: int
+        -{static}ELEV_RECEIVE_PORT: int
+
+        +ElevatorSubsystem(fileLoader: FileLoader)
+        -schedulerCommunicator(): void
+        -elevatorCommunicator(): void
+        -{synchronized} incrementElevatorNumber(): int
+        -{synchronized} initializeElevBuffers(): void
+        -{synchronized} addToSchedulerBuffer(): void
+        -{synchronized} getMsgFromSchedulerBuffer(): byte[]
+        -{synchronized} addToElevatorBuffer(): byte[]
+        -{synchronized} getMsgFromElevatorBuffer(elevatorNumber: Integer): byte[]
+        -waitToStartSim(): void
+        +run(): void
+    }
+
+    class Elevator{
+        -currentFloor: Floor
+        -ArrivalSensor: arrivalSensor
+        -elevatorNumber: int
+        -elevatorButtons: ElevatorButton[]
+        -elevatorLamps: ElevatorLamp[]
+        -motor: Motor
+        -door: Door 
+        -destinationFloor: ArrayList<Integer>
+        -targetFloor: int
+        -transmitter: RPC
+        -addr: InetAddress
+        -fileLoader: FileLoader
+        -nextButtonClick: int
+        -stuckSensor: StuckSensor
+        -isStuck: boolean
+
+        +Elevator(elevatorNumber: int, currentFloor: int, destPort: int, recPort: int, fileLoader: FileLoader)
+        +moveToFloor(destinationFloor: Floor): void
+        +notifyElevatorArrival(): void
+        -removeDestinationFloor(targetFloor2: int): void
+        +notifyElevatorUnStuck():void
+        -servePassengerToDestFloor(): void
+        +updatePosition(): void
+        +handleError(): boolean
+        +getFloor(): Integer
+        +openDoors(): void
+        +getCurrentFloorNumber(): int
+        +setCurrentFloorNumber(floorNumber: int): void
+        +closeDoors(): void
+        +getMotorState(): MotorState
+        +setMotorState(MotorState state): void
+        +getElevatorNumber(): int
+        +getElevatorButtons(): ElevatorButton[] 
+        +getElevatorLamps(): ElevatorLamp[]
+        +sendAndReceive(): void
+        +receive(): void
+        +run(): void
+    }
+
+    Class Motor{
+        -elevatorNumber: int
+	    -MotorState: state
+
+        +Motor(elevatorNumber: int)
+        +getElevatorNumber(): int
+        +getState(): MotorState
+        +setState(state: MotorState): void
+    }
+    Class Door{
+        -elevatorNumber: int
+	    -isOpen: boolean
+
+        +Door(elevatorNumber: int)
+        +getElevatorNumber(): int
+        +open(): void
+        +close(): void
+        +isOpen(): boolean
+    }
+    Class ArrivalSensor{
+        -elevator: Elevator
+
+        +ArrivalSensor(elevator: Elevator)
+        +simulateElevatorMovement(currentFloor: int, destinationFloor: int)
+    }
+    Class ElevatorButton{
+        -floorNumber: int
+	    -isPressed: boolean 
+
+        +ElevatorButton(floorNumber: int)
+        +getFloorNumber(): int
+        +isPressed(): boolean
+        +turnOn(): void
+        +turnOff(): void
+    }
+
+    enum MotorState{
+        MOVING_UP
+        MOVING_DOWN
+        IDLE
+        HARD_FAULT
+        TRANSIENT_FAULT
+    }
+
+    class StuckSensor{
+        +StuckSensor(elevator: Elevator)
+        +simulateStuck(): void
+    }
+}
+
+Elevator "1" *-u- "*" ElevatorLamp
+Elevator "1" *-u- "*" ElevatorButton
+Elevator "1" *-u- "1" ArrivalSensor
+Elevator "1" *-u- "1" Motor
+Elevator "1" *-u- "1" Door
+Elevator "1" *-u- "1" StuckSensor
+ElevatorSubsystem "1" -u-> "1" Elevator
+Motor "1" - -> "1" MotorState
+
+package Scheduler{
+    class Scheduler{
+        +{static}SCGEDULER_RECEIVE_PORT: int
+        -ackCheckMSG: byte[]
+        -schedulerState: SchedulerState
+        -elevatorStates: ElevatorState[]
+        -floorStates: FloorState[]
+        -msgsToElevatorSubSystem: Queue<byte[]>
+        -msgsToFloorSubSystem: Queue<byte[]>
+        -rpcFloor: RPC
+        -rpcElevator: RPC
+        
+        +Scheduler()
+        +getSchedulerState(): SchedulerState
+        -elevatorSubAddMsg(msg: byte[]): void
+        -elevatorSubAddErrorMsg(msg: byte[]): void
+        -floorSubAddMsg(msg: byte[]): void
+        -findClosestElevator(floorNumber: int, isFloorBtnUp: boolean): int
+        -findDistance(floor: int, isUp: boolean, elevatorState: ElevatorState): int
+        -sendReceiveFloorSub(): void
+        -sendReceiveElevSub(): void
+        +run(): void
+    }
+
+    class ElevatorState{
+        -elevatorNumber: int
+	    -currentFloorNumber: int
+	    -motorDir: int
+	    -targetFloor: int
+
+        +ElevatorState(elevatorNumber: int)
+        +ElevatorState(elevatorNumber: int, currentFloor: int, dir: int, targetFloor: int)
+        +getElevatorNumber(): int
+        +getCurrentFloorNumber(): int
+        +setCurrentFloorNumber(currentFloorNumber: int): void
+        +getMotorDir(): int
+        +setMotorDir(motorDir: int): void
+        +getTargetFloor(): int
+        +setTargetFloor(targetFloor: int): void
+    }
+
+    class FloorState{
+        -floorNumber: int
+        -UP: int
+        -DOWN: int
+
+        +FloorState(floorNumber: int)
+        +getUp(): int
+        +getDown(): int
+        +setUp(UP: int): void
+        +setDown(DOWN: int): void
+        +getFloorNumber(): int
+        +setFloorNumber(floorNumber: int): void
+    }
+
+    enum SchedulerState{
+        WAITING
+        SENDING_ELEVSUB
+        RECEIVING_ELEVSUB
+        SENDING_FLOORSUB
+        RECEIVING_FLOORSUB
+    }
+}
+
+package FloorSubsystem{
+    class Floor{
+        -floorNumber:int
+        +Floor(floorNumber:int)
+        +getFloorNumber(): int
+    }
+
+    class MiddleFloor{
+        -upBtn: FloorButton 
+	    -downBtn: FloorButton
+	    -upLamp: FloorLamp
+	    -downLamp: FloorLamp
+
+        +MiddleFloor(floorNumber:int)
+        +turnOnUpButton():void
+        +turnOffUpButton():void
+        +turnOnDownButton():void
+        +turnOffDownButton():void
+        +getUpLamp():FloorLamp
+        +getDownLamp():FloorLamp
+        +turnOnUpLamp():void
+        +turnOffUpLamp():void
+        +turnOnDownLamp():void
+        +turnOffDownLamp():void
+    }
+
+    class BottomFloor{
+        -upBtn: FloorButton
+        -upLamp: FloorLamp
+
+        +BottomFloor(floorNumber:int)
+        +turnOnUpButton():void
+        +turnOffUpButton():void
+        +getUpLamp():FloorLamp
+        +turnOnUpLamp():void
+        +turnOffUpLamp():void
+    }
+
+    class TopFloor{
+        -downBtn: FloorButton
+        -downLamp: FloorLamp
+
+        +TopFloor(floorNumber:int)
+        +turnOnDownButton():void
+        +turnOffDownButton():void
+        +getDownLamp():FloorLamp
+        +turnOnDownLamp():void
+        +turnOffDownLamp():void
+    }
+
+    Class FloorButton{
+        -isPressed:boolean
+        -floorNumber:int
+        -isUp:boolean
+
+        +FloorButton(floorNumber:int, isUp:boolean)
+        +isPressed():boolean
+        +isUp():boolean
+        +getFloorNumber():int
+        +turnOn():void
+        +turnOff():void
+    }
+
+    class FloorLamp{
+        -isTurnedOn:boolean
+
+        +FloorLamp()
+        +isTurnedOn():boolean
+        +turnOn():void
+        +turnOff():void
+    }
+
+    class FloorSubsystem{
+        -Floors: Floor[]
+        -messageQueue: LinkedList<byte[]>
+        +simulationFile: FileLoader
+        +rpc: RPC
+        +FLOORSUBSYSTEM_DEST_PORT: int
+        +FLOORSUBSYSTEM_RECV_PORT: int
+
+        +FloorSubsystem(fileLoader: FileLoader)
+        +createFloors(maxFloorNumber:int, floors:Floor[]):void
+        -addToQueue(msg: byte[]): void
+        -getMsgFromQueue(): byte[]
+        +nextInstruction(): void
+        +readInstruction(): void
+        +receive(): void
+        -waitToStartSim(): void
+        +run(): void
+    }
+
+    class FileLoader{
+        -simulationFile:File
+        -scanner:Scanner
+        -currLine:String
+        -csvSimInfo:String[]
+        -localTime:LocalTime
+        -destinations:HashMap<Integer, ArrayList<Integer>>
+        -faults:HashMap<Integer, LocalTime>
+        -reachedEndOFile:boolean
+        -{static}SIMULATION_START_TIME:String
+
+        +FileLoader()
+        +getDestinations(): HashMap<Integer, ArrayList<Integer>>
+        -pushDestinations(): void
+        +popDestinations(departFloor:int, goingUp:boolean, elevatorNumber:int):  Integer[]
+        -pushFaults(): void
+        +departFloor(): int
+        -destFloor(): int
+        -readLine(): String
+        +nextLine(): boolean
+        +getTime(): LocalTime
+        -findOffsets(): int[]
+        +isUp(): boolean
+    }
+}
+
+/'package Timer{
+    class TimerController{
+        ~running: boolean
+        ~timer: Thread
+
+        +TimerController(time:long)
+        +start():void
+        +stop():void
+        +isRunning():boolean
+        +finishRunning():void
+    }
+    class TimerThread{
+        -time:long
+
+        +TimerThread(time:long, timerController:TimerController)
+        -start():void
+        +run():void
+    }
+}'/
+
+Floor <|- - MiddleFloor
+Floor <|- - TopFloor
+Floor <|- - BottomFloor
+Floor "1" *- - "1..2" FloorButton
+Floor "1" *- - "1..2" FloorLamp
+FloorSubsystem "1" - -> "1" Floor
+FloorSubsystem "1" - -> "1" FileLoader
+
+
+Scheduler "1" *- - "1" SchedulerState
+Scheduler "1" *- - "*" FloorState
+Scheduler "1" *- - "*" ElevatorState
+
+Thread <|- - FloorSubsystem
+Thread <|- - ElevatorSubsystem
+Thread <|- - Scheduler
+
+FloorSubsystem "1" *-d- "1" RPC
+Scheduler "1" *-d- "2" RPC
+Elevator "1" *-d- "1" RPC
+
+'TimerThread- ->TimerController
+
+@enduml
+
+@startuml Elevator Iteration 4
+package Common{
+    class Common{
+        +config: config
+        +{static}NUM_FLOORS: int
+        +{static}NUM_ELEVATORS: int
+        +{static}TIMESTAMP_FORMAT: SimpleDateFormat
+        
+        +enum MESSAGETYPE
+            Invalid
+            Elevator
+            Floor
+            Scheduler
+            Acknowledgement
+            ELEV_ERROR
+            START_SIM
+            -value: byte
+        
+        +enum ELEV_ERROR
+        +{static}encodeStartMsg(startSim: boolean): byte[]
+        -{static}decodeStartMsg(msg: byte[]): int[]
+        +{static}encodeElevError(err: ELEV_ERROR, elevNum: int, curFloor: int, destFloor: int, dirFloor: boolean): byte[]
+        +{static}encodeElevMsgIntoBytes(elevatorNumber: int, currentFloor: int, state: MotorState, targetFloor: int): byte[]
+        +{static}encodeFloorMsgIntoBytes(floorNumber: int, isFloorBtnUp: boolean): byte[]
+        +{static}encodeSchedulerMsgIntoBytes(elevatorNumber: int, sharedFloorNumber: int, isFloorBtnUp: boolean): byte[]
+        +{static}encodeAckMsgIntoBytes(ack: ACKOWLEDGEMENT): byte[]
+        +{static}findType(msg: byte[] ): MESSAGETYPE 
+        +{static}decode(msg: byte[]): int[]
+        -{static}decodeElevMsgFromBytes(byte[] msg): int[]
+        +{static}decodeSchedulerFromElevMsgToString(decodedMsg: int[]): String
+        -{static}decodeFloorMsgFromBytes(byte[] msg): int[]
+        +{static}decodeSchedulerFromFloorMsgToString(decodedMsg: int[]): String
+        -{static}decodeSchedulerMsgFromBytes(byte[] msg): int[]
+        +{static}decodeSchedulerFloorMsgToString(decodedMsg: int[]): String
+        +{static}decodeSchedulerElevMsgToString(decodedMsg: int[]): String
+        -{static}decodeAckMsgFromBytes(byte[] msg): int[]
+        +{static}findAcknowledgement(byte[] msg): ACKNOWLEDGEMENT
+        +{static}findElevError(msg: byte[]): ELEV_ERROR
+    }
+
+    enum ELEV_ERROR {
+        INVALID
+        UNKNOWN
+        STUCK_BETWEEN
+        DOOR_OPEN
+        DOOR_CLOSE
+
+        -value: byte 
+        -name: String 
+        -elevNum: byte 
+        -currFloor: byte 
+        -destFloor: byte 
+        -dirFloor: byte 
+
+        -ELEV_ERROR(b: byte, n: String): byte[]
+        -encode(): byte[]
+        +{static} decode(msg: byte[]):ELEV_ERROR
+        -{static}decodeElevErrorMsgFromBytes(msg: byte[]): int[]
+    }
+
+    class Config{
+        +{static}CONFIG_FILE_NAME: String
+        -props: Properties
+        +Config()
+        +getProperty(key: String): String
+        +getIntProperty(key: String): int
+        +getLongProperty(key: String): Long
+    }
+
+    class RPC{
+        -destAddress: InetAddress
+        -destinationPort: int
+        -receivePort: int
+        -sendReceiveSocket: DataGramSocket
+        -BUF_SIZE : int
+
+        +RPC(destAddress: InetAddress, destinationPort: int, receivePort: int)
+        -initSocket(): void
+        +sendPacket(msg: byte[]): void
+        +receivePacket(): byte[]
+        +setSocketTimeout(ms: int): void
+    }
+}
+Common "1" *- - "1" Config
+Common "1" *- - "1" ELEV_ERROR
+
+package ElevatorSubsytem{
+    Class ElevatorLamp{
+        -floorNumber: int
+	    -isTurnedOn: boolean
+
+        +ElevatorLamp(floorNumber: int)
+        +getFloorNumber(): int
+        +isTurnedOn(): boolean
+        +turnOn(): void
+        +turnOff(): void
+    }
+    Class ElevatorSubsystem{
+        -elevators: Thread[]
+        -elevatorNumber: int
+        -elevatorMsgBuffer: HashMap<Integer, LinkedList<byte[]>>
+        -schedulerMsgBuffer: LinkedList<byte[]>
+        -SCHEDULER_ADDR: InetAddress
+        -ELEVATOR_ADDR: InetAddress
+        -fileLoader: FileLoader
+        -schedulerTransmitter: RPC
+        +{static}ELEVSUBSYSTEM_RECEIVE_PORT: int
+        -{static}ELEVSUBSYSTEM_RECEIVE_FROM_ELEV_PORT: int
+        -{static}ELEV_RECEIVE_PORT: int
+
+        +ElevatorSubsystem(fileLoader: FileLoader)
+        -schedulerCommunicator(): void
+        -elevatorCommunicator(): void
+        -{synchronized} incrementElevatorNumber(): int
+        -{synchronized} initializeElevBuffers(): void
+        -{synchronized} addToSchedulerBuffer(): void
+        -{synchronized} getMsgFromSchedulerBuffer(): byte[]
+        -{synchronized} addToElevatorBuffer(): byte[]
+        -{synchronized} getMsgFromElevatorBuffer(elevatorNumber: Integer): byte[]
+        -waitToStartSim(): void
+        +run(): void
+    }
+
+    class Elevator{
+        -currentFloor: Floor
+        -ArrivalSensor: arrivalSensor
+        -elevatorNumber: int
+        -elevatorButtons: ElevatorButton[]
+        -elevatorLamps: ElevatorLamp[]
+        -motor: Motor
+        -door: Door 
+        -destinationFloor: ArrayList<Integer>
+        -targetFloor: int
+        -transmitter: RPC
+        -addr: InetAddress
+        -fileLoader: FileLoader
+        -nextButtonClick: int
+        -stuckSensor: StuckSensor
+        -isStuck: boolean
+
+        +Elevator(elevatorNumber: int, currentFloor: int, destPort: int, recPort: int, fileLoader: FileLoader)
+        +moveToFloor(destinationFloor: Floor): void
+        +notifyElevatorArrival(): void
+        -removeDestinationFloor(targetFloor2: int): void
+        +notifyElevatorUnStuck():void
+        -servePassengerToDestFloor(): void
+        +updatePosition(): void
+        +handleError(): boolean
+        +getFloor(): Integer
+        +openDoors(): void
+        +getCurrentFloorNumber(): int
+        +setCurrentFloorNumber(floorNumber: int): void
+        +closeDoors(): void
+        +getMotorState(): MotorState
+        +setMotorState(MotorState state): void
+        +getElevatorNumber(): int
+        +getElevatorButtons(): ElevatorButton[] 
+        +getElevatorLamps(): ElevatorLamp[]
+        +sendAndReceive(): void
+        +receive(): void
+        +run(): void
+    }
+
+    Class Motor{
+        -elevatorNumber: int
+	    -MotorState: state
+
+        +Motor(elevatorNumber: int)
+        +getElevatorNumber(): int
+        +getState(): MotorState
+        +setState(state: MotorState): void
+    }
+    Class Door{
+        -elevatorNumber: int
+	    -isOpen: boolean
+
+        +Door(elevatorNumber: int)
+        +getElevatorNumber(): int
+        +open(): void
+        +close(): void
+        +isOpen(): boolean
+    }
+    Class ArrivalSensor{
+        -elevator: Elevator
+
+        +ArrivalSensor(elevator: Elevator)
+        +simulateElevatorMovement(currentFloor: int, destinationFloor: int)
+    }
+    Class ElevatorButton{
+        -floorNumber: int
+	    -isPressed: boolean 
+
+        +ElevatorButton(floorNumber: int)
+        +getFloorNumber(): int
+        +isPressed(): boolean
+        +turnOn(): void
+        +turnOff(): void
+    }
+
+    enum MotorState{
+        MOVING_UP
+        MOVING_DOWN
+        IDLE
+        HARD_FAULT
+        TRANSIENT_FAULT
+    }
+
+    class StuckSensor{
+        +StuckSensor(elevator: Elevator)
+        +simulateStuck(): void
+    }
+}
+
+Elevator "1" *-u- "*" ElevatorLamp
+Elevator "1" *-u- "*" ElevatorButton
+Elevator "1" *-u- "1" ArrivalSensor
+Elevator "1" *-u- "1" Motor
+Elevator "1" *-u- "1" Door
+Elevator "1" *-u- "1" StuckSensor
+ElevatorSubsystem "1" -u-> "1" Elevator
+Motor "1" - -> "1" MotorState
+
+package Scheduler{
+    class Scheduler{
+        +{static}SCGEDULER_RECEIVE_PORT: int
+        -ackCheckMSG: byte[]
+        -schedulerState: SchedulerState
+        -elevatorStates: ElevatorState[]
+        -floorStates: FloorState[]
+        -msgsToElevatorSubSystem: Queue<byte[]>
+        -msgsToFloorSubSystem: Queue<byte[]>
+        -rpcFloor: RPC
+        -rpcElevator: RPC
+        
+        +Scheduler()
+        +getSchedulerState(): SchedulerState
+        -elevatorSubAddMsg(msg: byte[]): void
+        -elevatorSubAddErrorMsg(msg: byte[]): void
+        -floorSubAddMsg(msg: byte[]): void
+        -findClosestElevator(floorNumber: int, isFloorBtnUp: boolean): int
+        -findDistance(floor: int, isUp: boolean, elevatorState: ElevatorState): int
+        -sendReceiveFloorSub(): void
+        -sendReceiveElevSub(): void
+        +run(): void
+    }
+
+    class ElevatorState{
+        -elevatorNumber: int
+	    -currentFloorNumber: int
+	    -motorDir: int
+	    -targetFloor: int
+
+        +ElevatorState(elevatorNumber: int)
+        +ElevatorState(elevatorNumber: int, currentFloor: int, dir: int, targetFloor: int)
+        +getElevatorNumber(): int
+        +getCurrentFloorNumber(): int
+        +setCurrentFloorNumber(currentFloorNumber: int): void
+        +getMotorDir(): int
+        +setMotorDir(motorDir: int): void
+        +getTargetFloor(): int
+        +setTargetFloor(targetFloor: int): void
+    }
+
+    class FloorState{
+        -floorNumber: int
+        -UP: int
+        -DOWN: int
+
+        +FloorState(floorNumber: int)
+        +getUp(): int
+        +getDown(): int
+        +setUp(UP: int): void
+        +setDown(DOWN: int): void
+        +getFloorNumber(): int
+        +setFloorNumber(floorNumber: int): void
+    }
+
+    enum SchedulerState{
+        WAITING
+        SENDING_ELEVSUB
+        RECEIVING_ELEVSUB
+        SENDING_FLOORSUB
+        RECEIVING_FLOORSUB
+    }
+}
+
+package FloorSubsystem{
+    class Floor{
+        -floorNumber:int
+        +Floor(floorNumber:int)
+        +getFloorNumber(): int
+    }
+
+    class MiddleFloor{
+        -upBtn: FloorButton 
+	    -downBtn: FloorButton
+	    -upLamp: FloorLamp
+	    -downLamp: FloorLamp
+
+        +MiddleFloor(floorNumber:int)
+        +turnOnUpButton():void
+        +turnOffUpButton():void
+        +turnOnDownButton():void
+        +turnOffDownButton():void
+        +getUpLamp():FloorLamp
+        +getDownLamp():FloorLamp
+        +turnOnUpLamp():void
+        +turnOffUpLamp():void
+        +turnOnDownLamp():void
+        +turnOffDownLamp():void
+    }
+
+    class BottomFloor{
+        -upBtn: FloorButton
+        -upLamp: FloorLamp
+
+        +BottomFloor(floorNumber:int)
+        +turnOnUpButton():void
+        +turnOffUpButton():void
+        +getUpLamp():FloorLamp
+        +turnOnUpLamp():void
+        +turnOffUpLamp():void
+    }
+
+    class TopFloor{
+        -downBtn: FloorButton
+        -downLamp: FloorLamp
+
+        +TopFloor(floorNumber:int)
+        +turnOnDownButton():void
+        +turnOffDownButton():void
+        +getDownLamp():FloorLamp
+        +turnOnDownLamp():void
+        +turnOffDownLamp():void
+    }
+
+    Class FloorButton{
+        -isPressed:boolean
+        -floorNumber:int
+        -isUp:boolean
+
+        +FloorButton(floorNumber:int, isUp:boolean)
+        +isPressed():boolean
+        +isUp():boolean
+        +getFloorNumber():int
+        +turnOn():void
+        +turnOff():void
+    }
+
+    class FloorLamp{
+        -isTurnedOn:boolean
+
+        +FloorLamp()
+        +isTurnedOn():boolean
+        +turnOn():void
+        +turnOff():void
+    }
+
+    class FloorSubsystem{
+        -Floors: Floor[]
+        -messageQueue: LinkedList<byte[]>
+        +simulationFile: FileLoader
+        +rpc: RPC
+        +FLOORSUBSYSTEM_DEST_PORT: int
+        +FLOORSUBSYSTEM_RECV_PORT: int
+
+        +FloorSubsystem(fileLoader: FileLoader)
+        +createFloors(maxFloorNumber:int, floors:Floor[]):void
+        -addToQueue(msg: byte[]): void
+        -getMsgFromQueue(): byte[]
+        +nextInstruction(): void
+        +readInstruction(): void
+        +receive(): void
+        -waitToStartSim(): void
+        +run(): void
+    }
+
+    class FileLoader{
+        -simulationFile:File
+        -scanner:Scanner
+        -currLine:String
+        -csvSimInfo:String[]
+        -localTime:LocalTime
+        -destinations:HashMap<Integer, ArrayList<Integer>>
+        -faults:HashMap<Integer, LocalTime>
+        -reachedEndOFile:boolean
+        -{static}SIMULATION_START_TIME:String
+
+        +FileLoader()
+        +getDestinations(): HashMap<Integer, ArrayList<Integer>>
+        -pushDestinations(): void
+        +popDestinations(departFloor:int, goingUp:boolean, elevatorNumber:int):  Integer[]
+        -pushFaults(): void
+        +departFloor(): int
+        -destFloor(): int
+        -readLine(): String
+        +nextLine(): boolean
+        +getTime(): LocalTime
+        -findOffsets(): int[]
+        +isUp(): boolean
+    }
+}
+
+
+Floor <|- - MiddleFloor
+Floor <|- - TopFloor
+Floor <|- - BottomFloor
+Floor "1" *- - "1..2" FloorButton
+Floor "1" *- - "1..2" FloorLamp
+FloorSubsystem "1" - -> "1" Floor
+FloorSubsystem "1" - -> "1" FileLoader
+
+
+Scheduler "1" *- - "1" SchedulerState
+Scheduler "1" *- - "*" FloorState
+Scheduler "1" *- - "*" ElevatorState
+
+Thread <|- - FloorSubsystem
+Thread <|- - ElevatorSubsystem
+Thread <|- - Scheduler
+
+FloorSubsystem "1" *-d- "1" RPC
+Scheduler "1" *-d- "2" RPC
+Elevator "1" *-d- "1" RPC
+
+
+@enduml
+
+PlantUML version 1.2022.0(Tue Jan 11 11:16:42 EST 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) Client VM
+Default Encoding: Cp1252
+Language: en
+Country: US
+--></g></svg>
