@@ -6,6 +6,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import elevatorsubsystem.MotorState;
 import scheduler.ElevatorState;
 
 
@@ -22,6 +23,28 @@ public class ElevatorTest {
 	public void initElevatorRequests() {
 		ev = new ElevatorTestHelper();
 	}
+	
+	
+	/**
+	 * Test Transient fault detection with elevator
+	 */
+	@Test
+	public void testTransientFault() {
+		MotorState ms = MotorState.MOVING_UP; 
+		MotorState m2 = ev.handleError(ms, false, 2); 
+		assertEquals(MotorState.TRANSIENT_FAULT, m2);
+	}
+	
+	/**
+	 * Test Hard fault detection with elevator
+	 */
+	@Test
+	public void testHardFault() {
+		MotorState ms = MotorState.MOVING_UP; 
+		MotorState m2 = ev.handleError(ms, true, 2); 
+		assertEquals(MotorState.HARD_FAULT, m2);
+	}
+	
 	
 	/**
 	 * Test all elevators are at the first floor which one is selected
@@ -42,6 +65,19 @@ public class ElevatorTest {
 		System.out.println(states[1]);
 		ev.setElevatorState(states);
 		assertEquals(2, ev.findClosestElevator(2, true)); 
+	}
+	
+	/**
+	 * There is an elevator at ERROR at the current floor
+	 */
+	@Test
+	public void testElevatorAtCurrentFloorWithError() {
+		ElevatorState[] states = {new ElevatorState(1), new ElevatorState(2,2,0,2), new ElevatorState(3), new ElevatorState(4)}; 
+		System.out.println(states[1]);
+		ev.setElevatorState(states);
+		assertEquals(2, ev.findClosestElevator(2, true));
+		ev.setSpecficElevatorState(1, null);
+		assertEquals(1, ev.findClosestElevator(2, true));
 	}
 	
 	/**

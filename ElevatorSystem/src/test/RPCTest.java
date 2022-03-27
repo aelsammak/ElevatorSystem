@@ -1,6 +1,7 @@
 package test;
 
 import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.net.InetAddress;
@@ -36,6 +37,58 @@ public class RPCTest {
 		assertTrue("Returns expected currentFloor number.", currentFloor == (int)msg[4]);
 		assertTrue("Returns the expected MotorState.", 1 == (int)msg[6]);
 		assertTrue("Returns expected target floor.", targetFloor == (int)msg[8]);
+	}
+	
+	/**
+	 * Test encoding of the elevator error: stuck between
+	 */
+	@Test
+	public void testEncodeElevatorErrorStuckBetween() {
+		int elevatorNumber = 1;
+		int currentFloor = 2;
+		int targetFloor = 5;
+		boolean dir = true; 
+		
+		byte[] msg = Common.encodeElevError(Common.ELEV_ERROR.STUCK_BETWEEN, elevatorNumber, currentFloor, targetFloor, dir);
+		
+		assertTrue("Message is in expected format.", msg instanceof byte[]);
+		assertTrue("Message type is of expected type Elevator Error.", 4==(int)msg[0]);
+		assertTrue("Returns expected elevator number.", elevatorNumber == (int)msg[2]);
+		assertEquals(currentFloor, (int)msg[3]);
+		assertTrue("Returns the expected target floor", targetFloor == (int)msg[4]);
+		assertTrue("Returns expected target floor.", 1 == (int)msg[5]);
+	}
+	
+	/**
+	 * Test encoding of the elevator error: door close
+	 */
+	@Test
+	public void testEncodeElevatorErrorDoorClose() {
+		int elevatorNumber = 1;
+		int currentFloor = 5;
+		int targetFloor = 2;
+		boolean dir = false; 
+		
+		byte[] msg = Common.encodeElevError(Common.ELEV_ERROR.DOOR_CLOSE, elevatorNumber, currentFloor, targetFloor, dir);
+		
+		assertTrue("Message is in expected format.", msg instanceof byte[]);
+		assertTrue("Message type is of expected type Elevator Error.", 4==(int)msg[0]);
+		assertTrue("Returns expected elevator number.", elevatorNumber == (int)msg[2]);
+		assertEquals(currentFloor, (int)msg[3]);
+		assertTrue("Returns the expected target floor", targetFloor == (int)msg[4]);
+		assertTrue("Returns expected target floor.", 0 == (int)msg[5]);
+	}
+	
+	/**
+	 * Test encoding of the start message
+	 */
+	@Test
+	public void testEncodeStartMSG() {
+		byte[] msg = Common.encodeStartMsg(false); 
+		
+		assertTrue("Message is in expected format.", msg instanceof byte[]);
+		assertTrue("Message type is of expected type Elevator Error.", 5==(int)msg[0]);
+		assertEquals(0, (int)msg[2]);
 	}
 	
 	/**
@@ -168,6 +221,65 @@ public class RPCTest {
 		assertTrue("Returns the expected currentFloor number.", currentFloor == decodedMsg[1]);
 		assertTrue("Returns the expected MotorState.", -1 == decodedMsg[2]);
 		assertTrue("Returns the expected target floor.", targetFloor == decodedMsg[3]);
+	}
+	
+	/**
+	 * Test decoding of the start message
+	 */
+	@Test
+	public void testDecodeStartMSG() {
+		byte[] msg = Common.encodeStartMsg(false); 
+		int[] decodedMsg = Common.decode(msg);
+		
+				
+		assertTrue("Message is in expected format.", decodedMsg instanceof int[]);
+		assertTrue("Message is of expected length 4.", 2 == decodedMsg.length);
+		assertEquals(5, decodedMsg[0]);
+		assertEquals(-106, decodedMsg[1]);
+	}
+	
+	/**
+	 * Tests decoding of Elevator errors messages specifically stuck between
+	 */
+	@Test
+	public void testDecodeElevatorErrorStuckBetween() {
+		int elevatorNumber = 1;
+		int currentFloor = 2;
+		int targetFloor = 5;
+		boolean dir = true; 
+		
+		byte[] msg = Common.encodeElevError(Common.ELEV_ERROR.STUCK_BETWEEN, elevatorNumber, currentFloor, targetFloor, dir);
+		
+		int[] decodedMsg = Common.decode(msg); 
+		
+		assertTrue("Message is in expected format.", decodedMsg instanceof int[]);
+		assertTrue("Message is of expected length 4.", 4 == decodedMsg.length);
+		assertTrue("Returns expected elevator number.", elevatorNumber == decodedMsg[0]);
+		assertTrue("Returns the expected currentFloor number.", currentFloor == decodedMsg[1]);
+		assertTrue("Returns the expected target floor", targetFloor == decodedMsg[2]);
+		assertTrue("Returns expected target floor.", 1 == decodedMsg[3]);
+	}
+	
+	/**
+	 * Tests decoding of Elevator errors messages specifically door close
+	 */
+	@Test
+	public void testDecodeElevatorErrorDoorClose() {
+		int elevatorNumber = 1;
+		int currentFloor = 5;
+		int targetFloor = 2;
+		boolean dir = false; 
+		
+		byte[] msg = Common.encodeElevError(Common.ELEV_ERROR.DOOR_CLOSE, elevatorNumber, currentFloor, targetFloor, dir);
+		
+		int[] decodedMsg = Common.decode(msg); 
+		
+		assertTrue("Message is in expected format.", decodedMsg instanceof int[]);
+		assertTrue("Message is of expected length 4.", 4 == decodedMsg.length);
+		assertTrue("Returns expected elevator number.", elevatorNumber == decodedMsg[0]);
+		assertTrue("Returns the expected currentFloor number.", currentFloor == decodedMsg[1]);
+		assertTrue("Returns the expected target floor", targetFloor == decodedMsg[2]);
+		assertTrue("Returns expected target floor.", 0 == decodedMsg[3]);
 	}
 	
 	/**
