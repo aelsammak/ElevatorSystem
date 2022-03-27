@@ -60,6 +60,7 @@ __List of files:__ root of code files ('/ElevatorSystem/src'):
   - ElevatorSubsystem.java - class acts as the intermediate between the Elevators and the Scheduler
   - Motor.java - class represents the Elevator's motor
   - MotorState.java - enum responsible for representing the different states of the Elevator's motor
+  - StuckSensor.java - class used to simulate the time the elevator is stuck for when a transient error occurs
 - /floorsubsystem:
   - BottomFloor.java - Bottom floor variant in the Floor class
   - FileLoader.java - responsible for reading the instructions from the simulation.csv file
