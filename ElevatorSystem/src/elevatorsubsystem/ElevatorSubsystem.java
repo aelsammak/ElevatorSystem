@@ -1,5 +1,8 @@
 package elevatorsubsystem;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.InetAddress;
 import java.time.LocalTime;
 import java.util.HashMap;
@@ -8,6 +11,7 @@ import java.util.LinkedList;
 import common.Common;
 import common.RPC;
 import floorsubsystem.FileLoader;
+import gui.GUI;
 import scheduler.Scheduler;
 
 /**
@@ -26,7 +30,7 @@ public class ElevatorSubsystem extends Thread {
 	private final InetAddress SCHEDULER_ADDR;
 	private final InetAddress ELEVATOR_ADDR;
 	private FileLoader fileLoader;
-	private RPC schedulerTransmitter;
+	private RPC schedulerTransmitter, rpcGUI;
 	
 	/* PORTS */
 	/* PLEASE NOTE: THIS PORT MIGHT NEED TO CHANGE DEPENDING IF YOUR LOCAL SYSTEM IS USING THIS PORT NUMBER */
@@ -39,7 +43,9 @@ public class ElevatorSubsystem extends Thread {
 	/* The starting port number used for receiving packets by the elevator */
 	/* The elevatorNumber will be added to this port to offset this port number and give a unique port number */
 	private static final int ELEV_RECEIVE_PORT = 10202;
-
+	
+	/* The starting port number used for sending packets from the elevator */
+	public static final int ELEVSUBSYSTEM_TO_GUI_PORT = 9010;
 	
 	/**
 	 * Constructor for the ElevatorSubSystem class.
@@ -68,6 +74,7 @@ public class ElevatorSubsystem extends Thread {
 		elevatorMsgBuffer = new HashMap<Integer, LinkedList<byte[]>>();
 		schedulerMsgBuffer = new LinkedList<byte[]>();
 		schedulerTransmitter = new RPC(SCHEDULER_ADDR, Scheduler.SCHEDULER_RECEIVE_PORT, ELEVSUBSYSTEM_RECEIVE_PORT);
+		rpcGUI = new RPC(InetAddress.getLocalHost(), GUI.GUI_RECEIVE_FROM_ELEVSUBSYSTEM_PORT, ELEVSUBSYSTEM_TO_GUI_PORT);
 	}
 	
 	/**
@@ -96,6 +103,13 @@ public class ElevatorSubsystem extends Thread {
 				}
 
 			} else {
+		    	try {
+					FileWriter writer = new FileWriter(new File("Timings.txt"), true);
+					writer.write("Time of ElevatorSubSystem Received Message From Scheduler : " + LocalTime.now() + "\n");
+					writer.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				/* Msg received for Elevator */
 				addToElevatorBuffer(msg);
 				msg = Common.encodeAckMsgIntoBytes(Common.ACKOWLEDGEMENT.RECEIVED);
@@ -128,6 +142,14 @@ public class ElevatorSubsystem extends Thread {
 					if (msg == null) {
 						/* No msg for Elevator, send an ACK instead */
 						msg = Common.encodeAckMsgIntoBytes(Common.ACKOWLEDGEMENT.NO_MSG);
+					} else {
+				    	try {
+				    		FileWriter writer = new FileWriter(new File("Timings.txt"), true);
+							writer.write("Time of ElevatorSubSystem Sending Message To Elevator : " + LocalTime.now() + "\n");
+							writer.close();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
 					}
 
 				} else {
@@ -135,11 +157,13 @@ public class ElevatorSubsystem extends Thread {
 					msg = Common.encodeAckMsgIntoBytes(Common.ACKOWLEDGEMENT.RECEIVED);
 				}
 
+			} else if (Common.findType(msg) == Common.MESSAGETYPE.ELEVATOR_TO_GUI || Common.findType(msg) == Common.MESSAGETYPE.ELEVATOR_ERROR_TO_GUI) {
+				rpcGUI.sendPacket(msg);
+				msg = Common.encodeAckMsgIntoBytes(Common.ACKOWLEDGEMENT.NO_MSG);
 			} else {
 				/* Msg received for Scheduler */
 				addToSchedulerBuffer(msg);
 				msg = Common.encodeAckMsgIntoBytes(Common.ACKOWLEDGEMENT.RECEIVED);
-				
 			}
 			/* Reply to Scheduler */
 			elevatorTransmitter.sendPacket(msg);

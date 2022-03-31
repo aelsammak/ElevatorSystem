@@ -1,5 +1,8 @@
 package elevatorsubsystem;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.time.LocalTime;
@@ -36,6 +39,7 @@ public class Elevator extends Thread {
 	private int nextButtonClick;
 	private StuckSensor stuckSensor;
 	private boolean isStuck;
+	private int departureFloor;
 	
 	/**
 	 * Constructor for the Elevator class. 
@@ -103,7 +107,16 @@ public class Elevator extends Thread {
 			
 			System.out.println("Time: " + LocalTime.now() + " | ELEVATOR: Elevator #" + elevatorNumber + " | CurrentFloor: " + currentFloor + " | MotorState: " + getMotorState() + " | TargetFloor: " + targetFloor);
 			
+	    	try {
+	    		FileWriter writer = new FileWriter(new File("Timings.txt"), true);
+				writer.write("Time of Elevator Starting to move to Target Floor : " + LocalTime.now() + "\n");
+				writer.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
 			sendAndReceive();
+			sendGUI(-1, true, targetFloor, getMotorState());
 			
 			arrivalSensor.simulateElevatorMovement(currentFloor, targetFloor);
 		}
@@ -120,6 +133,7 @@ public class Elevator extends Thread {
 		System.out.println("\nTime: " + LocalTime.now() + " | ELEVATOR: Elevator #" + elevatorNumber + " | ARRIVED at Floor #" + targetFloor + " | MotorState: " + getMotorState());
 		removeDestinationFloor(targetFloor);
 		
+		sendGUI(-1, true, targetFloor, getMotorState());
 		sendAndReceive();
 		closeDoors();
 		if (elevatorButtons[currentFloor - 1].isPressed()) {
@@ -130,14 +144,22 @@ public class Elevator extends Thread {
 		servePassengerToDestFloor();
 	}
 	
+	/**
+	 * This method is responsible for removing a destination floor from the list of destination floors
+	 * @param targetFloor2
+	 */
 	private void removeDestinationFloor(int targetFloor2) {
 		destinationFloors.remove((Integer)targetFloor2);		
 	}
 
+	/**
+	 * This method is responsible for notifying that the Elevator is unstuck
+	 */
 	public void notifyElevatorUnStuck() {
 		isStuck = false;
 		setMotorState(MotorState.IDLE);
 		System.out.println("Time: " + LocalTime.now() + " | ELEVATOR: Elevator #" + elevatorNumber + " is UNSTUCK");
+		sendErrorToGUI(false);
 		sendAndReceive();
 	}
 	
@@ -152,7 +174,39 @@ public class Elevator extends Thread {
 			elevatorButtons[nextDest - 1].turnOn();
 		    elevatorLamps[nextDest - 1].turnOn();
 		    destinationFloors.add((Integer)nextDest);
+		    MotorState motorState;
+		    if(currentFloor > targetFloor) {
+		    	motorState = MotorState.MOVING_DOWN;
+			} else if (currentFloor < targetFloor) {
+				motorState = MotorState.MOVING_UP;
+			} else {
+				motorState = MotorState.IDLE;
+			}
+		    sendGUI(nextDest, true, nextDest, motorState);
 		    moveToFloor();
+		} else if (departureFloor != -1) {
+			if (fileLoader.getDestinations().containsKey((Integer)departureFloor) && fileLoader.getDestinations().get((Integer)departureFloor).size() > 0) {
+				nextButtonClick = fileLoader.getDestinations().get((Integer)departureFloor).get(0);
+				fileLoader.getDestinations().get((Integer)departureFloor).remove(0);
+				int nextDest = nextButtonClick;
+				nextButtonClick = -1;
+				System.out.println("\nTime: " + LocalTime.now() + " | ELEVATOR: Elevator #" + elevatorNumber + " car button " + nextDest + " has been pressed");
+				elevatorButtons[nextDest - 1].turnOn();
+			    elevatorLamps[nextDest - 1].turnOn();
+			    destinationFloors.add((Integer)nextDest);
+			    MotorState motorState;
+			    if(currentFloor > targetFloor) {
+			    	motorState = MotorState.MOVING_DOWN;
+				} else if (currentFloor < targetFloor) {
+					motorState = MotorState.MOVING_UP;
+				} else {
+					motorState = MotorState.IDLE;
+				}
+			    sendGUI(nextDest, true, nextDest, motorState);
+			    moveToFloor();
+			} else {
+				departureFloor = -1;
+			}
 		}
 	}
 	
@@ -167,12 +221,18 @@ public class Elevator extends Thread {
 			currentFloor--;
 		}
 		sendAndReceive();
+		sendGUI(-1, false, targetFloor, getMotorState());
 	}
 	
+	/**
+	 * This method is responsible for the handling the error (transient or hard fault)
+	 * @return true - if a fault/error occurred, else false
+	 */
 	public boolean handleError() {
 		// check if fault has not occurred, if it hasnt then return false, else coninue till end and return true
 		if (fileLoader.getFaults().containsKey(elevatorNumber)) {
 			if (LocalTime.now().isAfter(fileLoader.getFaults().get(elevatorNumber))) {
+				sendErrorToGUI(true);
 				boolean isHardFault = false;
 				isStuck = true;
 				fileLoader.getFaults().remove(elevatorNumber);
@@ -200,6 +260,7 @@ public class Elevator extends Thread {
 				
 				// while loop through all destinations and send to scheduler until empty
 				byte[] msg;
+				System.out.println("GETFLOOR(): " + getFloor());
 				if (this.door.isOpen() && !elevatorButtons[currentFloor - 1].isPressed()) {
 					fileLoader.getDestinations().get(targetFloor).add(nextButtonClick);
 					System.out.println("Removing floors...");
@@ -217,6 +278,8 @@ public class Elevator extends Thread {
 						removeDestinationFloor(getFloor());
 						elevatorButtons[currentFloor - 1].turnOff();
 				        elevatorLamps[currentFloor - 1].turnOff();
+				        msg = Common.encodeElevError(errorType, elevatorNumber, currentFloor, -1, (getMotorState() == MotorState.MOVING_UP ? true : false));
+						transmitter.sendPacket(msg);
 						continue;
 					}
 					fileLoader.getDestinations().get(getFloor()).add(nextButtonClick);
@@ -229,7 +292,8 @@ public class Elevator extends Thread {
 				setMotorState(motorState);
 				
 				if (isHardFault) {
-					Thread.currentThread().interrupt();
+					System.out.println("Time: " + LocalTime.now() + " | ELEVATOR: Elevator #" + elevatorNumber + " is has SHUTDOWN");
+					Thread.currentThread().stop();
 				}
 				
 				return true;
@@ -240,6 +304,10 @@ public class Elevator extends Thread {
 		
 	}
 	
+	/**
+	 * This method is responsible for finding the closest floor out of the elevators destinations based on motorstate
+	 * @return Integer - the closest floor to the elevator
+	 */
 	public Integer getFloor() {
 		int target = -1;
 		try {
@@ -258,7 +326,15 @@ public class Elevator extends Thread {
 	 * This method is resonsible for opening the Elevator doors
 	 */
 	public void openDoors() {
+		System.out.println("Time: " + LocalTime.now() + " | ELEVATOR: Elevator #" + elevatorNumber + " opening doors");
 		this.door.open();
+    	try {
+    		FileWriter writer = new FileWriter(new File("Timings.txt"), true);
+			writer.write("Time of Elevator Door Opened : " + LocalTime.now() + "\n");
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
@@ -288,7 +364,7 @@ public class Elevator extends Thread {
 		float loadTimeFloat = ((float) loadTime / 10);
 		loadTime = ((Float) loadTimeFloat).longValue();
 		
-		System.out.println("LOAD TIME: " + loadTime);
+		System.out.println("LOAD/UNLOAD TIME: " + loadTime);
     	
         try {
         	for (int i = 0; i < 10; i++) {
@@ -303,7 +379,15 @@ public class Elevator extends Thread {
             e.printStackTrace();
         }
         
+        System.out.println("Time: " + LocalTime.now() + " | ELEVATOR: Elevator #" + elevatorNumber + " closing doors");
         this.door.close();
+    	try {
+    		FileWriter writer = new FileWriter(new File("Timings.txt"), true);
+			writer.write("Time of Elevator Door Closed : " + LocalTime.now() + "\n");
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
 
 	
@@ -360,6 +444,24 @@ public class Elevator extends Thread {
 		transmitter.sendPacket(msg);
 		msg = transmitter.receivePacket();
 	}
+	
+	/**
+	 * This method is used to send an elevator update to the GUI
+	 */
+	public void sendGUI(int carButtonClicked, boolean printToTextField, int realTargetFloor, MotorState motorState) {
+		byte[] msg = Common.encodeElevToGUIMsgIntoBytes(elevatorNumber, currentFloor, motorState, carButtonClicked, realTargetFloor, printToTextField);
+		transmitter.sendPacket(msg);
+		msg = transmitter.receivePacket();
+	}
+	
+	/**
+	 * This method is used to send an elevator error to the GUI
+	 */
+	public void sendErrorToGUI(boolean isStuck) {
+		byte[] msg = Common.encodeElevErrorToGUI(elevatorNumber, isStuck);
+		transmitter.sendPacket(msg);
+		msg = transmitter.receivePacket();
+	}
 
 	/**
 	 * This method first sends an acknowledgement check msg to the ElevatorSubSystem and then receives a msg with the instructions from Scheduler.
@@ -378,14 +480,23 @@ public class Elevator extends Thread {
 		}
 		
 		if (Common.findType(receiveMsg) != Common.MESSAGETYPE.ACKNOWLEDGEMENT) {
+	    	try {
+	    		FileWriter writer = new FileWriter(new File("Timings.txt"), true);
+				writer.write("Time of Elevator Receive Message From ElevatorSubSystem : " + LocalTime.now() + "\n");
+				writer.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			int received[] = Common.decode(receiveMsg);
 			if (!isStuck) {
 				if (!handleError()) {
-					if (fileLoader.getDestinations().containsKey((Integer)received[1])) {
+					if (fileLoader.getDestinations().containsKey((Integer)received[1]) && fileLoader.getDestinations().get((Integer)received[1]).size() > 0) {
+						departureFloor = received[1];
 						nextButtonClick = fileLoader.getDestinations().get((Integer)received[1]).get(0);
 						fileLoader.getDestinations().get((Integer)received[1]).remove(0);
 					} else {
 						nextButtonClick = -1;
+						departureFloor = -1;
 					}
 					destinationFloors.add((Integer) received[1]);
 					moveToFloor();

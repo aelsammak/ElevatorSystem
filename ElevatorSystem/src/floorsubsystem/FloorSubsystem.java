@@ -1,12 +1,15 @@
 package floorsubsystem;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.InetAddress;
 import java.time.LocalTime;
 import java.util.LinkedList;
 
 import common.Common;
 import common.RPC;
-import elevatorsubsystem.ElevatorSubsystem;
+import gui.GUI;
 
 /**
  * This class represents the FloorSubSystem.
@@ -21,10 +24,13 @@ public class FloorSubsystem extends Thread {
     private LinkedList<byte[]> messageQueue;
     
     public FileLoader simulationFile;
-    public RPC rpc;
+    public RPC rpc, rpcGUI;
     
     public static final int FLOORSUBSYSTEM_DEST_PORT = 10002;
     public static final int FLOORSUBSYSTEM_RECV_PORT = 10001;
+    
+	/* The starting port number used for sending packets from the FloorSubSystem to the GUI */
+	public static final int FLOORSUBSYSTEM_TO_GUI_PORT = 9011;
     
     /**
      * Parameterized constructor
@@ -41,6 +47,8 @@ public class FloorSubsystem extends Thread {
         
         rpc = new RPC(InetAddress.getLocalHost(), FLOORSUBSYSTEM_DEST_PORT, FLOORSUBSYSTEM_RECV_PORT);
         rpc.setSocketTimeout(2000);
+        
+        rpcGUI = new RPC(InetAddress.getLocalHost(), GUI.GUI_RECEIVE_FROM_FLOORSUBSYSTEM_PORT, FLOORSUBSYSTEM_TO_GUI_PORT);
         
         messageQueue = new LinkedList<byte[]>();
     }
@@ -99,6 +107,13 @@ public class FloorSubsystem extends Thread {
      * Read the instruction from the file
      */
     public void readInstruction() {
+    	try {
+    		FileWriter writer = new FileWriter(new File("Timings.txt"), true);
+			writer.write("Time of Floor Button Pressed : " + LocalTime.now() + "\n");
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
         int departureFloor = simulationFile.departFloor();
 
         if(1 <= departureFloor && departureFloor <= Common.NUM_FLOORS){
@@ -108,19 +123,23 @@ public class FloorSubsystem extends Thread {
         			((MiddleFloor) currentFloor).turnOnUpButton();
         			((MiddleFloor) currentFloor).turnOnUpLamp();
         			System.out.println("Time: " + LocalTime.now() + " | FLOOR: Floor #" + currentFloor.getFloorNumber() + " UP button pressed \n");
+        			rpcGUI.sendPacket(Common.encodeFloorToGUIMsgIntoBytes(currentFloor.getFloorNumber(), true, true));
         		} else {
         			((MiddleFloor) currentFloor).turnOnDownLamp();
         			((MiddleFloor) currentFloor).turnOnDownButton();
         			System.out.println("Time: " + LocalTime.now() + " | FLOOR: Floor #" + currentFloor.getFloorNumber() + " DOWN button pressed \n");
+        			rpcGUI.sendPacket(Common.encodeFloorToGUIMsgIntoBytes(currentFloor.getFloorNumber(), false, true));
         		}
     		} else if(currentFloor instanceof TopFloor) {
     			((TopFloor) currentFloor).turnOnDownLamp();
     			((TopFloor) currentFloor).turnOnDownButton();
     			System.out.println("Time: " + LocalTime.now() + " | FLOOR: Floor #" + currentFloor.getFloorNumber() + " DOWN button pressed \n");
+    			rpcGUI.sendPacket(Common.encodeFloorToGUIMsgIntoBytes(currentFloor.getFloorNumber(), false, true));
     		} else {
     			((BottomFloor) currentFloor).turnOnUpLamp();
     			((BottomFloor) currentFloor).turnOnUpButton();
     			System.out.println("Time: " + LocalTime.now() + " | FLOOR: Floor #" + currentFloor.getFloorNumber() + " UP button pressed \n");
+    			rpcGUI.sendPacket(Common.encodeFloorToGUIMsgIntoBytes(currentFloor.getFloorNumber(), true, true));
     		}
         } else {
             System.out.println("Time: " + LocalTime.now() + " | FLOOR: ERROR Departure Floor #" + departureFloor + " out of range");
@@ -149,6 +168,14 @@ public class FloorSubsystem extends Thread {
         	msg = getMsgFromQueue();
         	if(msg == null) {
         		msg = Common.encodeAckMsgIntoBytes(Common.ACKOWLEDGEMENT.NO_MSG);
+        	} else {
+            	try {
+            		FileWriter writer = new FileWriter(new File("Timings.txt"), true);
+        			writer.write("Time of Floor Sent Button Pressed To Scheduler : " + LocalTime.now() + "\n");
+        			writer.close();
+        		} catch (IOException e) {
+        			e.printStackTrace();
+        		}
         	}
         } else {
 	        int[] decodeMsg = Common.decode(message);
@@ -159,15 +186,24 @@ public class FloorSubsystem extends Thread {
 	        msg = Common.encodeAckMsgIntoBytes(Common.ACKOWLEDGEMENT.RECEIVED);
 	        if(1 <= arrivalFloor && arrivalFloor <= Common.NUM_FLOORS) {
 	        	Floor currentFloor = floors[arrivalFloor - 1];
+            	try {
+            		FileWriter writer = new FileWriter(new File("Timings.txt"), true);
+        			writer.write("Time of Floor Received Turn Off Button Pressed From Scheduler : " + LocalTime.now() + "\n");
+        			writer.close();
+        		} catch (IOException e) {
+        			e.printStackTrace();
+        		}
 	        	if (currentFloor instanceof MiddleFloor) {
 	        		if (isUpBtn && ((MiddleFloor) currentFloor).getUpLamp().isTurnedOn()) {
 	        			System.out.println("Time: " + LocalTime.now() + " | FLOOR: Turning OFF Floor #" + arrivalFloor + " "+ (isUpBtn ? "UP" : "DOWN") + " button & lamp \n" );
 	        			((MiddleFloor) currentFloor).turnOffUpButton();
 	        			((MiddleFloor) currentFloor).turnOffUpLamp();
+	        			rpcGUI.sendPacket(Common.encodeFloorToGUIMsgIntoBytes(arrivalFloor, isUpBtn, false));
 	        		} else if (((MiddleFloor) currentFloor).getDownLamp().isTurnedOn()) {
 	        			System.out.println("Time: " + LocalTime.now() + " | FLOOR: Turning OFF Floor #" + arrivalFloor + " "+ (isUpBtn ? "UP" : "DOWN") + " button & lamp \n");
 	        			((MiddleFloor) currentFloor).turnOffDownLamp();
 	        			((MiddleFloor) currentFloor).turnOffDownButton();
+	        			rpcGUI.sendPacket(Common.encodeFloorToGUIMsgIntoBytes(arrivalFloor, isUpBtn, false));
 	        		}
 	    		}
 	    		else if(currentFloor instanceof TopFloor) {
@@ -175,6 +211,7 @@ public class FloorSubsystem extends Thread {
 		    			System.out.println("Time: " + LocalTime.now() + " | FLOOR: Turning OFF Floor # " + arrivalFloor + " "+ (isUpBtn ? "UP" : "DOWN") + " button & lamp \n");
 		    			((TopFloor) currentFloor).turnOffDownLamp();
 		    			((TopFloor) currentFloor).turnOffDownButton();
+		    			rpcGUI.sendPacket(Common.encodeFloorToGUIMsgIntoBytes(arrivalFloor, isUpBtn, false));
 	    			}
 	    		}
 	    		else {
@@ -182,8 +219,8 @@ public class FloorSubsystem extends Thread {
 		    			System.out.println("Time: " + LocalTime.now() + " | FLOOR: Turning OFF Floor # " + arrivalFloor + " "+ (isUpBtn ? "UP" : "DOWN") + " button & lamp \n");
 		    			((BottomFloor) currentFloor).turnOffUpLamp();
 		    			((BottomFloor) currentFloor).turnOffUpButton();
+		    			rpcGUI.sendPacket(Common.encodeFloorToGUIMsgIntoBytes(arrivalFloor, isUpBtn, false));
 	    			}
-	    			
 	    		}
 	        } else {
 	            System.out.println("Time: " + LocalTime.now() + " | FLOOR: ERROR Arrival Floor #" + arrivalFloor + " out of range");

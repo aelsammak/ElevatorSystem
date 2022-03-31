@@ -1,5 +1,8 @@
 package scheduler;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.InetAddress;
 import java.time.LocalTime;
 import java.util.*;
@@ -146,7 +149,15 @@ public class Scheduler extends Thread {
 			isUp = true;
 		}
 
+		System.out.print("Time: " + LocalTime.now() + " | SCHEDULER: Finding Closest Elevator to Floor #" + floor);
 		int closestElevt = findClosestElevator(floor, isUp);
+    	try {
+    		FileWriter writer = new FileWriter(new File("Timings.txt"), true);
+			writer.write("Time of Scheduler Done Calculating Closest Elevator : " + LocalTime.now() + "\n");
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		byte[] oneMsgToElevtSub = Common.encodeSchedulerMsgIntoBytes(closestElevt, floor, isUp);
 		msgsToElevatorSubSystem.offer(oneMsgToElevtSub);
 	}
@@ -172,6 +183,11 @@ public class Scheduler extends Thread {
 			}
 		}
 		
+		System.out.print("Time: " + LocalTime.now() + " | SCHEDULER: DISTANCES FOR FLOOR #" + floorNumber + " : ");
+		for (int dist : distances) {
+			System.out.print(dist + " ");
+		}
+		System.out.println("");
 		/* Find the closest elevator */ 
 		int index = 0;
 		int min = distances[0];
@@ -239,6 +255,13 @@ public class Scheduler extends Thread {
 		schedulerState = SchedulerState.RECEIVING_FLOORSUB;
 		byte[] msgReceive = rpcFloor.receivePacket();
 		if (Common.findType(msgReceive) != Common.MESSAGETYPE.ACKNOWLEDGEMENT) {
+	    	try {
+	    		FileWriter writer = new FileWriter(new File("Timings.txt"), true);
+				writer.write("Time of Scheduler Received Floor Button Pressed : " + LocalTime.now() + "\n");
+				writer.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			floorSubAddMsg(msgReceive);
 			System.out.println("Time: " + LocalTime.now() + " | SCHEDULER: Method: RECEIVE | From: FloorSubSystem | Msg: " + Common.decodeSchedulerFromFloorMsgToString(Common.decode(msgReceive)));
 
@@ -253,7 +276,14 @@ public class Scheduler extends Thread {
 		// SEND
 		schedulerState = SchedulerState.SENDING_ELEVSUB;
 		byte[] msgSend = msgsToElevatorSubSystem.poll();
-		if ( msgSend != null) {
+		if (msgSend != null) {
+	    	try {
+	    		FileWriter writer = new FileWriter(new File("Timings.txt"), true);
+				writer.write("Time of Scheduler Telling ElevatorSubSystem which Elevator is Assigned to Departure Floor : " + LocalTime.now() + "\n");
+				writer.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			rpcElevator.sendPacket(msgSend);
 			System.out.println("Time: " + LocalTime.now() + " | SCHEDULER: Method: SEND | To: ElevatorSubSystem | Msg: " +  Common.decodeSchedulerElevMsgToString(Common.decode(msgSend)));
 		} else {

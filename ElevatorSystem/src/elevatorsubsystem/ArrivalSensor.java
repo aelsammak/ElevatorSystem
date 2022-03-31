@@ -2,10 +2,12 @@ package elevatorsubsystem;
 
 import static java.lang.Math.abs;
 
-import java.util.Timer;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalTime;
 
 import common.Common;
-import timer.TimerController;
 
 /**
  * The ArrivalSensor class represents the Elevator's ArrivalSensor
@@ -36,6 +38,23 @@ public class ArrivalSensor {
     public synchronized void simulateElevatorMovement(int currentFloor, int destinationFloor) {
     	try {
     		for (int i = 0; i < abs(destinationFloor - currentFloor); i++) {
+    			if (i == 0) {
+    		    	try {
+    		    		FileWriter writer = new FileWriter(new File("Timings.txt"), true);
+    					writer.write("Time of Elevator Starting Movement : " + LocalTime.now() + "\n");
+    					writer.close();
+    				} catch (IOException e) {
+    					e.printStackTrace();
+    				}
+    			} else if (i == 1) {
+    		    	try {
+    		    		FileWriter writer = new FileWriter(new File("Timings.txt"), true);
+    					writer.write("Time of Elevator Stop Movement : " + LocalTime.now() + "\n");
+    					writer.close();
+    				} catch (IOException e) {
+    					e.printStackTrace();
+    				}
+    			}
     			wait(Common.config.getLongProperty("TIME_BETWEEN_ONE_FLOOR"));
     			elevator.updatePosition();
     			if (elevator.handleError()) {

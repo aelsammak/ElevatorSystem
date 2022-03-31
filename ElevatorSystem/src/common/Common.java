@@ -28,15 +28,18 @@ public class Common {
 	public static int NUM_ELEVATORS = config.getIntProperty("NUM_ELEVATORS");
 	public static final SimpleDateFormat TIMESTAMP_FORMAT = new SimpleDateFormat("HH:mm:ss");
     
-	
+	/* Messages types */
 	public enum MESSAGETYPE {
-		INVALID			((byte) -1),
-		ELEVATOR		((byte) 0),
-		FLOOR			((byte) 1),
-		SCHEDULER		((byte) 2),
-		ACKNOWLEDGEMENT	((byte) 3),
-		ELEV_ERROR		((byte) 4),
-		START_SIM		((byte) 5);
+		INVALID					((byte) -1),
+		ELEVATOR				((byte) 0),
+		FLOOR					((byte) 1),
+		SCHEDULER				((byte) 2),
+		ACKNOWLEDGEMENT			((byte) 3),
+		ELEV_ERROR				((byte) 4),
+		START_SIM				((byte) 5),
+		FLOOR_TO_GUI			((byte) 6),
+		ELEVATOR_TO_GUI 		((byte) 7),
+		ELEVATOR_ERROR_TO_GUI 	((byte) 8);
 
 		private final byte value;
 		
@@ -52,7 +55,7 @@ public class Common {
 		}
 	}
 
-
+	/* Acknowledgement messages types */
 	public enum ACKOWLEDGEMENT {
 		INVALID			((byte) -1),
 		CHECK			((byte) 0),
@@ -80,7 +83,8 @@ public class Common {
 		UNKNOWN			((byte) 0, "UNKNOWN"),
 		STUCK_BETWEEN	((byte) 1, "STUCKBETWEEN"),
 		DOOR_OPEN		((byte) 2, "DOORSTUCKOPEN"),
-		DOOR_CLOSE		((byte) 3, "DOORSTUCKCLOSED");
+		DOOR_CLOSE		((byte) 3, "DOORSTUCKCLOSED"),
+		UNSTUCK         ((byte) 4, "UNSTUCK");
 
 		// Enum initializer
 		private final byte value;
@@ -137,6 +141,11 @@ public class Common {
 		
 	}
 	
+	/**
+	 * This method is used to encode the msg to start the simualtion in bytes
+	 * @param startSim
+	 * @return byte[] - the msg in bytes
+	 */
 	public static byte[] encodeStartMsg(boolean startSim) {
 		byte[] msg = new byte[3];
 		msg[0] = MESSAGETYPE.START_SIM.value;
@@ -145,6 +154,11 @@ public class Common {
 		return msg;
 	}
 	
+	/**
+	 * This method is used to decode the start message from bytes into an int[]
+	 * @param msg
+	 * @return int[] - decoded msg
+	 */
 	private static int[] decodeStartMsgFromBytes(byte[] msg) {
 		int[] decodedMsg = new int[2];
 		decodedMsg[0] = (int)msg[0];
@@ -153,7 +167,13 @@ public class Common {
 	}
 	
 	/**
-	 * encode elevator error message into byte[]
+	 * This method is used to encode the elevator error message into byte[]
+	 * @param err
+	 * @param elevNum
+	 * @param curFloor
+	 * @param destFloor
+	 * @param dirFloor
+	 * @return byte[] - the msg in bytes
 	 */
 	public static byte[] encodeElevError(ELEV_ERROR err, int elevNum, int curFloor, int destFloor, boolean dirFloor) {
 		ELEV_ERROR elevError = err;
@@ -162,6 +182,35 @@ public class Common {
 		elevError.destFloor = (byte) destFloor;
 		elevError.dirFloor = (byte) (dirFloor ? 1 : 0);
 		return err.encode();
+	}
+	
+	/**
+	 * This method is responsible for encoding the elevator error message to be sent to the GUI
+	 * @param elevNum
+	 * @param isStuck
+	 * @return byte[] - the msg in bytes
+	 */
+	public static byte[] encodeElevErrorToGUI(int elevNum, boolean isStuck) {
+		byte[] msg = new byte[6];
+		msg[0] = MESSAGETYPE.ELEVATOR_ERROR_TO_GUI.value;
+		msg[1] = (byte)150;
+		msg[2] = (byte)elevNum;
+		msg[3] = (byte)150;
+		msg[4] = (byte) (isStuck ? 1 : 0);
+		msg[5] = (byte)150;
+		return msg;
+	}
+	
+	/**
+	 * This method is responsible for decoding elev error to be sent to the GUI
+	 * @param msg
+	 * @return int[] - decoded msg
+	 */
+	public static int[] decodeElevErrorToGUIFromBytes(byte[] msg) {
+		int[] decodedMsg = new int[2];
+		decodedMsg[0] = (int)msg[2];
+		decodedMsg[1] = (int)msg[4];
+		return decodedMsg;
 	}
 
 	/**
@@ -203,6 +252,48 @@ public class Common {
 	}
 	
 	/**
+	 * This method is used to encode the Elevator Msg into bytes.
+	 * The byte[] will be encoded using the following schema below:
+	 * Useful bytes: 
+	 * byte[0] -> MESSAGETYPE.ELEVATOR.value (0), 
+	 * byte[2] -> elevatorNumber, 
+	 * byte[4] -> currentFloorOfElev, 
+	 * byte[6] -> motorState [1 for UP, -1 for DOWN, 0 for IDLE],
+	 * byte[8] -> targetFloor
+	 * Useless bytes (separator == 150): byte[1], byte[3], byte[5], byte[7], byte[9]
+	 * 
+	 * @param elevatorNumber - the elevatorNumber
+	 * @param currentFloor - the currentFloor
+	 * @param state - the MotorState
+	 * @param targetFloor - the targetFloor
+	 * @return byte[] - the elevator msg converted to bytes
+	 */
+	public static byte[] encodeElevToGUIMsgIntoBytes(int elevatorNumber, int currentFloor, MotorState state, int carButtonClicked, int targetFloor, boolean printToTextField) {
+		byte[] msg = new byte[14];
+		msg[0] = MESSAGETYPE.ELEVATOR_TO_GUI.value;
+		msg[1] = (byte)150;
+		msg[2] = (byte)elevatorNumber;
+		msg[3] = (byte)150;
+		msg[4] = (byte)currentFloor;
+		msg[5] = (byte)150;
+		if(state == MotorState.MOVING_UP) {
+			msg[6] = (byte)1;
+		} else if (state == MotorState.MOVING_DOWN) {
+			msg[6] = (byte)-1;
+		} else {
+			msg[6] = (byte)0;
+		}
+		msg[7] = (byte)150;
+		msg[8] = (byte)carButtonClicked;
+		msg[9] = (byte)150;
+		msg[10] = (byte)targetFloor;
+		msg[11] = (byte)150;
+		msg[12] = (byte) (printToTextField ? 1 : 0);
+		msg[13] = (byte)150;
+		return msg;
+	}
+	
+	/**
 	 * This method is used to encode the Floor Msg into bytes.
 	 * The byte[] will be encoded using the following schema below:
 	 * Useful bytes: 
@@ -223,6 +314,33 @@ public class Common {
 		msg[3] = (byte)150;
 		msg[4] = isFloorBtnUp ? (byte) 1 : (byte) 0;
 		msg[5] = (byte)150;
+		return msg;
+	}
+	
+	/**
+	 * This method is used to encode the Floor Msg into bytes.
+	 * The byte[] will be encoded using the following schema below:
+	 * Useful bytes: 
+	 * byte[0] -> MESSAGETYPE.FLOOR.value (1), 
+	 * byte[2] -> floorNumber, 
+	 * byte[4] -> isFloorBtnUp
+	 * byte[6] -> isPressed
+	 * Useless bytes (separator == 150): byte[1], byte[3], byte[5], byte[7]
+	 * 
+	 * @param floorNumber - the floorNumber
+	 * @param isFloorBtnUp - is the Floor Btn Up
+	 * @return byte[] - the floor msg converted to bytes
+	 */
+	public static byte[] encodeFloorToGUIMsgIntoBytes(int floorNumber, boolean isFloorBtnUp, boolean isPressed) {
+		byte[] msg = new byte[8];
+		msg[0] = MESSAGETYPE.FLOOR_TO_GUI.value;
+		msg[1] = (byte)150;
+		msg[2] = (byte)floorNumber;
+		msg[3] = (byte)150;
+		msg[4] = isFloorBtnUp ? (byte) 1 : (byte) 0;
+		msg[5] = (byte)150;
+		msg[6] = isPressed ? (byte) 1 : (byte) 0;
+		msg[7] = (byte)150;
 		return msg;
 	}
 	
@@ -300,6 +418,12 @@ public class Common {
 				return ELEV_ERROR.decodeElevErrorMsgFromBytes(msg);
 			case START_SIM:
 				return decodeStartMsgFromBytes(msg);
+			case FLOOR_TO_GUI:
+				return decodeFloorToGUIMsgFromBytes(msg);
+			case ELEVATOR_TO_GUI:
+				return decodeElevToGUIMsgFromBytes(msg);
+			case ELEVATOR_ERROR_TO_GUI:
+				return decodeElevErrorToGUIFromBytes(msg);
 			default:
 				return null;
 		}
@@ -326,6 +450,28 @@ public class Common {
 	}
 	
 	/**
+	 * This method is used to decode an Elevator msg from bytes. The decoded message will be returned into an int[].
+	 * Indexes of the int[] are as follows:
+	 * int[0] -> elevatorNumber,
+	 * int[1] -> currentFloorOfElev, 
+	 * int[2] -> motorState [1 for UP, -1 for DOWN, 0 for IDLE],
+	 * int[3] -> targetFloor
+	 * 
+	 * @param msg - the elev msg to decode
+	 * @return int[] - the array containing the decoded useful data
+	 */
+	private static int[] decodeElevToGUIMsgFromBytes(byte[] msg) {
+		int[] decodedMsg = new int[6];
+		decodedMsg[0] = (int)msg[2];
+		decodedMsg[1] = (int)msg[4];
+		decodedMsg[2] = (int)msg[6];
+		decodedMsg[3] = (int)msg[8];
+		decodedMsg[4] = (int)msg[10];
+		decodedMsg[5] = (int)msg[12];
+		return decodedMsg;
+	}
+	
+	/**
 	 * This method is used to decode an Elevator msg that was received by the Scheduler in bytes to a meaningful string.
 	 * 
 	 * @param msg - the elev msg to decode
@@ -343,6 +489,24 @@ public class Common {
 		}
 		
 		return "Elevator #" + decodedMsg[0] + " | CurrentFloor: " + decodedMsg[1] + " | MotorState: " + motorState + " | TargetFloor: " + decodedMsg[3];
+	}
+	
+	/**
+	 * This method is used to decode an Floor msg from bytes. The decoded message will be returned into an int[].
+	 * Indexes of the int[] are as follows:
+	 * int[0] -> floorNumber, 
+	 * int[1] -> isFloorBtnUp
+	 * int[2] -> isPressed
+	 * 
+	 * @param msg - the floor msg to decode
+	 * @return int[] - the array containing the decoded useful data
+	 */
+	private static int[] decodeFloorToGUIMsgFromBytes(byte[] msg) {
+		int[] decodedMsg = new int[3];
+		decodedMsg[0] = (int)msg[2];
+		decodedMsg[1] = (int)msg[4];
+		decodedMsg[2] = (int)msg[6];
+		return decodedMsg;
 	}
 	
 	/**
