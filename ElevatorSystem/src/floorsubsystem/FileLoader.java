@@ -75,6 +75,48 @@ public class FileLoader {
         }
     }
     
+ // Get destination floors for a specific floor
+    // should only be called by elevator when the elevator arrived on demand
+    public synchronized Integer[] popDestinations(int departFloor, boolean goingUp, int elevatorNumber) {
+    	System.out.println("ELEVATOR #" + elevatorNumber +" CALLED popDestinations");
+        if(destinations.containsKey(departFloor)) {
+            ArrayList<Integer> destinationFloors = destinations.get(departFloor);
+            ArrayList<Integer> output = new ArrayList<Integer>();
+
+            System.out.println("DESTINATIONFLOORSLIST: " + destinationFloors);
+            for (int destination: destinationFloors) {
+                if((goingUp && destination > departFloor) ||
+                  (!goingUp && destination < departFloor)){
+                    // Add destination to output
+                    output.add(destination);
+                    // Remove destination from destinationFloors
+                   
+                    System.out.println("DESTINATION IS: " + destination);
+//                    destinationFloors.remove(destination);
+//                    destinationFloors.remove((Integer) destination);
+//                    removeDestination(destinationFloors, destination);
+                }
+            }
+            
+            for(Integer destination : output) {
+            	destinationFloors.remove(destination);
+            }
+
+            // if destinationFloors is empty, cleanup
+            if (destinationFloors.size() == 0){
+                destinations.remove(departFloor);
+            }
+
+            return output.toArray(new Integer[0]);
+        }
+        // return empty int[] if no destination.
+        return new Integer[0];
+    }
+    
+//    private synchronized void removeDestination(ArrayList<Integer> destinationFloors, int destination) {
+//    	destinationFloors.remove((Integer) destination);
+//    }
+    
     private void pushFaults() {
         faults.put(Integer.parseInt(csvSimInfo[1]), getTime());
     }
