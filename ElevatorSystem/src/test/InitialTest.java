@@ -56,8 +56,8 @@ public class InitialTest {
 		m = fileLoader.getDestinations();
 
 		assertTrue(m.get(1).contains(10));
-		assertTrue(m.get(4).contains(1));
-		assertTrue(m.get(2).contains(5));
+		assertTrue(m.get(12).contains(1));
+		assertTrue(m.get(14).contains(7));
 	}
 	
 	// Test the direction of the request as parsed from the csv
