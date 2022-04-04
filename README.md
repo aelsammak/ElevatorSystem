@@ -70,6 +70,9 @@ __List of files:__ root of code files ('/ElevatorSystem/src'):
   - FloorSubsystem.java - class represents the FloorSubSystem
   - MiddleFloor.java - Middle floor variant of the Floor class
   - TopFloor.java - Top floor variant of the Floor class
+- /gui:
+  - GUI.java - class is used to represent the Elevator Simulation in the form of a GUI
+  - TextManager.java - class is responsible for writing the logs to the textpanel
 - /scheduler:
   - ElevatorState.java - Keeps track of elevator state
   - FloorState.java - Keeps track of floor state
