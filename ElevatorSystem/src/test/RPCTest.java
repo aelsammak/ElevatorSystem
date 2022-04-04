@@ -132,6 +132,125 @@ public class RPCTest {
 	}
 	
 	/**
+	 * Test encoding of GUI Elevator
+	 */
+	@Test
+	public void testEncodeGUIFloor() {
+		int floorNumber = 1; 
+		boolean dir = true;
+		boolean isPressed = true; 
+		
+		byte[] msg = Common.encodeFloorToGUIMsgIntoBytes(floorNumber, dir, isPressed);
+		
+		assertTrue("Message is in expected format.", msg instanceof byte[]);
+		assertEquals(6, (int) msg[0]); 
+		assertEquals(floorNumber, (int) msg[2]); 
+		assertEquals(dir ? 1 : 0, (int) msg[4]); 
+		assertEquals(isPressed ? 1 : 0, (int) msg[6]); 
+	}
+	
+	/**
+	 * Test encoding of GUI Elevator
+	 */
+	@Test
+	public void testEncodeGUIElevator() {
+		int elevatorNumber = 1; 
+		int currentFloor = 2;
+		MotorState currentState = MotorState.MOVING_UP;
+		int carButtonClick = 3; 
+		int targetFloor = 4; 
+		boolean printTextFlag = true; 
+		
+		byte[] msg = Common.encodeElevToGUIMsgIntoBytes(elevatorNumber, currentFloor, currentState, carButtonClick, targetFloor, printTextFlag);
+		
+		assertTrue("Message is in expected format.", msg instanceof byte[]);
+		assertEquals(7, (int) msg[0]); 
+		assertEquals(elevatorNumber, (int) msg[2]); 
+		assertEquals(currentFloor, (int) msg[4]); 
+		assertEquals(1, (int) msg[6]); 
+		assertEquals(carButtonClick, (int) msg[8]); 
+		assertEquals(targetFloor, (int) msg[10]); 
+		assertEquals(1, (int) msg[12]); 
+	}
+	
+	/**
+	 * Test DECODE of GUI Elevator
+	 */
+	@Test
+	public void testDecodeGUIElevator() {
+		int elevatorNumber = 1; 
+		int currentFloor = 2;
+		MotorState currentState = MotorState.MOVING_UP;
+		int carButtonClick = 3; 
+		int targetFloor = 4; 
+		boolean printTextFlag = true; 
+		
+		byte[] msg = Common.encodeElevToGUIMsgIntoBytes(elevatorNumber, currentFloor, currentState, carButtonClick, targetFloor, printTextFlag);
+		int[] decodedMsg = Common.decode(msg); 
+		
+		assertTrue("Message is in expected format.", decodedMsg instanceof int[]);
+		assertEquals(elevatorNumber, decodedMsg[0]); 
+		assertEquals(currentFloor, decodedMsg[1]); 
+		assertEquals(1, decodedMsg[2]); 
+		assertEquals(carButtonClick, decodedMsg[3]); 
+		assertEquals(targetFloor, decodedMsg[4]); 
+		assertEquals(printTextFlag ? 1 : 0, decodedMsg[5]); 
+	}
+	
+	/**
+	 * Test DECODE of GUI Floor Msg
+	 */
+	@Test
+	public void testDecodeFloorGUIMSG() {
+		int floorNumber = 1; 
+		boolean dir = true;
+		boolean isPressed = true; 
+		
+		byte[] msg = Common.encodeFloorToGUIMsgIntoBytes(floorNumber, dir, isPressed);
+		
+		int [] decodedMsg = Common.decode(msg); 
+		
+		assertTrue("Message is in expected format.", decodedMsg instanceof int[]);
+		assertEquals(floorNumber, decodedMsg[0]); 
+		assertEquals(dir ? 1 : 0, decodedMsg[1]); 
+		assertEquals(isPressed ? 1 : 0, decodedMsg[2]);  
+	}
+	
+	/**
+	 * Test encoding of GUI Elevator ERROR
+	 */
+	@Test
+	public void testEncodeGUIElevatorError() {
+		int elevNum = 1; 
+		boolean isStuck = true;
+		
+		byte[] msg = Common.encodeElevErrorToGUI(elevNum, isStuck);
+		
+		assertTrue("Message is in expected format.", msg instanceof byte[]);
+		assertEquals(8, (int) msg[0]); 
+		assertEquals(elevNum, (int) msg[2]); 
+		assertEquals(isStuck ? 1 : 0, (int) msg[4]); 
+	}
+	
+	/**
+	 * Test Decoding of GUI Elevator ERROR
+	 */
+	@Test
+	public void testDecodeGUIElevatorError() {
+		int elevNum = 1; 
+		boolean isStuck = true;
+		
+		byte[] msg = Common.encodeElevErrorToGUI(elevNum, isStuck);
+		int[] decodedMsg = Common.decode(msg);
+		
+		
+		assertTrue("Message is in expected format.", decodedMsg instanceof int[]);
+		assertEquals(elevNum, decodedMsg[0]); 
+		assertEquals(isStuck ? 1 : 0, decodedMsg[1]); 
+	}
+	
+	
+	/**
 	 * Tests encoding of an communication of a request for floor button up push
 	 */
 	@Test
