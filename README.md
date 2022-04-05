@@ -35,16 +35,26 @@ __Setup Instructions__:
      -  Select root directory where project is kept
      -  Click Finish
 
-__Execution Instructions__:
-- In Eclipse
-  - Navigate to the /ElevatorSystem/src/main/Main.java
-  - Right-click on Main.java then click Run as -> Java Application
+__Execution Instructions in Eclipse__:
+  - Using multiple programs/consoles (must be run in the following order)
+    - Navigate to the /ElevatorSystem/src/gui/GUI.java
+    - Right-click on GUI.java then click Run as -> Java Application
+    - Navigate to the /ElevatorSystem/src/floorsubsystem/FloorSubsystem.java 
+    - Right-click on FloorSubsystem.java then click Run as -> Java Application
+    - Navigate to the /ElevatorSystem/src/elevatorsubsystem/ElevatorSubsystem.java
+    - Right-click on ElevatorSubsystem.java then click Run as -> Java Application  
+    - Navigate to the /ElevatorSystem/src/scheduler/Scheduler.java
+    - Right-click on Scheduler.java then click Run as -> Java Application
+  - Using one program/console
+    - Navigate to the /ElevatorSystem/src/gui/GUI.java
+    - Right-click on GUI.java then click Run as -> Java Application
+    - Navigate to the /ElevatorSystem/src/main/Main.java
+    - Right-click on Main.java then click Run as -> Java Application
 
-__Testing Instructions__:
-- In Eclipse
-  - Navigate to the /ElevatorSystem/src/test/TestSuiteRunner.java
-  - Right-click on TestSuiteRunner.java then click Run as -> Java Application
-  - Note: this will run all test cases contained within the project
+__Testing Instructions in Eclipse__:
+- Navigate to the /ElevatorSystem/src/test/TestSuiteRunner.java
+- Right-click on TestSuiteRunner.java then click Run as -> Java Application
+- Note: this will run all test cases contained within the project
 
 __List of files:__ root of code files ('/ElevatorSystem/src'):
 - /common: 
@@ -88,7 +98,6 @@ __List of files:__ root of code files ('/ElevatorSystem/src'):
   - Main.java - class that is responsible for running simulation and starting all threads
 - /resources:
   - config.cfg - config file used to configure the parameters and initial settings for the program
-- measurements - Recorded timings used to simulate elevator times within the program
 
 __Responsibilities:__
 - Elevator Subsystem: Adi El-Sammak
